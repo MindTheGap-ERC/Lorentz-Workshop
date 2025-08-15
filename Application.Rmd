@@ -1,0 +1,83 @@
+---
+title: "Lorentz workshop application"
+author: "Emilia Jarochowska, Rachel Warnock and others"
+output: word_document
+---
+
+# Title
+
+<!--# The original title “Stratigraphic paleobiology and phylogenetics workshop and symposium” might be a wee bit too technical? It’s precise but we might consider something legible to an outsider, e.g. “Fossil record in phylogenetic inference” which would also open it up to more angles than just strat-pal -->
+
+# Organizers
+
+<!--# Min 3, max 5. Must be diverse in terms of gender, location, career stage. We have space for one person: Mark Patzkowsky, Laura…?  -->
+
+1.  Emilia Jarochowska, Utrecht University (Netherlands)
+
+2.  Rachel Warnock, Friedrich-Alexander-Universität Erlangen-Nürnberg (Germany)
+
+3.  Joëlle Barido-Sottani, École Normale Supérieure, Université Paris Sciences et Lettres (France)
+
+4.  Niklas Hohmann, Utrecht University (Netherlands)
+
+# Abstract
+
+<!--# Ca. 150 words -->
+
+Stratigraphic paleobiology seeks to understand how physical processes shape the fossil record, whereas phylogenetics seeks to reconstruct evolutionary relationships, rates, and times. Although stratigraphy is the key source of time in phylogenies and reconstructed evolutionary trees allow us to fill gaps in the fossil record, few studies apply both approaches simultaneously. The challenge of reconciling physical geological record with phylogenetics lies in theoretical chasms between disciplines, computational tools available to researchers, and ontologies of uncertainty. Meanwhile recent advances in modelling in both areas create opportunities for joint models of stratigraphic and phylogenetic processes. In this workshop, we will isolate these opportunities and invite stratigraphers, evolutionary biologists and software engineers to solve them together interactively. This workshops aims to establish a theoretical framework for incorporating geological record in phylogenetic inference and to translate these theoretical advances into actionable research software improvements.
+
+# Scientific case
+
+```{=html}
+<!--# in a typical proposal, this section is about 2-3 pages long
+
+While we ask you to be specific about your aims, don't be too technical. Non-expert colleagues should also be able to understand your scientific case (e.g. use specific examples).
+
+b\. Integrate 5 to 10 key references that demonstrate the embedding of the workshop in the research field(s) and the timeliness.
+
+c\. While the Lorentz Center is an international workshop center, the intention of our funders is that the workshops should also benefit the Dutch research community. Please explain how the proposed topic is connected to the Dutch research community and/or the possible benefits of organizing this workshop in the Netherlands.
+
+d\. Be explicit about why an interactive Lorentz Center workshop is appropriate for the aims you have in mind -->
+```
+
+## Research challenges of the field
+
+## Aims of the workshop
+
+## Workshop outcomes
+
+### Short-term impact
+
+### Long-term impact
+
+# Program
+
+# Participants
+
+```{=html}
+<!--# In your general description, include the following:
+
+a\. An estimate of the expected number of participants. Space can be offered for a maximum of 55 persons (Lorentz Center\@omega) or 25 persons (Lorentz Center\@lambda), organisers included. If you plan on virtual attendance the total maximum is 80.
+
+b\. The fields, expertise and/or important research groups required to achieve the aims of your workshop.
+
+c\. Attention to international participation (research is international) as well as to relevant Dutch participation (we are financed by the Dutch taxpayers).
+
+d\. The ratio of early career researchers to senior participants you are aiming at. Inclusion of early career researchers in the workshop is highly encouraged. Think of participants who obtained their Ph.D. less than 5 years ago or are currently working towards it.
+
+e\. Explicit attention to enriching the diversity of your workshop. The Lorentz Center is committed to improve the participation of underrepresented groups in the workshops and the scientific boards pay particular attention to this. Make sure that the gender balance in your workshop is better than in your field and include researchers from underrepresented groups. -->
+```
+
+1.  Laura Mulvey, Postdoctoral Researcher, Queen Mary University of London, UK (ECR)
+
+2.  Mark Patzkowsky, Professor Emeritus of Geosciences, Penn State, USA
+
+# Budget
+
+# Dates
+
+<!--# From options listed here: <https://www.lorentzcenter.nl/index.php?pntHandler=ConRewriteAction&q=calendar.html&year=2026> I assumed we go for the smaller room, lambda, max 25 people. The other has a max capacity of 55 -->
+
+7-11 September 2026
+
+21-25 September 2026
