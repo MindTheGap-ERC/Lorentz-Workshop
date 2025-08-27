@@ -58,6 +58,58 @@ At the end of the workshop, we will have produced:
 
 # Program
 
+Each day will be dedicated to one problem, to reduce cognitive load, and led by one of the organizers.
+
+## Monday: the structure of the geological record
+
+*Emilia Jarochowska*
+
+**Lorentz Center welcome and opening**
+
+Introductory lecture by Mark Patzkowsky: **Principles of Stratigraphic Palaeobiology**
+
+**Ice-breaker workshop: Make your own geological record.** In a pre-workshop survey we will ask participants about their coding skills and divide them into "novice", "familiar" and "expert". In the workshop, we will make sure that novice users are always paired with experts and that senior researchers are paired with ECRs. In this workshop, participants will learn the basics of creating a simple model of the geological record on their own computers. This exercise has been tested in two previous workshops and is suitable for a diverse audience.
+
+In-depth lecture by Adam Tomasovych: **The complexities of fossil data**
+
+Diving deep workshop: **Extracting information for phylogenies from strata**. We will use the models created in the morning to extract information which can be used in phylogenetic analyses: age-depth models, fossil ranges including their uncertainties, apparent origination and extionction rates. These datasets will be used in the following days.
+
+**Welcome reception**
+
+## Tuesday: Models of morphological evolution
+
+*Laura Mulvey*
+
+To Be Filled
+
+## Wednesday: Tree inference from fossil data
+
+*Niklas Hohmann*
+
+To Be Filled
+
+**Evening: Workshop dinner**
+
+## Thursday: Best practices and replicability? Validation between RB and BEAST?
+
+*Rachel Warnock*
+
+To Be Filled
+
+Maybe a good day to include other modalities: brainstorms, breakout rooms?
+
+## Friday: Interactive synthesis
+
+*Everyone*
+
+*Caution: this day needs to end by 15:30 latest*
+
+We will dedicate the day to carrying out a hands-on phylogenetic analyses representing two common scenarios: tree inference from incomplete geological record using the FBD Skyline model and tree inference accounting for fossil occurrence uncertainty using the FBD Range model. We will use simulated data of which we have perfect knowledge and the goal will be to recover the original tree properties.
+
+We will apply the *literate programming* approach: documenting our work in human language alongside code. The created document will be the basis for a scientific publication, as well as a tutorial for other users. We will again make sure to pair members with different expertise, i.e. self-declared experts with novices.
+
+Due to high computation time of the analyses they may not be finished by the end of the workshop, although we will provide SURF computing infrastructure to ensure as rapid completion as possible. We will finish the day and the workshop with a joint revision of what has been achieved. To this goal, we will offer the ECRs to present a summary of the reconstruction and the results (if already available) on behalf of their teams and to be the ambassadors of the respective team's concerns, recommendations, and findings.
+
 # Participants
 
 ```{=html}
