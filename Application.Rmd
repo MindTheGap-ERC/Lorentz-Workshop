@@ -1,30 +1,26 @@
 ---
-title: "Lorentz workshop application"
+title: "Stratigraphic palaeobiology in phylogenetics"
 author: "Emilia Jarochowska, Rachel Warnock and others"
 output: word_document
 ---
-
-# Title
-
-<!--# The original title “Stratigraphic paleobiology and phylogenetics workshop and symposium” might be a wee bit too technical? It’s precise but we might consider something legible to an outsider, e.g. “Fossil record in phylogenetic inference” which would also open it up to more angles than just strat-pal -->
 
 # Organizers
 
 <!--# Min 3, max 5. Must be diverse in terms of gender, location, career stage. We have space for one person: Mark Patzkowsky, Laura…?  -->
 
-1.  Emilia Jarochowska, Utrecht University (Netherlands)
+1.  Emilia Jarochowska, Utrecht University (Netherlands), Assistant Professor
 
-2.  Rachel Warnock, Friedrich-Alexander-Universität Erlangen-Nürnberg (Germany)
+2.  Rachel Warnock, Friedrich-Alexander-Universität Erlangen-Nürnberg (Germany), Professor
 
-3.  Joëlle Barido-Sottani, École Normale Supérieure, Université Paris Sciences et Lettres (France)
+3.  Laura Mulvey, Queen Mary University of London (UK), Postdoctoral Researcher
 
-4.  Niklas Hohmann, Utrecht University (Netherlands)
+4.  Niklas Hohmann, Utrecht University (Netherlands), PhD student
 
 # Abstract
 
 <!--# Ca. 150 words -->
 
-Stratigraphic paleobiology seeks to understand how physical processes shape the fossil record, whereas phylogenetics seeks to reconstruct evolutionary relationships, rates, and times. Although stratigraphy is the key source of time in phylogenies and reconstructed evolutionary trees allow us to fill gaps in the fossil record, few studies apply both approaches simultaneously. The challenge of reconciling physical geological record with phylogenetics lies in theoretical chasms between disciplines, computational tools available to researchers, and ontologies of uncertainty. Meanwhile recent advances in modelling in both areas create opportunities for joint models of stratigraphic and phylogenetic processes. In this workshop, we will isolate these opportunities and invite stratigraphers, evolutionary biologists and software engineers to solve them together interactively. This workshops aims to establish a theoretical framework for incorporating geological record in phylogenetic inference and to translate these theoretical advances into actionable research software improvements.
+Stratigraphic paleobiology seeks to understand how physical processes shape the fossil record, whereas phylogenetics seeks to reconstruct evolutionary relationships, rates, and mechanisms. Stratigraphy, the science of Earth's history, is the key source of time information in phylogenies and reconstructed evolutionary trees allow us to fill gaps in the fossil record. Yet, few studies exploit both approaches simultaneously. The challenge of reconciling physical geological record with phylogenetics lies in theoretical chasms between disciplines, computational tools available to researchers, technical skills, and ontologies of uncertainty. Meanwhile recent advances in modelling in both areas create opportunities for joint models of stratigraphic and phylogenetic processes. In this workshop, we will isolate these opportunities and invite stratigraphers, evolutionary biologists and software engineers to solve them together interactively. This workshops aims to establish a workflow for incorporating geological record in phylogenetic inference, to create a roadmap for digital infrastructure required for successful integration of geological and evolutionary data, and to translate these theoretical advances into actionable research software improvements.
 
 # Scientific case
 
@@ -48,7 +44,17 @@ d\. Be explicit about why an interactive Lorentz Center workshop is appropriate 
 
 ### Short-term impact
 
+At the end of the workshop, we will have produced:
+
+1.  A **best-practices recommendations list** for publishing and reviewing phylogenetic analyses and reporting fossil and stratigraphic information.
+2.  A **roadmap for digital infrastructure** needed for landmark use-cases of phylogenetic analysis incorporating fossil data
+3.  A **technical draft of a phylogenetic reconstruction from simulated data**, addressing uncertainties, sources of error, and instructions for practitioners - this draft will become the basis for a future publication and tutorial
+
 ### Long-term impact
+
+1.  A chapter on using fossil and stratigraphic data in phylogenetic analyses and on replicability in a new planned article on best practices
+2.  Translation of researcher needs into digital infrastructure: based on the roadmap for digital infrastructure, feature requests including specifications of missing parts of algorithms and documentation will be prepared, following best practices in research software design. This will allow matching software capabilities with scientific needs and will ensure proper validation of the complex computations involved in phylogenetic inference.
+3.  A scientific article on phylogenetic inference from incomplete (gappy) fossil data and on incorporating stratigraphic precision and accuracy.
 
 # Program
 
@@ -68,7 +74,7 @@ d\. The ratio of early career researchers to senior participants you are aiming 
 e\. Explicit attention to enriching the diversity of your workshop. The Lorentz Center is committed to improve the participation of underrepresented groups in the workshops and the scientific boards pay particular attention to this. Make sure that the gender balance in your workshop is better than in your field and include researchers from underrepresented groups. -->
 ```
 
-1.  Laura Mulvey, Postdoctoral Researcher, Queen Mary University of London, UK (ECR)
+1.  
 
 2.  Mark Patzkowsky, Professor Emeritus of Geosciences, Penn State, USA
 
