@@ -1,7 +1,8 @@
 ---
 title: "Stratigraphic palaeobiology in phylogenetics"
-author: "Emilia Jarochowska, Rachel Warnock and others"
+author: "Emilia Jarochowska, Rachel Warnock, Laura Mulvey, Niklas Hohmann"
 output: word_document
+bibliography: references.bib  
 ---
 
 # Organizers
@@ -36,9 +37,37 @@ c\. While the Lorentz Center is an international workshop center, the intention 
 d\. Be explicit about why an interactive Lorentz Center workshop is appropriate for the aims you have in mind -->
 ```
 
+**Phylogenetics** is the science of reconstructing evolutionary relationships, rates and processes. It is built through a concerted effort of mathematicians, palaeobiologists, geneticists, and computer scientists. For decades, the primary source of data for phylogenetic trees and the methods used to infer them were genetic sequences from living and - in exceptional circumstances - recently extinct taxa. Such data represents a tip-of-an-iceberg proportion of known diversity, as over 99% of organisms are extinct and either discovereable as **fossils** or lost for good. For many reasons, which can be argued mathematically and are understood intuitively, inclusion of fossils in phylogenetic trees, regardless of the methodological extent, radically improves our reconstruction of evolution (@ronquist_total-evidence_2012, @gavryushkina_bayesian_2017; @saladin_fossils_2017). 
+
+The recent mathematical development known as the **Fossilized Birth-Death** (FBD) family of models treats fossils and extant species as observations from the same macroevolutionary process, rather than external calibration constraints, providing statistically principled methods for integrating temporal, morphological, and molecular evidence. The introduction of the FBD process has led to major revisions in evolutionary timelines across diverse groups from insects to mammals, demonstrating that fossil data contains irreplaceable information about deep-time evolutionary processes. 
+
+Among the features of the FBD model that allow it to incorporate fossil data is the fact that (1) it is a diversification and **sampling model** and (2) the inference of the topology can include fossil ages (@wright_integrating_2022). These two aspects of the FBD model, sampling and fossil ages, constitute the interface between phylogenetics and geosciences. Phylogeneticists have acutely experienced the detrimental effects of using fossil ages without sufficient context (@ronquist_total-evidence_2012). Fossils can virtually never be dated directly and the typical precision of a fossil age is several million years. Ignoring stratigraphic age uncertainty, which can introduce errors of 10-20 million years in divergence time estimates [@barido-sottani_ignoring_2020]
+
+**Stratigraphic paleobiology** is the discipline studying the laws and processes governing fossil preservation and discoverability. It offers a theoretical framework and a predictive toolbox for identifying gaps in the fossil record, environmental factors affecting fossil occurrences, and quantification of the uncertainty of fossil ages (@patzkowsky_stratigraphic_2012). In this workshop we aim to address challenges of using fossil data in phylogenies using the stratigraphic palaeobiology approach.
+
 ## Research challenges of the field
 
+### Understanding the geological record
+
+The geological record offers a conceptual challenge: it can be represented in the stratigraphic (depth) domain and in the time domain. The stratigraphic domain is the physical record: the strata, the fossils, the boundaries and event horizons, the minerals bearing radioisotopes that allow calibration in absolute time. The time domain is where the strata and fossils are formed, where extinction and originations happen, and what we cannot observe but must reconstruct from the stratigraphic domain. Most information needed for phylogenetics is implicitly expressed in the time domain (fossil ages, rates, sampling), but taken from the stratigraphic domain. The stratigraphic record is commonly treated as a continuous, lossless mapping from the time domain, but the broad and diverse fields of stratigraphy and sedimentology provide a wealth of processes that challenge this approach. Recent advances in modeling and geochronology allow us to build representations of time in geological strata, including their uncertainty (@hohmann_nonparametric_2024). They also show that gaps in the stratigraphic record do not necessarily compromise the recovery of evolutionary processes (@hohmann_identification_2024).
+
+### Models of morphological evolution
+
+<!--# Can you help here, Laura? -->
+
+### Interdisciplinarity
+
+Fossil data used for phylogenetic tree inference is qualitatively different from genetic (also referred to as molecular) data used for modern organisms. The dynamics of molecular evolution is arguably much better understood and allows for easier comparison between distantly related groups of organisms. A molecular phylogenicist can rapidly familiarise themselves with genetic data for a new group. In contrast, fossils are almost exclusively known from their (usually skeletal) morphological remains, often fragmentary, which require expert knowledge of anatomy, preservation and geological sampling to translate into data useful for phylogenetics. Yet, meta-analyses of combined molecular-morphological datasets demonstrate that morphological and molecular information on the same sets of organisms frequently show conflicting signals when analyzed separately, but combined analyses often yield unique trees not sampled by either type of information (partition) individually (@keating_phylogenetic_2023). Even when morphological data has a lower information contents on its own, it consistently improves phylogenetic resolution and accuracy when combined with molecular data (@asher_phylogenetic_2022). Empowering phylogeneticists to use the wealth of fossil data requires not only development and validation of models of morphological evolution, but also breaking the disciplinary ice and an in-depth dialogue.
+
+### Digital infrastructure
+
+<!--# Input from all of you? -->
+
+<!--# I can think of many more but we don't address them in the program. - EJ -->
+
 ## Aims of the workshop
+
+Our goal is to achieve an integration of phylogenetics and stratigraphic palaeobiology, communicate it to the scientific community through a publication, and foster collaboration between scientists contributing to both fields, helping them overcome the disciplinary boundaries.
 
 ## Workshop outcomes
 
@@ -70,7 +99,7 @@ Introductory lecture by Mark Patzkowsky: **Principles of Stratigraphic Palaeobio
 
 **Ice-breaker workshop: Make your own geological record.** In a pre-workshop survey we will ask participants about their coding skills and divide them into "novice", "familiar" and "expert". In the workshop, we will make sure that novice users are always paired with experts and that senior researchers are paired with ECRs. In this workshop, participants will learn the basics of creating a simple model of the geological record on their own computers. This exercise has been tested in two previous workshops and is suitable for a diverse audience.
 
-In-depth lecture by Adam Tomasovych: **The complexities of fossil data**
+In-depth lecture by Lydian Boschman: 
 
 Diving deep workshop: **Extracting information for phylogenies from strata**. We will use the models created in the morning to extract information which can be used in phylogenetic analyses: age-depth models, fossil ranges including their uncertainties, apparent origination and extionction rates. These datasets will be used in the following days.
 
@@ -112,6 +141,10 @@ Due to high computation time of the analyses they may not be finished by the end
 
 # Participants
 
+We aim the workshop at participants with prior experience with phylogenetics, even if they are at the beginning of a PhD journey, and a small number of key participants representing stratigraphic palaeobiology. Since digital infrastructure is among the challenges in this field, we target particularly participants with at least an intention to engage with the software or research software engineers and to discuss the interplay between the needs of the users and the computational possibilities. 
+
+Since the workshop will include hands-on sessions, including writing or running simple code (with ample help and instruction from the organizers), we intend to survey the participants about their skills and assign them to groups with mixed background, so they can work on problems together.
+
 ```{=html}
 <!--# In your general description, include the following:
 
@@ -126,9 +159,6 @@ d\. The ratio of early career researchers to senior participants you are aiming 
 e\. Explicit attention to enriching the diversity of your workshop. The Lorentz Center is committed to improve the participation of underrepresented groups in the workshops and the scientific boards pay particular attention to this. Make sure that the gender balance in your workshop is better than in your field and include researchers from underrepresented groups. -->
 ```
 
-1.  
-
-2.  Mark Patzkowsky, Professor Emeritus of Geosciences, Penn State, USA
 
 # Budget
 
@@ -139,3 +169,5 @@ e\. Explicit attention to enriching the diversity of your workshop. The Lorentz 
 7-11 September 2026
 
 21-25 September 2026
+
+# References
