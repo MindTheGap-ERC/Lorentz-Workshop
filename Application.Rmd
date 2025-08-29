@@ -79,6 +79,8 @@ At the end of the workshop, we will have produced:
 2.  A **roadmap for digital infrastructure** needed for landmark use-cases of phylogenetic analysis incorporating fossil data
 3.  A **technical draft of a phylogenetic reconstruction from simulated data**, addressing uncertainties, sources of error, and instructions for practitioners - this draft will become the basis for a future publication and tutorial
 
+We will also have **trained** and **built capacity** in using methods of the respective disciplines among phylogeneticists interested in incorporating geological knowledge and stratgraphic palaeobiologists aiming to bring in their expertise into phylogenetics.
+
 ### Long-term impact
 
 1.  A chapter on using fossil and stratigraphic data in phylogenetic analyses and on replicability in a new planned article on best practices
@@ -99,7 +101,7 @@ Introductory lecture by Mark Patzkowsky: **Principles of Stratigraphic Palaeobio
 
 **Ice-breaker workshop: Make your own geological record.** In a pre-workshop survey we will ask participants about their coding skills and divide them into "novice", "familiar" and "expert". In the workshop, we will make sure that novice users are always paired with experts and that senior researchers are paired with ECRs. In this workshop, participants will learn the basics of creating a simple model of the geological record on their own computers. This exercise has been tested in two previous workshops and is suitable for a diverse audience.
 
-In-depth lecture by Lydian Boschman: 
+In-depth lecture by Lydian Boschman: **Palaeogeography and plate tectonics in phylogenies**
 
 Diving deep workshop: **Extracting information for phylogenies from strata**. We will use the models created in the morning to extract information which can be used in phylogenetic analyses: age-depth models, fossil ranges including their uncertainties, apparent origination and extionction rates. These datasets will be used in the following days.
 
