@@ -117,7 +117,13 @@ To Be Filled
 
 *Niklas Hohmann*
 
-To Be Filled
+Introductory lecture by Philip Donoghoue: **Fossil Evidence in Time Tree Reconstruction**
+
+**Workshop: Digital infrastructure for tree inference from fossil data**. In this workshop, we will group together researchers from different disciplines in break-out rooms to establish the major conceptual and infrastructural thresholds to incorporating fossil data into tree inference. These will serve as the basis for the *roadmap digital infrastructure*.
+
+**another lecture here?**
+
+**Workshop: The Stratigraphic record as a source of information**: Based on the workshop on Monday, participants will discuss how different sources of geological information can enrich phylogenetic inference. They will identify if current models are capable to incorporate this information or if there are deficits in the methodological landscape, and will discuss best practices and strategies for reporting these data sources to reproducibility of phylogenetic inferences.
 
 **Evening: Workshop dinner**
 
