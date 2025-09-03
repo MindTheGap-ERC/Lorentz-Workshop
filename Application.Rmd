@@ -1,4 +1,4 @@
----
+ ---
 title: "Stratigraphic palaeobiology in phylogenetics"
 author: "Emilia Jarochowska, Rachel Warnock, Laura Mulvey, Niklas Hohmann"
 output: word_document
@@ -53,7 +53,7 @@ The geological record offers a conceptual challenge: it can be represented in th
 
 ### Models of morphological evolution
 
-<!--# Can you help here, Laura? -->
+Beyond providing temporal information, fossils also preserve morphological characteristics in their appearance, which provide an important souce of data for phylogenetic inference. The use of discretized morphological data in phylogenetics has traditionally relied on parsimony-based methods. More recently, however, their application within a Bayesian framework has gained traction, offering the advantage of directly incorporating fossil data into time-calibrated phylogenetic inference while jointly resolving relationships among both extinct and extant lineages @wright2014. Nevertheless, the number of morphological models available to describe character change remains limited, reflecting the difficulty of generalizing trait evolution. The most widely used approach is the Mk model, which assumes equal transition rates among states and equal stationary frequencies @lewis2001. Several extensions of this model have been developed and are frequently applied, although their assumptions about character evolution remain relatively simplistic. Despite these limitations, studies indicate that such models perform well and are capable of capturing essential aspects of the evolutionary process @mulvey2025. An important aspect of fossil character data that remains underexplored is the influence of stratigraphic and taphonomic biases, both on the fossils themselves and on the loss of entire specimens from the fossil record. Gaining a better understanding of how these biases shape our observed data could inform strategies to model the processes that generated it, integrating insights from both biological and geological perspectives.
 
 ### Interdisciplinarity
 
