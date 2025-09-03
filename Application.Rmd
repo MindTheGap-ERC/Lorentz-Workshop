@@ -111,7 +111,17 @@ Diving deep workshop: **Extracting information for phylogenies from strata**. We
 
 *Laura Mulvey*
 
-To Be Filled
+Introductory lecture by April Wright/Sergei Tarasov (?) **Modelling morphological evolution**
+
+An overview of the conceptual foundations of morphological evolution, including trait coding, evolutionary models, and their application in phylogenetic inference.
+
+**Workshop: Incorporating morphological data into phylogenetic analysis:** In this workshop, participants will gain hands-on experience running phylogenetic analyses using morphological data. They will be tasked with selecting appropriate models and providing justification for their choices. The results of the analyses will be discussed, highlighting challenges encountered and exploring potential approaches for improvement
+
+Potential Lecture: **Extensions to Common Morphological Models**
+This session could cover recent methodological developments and extensions to standard models of morphological evolution.
+
+**Workshop: Challenges in morphological modeling** In this workshop, participants will discuss practical and theoretical challenges in morphological modeling. Topics may include, deciding which traits are informative for phylogenetic inference, how taphonomic biases influence morphological character evolution, and the advantages and limitations of using discrete versus continuous traits. The discussion will aim to generate insights into developing modeling approaches that better reflect the biological and geological processes shaping the observed data.
+
 
 ## Wednesday: Tree inference from fossil data
 
