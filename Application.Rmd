@@ -120,7 +120,7 @@ An overview of the conceptual foundations of morphological evolution, including 
 Potential Lecture: **Extensions to Common Morphological Models**
 This session could cover recent methodological developments and extensions to standard models of morphological evolution.
 
-**Workshop: Challenges in morphological modeling** In this workshop, participants will discuss practical and theoretical challenges in morphological modeling. Topics may include, deciding which traits are informative for phylogenetic inference, how taphonomic biases influence morphological character evolution, and the advantages and limitations of using discrete versus continuous traits. The discussion will aim to generate insights into developing modeling approaches that better reflect the biological and geological processes shaping the observed data.
+**Workshop: Challenges in morphological modeling** In this workshop, participants will be grouped together into break-out rooms to discuss practical and theoretical challenges in morphological modeling. Topics may include, deciding which traits are informative for phylogenetic inference, how taphonomic biases influence morphological character evolution, and the advantages and limitations of using discrete versus continuous traits. The discussion will aim to generate insights into developing modeling approaches that better reflect the biological and geological processes shaping the observed data.
 
 
 ## Wednesday: Tree inference from fossil data
