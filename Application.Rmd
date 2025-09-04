@@ -1,9 +1,9 @@
-|  |
-|----|
-| itle: "Stratigraphic palaeobiology in phylogenetics" |
-| uthor: "Emilia Jarochowska, Rachel Warnock, Laura Mulvey, Niklas Hohmann, Johannes Hidding" |
-| utput: word_document |
-| ibliography: references.bib |
+---
+title: "Stratigraphic palaeobiology in phylogenetics"
+author: "Emilia Jarochowska, Rachel Warnock, Laura Mulvey, Niklas Hohmann, Johannes Hidding"
+output: word_document
+bibliography: references.bib
+---
 
 # Organizers
 
