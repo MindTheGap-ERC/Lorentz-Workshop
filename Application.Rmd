@@ -1,9 +1,9 @@
- ---
-title: "Stratigraphic palaeobiology in phylogenetics"
-author: "Emilia Jarochowska, Rachel Warnock, Laura Mulvey, Niklas Hohmann, Johannes Hidding"
-output: word_document
-bibliography: references.bib  
----
+|  |
+|----|
+| itle: "Stratigraphic palaeobiology in phylogenetics" |
+| uthor: "Emilia Jarochowska, Rachel Warnock, Laura Mulvey, Niklas Hohmann, Johannes Hidding" |
+| utput: word_document |
+| ibliography: references.bib |
 
 # Organizers
 
@@ -37,9 +37,9 @@ c\. While the Lorentz Center is an international workshop center, the intention 
 d\. Be explicit about why an interactive Lorentz Center workshop is appropriate for the aims you have in mind -->
 ```
 
-**Phylogenetics** is the science of reconstructing evolutionary relationships, rates and processes. It is built through a concerted effort of mathematicians, palaeobiologists, geneticists, and computer scientists. For decades, the primary source of data for phylogenetic trees and the methods used to infer them were genetic sequences from living and - in exceptional circumstances - recently extinct taxa. Such data represents a tip-of-an-iceberg proportion of known diversity, as over 99% of organisms are extinct and either discovereable as **fossils** or lost for good. For many reasons, which can be argued mathematically and are understood intuitively, inclusion of fossils in phylogenetic trees, regardless of the methodological extent, radically improves our reconstruction of evolution (@ronquist_total-evidence_2012, @gavryushkina_bayesian_2017; @saladin_fossils_2017). 
+**Phylogenetics** is the science of reconstructing evolutionary relationships, rates and processes. It is built through a concerted effort of mathematicians, palaeobiologists, geneticists, and computer scientists. For decades, the primary source of data for phylogenetic trees and the methods used to infer them were genetic sequences from living and - in exceptional circumstances - recently extinct taxa. Such data represents a tip-of-an-iceberg proportion of known diversity, as over 99% of organisms are extinct and either discovereable as **fossils** or lost for good. For many reasons, which can be argued mathematically and are understood intuitively, inclusion of fossils in phylogenetic trees, regardless of the methodological extent, radically improves our reconstruction of evolution (@ronquist_total-evidence_2012, @gavryushkina_bayesian_2017; @saladin_fossils_2017).
 
-The recent mathematical development known as the **Fossilized Birth-Death** (FBD) family of models treats fossils and extant species as observations from the same macroevolutionary process, rather than external calibration constraints, providing statistically principled methods for integrating temporal, morphological, and molecular evidence. The introduction of the FBD process has led to major revisions in evolutionary timelines across diverse groups from insects to mammals, demonstrating that fossil data contains irreplaceable information about deep-time evolutionary processes. 
+The recent mathematical development known as the **Fossilized Birth-Death** (FBD) family of models treats fossils and extant species as observations from the same macroevolutionary process, rather than external calibration constraints, providing statistically principled methods for integrating temporal, morphological, and molecular evidence. The introduction of the FBD process has led to major revisions in evolutionary timelines across diverse groups from insects to mammals, demonstrating that fossil data contains irreplaceable information about deep-time evolutionary processes.
 
 Among the features of the FBD model that allow it to incorporate fossil data is the fact that (1) it is a diversification and **sampling model** and (2) the inference of the topology can include fossil ages (@wright_integrating_2022). These two aspects of the FBD model, sampling and fossil ages, constitute the interface between phylogenetics and geosciences. Phylogeneticists have acutely experienced the detrimental effects of using fossil ages without sufficient context (@ronquist_total-evidence_2012). Fossils can virtually never be dated directly and the typical precision of a fossil age is several million years. Ignoring stratigraphic age uncertainty, which can introduce errors of 10-20 million years in divergence time estimates [@barido-sottani_ignoring_2020]
 
@@ -84,7 +84,9 @@ We will also have **trained** and **built capacity** in using methods of the res
 ### Long-term impact
 
 1.  A chapter on using fossil and stratigraphic data in phylogenetic analyses and on replicability in a new planned article on best practices
+
 2.  Translation of researcher needs into digital infrastructure: based on the roadmap for digital infrastructure, feature requests including specifications of missing parts of algorithms and documentation will be prepared, following best practices in research software design. This will allow matching software capabilities with scientific needs and will ensure proper validation of the complex computations involved in phylogenetic inference.
+
 3.  A scientific article on phylogenetic inference from incomplete (gappy) fossil data and on incorporating stratigraphic precision and accuracy.
 
 # Program
@@ -99,7 +101,7 @@ Each day will be dedicated to one problem, to reduce cognitive load, and led by 
 
 Introductory lecture by Mark Patzkowsky: **Principles of Stratigraphic Palaeobiology**
 
-**Ice-breaker workshop: Make your own geological record.** In a pre-workshop survey we will ask participants about their coding skills and divide them into "novice", "familiar" and "expert". In the workshop, we will make sure that novice users are always paired with experts and that senior researchers are paired with ECRs. In this workshop, participants will learn the basics of creating a simple model of the geological record on their own computers. This exercise has been tested in two previous workshops and is suitable for a diverse audience.
+**Ice-breaker workshop: Make your own geological record.** In a pre-workshop survey we will ask participants about their coding skills and divide them into "novice", "familiar" and "expert". In the workshop, we will make sure that novice users are always paired with experts and that senior researchers are paired with ECRs. In this workshop, participants will learn the basics of creating a simple model of the geological record on their own computers, using CarboKitten developed jointly at Utrecht University and Netherlands eScience Center. This exercise has been tested in previous workshops and is suitable for a diverse audience.
 
 In-depth lecture by Lydian Boschman: **Palaeogeography and plate tectonics in phylogenies**
 
@@ -117,23 +119,21 @@ An overview of the conceptual foundations of morphological evolution, including 
 
 **Workshop: Incorporating morphological data into phylogenetic analysis:** In this workshop, participants will gain hands-on experience running phylogenetic analyses using morphological data. They will be tasked with selecting appropriate models and providing justification for their choices. The results of the analyses will be discussed, highlighting challenges encountered and exploring potential approaches for improvement
 
-Potential Lecture: **Extensions to Common Morphological Models**
-This session could cover recent methodological developments and extensions to standard models of morphological evolution.
+Potential Lecture: **Extensions to Common Morphological Models** This session could cover recent methodological developments and extensions to standard models of morphological evolution.
 
 **Workshop: Challenges in morphological modeling** In this workshop, participants will be grouped together into break-out rooms to discuss practical and theoretical challenges in morphological modeling. Topics may include, deciding which traits are informative for phylogenetic inference, how taphonomic biases influence morphological character evolution, and the advantages and limitations of using discrete versus continuous traits. The discussion will aim to generate insights into developing modeling approaches that better reflect the biological and geological processes shaping the observed data.
-
 
 ## Wednesday: Tree inference from fossil data
 
 *Niklas Hohmann*
 
-Introductory lecture by Philip Donoghoue: **Fossil Evidence in Time Tree Reconstruction**
+Introductory lecture by Philip Donoghue: **Fossil Evidence in Time Tree Reconstruction**
 
 **Workshop: The Stratigraphic record as a source of information**: Using their knowledge from the workshops on Monday about the data the stratigraphic record provides, participants will discuss in small groups how analyses from existing studies could be refined and identify novel research questions that can be addresses with this new data available. They will identify deficits in the methodological landscape and available empirical data sets, and will discuss best practices and strategies for reporting to increase reproducibility of phylogenetic inferences.
 
 **another lecture here?**
 
-**Workshop: Digital infrastructure for tree inference from fossil data**. Remixing the groups from the morning workshop, we will group together researchers from different disciplines in break-out rooms to establish the major conceptual and infrastructural thresholds to incorporating fossil data into tree inference. These will serve as the basis for the *roadmap digital infrastructure*.
+**Workshop: Digital infrastructure for tree inference from fossil data**. Remixing the groups from the morning workshop, we will group together researchers from different disciplines in break-out rooms to establish the major conceptual and infrastructural thresholds to incorporating fossil data into tree inference. These will serve as the basis for the *roadmap digital infrastructure*. Ideally, an RSE will be assigned to each group to advise on implementation.
 
 **Evening: Workshop dinner**
 
@@ -159,32 +159,33 @@ Due to high computation time of the analyses they may not be finished by the end
 
 # Participants
 
-We aim the workshop at participants with prior experience with phylogenetics, even if they are at the beginning of a PhD journey, and a small number of key participants representing stratigraphic palaeobiology. Since digital infrastructure is among the challenges in this field, we target particularly participants with at least an intention to engage with the software or research software engineers and to discuss the interplay between the needs of the users and the computational possibilities. 
+To achieve the aims of the workshop, we need to bring together participants representing: phylogenetics, stratigraphy, bioinformatics, evolutionary biology, sedimentary modelling, and research software engineering. We aim at:
+
+-   workshop participants with at least elementary experience with Bayesian phylogenetics, even if they are at the beginning of a PhD journey,
+
+-   a small number of key participants representing stratigraphic palaeobiology,
+
+-   Research Software Engineers in an advisory role.
+
+Since digital infrastructure is among the challenges in this field, we target particularly participants with at least an intention to engage with the software or research software engineers and to discuss the interplay between the needs of the users and the computational possibilities. The engagement does not mean experience with coding. It also means promoting the enforcement of good software governance and replicability among journal editors, supervisors, grant reviewers and other people in senior academic roles.
 
 Since the workshop will include hands-on sessions, including writing or running simple code (with ample help and instruction from the organizers), we intend to survey the participants about their skills and assign them to groups with mixed background, so they can work on problems together.
+
+We aim at a minimum proportion of ECRs of ca. 40%.
 
 ```{=html}
 <!--# In your general description, include the following:
 
 a\. An estimate of the expected number of participants. Space can be offered for a maximum of 55 persons (Lorentz Center\@omega) or 25 persons (Lorentz Center\@lambda), organisers included. If you plan on virtual attendance the total maximum is 80.
 
-b\. The fields, expertise and/or important research groups required to achieve the aims of your workshop.
-
-c\. Attention to international participation (research is international) as well as to relevant Dutch participation (we are financed by the Dutch taxpayers).
-
-d\. The ratio of early career researchers to senior participants you are aiming at. Inclusion of early career researchers in the workshop is highly encouraged. Think of participants who obtained their Ph.D. less than 5 years ago or are currently working towards it.
-
 e\. Explicit attention to enriching the diversity of your workshop. The Lorentz Center is committed to improve the participation of underrepresented groups in the workshops and the scientific boards pay particular attention to this. Make sure that the gender balance in your workshop is better than in your field and include researchers from underrepresented groups. -->
 ```
-
 
 # Budget
 
 # Dates
 
 <!--# From options listed here: <https://www.lorentzcenter.nl/index.php?pntHandler=ConRewriteAction&q=calendar.html&year=2026> I assumed we go for the smaller room, lambda, max 25 people. The other has a max capacity of 55 -->
-
-7-11 September 2026
 
 21-25 September 2026
 
