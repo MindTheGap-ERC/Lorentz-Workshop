@@ -98,11 +98,11 @@ Each day will be dedicated to one problem, to reduce cognitive load, and will be
 
 Introductory lecture by Mark Patzkowsky: **Principles of Stratigraphic Palaeobiology**
 
-**Ice-breaker workshop: Make your own geological record.** In a pre-workshop survey we will ask participants about their coding skills and divide them into "novice", "familiar" and "expert". In the workshop, we will make sure that novice users are always paired with experts and that senior researchers are paired with ECRs. In this workshop, participants will learn the basics of creating a simple model of the geological record on their own computers, using CarboKitten developed jointly at Utrecht University and Netherlands eScience Center [@hidding_CK]. This exercise has been tested in previous workshops and is suitable for a diverse audience.
+**Ice-breaker group coding activity: Make your own geological record.** In a pre-workshop survey we will ask participants about their coding skills and divide them into "novice", "familiar" and "expert". In the workshop, we will make sure that novice users are always paired with experts and that senior researchers are paired with ECRs. In this workshop, participants will learn the basics of creating a simple model of the geological record on their own computers, using CarboKitten developed jointly at Utrecht University and Netherlands eScience Center [@hidding_CK]. This exercise has been tested in previous workshops and is suitable for a diverse audience.
 
 In-depth lecture by Lydian Boschman: **Palaeogeography and plate tectonics in phylogenies**
 
-Diving deep workshop: **Extracting information for phylogenies from strata**. We will use the models created in the morning to simulate information which can be used in phylogenetic analyses: age-depth models, fossil ranges including their uncertainties, apparent origination and extinction rates. These datasets will be used in the following days.
+Diving deep group coding activity: **Extracting information for phylogenies from strata**. We will use the models created in the morning to simulate information which can be used in phylogenetic analyses: age-depth models, fossil ranges including their uncertainties, apparent origination and extinction rates. These datasets will be used in the following days.
 
 **Welcome reception**
 
@@ -112,15 +112,15 @@ Diving deep workshop: **Extracting information for phylogenies from strata**. We
 
 <!-- RW: Given the broader objectives of the workshop, perhaps you could also bring something about taphonomy in here? -->
 
-Introductory lecture by April Wright/Sergei Tarasov (?) **Modelling morphological evolution**
+Introductory lecture by April Wright/Sergei Tarasov **Modelling morphological evolution**
 
 An overview of the conceptual foundations of morphological evolution, including trait coding, evolutionary models, and their application in phylogenetic inference.
 
-**Workshop: Incorporating morphological data into phylogenetic analysis:** In this workshop, participants will gain hands-on experience running phylogenetic analyses using morphological data. They will be tasked with selecting appropriate models and providing justification for their choices. The results of the analyses will be discussed, highlighting challenges encountered and exploring potential approaches for improvement.
+**Group coding practical: Incorporating morphological data into phylogenetic analysis:** In this workshop, participants will gain hands-on experience running phylogenetic analyses using morphological data. They will be tasked with selecting appropriate models and providing justification for their choices. The results of the analyses will be discussed, highlighting challenges encountered and exploring potential approaches for improvement.
 
 Potential Lecture: **Extensions to Common Morphological Models** This session could cover recent methodological developments and extensions to standard models of morphological evolution.
 
-**Workshop: Challenges in morphological modeling** In this workshop, participants will be grouped together into break-out rooms to discuss practical and theoretical challenges in morphological modeling. Topics may include, deciding which traits are informative for phylogenetic inference, how taphonomic biases influence morphological character evolution, and the advantages and limitations of using discrete versus continuous traits. The discussion will aim to generate insights into developing modeling approaches that better reflect the biological and geological processes shaping the observed data.
+**Breakout group activity: Challenges in morphological modeling** In this workshop, participants will be grouped together into break-out rooms to discuss practical and theoretical challenges in morphological modeling. Topics may include, deciding which traits are informative for phylogenetic inference, how taphonomic biases influence morphological character evolution, and the advantages and limitations of using discrete versus continuous traits. The discussion will aim to generate insights into developing modeling approaches that better reflect the biological and geological processes shaping the observed data.
 <!-- RW: Perhaps we could even have people simulate incomplete character data using MorphoSim, to pair with the simulated output from Day 1? -->
 
 ## Wednesday: Tree inference from fossil data
@@ -130,11 +130,13 @@ Potential Lecture: **Extensions to Common Morphological Models** This session co
 Introductory lecture by Philip Donoghue: **Fossil Evidence in Time Tree Reconstruction**
 
 <!-- RW: My suggestion would be to include an intro to the FBD model prior to this and then have ppl identify temporal info from for use in node dating vs. different FBD models. -->
-**Workshop: The Stratigraphic record as a source of information**: Using their knowledge from the workshops on Monday about the data the stratigraphic record provides, participants will discuss in small groups how to characterize information from the stratigraphic record for time tree inference, how analyses from existing studies could be refined and identify novel research questions that can be addresses with this new data<!-- RW: Maybe be more precise --> available. They will identify deficits in the methodological landscape and available empirical data sets, and will discuss best practices and strategies for reporting to increase reproducibility of phylogenetic inferences.
+<!-- who could give an intro to the FBD model? Rachel? And can people survive Tuesday without it? -->
+
+**Breakout group activity: The stratigraphic record as a source of information**: Using their knowledge from the workshops on Monday about the data the stratigraphic record provides, participants will discuss in small groups how to characterize information from the stratigraphic record for time tree inference, how analyses from existing studies could be refined and identify novel research questions that can be addresses with this new data<!-- RW: Maybe be more precise --> available. They will identify deficits in the methodological landscape and available empirical data sets, and will discuss best practices and strategies for reporting to increase reproducibility of phylogenetic inferences. <!-- EJ: the last sentence does not seem to be linked to the topic of this activity. -->
 
 **another lecture here?** <!-- JBS: if you want to get into the software weeds, then this can be the right spot to talk about software concepts - architecture and limitations of common frameworks, what goes into the performance and why it can be hard to improve, how new developments are/should be validated etc (I'm assuming that Ugne's talk will focus on the community aspect i.e. git workflows, communication & teaching etc) -->
 <!-- RW: We could do with technical intro to the FBD model before the above workshop I reckon. Phil usually presents more on broad level stuff. Perhaps someone could follow up with a more technical intro to the FBD model ahead of the above? Maybe Sasha? -->
-**Workshop: Digital infrastructure for tree inference from fossil data**. Remixing the groups from the morning workshop, we will group together researchers from different disciplines in break-out rooms to establish the major conceptual and infrastructural barriers to incorporating fossil data into tree inference. These will serve as the basis for the *roadmap for digital infrastructure*. Ideally, an RSE will be assigned to each group to advise on implementation. <!-- JBS I don't love this last sentence because it sounds like the RSE are envisioned like "executants" rather than equal contributors... maybe say instead that you will ensure that each group is a mix of perspectives from the user side and the developer side ?-->
+Plenary discussion: **A simulation-based approach to integrating stratigraphic paleobiology and phylogenetics.** This session will bring together aspects from all previous workshops, with a focus on forward modelling. Participants will learn how to bring together simulation tools that can be used to simulate stratigraphy, trees, fossil and morphology. We will discuss the several different use cases for simulations, including validating and comparing different implementations of the FBD model and exploring limitations of existing models. We will identify a suite of questions that can be addressed in future simulation studies. <!-- EJ: I also think this is not clear: is this a tutorial, a plenary discussion, do we write something down at the end? -->
 
 **Evening: Workshop dinner**
 
@@ -144,22 +146,19 @@ Introductory lecture by Philip Donoghue: **Fossil Evidence in Time Tree Reconstr
 
 Introductory lecture by Ugne Stolz: **Community led phylogenetic software development**
 
-Workshop: **Preparing and reporting data for phylogenetic inference.** In contrast to previous workshops, which focus more on conceptual aspects of extracting information from the stratigraphic record for use in phylogenetics, this day will focus on more practical aspects. This will include an introduction to Bayesian phylogenetic software (BEAST2, MrBayes, RevBayes) and participants will walk through the decision-making process that goes into setting up an analysis using the FBD model. One of the objectives will be to develop best practices for reporting on this decision-making process and ensuring reproducibility. We will also discuss the challenges associated with comparing model implementations and output across different software.
+Breakout group activity: **Preparing and reporting data for phylogenetic inference.** In contrast to previous activities, which focus more on conceptual aspects of extracting information from the stratigraphic record for use in phylogenetics, this day will focus on more practical aspects. This will include an introduction to Bayesian phylogenetic software (BEAST2, MrBayes, RevBayes) and participants will walk through the decision-making process that goes into setting up an analysis using the FBD model. One of the objectives will be to develop best practices for reporting on this decision-making process and ensuring reproducibility. We will also discuss the challenges associated with comparing model implementations and output across different software.
 
-Potential lecture: **Reconciling models of morphological evolution and the fossilized birth-death processes** <!-- JBS: I would switch this afternoon and the previous, otherwise you have people discussing the digital infra before being introduced to the actual software -->
-<!-- RW: I agree with this --> 
+Potential lecture: **Reconciling models of morphological evolution and the fossilized birth-death processes**  
 
-Workshop: **A simulation-based approach to integrating stratigraphic paleobiology and phylogenetics.** This session will bring together aspects from all previous workshops, with a focus on forward modelling. Participants will learn how to bring together simulation tools that can be used to simulate stratigraphy, trees, fossil and morphology. We will discuss the several different use cases for simulations, including validating and comparing different implementations of the FBD model and exploring limitations of existing models. We will identify a suite of questions that can be addressed in future simulation studies.
+**Breakout group activity: Digital infrastructure for tree inference from fossil data**. Remixing the groups from the morning workshop, we will group together researchers from different disciplines in break-out rooms to establish the major conceptual and infrastructural barriers to incorporating fossil data into tree inference. These will serve as the basis for the *roadmap for digital infrastructure*. Ideally, an RSE will be assigned to each group to represent user and developer perspectives. 
 
 ## Friday: Interactive synthesis
 
-*Everyone*
-
-*Caution: this day needs to end by 15:30 latest*
+*All organizers*
 
 We will dedicate the day to carrying out a hands-on phylogenetic analyses representing two common scenarios: tree inference from incomplete geological record using the FBD Skyline model and tree inference accounting for fossil occurrence uncertainty using the FBD Range model. We will use simulated data of which we have perfect knowledge and the goal will be to recover the original tree properties.
 
-We will apply the *literate programming* approach: documenting our work in human language alongside code. The created document will be the basis for a scientific publication, as well as a tutorial for other users. We will again make sure to pair members with different expertise, i.e., self-declared experts with novices.
+We will apply the *literate programming* approach: documenting our work in human language alongside code. The created document will be the basis for a scientific publication, as well as a tutorial for other users. We will again make sure to form small groups of members with different expertise, i.e., self-declared experts with novices.
 
 Due to high computation time of the analyses they may not be finished by the end of the workshop, although we will provide SURF computing infrastructure to ensure as rapid completion as possible. We will finish the day and the workshop with a joint revision of what has been achieved. To this goal, we will offer the ECRs the opportunity to present a summary of the reconstruction and the results (if already available) on behalf of their teams and to be the ambassadors of the respective team's concerns, recommendations, and findings.
 
