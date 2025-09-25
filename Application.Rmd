@@ -1,7 +1,7 @@
 ---
 title: "Bridging stratigraphic palaeobiology and phylogenetics"
 author: "Emilia Jarochowska, Rachel Warnock, Laura Mulvey, Niklas Hohmann, Johannes Hidding"
-output: word_document
+output: pdf_document
 bibliography: references.bib
 ---
 
@@ -60,14 +60,6 @@ A major barrier to integrating information from the fossil record into phylogene
 ## Aims of the workshop
 
 Our goal is to achieve a framework for the integration of phylogenetics and stratigraphic palaeobiology, to communicate this to the scientific community through a publication, and foster collaboration between scientists contributing to both fields and research software engineers essential to making this research possible.
-
-```{=html}
-<!-- JBS: this section seems to be written mostly from the user perspective, and it's not super clear to me what the RSEs would gain from attending some possibilities I can see would be 
-* clear priorities on what is important for users
-* a better understanding by users of the challenges of the software and how they can make it easier for developers to help them
-* commitment by new developers from the paleo/bio side to spend time and effort learning best practices instead of jumping to the stuff they are interested in (and possibly commitment to long-term support beyond the publication)
-* support through grant applications / advocating for including software funds in future grants (this is mentioned above already but it's not super clear) -->
-```
 
 ### Benefit to the Dutch research community
 
