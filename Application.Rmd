@@ -18,7 +18,9 @@ bibliography: references.bib
 5.  Johannes Hidding, Netherlands eScience Center (Netherlands), Research Software Engineer
 
 # Abstract
+
 <!-- PD: Or: Stratigraphic paleobiology and phylogenetics seek to understand how physical and biological processes (respectively) shape the fossil record - why are they so poorly integrated?  EJ: I don't like this version because it makes it sound as if the fossil record was a goal in itself, whereas I prefer to present it as a tool. -->
+
 Stratigraphic paleobiology and phylogenetics seek to understand how physical and biological processes (respectively) shape the fossil record. Yet, these fields are poorly integrated. The stratigraphic record is the key source of temporal information used to constrain the evolution of life and is the purview of Earth scientists. Phylogenetics, although it relies on this temporal record to reconstructed evolutionary time trees, allowing us to fill critical gaps in the fossil record, is largely the purview of biologists. Few studies exploit both approaches simultaneously. The challenge of reconciling the physical geological record with phylogenetics lies in the theoretical chasms that exist between disciplines, as well as limitations created by computational tools, technical skills, and ontologies of uncertainty. Meanwhile recent advances in modelling in both areas create opportunities for joint models of stratigraphic and phylogenetic processes. In this workshop, we will isolate these opportunities and unite stratigraphers, evolutionary biologists and software engineers to solve them together interactively. This workshop aims to establish a workflow for incorporating the geological record into phylogenetic inference, to create a roadmap for the digital infrastructure required for successful integration of geological and evolutionary data, and to translate these theoretical advances into actionable research software improvements.
 
 # Scientific case
@@ -28,6 +30,7 @@ Stratigraphic paleobiology and phylogenetics seek to understand how physical and
 Recent mathematical and computational developments, collectively known as the **Fossilized Birth-Death** (FBD) family of models, treat fossils and extant species as observations from the same macroevolutionary process, rather than external calibration constraints, providing statistically principled methods for integrating temporal, morphological, and molecular evidence. The introduction of the FBD process has led to major revisions in evolutionary timelines across diverse groups from insects to mammals, demonstrating that fossil data contains irreplaceable information about deep-time evolutionary processes, reviewed in (@mulvey_fossils_2025).
 
 <!-- RW: changes I made here were only to the order of logic -->
+
 Among the features of the FBD model that allow it to incorporate fossil data is the fact that it is a **diversification** *and* **sampling model**, meaning (1) that the inference of the topology can directly incorporate information about fossil ages, and (2) that we can make explicit assumptions about incomplete sampling and the structure of available fossil data [@stadler_sampling-through-time_2010]. These aspects of the FBD model, the sampling process and fossil ages, constitute the interface between phylogenetics and geosciences. The FBD model has enabled us to incorporate stratigraphic information directly into phylogenetic inference. For example, fossils can virtually never be dated directly and the typical precision of a fossil age is several million years. Ignoring stratigraphic age uncertainty can introduce errors of 10-20 million years in divergence time estimates but this source of uncertainty can readily be accounted for in a Bayesian framework [@barido-sottani_ignoring_2020]. Beyond this, much more untapped potential remains. Other information about the stratigraphic record, such as variation in sampling through time has almost never been accounted for in analyses using FBD models.
 
 **Stratigraphic paleobiology** is the discipline studying the laws and processes governing fossil preservation and discoverability. It offers a theoretical framework and a predictive toolbox for identifying gaps in the fossil record, environmental factors affecting fossil occurrences, and quantification of the uncertainty of fossil ages [@patzkowsky_stratigraphic_2012]. In this workshop, we aim to address the challenges of using fossil data in phylogenies using a stratigraphic palaeobiology approach.
@@ -40,13 +43,15 @@ Tapping into the record of evolution in rocks requires, essentially, bridging th
 
 ### Understanding the geological record
 
-The geological record offers a conceptual challenge: it can be represented in the stratigraphic (depth) domain and in the time domain. The stratigraphic domain is the physical record: the strata, the fossils, the boundaries and event horizons, and the minerals bearing radioisotopes that allow calibration in absolute time. The time domain is where the strata and fossils are formed, where extinction and origination happen, and what we cannot observe but must reconstruct from the stratigraphic domain. Most information needed for phylogenetics is implicitly expressed in the time domain (fossil ages, rates, sampling), but taken from the stratigraphic domain. The stratigraphic record is commonly treated as a continuous, lossless mapping from the time domain, but the broad and diverse fields of stratigraphy and sedimentology provide a wealth of processes that challenge this approach. Recent advances in modeling and geochronology (led by researchers at Utrecht University) allow us to build representations of time in geological strata, including their uncertainty [@hohmann_nonparametric_2024], but these tools are yet to be incorporated in phylogenetic inference. 
+The geological record offers a conceptual challenge: it can be represented in the stratigraphic (depth) domain and in the time domain. The stratigraphic domain is the physical record: the strata, the fossils, the boundaries and event horizons, and the minerals bearing radioisotopes that allow calibration in absolute time. The time domain is where the strata and fossils are formed, where extinction and origination happen, and what we cannot observe but must reconstruct from the stratigraphic domain. Most information needed for phylogenetics is implicitly expressed in the time domain (fossil ages, rates, sampling), but taken from the stratigraphic domain. The stratigraphic record is commonly treated as a continuous, lossless mapping from the time domain, but the broad and diverse fields of stratigraphy and sedimentology provide a wealth of processes that challenge this approach. Recent advances in modeling and geochronology (led by researchers at Utrecht University) allow us to build representations of time in geological strata, including their uncertainty [@hohmann_nonparametric_2024], but these tools are yet to be incorporated in phylogenetic inference.
 
 ### Models of morphological evolution
 
 <!-- PD: include continuous data -->
+
 <!-- PD: I think there is also an issue with whether, with models like the FBD, we are attempting to model biological processes or palaeontological patterns which are a consequence of biological and physical processes -->
-Beyond providing temporal information, fossils also preserve morphological characteristics in their appearance, which constitute an important source of data for phylogenetic inference. The use of discretized morphological data in phylogenetics has traditionally relied on parsimony-based methods. More recently, however, their application within a Bayesian framework has gained traction, offering the advantage of directly incorporating fossil data into time-calibrated phylogenetic inference while jointly resolving relationships among both extinct and extant lineages [@wright2014]. Nevertheless, the number of morphological models available to describe character change remains limited, reflecting the difficulty of generalizing trait evolution. The most widely used approach is the `Mk` model, which assumes equal transition rates among states and equal stationary frequencies [@lewis2001]. Several extensions of this model have been developed and are frequently applied, although their assumptions about character evolution remain relatively simplistic. Despite these limitations, studies indicate that such models perform well and are capable of capturing essential aspects of the evolutionary process [@mulvey2025]. An important aspect of fossil character data that remains underexplored is the influence of stratigraphic and taphonomic biases, both on the fossils themselves and on the loss of entire specimens from the fossil record. Gaining a better understanding of how these biases shape our observed data could inform strategies to model the processes that generated it, integrating insights from both biological and geological perspectives. <!-- PD: These are not really biases, though this is how us palaeos characterise them. Rather, they are aspects of the structure of the bio- and litho-stratigraphic records. RW: you could just replace bias with process here? --> 
+
+Beyond providing temporal information, fossils also preserve morphological characteristics in their appearance, which constitute an important source of data for phylogenetic inference. The use of discretized morphological data in phylogenetics has traditionally relied on parsimony-based methods. More recently, however, their application within a Bayesian framework has gained traction, offering the advantage of directly incorporating fossil data into time-calibrated phylogenetic inference while jointly resolving relationships among both extinct and extant lineages [@wright2014]. Nevertheless, the number of morphological models available to describe character change remains limited, reflecting the difficulty of generalizing trait evolution. The most widely used approach is the `Mk` model, which assumes equal transition rates among states and equal stationary frequencies [@lewis2001]. Several extensions of this model have been developed and are frequently applied, although their assumptions about character evolution remain relatively simplistic. Despite these limitations, studies indicate that such models perform well and are capable of capturing essential aspects of the evolutionary process [@mulvey2025]. An important aspect of fossil character data that remains underexplored is the influence of stratigraphic and taphonomic biases, both on the fossils themselves and on the loss of entire specimens from the fossil record. Gaining a better understanding of how these biases shape our observed data could inform strategies to model the processes that generated it, integrating insights from both biological and geological perspectives. <!-- PD: These are not really biases, though this is how us palaeos characterise them. Rather, they are aspects of the structure of the bio- and litho-stratigraphic records. RW: you could just replace bias with process here? -->
 
 ### Digital infrastructure
 
@@ -54,15 +59,18 @@ A major barrier to integrating information from the fossil record into phylogene
 
 ## Aims of the workshop
 
-Our goal is to achieve a framework for the integration of phylogenetics and stratigraphic palaeobiology, to communicate this to the scientific community through a publication, and foster collaboration between scientists contributing to both fields and research software engineers essential to making this research possible. 
+Our goal is to achieve a framework for the integration of phylogenetics and stratigraphic palaeobiology, to communicate this to the scientific community through a publication, and foster collaboration between scientists contributing to both fields and research software engineers essential to making this research possible.
 
+```{=html}
 <!-- JBS: this section seems to be written mostly from the user perspective, and it's not super clear to me what the RSEs would gain from attending some possibilities I can see would be 
 * clear priorities on what is important for users
 * a better understanding by users of the challenges of the software and how they can make it easier for developers to help them
 * commitment by new developers from the paleo/bio side to spend time and effort learning best practices instead of jumping to the stuff they are interested in (and possibly commitment to long-term support beyond the publication)
 * support through grant applications / advocating for including software funds in future grants (this is mentioned above already but it's not super clear) -->
+```
 
 ### Benefit to the Dutch research community
+
 <!-- Maybe you could also say there isn't a very strong phylo methods community? I'm not really aware of any Dutch groups developing Bayesian phylogenetic software -->
 
 The Netherlands has a strong tradition in evolutionary biology, but its share and impact of publications in natural sciences has been falling in the recent years, compared to other EU and world countries, according to the Rathenau Instituut. At the same time, the Netherlands has established itself as a leader in Open Science and software sustainability and sovereignty, through the work of the Netherlands eScience Center and the integration of engineering and research expertise in research strategies and funding programs. Through this workshop, we want to leverage this leadership position. We will promote software tools developed in the Netherlands and integrate this unique expertise into the workflows and tools that are fundamental to phylogenetics and stratigraphic paleobiology. The workshop involves a strong international participation as a way to offer Dutch researchers the opportunity to access the most exciting developments in the field and to counteract increasing scientific isolationism visible in Europe and worldwide. Our goal is to strengthen the role of Dutch scientists in international collaboration through publications, joint strategies and roadmaps, and co-creation of grant applications and projects.
@@ -74,7 +82,7 @@ The Netherlands has a strong tradition in evolutionary biology, but its share an
 At the end of the workshop, we will have produced:
 
 1.  A **best-practices recommendations list** for publishing and reviewing phylogenetic analyses and reporting fossil and stratigraphic information.
-2.  A **roadmap for digital infrastructure** needed for landmark use-cases of phylogenetic analysis incorporating fossil data. It will contain a list of priorities from the user perspective. 
+2.  A **roadmap for digital infrastructure** needed for landmark use-cases of phylogenetic analysis incorporating fossil data. It will contain a list of priorities from the user perspective.
 3.  A **technical draft of a manual for phylogenetic reconstruction from simulated data**, addressing uncertainties, sources of error, and instructions for practitioners - this draft will become the basis for a future publication and tutorial.
 
 We will also have **trained** and **built capacity** in using methods of the respective disciplines among phylogeneticists interested in incorporating geological knowledge and stratigraphic palaeobiologists aiming to bring in their expertise into phylogenetics. As research software engineers are still relatively new roles in the academic landscape, we will have trained participants in the fundamentals of communicating with them.
@@ -121,8 +129,7 @@ An overview of the conceptual foundations of morphological evolution, including 
 
 Potential Lecture: **Extensions to Common Morphological Models** This session could cover recent methodological developments and extensions to standard models of morphological evolution.
 
-**Breakout group activity: Challenges in morphological modeling** In this workshop, participants will be grouped together into break-out rooms to discuss practical and theoretical challenges in morphological modeling. Topics may include, deciding which traits are informative for phylogenetic inference, how taphonomic biases influence morphological character evolution, and the advantages and limitations of using discrete versus continuous traits. The discussion will aim to generate insights into developing modeling approaches that better reflect the biological and geological processes shaping the observed data.
-<!-- RW: Perhaps we could even have people simulate incomplete character data using MorphoSim, to pair with the simulated output from Day 1? -->
+**Breakout group activity: Challenges in morphological modeling** In this workshop, participants will be grouped together into break-out rooms to discuss practical and theoretical challenges in morphological modeling. Topics may include, deciding which traits are informative for phylogenetic inference, how taphonomic biases influence morphological character evolution, and the advantages and limitations of using discrete versus continuous traits. The discussion will aim to generate insights into developing modeling approaches that better reflect the biological and geological processes shaping the observed data. <!-- RW: Perhaps we could even have people simulate incomplete character data using MorphoSim, to pair with the simulated output from Day 1? -->
 
 ## Wednesday: Tree inference from fossil data
 
@@ -133,13 +140,14 @@ Introductory lectures by Philip Donoghue: **Fossil Evidence in Time Tree Reconst
 These talks will introduce the major modelling frameworks used to infer time constrained trees, along with conceptual challenges.
 
 <!-- RW: My suggestion would be to include an intro to the FBD model prior to this and then have ppl identify temporal info from for use in node dating vs. different FBD models. -->
+
 <!-- who could give an intro to the FBD model? Rachel? And can people survive Tuesday without it? RW: yes, the morpho models can be taught in isolation, but its needed here -->
 
 **Group coding practical: A simulation-based approach to integrating stratigraphic paleobiology and phylogenetics.** This session will bring together aspects from all previous workshops, with a focus on forward modelling. Participants will learn how to bring together simulation tools that can be used to simulate stratigraphy, trees, fossil and morphology. This practical session aims to help participants develop an intuition for the model parameters. In addition, we will discuss the different use cases for simulations, including validating and comparing different implementations of the FBD model and exploring limitations of existing models.
 
-Lecture by Rachel Warnock: **Extensions to the FBD processes and challenges**<!--RW: Alternatively JBS or David Cerny could do this if we can find someone to do the talk I assigned to her below-->  
+Lecture by Rachel Warnock: **Extensions to the FBD processes and challenges**<!--RW: Alternatively JBS or David Cerny could do this if we can find someone to do the talk I assigned to her below-->
 
-**Breakout group activity: The stratigraphic record as a source of information**: Using their knowledge from the workshops on Monday about the data the stratigraphic record provides, participants will discuss in small groups how to characterize information from the stratigraphic record for time tree inference, how analyses from existing studies could be refined and identify novel research questions that can be addresses using more precise information from the stratigraphic record. In addition, we will identify deficits in the methodological landscape and available empirical data sets, i.e., cases of model-misspecification and current limits to including stratigraphic data, and will discuss best practices and strategies for reporting to increase reproducibility of phylogenetic inferences. 
+**Breakout group activity: The stratigraphic record as a source of information**: Using their knowledge from the workshops on Monday about the data the stratigraphic record provides, participants will discuss in small groups how to characterize information from the stratigraphic record for time tree inference, how analyses from existing studies could be refined and identify novel research questions that can be addresses using more precise information from the stratigraphic record. In addition, we will identify deficits in the methodological landscape and available empirical data sets, i.e., cases of model-misspecification and current limits to including stratigraphic data, and will discuss best practices and strategies for reporting to increase reproducibility of phylogenetic inferences.
 
 **Evening: Workshop dinner**
 
@@ -151,12 +159,9 @@ Introductory lecture by Ugne Stolz: **Community led phylogenetic software develo
 
 **Breakout group activity: Preparing and reporting data for phylogenetic inference.** In contrast to previous activities, which focus more on conceptual aspects of extracting information from the stratigraphic record for use in phylogenetics, this day will focus on more practical aspects. This will include an introduction to Bayesian phylogenetic software (BEAST2, MrBayes, RevBayes) and participants will walk through the decision-making process that goes into setting up an analysis using the FBD model. One of the objectives will be to develop best practices for reporting on this decision-making process and ensuring reproducibility. We will also discuss the challenges associated with comparing model implementations and output across different software.
 
-Lecture by Joëlle Barido-Sottani: **Architecture and limitations of common frameworks used in phylogenetic software development**.
-<!-- David Cerny or Sebastian Höhna could also potential do this talk, or even Johannes Hidding? -->
-<!-- EJ: I think we could offer them the opportunity to contribute slides or prepare the lecture together but if they don't have time, we can align them during the workshop - it will still be useful -->
-<!-- JBS: if you want to get into the software weeds, then this can be the right spot to talk about software concepts - architecture and limitations of common frameworks, what goes into the performance and why it can be hard to improve, how new developments are/should be validated etc (I'm assuming that Ugne's talk will focus on the community aspect i.e. git workflows, communication & teaching etc) -->
+Lecture by Joëlle Barido-Sottani: **Architecture and limitations of common frameworks used in phylogenetic software development**. <!-- David Cerny or Sebastian Höhna could also potential do this talk, or even Johannes Hidding? --> <!-- EJ: I think we could offer them the opportunity to contribute slides or prepare the lecture together but if they don't have time, we can align them during the workshop - it will still be useful --> <!-- JBS: if you want to get into the software weeds, then this can be the right spot to talk about software concepts - architecture and limitations of common frameworks, what goes into the performance and why it can be hard to improve, how new developments are/should be validated etc (I'm assuming that Ugne's talk will focus on the community aspect i.e. git workflows, communication & teaching etc) -->
 
-**Breakout group activity: Digital infrastructure for tree inference from fossil data**. Remixing the groups from the morning workshop, we will group together researchers from different disciplines in break-out rooms to establish the major conceptual and infrastructural barriers to incorporating fossil data into tree inference. These will serve as the basis for the *roadmap for digital infrastructure*. Ideally, an RSE will be assigned to each group to balance user and developer perspectives. 
+**Breakout group activity: Digital infrastructure for tree inference from fossil data**. Remixing the groups from the morning workshop, we will group together researchers from different disciplines in break-out rooms to establish the major conceptual and infrastructural barriers to incorporating fossil data into tree inference. These will serve as the basis for the *roadmap for digital infrastructure*. Ideally, an RSE will be assigned to each group to balance user and developer perspectives.
 
 ## Friday: Interactive synthesis
 
@@ -166,9 +171,9 @@ We will dedicate the day to carrying out **hands-on phylogenetic analyses** repr
 
 We will apply the *literate programming* approach: documenting our work in human language alongside code. The created document will be the basis for a scientific publication, as well as a tutorial for other users. We will again make sure to form small groups of members with different expertise, i.e., self-declared experts with novices. The produced code will be shared and open and will be the basis for a future tutorial and article reporting the results of the workshop.
 
-Due to high computation time of the analyses they may not be finished by the end of the workshop, although we will provide SURF computing infrastructure to ensure as rapid completion as possible. We will finish the day and the workshop with a joint revision of what has been achieved. To this goal, we will offer the ECRs the opportunity to present a summary of the reconstruction and the results (if already available) on behalf of their teams and to be the ambassadors of the respective team's concerns, recommendations, and findings.  
+Due to high computation time of the analyses they may not be finished by the end of the workshop, although we will provide SURF computing infrastructure to ensure as rapid completion as possible. We will finish the day and the workshop with a joint revision of what has been achieved. To this goal, we will offer the ECRs the opportunity to present a summary of the reconstruction and the results (if already available) on behalf of their teams and to be the ambassadors of the respective team's concerns, recommendations, and findings.
 
-Finally, we will identify a suite of research questions that can be addressed in future simulation and empirical studies, using the tools introduced throughout the week. <!--RW: at least I think this would make sense on the last day --> 
+Finally, we will identify a suite of research questions that can be addressed in future simulation and empirical studies, using the tools introduced throughout the week. <!--RW: at least I think this would make sense on the last day -->
 
 # Participants
 
@@ -186,11 +191,26 @@ Since the workshop will include hands-on sessions, including writing or running 
 
 We aim at a minimum proportion of ECRs of ca. 40% and anticipate between 40 and 50 participants.
 
-
 # Budget
+
+|  |  |  |  |
+|----|----|----|----|
+| **Purpose** | **Funding source** | **Amount (EUR)** | **Status** |
+| Travel and housing of Laura Mulvey (UK) | Palaeontological Association | 1300 | Application submitted |
+| Travel and housing of Rachel Warnock (Germany) | ERC grant of E. Jarochowska | 1000 | Confirmed |
+| Travel and housing of guest speaker M. Patzkowsky | Speaker's sources | 2500 | Confirmed |
+| Travel and housing of guest speakers A. Gavryushkina (New Zealand) and U. Stolz (Switzerland) | Paleontological Society | 3058 | Application submitted |
+| Travel and housing of guest speakers P. Donoghue and A. Gavryushkina | Society for the Study of Evolution | 5100 | Application submitted |
+| Meeting expenses | International Commission of Stratigraphy | 500 | Application submitted |
+| Travel and housing of guest speaker S. Tarasov | Speaker's sources | 1200 | Confirmed |
+| Travel and housing of guest speaker A. Wright | Speaker's sources | 2500 | Confirmed |
 
 # Dates
 
-21-25 September 2026
+1.  21-25 September 2026
+
+2.  28 September - 2 October 2026
+
+3.  14-18 September 2026
 
 # References
