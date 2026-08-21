@@ -87,14 +87,6 @@ output = Dict(
     :topography => OutputSpec(write_interval=100),
     :profile    => OutputSpec(slice=(:, 25)),
 )
-for loc in locations
-    output[loc.key] = OutputSpec(slice=(loc.x, loc.y), write_interval=1)
-end
-
-for loc in locations
-    depth = initial_topography((loc.x - 1) * 150.0, nothing)
-    println(rpad(loc.label, 16), " x-index=", loc.x, "  initial depth ≈ ", round(depth, digits=1), " m")
-end
 ```
 
 ### An "icehouse"-type sea-level history leads to large gaps
@@ -103,6 +95,7 @@ Stratigraphic gaps form whenever relative sea level falls faster than subsidence
 
 ```{julia}
 #| label: sea-level
+#| echo: false
 sea_level = t -> 5.5u"m" * sin(2π * t / 0.18u"Myr")
 subsidence_rate = 38.0u"m/Myr"
 disintegration_rate = 80.0u"m/Myr"
@@ -114,6 +107,7 @@ Now we assemble the full input:
 
 ```{julia}
 #| label: input
+#| echo: false
 input = ALCAP.Input(
     box = box,
     ca_interval = 1,
@@ -136,6 +130,7 @@ input = ALCAP.Input(
 ```{julia}
 #| label: run-model
 #| cache: true
+#| echo: false
 mkpath("data/output")
 write("data/output/.gitignore", "*\n")
 
