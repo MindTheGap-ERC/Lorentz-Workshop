@@ -72,7 +72,7 @@ The platform is a 100 x 50 grid of 150 m cells (15 km x 7.5 km), with a gentle r
 
 ```{julia}
 #| label: geometry
-box = Box{Coast}(grid_size=(100, 50), phys_scale=150.0u"m")
+box = CarboKitten.Box{Coast}(grid_size=(100, 50), phys_scale=150.0u"m")
 time = TimeProperties(Δt=0.0002u"Myr", steps=5000)
 initial_topography = (x, y) -> -x / 300.0
 
@@ -108,7 +108,7 @@ subsidence_rate = 38.0u"m/Myr"
 disintegration_rate = 80.0u"m/Myr"
 ```
 
-Every 0.18 Myr the sea surface swings up and down by 5.5 m while the sea floor only subsides by about 38 m/Myr x 0.18 Myr ≈ 6.8 m per cycle. Each falling limb of the curve will push shallow parts of the platform above sea level, exposing them, before the next rise buries them again. That is our gap-generating machine.
+Every 0.18 Myr the sea surface swings up and down by 5.5 m while the sea floor only subsides by about 38 m/Myr $\times$ 0.18 Myr $\approx$ 6.8 m per cycle. Each falling limb of the curve will push shallow parts of the platform above sea level, exposing them, before the next rise buries them again. That is our gap-generating machine.
 
 Now we assemble the full input:
 
@@ -205,7 +205,7 @@ fig_logs
 
 ## 6. Age-depth models: where did the time go?
 
-The stratigraphic height each column reaches is a *cumulative* quantity: it only goes up when sediment is actually preserved. Plotting that cumulative height against time — the age-depth model — represents every interval of non-deposition or erosion into a flat, horizontal plateau: time passes, but the column does not grow. Long plateaus are large stratigraphic gaps.
+The stratigraphic height each column reaches is cumulative: it only goes up when sediment is actually preserved. Plotting that cumulative height against time — the age-depth model — represents every interval of non-deposition or erosion into a flat, horizontal plateau: time passes, but the column does not grow. Long plateaus are large stratigraphic gaps.
 
 ```{julia}
 #| label: fig-adm
@@ -226,7 +226,7 @@ axislegend(ax, position=:rb)
 fig_adm
 ```
 
-Compare the four curves: the proximal column (repeatedly exposed by the oscillating sea level) should show the longest flat plateaus, while columns further down the ramp - spending more time below wave base - tend to accumulate more continuously, at least until subsidence carries them out of the photic zone and production itself shuts down. Every plateau you see here is time that a phylogenetic or biostratigraphic study at that location would simply never get to sample, no matter how good the fossil preservation is *within* the rock that did form.
+Compare the four curves: the proximal column (repeatedly exposed by the oscillating sea level) should show the longest flat plateaus, while columns further down the ramp - spending more time below wave base - tend to accumulate more continuously, at least until subsidence carries them out of the photic zone and production itself shuts down. 
 
 ## 7. Optional: exporting the columns for further analysis
 
@@ -251,6 +251,6 @@ data_export(spec, header, cols)
 
 ## Wrap-up
 
--   A single sea-level curve, applied uniformly across a platform, produces a *spatially* very uneven stratigraphic record: gap size and frequency depend strongly on where a section sits relative to sea level and the photic zone.
--   The age-depth model is the key object that translates "how much rock is here" into "how much time does this rock represent" — and it is exactly the kind of information you would need to correct for when placing fossil occurrences on a time scale.
--   Try changing `sea_level`, `subsidence_rate`, or `disintegration_rate` above and re-running from Section 3 onward: how do the four age-depth models respond? Can you find a parameter combination where the *deepest* column has the biggest gaps instead of the shallowest one?
+-   A single sea-level curve, applied uniformly across a platform, produces a spatially heterogeneous stratigraphic record: gap size and frequency depend strongly on where a section sits relative to sea level and the photic zone.
+-   The age-depth model is the key object that translatesrock thickness into time.
+-   Try changing `sea_level`, `subsidence_rate`, or `disintegration_rate` above and re-running from Section 3 onward: how do the four age-depth models respond? Can you find a parameter combination where the deepest column has the biggest gaps instead of the shallowest one?
