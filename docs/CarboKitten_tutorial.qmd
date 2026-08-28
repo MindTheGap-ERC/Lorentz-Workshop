@@ -87,6 +87,10 @@ output = Dict(
     :topography => OutputSpec(write_interval=100),
     :profile    => OutputSpec(slice=(:, 25)),
 )
+
+for loc in locations
+    output[loc.key] = OutputSpec(slice=(loc.x, loc.y), write_interval=1)
+end
 ```
 
 ### An "icehouse"-type sea-level history leads to large gaps
