@@ -4,10 +4,10 @@
 
 ### Scientific organizers:
 
-1. Emilia Jarochowska, Utrecht University
+1. Emilia Jarochowska, Utrecht University and Münster University
 2. Johan Hidding, Netherlands eScience Center
 3. Laura Mulvey, Queen Mary University of London
-4. Rachel Warnock, rachel.warnock@fau.de
+4. Rachel Warnock, Friedrich-Alexander-Universität Erlangen-Nürnberg
 5. Niklas Hohmann, Utrecht University
 
 ### Preliminary program
