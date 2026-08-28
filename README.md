@@ -68,3 +68,64 @@
 | 12:00         | Lunch break                                                                                                                                                                                                                                          |                                         |
 | 13:30         | Breakout group coding and writing activity                                                                                                                                                                                                           |                                         |
 | 14:40         | Plenary discussion and conclusions, planning next steps                                                                                                                                                                                              |                                         |
+
+## Workshop book
+
+The teaching materials in this repository are a [Quarto](https://quarto.org) book. The rendered site is written to `_book/`, with `_book/index.html` as the entry point.
+
+### Rendering to HTML
+
+Requirements: Quarto (>= 1.4; already installed in recent RStudio versions).
+To run non-R code (code is run during rendering unless set otherwise by the author of the chapter), you need the respective language installed, please see a separate section on this below. 
+
+The simplest way to build the html:
+
+```bash
+quarto render
+```
+Currently the book renders to HTML AND PDF by default. If you want only HTML, do:
+
+```bash
+quarto render --to html 
+```
+
+While drafting, a single chapter can be rendered on its own (standalone page, without book navigation):
+
+```bash
+quarto render adms.qmd --to html
+```
+
+In RStudio: open `Lorentz-Workshop.Rproj` and use **Build > Render Book**, or the **Render** button on an individual `.qmd`.
+
+`_book/` is generated output — there is no need to edit anything in it.
+
+### Editing
+
+If you are used to R Markdown, you will hardly notice any differences:
+
+- Chapters are `.qmd` files in the repository root. Same structure as `.Rmd`: YAML header, Markdown body, code chunks. 
+- To add a chapter, create the `.qmd` file and list it under the relevant `part:` in `_quarto.yml` — that file is the table of contents, and a chapter not listed there is not part of the book.
+- Unlike in R Markdown, code chunk options go inside the chunk as `#|` comments, not in the chunk header:
+
+````
+```{r}
+#| label: fig-example
+#| echo: false
+#| fig-cap: "Caption goes here."
+```
+````
+
+- The default engine is knitr, so `{r}` chunks work as usual. A chapter in another language declares it in its YAML header, e.g. `engine: julia` in `CarboKitten_tutorial.qmd`, and then uses `{julia}` chunks.
+- Citations: add the BibTeX entry to `references.bib` and cite with `[@key]`. The reference list is generated in `references.qmd`.
+- Cross-references use the label prefix: a chunk labelled `fig-example` is referenced as `@fig-example`, a section with `{#sec-intro}` as `@sec-intro`.
+- Images go in `images/` and are included with standard Markdown: `![Caption](images/file.png)`.
+
+## Installing languages and other software used in the workshop
+
+### Julia 
+
+The code used here requires Julia >= 1.10. Install the Julia packages once, from the repository root:
+
+```bash
+julia --project=. -e 'using Pkg; Pkg.instantiate()'
+```
