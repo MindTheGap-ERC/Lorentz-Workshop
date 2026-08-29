@@ -69,22 +69,22 @@
 | 13:30         | Breakout group coding and writing activity                                                                                                                                                                                                           |                                         |
 | 14:40         | Plenary discussion and conclusions, planning next steps                                                                                                                                                                                              |                                         |
 
-## Workshop book
+## Workshop book - instructions for contributors
 
-The teaching materials in this repository are a [Quarto](https://quarto.org) book. The book sources live in `docs/`; the rendered site is written to `_book/` next to it, with `_book/index.html` as the entry point.
+The teaching materials in this repository are a [Quarto](https://quarto.org) book. The sources live in `book/`; rendering writes the finished website into `docs/`, which is the folder GitHub Pages serves.
 
-### Rendering to HTML
+### Rendering to HTML 
 
 Requirements: Quarto (>= 1.4; already installed in recent RStudio versions).
 To run non-R code (code is run during rendering unless set otherwise by the author of the chapter), you need the respective language installed, please see a separate section on this below. 
 
-All Quarto commands are run from the `docs/` directory:
+All Quarto commands are run from the `book/` directory:
 
 ```bash
-cd docs
+cd book
 ```
 
-The simplest way to build the html:
+The simplest way to build:
 
 ```bash
 quarto render
@@ -101,16 +101,32 @@ While drafting, a single chapter can be rendered on its own (standalone page, wi
 quarto render adms.qmd --to html
 ```
 
-In RStudio, the **Build > Render Book** button only appears when `_quarto.yml` sits in the RStudio project root, which is not the case with the sources in `docs/`. Use the Terminal pane instead (`cd docs`, then the commands above), or the **Render** button on an individual open `.qmd`.
+In RStudio, the **Build > Render Book** button only appears when `_quarto.yml` sits in the RStudio project root, which is not the case with the sources in `book/`. Use the Terminal pane instead (`cd book`, then the commands above), or the **Render** button on an individual open `.qmd`.
 
-`_book/` is generated output — there is no need to edit anything in it. The same goes for `docs/data/`, where the code chunks write their simulation output.
+`docs/` is generated output, please do not edit anything in it by hand, it won't be saved. The same goes for `book/data/`, where the code chunks write their simulation output.
+
+### Publishing to GitHub Pages
+
+The site is **served directly from the repository** (not rendered with GitHub Actions), so publishing an update means rendering and committing the result:
+
+```bash
+cd book
+quarto render --to html
+git add ../docs
+git commit -m "rebuild the book"
+git push
+```
+
+GitHub rebuilds the site within a minute or so and it appears at <https://mindthegap-erc.github.io/Lorentz-Workshop/>.
+
+Note to self: The empty `docs/.nojekyll` file must stay, without it GitHub runs Jekyll over the output and drops everything in folders with names starting with an underscore.
 
 ### Editing
 
 If you are used to R Markdown, you will hardly notice any differences:
 
-- Chapters are `.qmd` files in `docs/`. Same structure as `.Rmd`: YAML header, Markdown body, code chunks. 
-- To add a chapter, create the `.qmd` file in `docs/` and list it under the relevant `part:` in `docs/_quarto.yml` — that file is the table of contents, and a chapter not listed there is not part of the book.
+- Chapters are `.qmd` files in `book/`. Same structure as `.Rmd`: YAML header, Markdown body, code chunks. 
+- To add a chapter, create the `.qmd` file in `book/` and list it under the relevant `part:` in `book/_quarto.yml` — that file is the table of contents, and a chapter not listed there is not part of the book.
 - Unlike in R Markdown, code chunk options go inside the chunk as `#|` comments, not in the chunk header:
 
 ````
@@ -122,9 +138,9 @@ If you are used to R Markdown, you will hardly notice any differences:
 ````
 
 - The default engine is knitr, so `{r}` chunks work as usual. A chapter in another language declares it in its YAML header, e.g. `engine: julia` in `CarboKitten_tutorial.qmd`, and then uses `{julia}` chunks.
-- Citations: add the BibTeX entry to `docs/references.bib` and cite with `[@key]`. The reference list is generated in `docs/references.qmd`.
+- Citations: add the BibTeX entry to `book/references.bib` and cite with `[@key]`. The reference list is generated in `book/references.qmd`.
 - Cross-references use the label prefix: a chunk labelled `fig-example` is referenced as `@fig-example`, a section with `{#sec-intro}` as `@sec-intro`.
-- Paths inside a chapter are relative to `docs/`, so images go in `docs/images/` and are included with standard Markdown: `![Caption](images/file.png)`.
+- Paths inside a chapter are relative to `book/`, so images go in `book/images/` and are included with standard Markdown: `![Caption](images/file.png)`.
 
 ## Installing languages and other software used in the workshop
 
