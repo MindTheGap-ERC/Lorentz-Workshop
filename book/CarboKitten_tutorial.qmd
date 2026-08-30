@@ -99,7 +99,8 @@ Stratigraphic gaps form whenever relative sea level falls faster than subsidence
 
 ```{julia}
 #| label: sea-level
-#| echo: false
+#| echo: true
+#| output: false
 sea_level = t -> 5.5u"m" * sin(2π * t / 0.18u"Myr")
 subsidence_rate = 38.0u"m/Myr"
 disintegration_rate = 80.0u"m/Myr"
@@ -111,7 +112,7 @@ Now we assemble the full input:
 
 ```{julia}
 #| label: input
-#| echo: false
+#| echo: true
 input = ALCAP.Input(
     box = box,
     ca_interval = 1,
@@ -134,7 +135,8 @@ input = ALCAP.Input(
 ```{julia}
 #| label: run-model
 #| cache: true
-#| echo: false
+#| echo: true
+#| output: false
 mkpath("data/output")
 write("data/output/.gitignore", "*\n")
 
