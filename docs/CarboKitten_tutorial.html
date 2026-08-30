@@ -251,7 +251,7 @@ window.Quarto = {
   <li><a href="#geometry-timing-and-the-four-core-locations" id="toc-geometry-timing-and-the-four-core-locations" class="nav-link" data-scroll-target="#geometry-timing-and-the-four-core-locations"><span class="header-section-number">3.2.2</span> Geometry, timing, and the four core locations</a></li>
   <li><a href="#an-icehouse-type-sea-level-history-leads-to-large-gaps" id="toc-an-icehouse-type-sea-level-history-leads-to-large-gaps" class="nav-link" data-scroll-target="#an-icehouse-type-sea-level-history-leads-to-large-gaps"><span class="header-section-number">3.2.3</span> An “icehouse”-type sea-level history leads to large gaps</a></li>
   </ul></li>
-  <li><a href="#running-the-model" id="toc-running-the-model" class="nav-link" data-scroll-target="#running-the-model"><span class="header-section-number">3.3</span> 3. Running the model</a></li>
+  <li><a href="#running-the-model-and-where-the-output-comes-from" id="toc-running-the-model-and-where-the-output-comes-from" class="nav-link" data-scroll-target="#running-the-model-and-where-the-output-comes-from"><span class="header-section-number">3.3</span> 3. Running the model, and where the output comes from</a></li>
   <li><a href="#the-stratigraphic-architecture-of-the-platform" id="toc-the-stratigraphic-architecture-of-the-platform" class="nav-link" data-scroll-target="#the-stratigraphic-architecture-of-the-platform"><span class="header-section-number">3.4</span> 4. The stratigraphic architecture of the platform</a></li>
   <li><a href="#four-stratigraphic-columns" id="toc-four-stratigraphic-columns" class="nav-link" data-scroll-target="#four-stratigraphic-columns"><span class="header-section-number">3.5</span> 5. Four stratigraphic columns</a></li>
   <li><a href="#age-depth-models-where-did-the-time-go" id="toc-age-depth-models-where-did-the-time-go" class="nav-link" data-scroll-target="#age-depth-models-where-did-the-time-go"><span class="header-section-number">3.6</span> 6. Age-depth models: where did the time go?</a></li>
@@ -285,7 +285,7 @@ window.Quarto = {
 <p>In this tutorial we build a small three-dimensional carbonate platform with <a href="https://github.com/MindTheGap-ERC/CarboKitten.jl">CarboKitten.jl</a>, a Julia package that simulates carbonate platform stratigraphy (a reimplementation of Peter Burgess’ CarboCAT). We will:</p>
 <ol type="1">
 <li>configure a platform whose sea-level history is deliberately “unkind”, so that it produces large stratigraphic gaps,</li>
-<li>run the forward model,</li>
+<li>run the forward model — or, as we do here, download its archived output,</li>
 <li>look at the resulting architecture, and</li>
 <li>drill four virtual cores at different positions on the platform, turning each one into a stratigraphic column and an <strong>age-depth model</strong> (ADM) — the curve that tells us how much of geological time is actually recorded as rock at that location, and how much is missing.</li>
 </ol>
@@ -400,26 +400,43 @@ window.Quarto = {
 </div>
 </section>
 </section>
-<section id="running-the-model" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="running-the-model"><span class="header-section-number">3.3</span> 3. Running the model</h2>
-<div id="run-model" class="cell" data-cache="true" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkpath</span>(<span class="st">"data/output"</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write</span>(<span class="st">"data/output/.gitignore"</span>, <span class="st">"*</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>FILENAME <span class="op">=</span> <span class="st">"data/output/carbo-platform.h5"</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">run_model</span>(Model{ALCAP}, input, FILENAME)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="running-the-model-and-where-the-output-comes-from" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="running-the-model-and-where-the-output-comes-from"><span class="header-section-number">3.3</span> 3. Running the model, and where the output comes from</h2>
+<p>A full run takes several minutes and writes an HDF5 file of about 48 MB — too large to keep in a Git repository. The output has therefore been archived on Zenodo, and everything from here on reads that archived file:</p>
+<blockquote class="blockquote">
+<p><em>Datasets for the Lorentz Workshop “Bridging Stratigraphic Palaeobiology and Phylogenetics”</em>, <a href="https://doi.org/10.5281/zenodo.22083205" class="uri">https://doi.org/10.5281/zenodo.22083205</a> (all versions).</p>
+</blockquote>
+<p>All the chunks below refer to it through a single path:</p>
+<div id="cell-data-file" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>FILENAME <span class="op">=</span> <span class="st">"data/output/carbo-platform.h5"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="data-file" class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>"data/output/carbo-platform.h5"</code></pre>
 </div>
-<p>Depending on your machine this takes a couple of minutes; the <code>cache: true</code> option means Quarto will only re-run it when the code above changes.</p>
+</div>
+<p>To fetch the file, run the chunk below once — it is not executed when the book is rendered, so you have to run it yourself in your session. <code>Downloads</code> is part of Julia’s standard library. The download is about 48 MB and takes a few seconds on a decent connection:</p>
+<div id="fetch-data" class="cell" data-execution_count="0">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Downloads</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkpath</span>(<span class="fu">dirname</span>(FILENAME))</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="bu">Downloads</span>.<span class="fu">download</span>(</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://zenodo.org/records/22083206/files/carbo-platform.h5?download=1"</span>,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    FILENAME)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The chunk below is the code that produced that file. It is shown as the provenance of the dataset and is deliberately <strong>not</strong> executed here; run it yourself only if you want to change the model set-up above and generate your own output:</p>
+<div id="run-model" class="cell" data-execution_count="0">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkpath</span>(<span class="st">"data/output"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">run_model</span>(Model{ALCAP}, input, FILENAME)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </section>
 <section id="the-stratigraphic-architecture-of-the-platform" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="the-stratigraphic-architecture-of-the-platform"><span class="header-section-number">3.4</span> 4. The stratigraphic architecture of the platform</h2>
 <p>CarboKitten’s <code>sediment_profile</code> plots the <code>:profile</code> slice we saved above, colouring each parcel of sediment by its dominant facies and marking unconformities (subaerial-exposure surfaces) with dashed white lines:</p>
 <div id="cell-fig-profile" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CarboKitten.Export</span>: read_slice</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CarboKitten.Visualization</span>: sediment_profile</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>header, section <span class="op">=</span> <span class="fu">read_slice</span>(FILENAME, <span class="op">:</span>profile)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sediment_profile</span>(header, section)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CarboKitten.Export</span>: read_slice</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CarboKitten.Visualization</span>: sediment_profile</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>header, section <span class="op">=</span> <span class="fu">read_slice</span>(FILENAME, <span class="op">:</span>profile)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sediment_profile</span>(header, section)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="fig-profile" class="cell-output cell-output-display quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="1">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-profile-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -437,39 +454,39 @@ Figure&nbsp;3.1: Sediment profile along the platform, y = 25. Dashed white lines
 <h2 data-number="3.5" class="anchored" data-anchor-id="four-stratigraphic-columns"><span class="header-section-number">3.5</span> 5. Four stratigraphic columns</h2>
 <p>We now read back each of the four stratigraphic columns we saved earlier, and turn each one into a small “core log”: a vertical bar coloured by whichever facies contributed most sediment at each preserved interval. We use CarboKitten’s own stratigraphic-column algorithm (<code>CarboKitten.Output.Abstract.stratigraphic_column</code>), which corrects for sediment that was deposited and later disintegrated.</p>
 <div id="cell-fig-columns" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CarboKitten.Export</span>: read_column, extract_sac, extract_sc, age_depth_model</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">column_bands</span>(filename, loc)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    header, data <span class="op">=</span> <span class="fu">read_column</span>(filename, loc.key)</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    sac_df <span class="op">=</span> <span class="fu">extract_sac</span>(header, data, loc.key)</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    adm <span class="op">=</span> <span class="fu">age_depth_model</span>(sac_df)[<span class="op">:</span>, <span class="st">"adm_</span><span class="sc">$</span>(loc.key)<span class="st">"</span>] <span class="op">|&gt;</span> <span class="fu">in_units_of</span>(u<span class="st">"m"</span>)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    sc_df <span class="op">=</span> <span class="fu">extract_sc</span>(header, data, loc.key)</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    facies_cols <span class="op">=</span> [<span class="st">"sc_</span><span class="sc">$</span>(loc.key)<span class="st">_f</span><span class="sc">$</span>(f)<span class="st">"</span> for f <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>header.n_facies]</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    sc <span class="op">=</span> <span class="fu">Matrix</span>(sc_df[<span class="op">:</span>, facies_cols])</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    dominant <span class="op">=</span> <span class="fu">getindex</span>.(<span class="fu">argmax</span>(sc, dims<span class="op">=</span><span class="fl">2</span>)[<span class="op">:</span>, <span class="fl">1</span>], <span class="fl">2</span>)</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> adm, dominant</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> Makie.<span class="fu">wong_colors</span>()</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>fig_logs <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">700</span>, <span class="fl">500</span>))</span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>axs <span class="op">=</span> Axis[]</span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i, loc) <span class="kw">in</span> <span class="fu">enumerate</span>(locations)</span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    adm, dominant <span class="op">=</span> <span class="fu">column_bands</span>(FILENAME, loc)</span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig_logs[<span class="fl">1</span>, i], title<span class="op">=</span>loc.label, xticksvisible<span class="op">=</span><span class="cn">false</span>, xticklabelsvisible<span class="op">=</span><span class="cn">false</span>)</span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hspan!</span>(ax, adm[<span class="fl">1</span><span class="op">:</span><span class="kw">end</span><span class="op">-</span><span class="fl">1</span>], adm[<span class="fl">2</span><span class="op">:</span><span class="kw">end</span>]; color<span class="op">=</span>colors[dominant[<span class="fl">1</span><span class="op">:</span><span class="kw">end</span><span class="op">-</span><span class="fl">1</span>]])</span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">push!</span>(axs, ax)</span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>axs[<span class="fl">1</span>].ylabel <span class="op">=</span> <span class="st">"stratigraphic height [m]"</span></span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="fu">linkyaxes!</span>(axs<span class="op">...</span>)</span>
-<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="fu">Legend</span>(fig_logs[<span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>],</span>
-<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>    [<span class="fu">PolyElement</span>(color<span class="op">=</span>colors[f]) for f <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>],</span>
-<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"euphotic (shallow, fast)"</span>, <span class="st">"oligophotic (mid depth)"</span>, <span class="st">"aphotic (deep, slow)"</span>],</span>
-<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>    orientation<span class="op">=:</span>horizontal, tellwidth<span class="op">=</span><span class="cn">false</span>)</span>
-<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>fig_logs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CarboKitten.Export</span>: read_column, extract_sac, extract_sc, age_depth_model</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">column_bands</span>(filename, loc)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    header, data <span class="op">=</span> <span class="fu">read_column</span>(filename, loc.key)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    sac_df <span class="op">=</span> <span class="fu">extract_sac</span>(header, data, loc.key)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    adm <span class="op">=</span> <span class="fu">age_depth_model</span>(sac_df)[<span class="op">:</span>, <span class="st">"adm_</span><span class="sc">$</span>(loc.key)<span class="st">"</span>] <span class="op">|&gt;</span> <span class="fu">in_units_of</span>(u<span class="st">"m"</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    sc_df <span class="op">=</span> <span class="fu">extract_sc</span>(header, data, loc.key)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    facies_cols <span class="op">=</span> [<span class="st">"sc_</span><span class="sc">$</span>(loc.key)<span class="st">_f</span><span class="sc">$</span>(f)<span class="st">"</span> for f <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>header.n_facies]</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    sc <span class="op">=</span> <span class="fu">Matrix</span>(sc_df[<span class="op">:</span>, facies_cols])</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    dominant <span class="op">=</span> <span class="fu">getindex</span>.(<span class="fu">argmax</span>(sc, dims<span class="op">=</span><span class="fl">2</span>)[<span class="op">:</span>, <span class="fl">1</span>], <span class="fl">2</span>)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> adm, dominant</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> Makie.<span class="fu">wong_colors</span>()</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>fig_logs <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">700</span>, <span class="fl">500</span>))</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>axs <span class="op">=</span> Axis[]</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i, loc) <span class="kw">in</span> <span class="fu">enumerate</span>(locations)</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    adm, dominant <span class="op">=</span> <span class="fu">column_bands</span>(FILENAME, loc)</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig_logs[<span class="fl">1</span>, i], title<span class="op">=</span>loc.label, xticksvisible<span class="op">=</span><span class="cn">false</span>, xticklabelsvisible<span class="op">=</span><span class="cn">false</span>)</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hspan!</span>(ax, adm[<span class="fl">1</span><span class="op">:</span><span class="kw">end</span><span class="op">-</span><span class="fl">1</span>], adm[<span class="fl">2</span><span class="op">:</span><span class="kw">end</span>]; color<span class="op">=</span>colors[dominant[<span class="fl">1</span><span class="op">:</span><span class="kw">end</span><span class="op">-</span><span class="fl">1</span>]])</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">push!</span>(axs, ax)</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>axs[<span class="fl">1</span>].ylabel <span class="op">=</span> <span class="st">"stratigraphic height [m]"</span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="fu">linkyaxes!</span>(axs<span class="op">...</span>)</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="fu">Legend</span>(fig_logs[<span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>],</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>    [<span class="fu">PolyElement</span>(color<span class="op">=</span>colors[f]) for f <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>],</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"euphotic (shallow, fast)"</span>, <span class="st">"oligophotic (mid depth)"</span>, <span class="st">"aphotic (deep, slow)"</span>],</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>    orientation<span class="op">=:</span>horizontal, tellwidth<span class="op">=</span><span class="cn">false</span>)</span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>fig_logs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="fig-columns" class="cell-output cell-output-display quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="1">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-columns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -486,20 +503,20 @@ Figure&nbsp;3.2: Stratigraphic columns (virtual cores) at four positions across 
 <h2 data-number="3.6" class="anchored" data-anchor-id="age-depth-models-where-did-the-time-go"><span class="header-section-number">3.6</span> 6. Age-depth models: where did the time go?</h2>
 <p>The stratigraphic height each column reaches is cumulative: it only goes up when sediment is actually preserved. Plotting that cumulative height against time — the age-depth model — represents every interval of non-deposition or erosion into a flat, horizontal plateau: time passes, but the column does not grow. Long plateaus are large stratigraphic gaps.</p>
 <div id="cell-fig-adm" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>fig_adm <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">700</span>, <span class="fl">450</span>))</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> <span class="fu">Axis</span>(fig_adm[<span class="fl">1</span>, <span class="fl">1</span>], xlabel<span class="op">=</span><span class="st">"time [Myr]"</span>, ylabel<span class="op">=</span><span class="st">"stratigraphic height [m]"</span>,</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>          title<span class="op">=</span><span class="st">"Age-depth models across the platform"</span>)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> loc <span class="kw">in</span> locations</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    header, data <span class="op">=</span> <span class="fu">read_column</span>(FILENAME, loc.key)</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> header.axes.t <span class="op">|&gt;</span> <span class="fu">in_units_of</span>(u<span class="st">"Myr"</span>)</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    sac_df <span class="op">=</span> <span class="fu">extract_sac</span>(header, data, loc.key)</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    adm <span class="op">=</span> <span class="fu">age_depth_model</span>(sac_df)[<span class="op">:</span>, <span class="st">"adm_</span><span class="sc">$</span>(loc.key)<span class="st">"</span>] <span class="op">|&gt;</span> <span class="fu">in_units_of</span>(u<span class="st">"m"</span>)</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax, t, adm, label<span class="op">=</span>loc.label)</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="fu">axislegend</span>(ax, position<span class="op">=:</span>rb)</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>fig_adm</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>fig_adm <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">700</span>, <span class="fl">450</span>))</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> <span class="fu">Axis</span>(fig_adm[<span class="fl">1</span>, <span class="fl">1</span>], xlabel<span class="op">=</span><span class="st">"time [Myr]"</span>, ylabel<span class="op">=</span><span class="st">"stratigraphic height [m]"</span>,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>          title<span class="op">=</span><span class="st">"Age-depth models across the platform"</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> loc <span class="kw">in</span> locations</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    header, data <span class="op">=</span> <span class="fu">read_column</span>(FILENAME, loc.key)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> header.axes.t <span class="op">|&gt;</span> <span class="fu">in_units_of</span>(u<span class="st">"Myr"</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    sac_df <span class="op">=</span> <span class="fu">extract_sac</span>(header, data, loc.key)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    adm <span class="op">=</span> <span class="fu">age_depth_model</span>(sac_df)[<span class="op">:</span>, <span class="st">"adm_</span><span class="sc">$</span>(loc.key)<span class="st">"</span>] <span class="op">|&gt;</span> <span class="fu">in_units_of</span>(u<span class="st">"m"</span>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax, t, adm, label<span class="op">=</span>loc.label)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="fu">axislegend</span>(ax, position<span class="op">=:</span>rb)</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>fig_adm</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="fig-adm" class="cell-output cell-output-display quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="1">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-adm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -517,19 +534,19 @@ Figure&nbsp;3.3: Age-depth models for the four columns. Flat segments are strati
 <h2 data-number="3.7" class="anchored" data-anchor-id="optional-exporting-the-columns-for-further-analysis"><span class="header-section-number">3.7</span> 7. Optional: exporting the columns for further analysis</h2>
 <p>If you want to work with these curves outside Julia (R, Python, a spreadsheet…), CarboKitten can export the sediment-accumulation curve, age-depth model, per-facies stratigraphic column, and water depth for a set of columns straight to CSV, plus a TOML file with the metadata (coordinates, subsidence rate, etc.) of each location:</p>
 <div id="export-csv" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CarboKitten.Export</span>: CSV, data_export</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>cols <span class="op">=</span> <span class="fu">Dict</span>(loc.key <span class="op">=&gt;</span> <span class="fu">read_column</span>(FILENAME, loc.key)[<span class="fl">2</span>] <span class="cf">for</span> loc <span class="kw">in</span> locations)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>header, _ <span class="op">=</span> <span class="fu">read_column</span>(FILENAME, <span class="fu">first</span>(locations).key)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>spec <span class="op">=</span> <span class="fu">CSV</span>(</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">:</span>sediment_accumulation_curve <span class="op">=&gt;</span> <span class="st">"data/output/columns_sac.csv"</span>,</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">:</span>age_depth_model             <span class="op">=&gt;</span> <span class="st">"data/output/columns_adm.csv"</span>,</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">:</span>stratigraphic_column        <span class="op">=&gt;</span> <span class="st">"data/output/columns_sc.csv"</span>,</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">:</span>water_depth                 <span class="op">=&gt;</span> <span class="st">"data/output/columns_wd.csv"</span>,</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">:</span>metadata                    <span class="op">=&gt;</span> <span class="st">"data/output/columns_metadata.toml"</span>)</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="fu">data_export</span>(spec, header, cols)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CarboKitten.Export</span>: CSV, data_export</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>cols <span class="op">=</span> <span class="fu">Dict</span>(loc.key <span class="op">=&gt;</span> <span class="fu">read_column</span>(FILENAME, loc.key)[<span class="fl">2</span>] <span class="cf">for</span> loc <span class="kw">in</span> locations)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>header, _ <span class="op">=</span> <span class="fu">read_column</span>(FILENAME, <span class="fu">first</span>(locations).key)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>spec <span class="op">=</span> <span class="fu">CSV</span>(</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">:</span>sediment_accumulation_curve <span class="op">=&gt;</span> <span class="st">"data/output/columns_sac.csv"</span>,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">:</span>age_depth_model             <span class="op">=&gt;</span> <span class="st">"data/output/columns_adm.csv"</span>,</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">:</span>stratigraphic_column        <span class="op">=&gt;</span> <span class="st">"data/output/columns_sc.csv"</span>,</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">:</span>water_depth                 <span class="op">=&gt;</span> <span class="st">"data/output/columns_wd.csv"</span>,</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">:</span>metadata                    <span class="op">=&gt;</span> <span class="st">"data/output/columns_metadata.toml"</span>)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="fu">data_export</span>(spec, header, cols)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="wrap-up" class="level2" data-number="3.8">

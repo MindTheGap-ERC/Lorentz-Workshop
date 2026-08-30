@@ -103,7 +103,30 @@ quarto render adms.qmd --to html
 
 In RStudio, the **Build > Render Book** button only appears when `_quarto.yml` sits in the RStudio project root, which is not the case with the sources in `book/`. Use the Terminal pane instead (`cd book`, then the commands above), or the **Render** button on an individual open `.qmd`.
 
-`docs/` is generated output, please do not edit anything in it by hand, it won't be saved. The same goes for `book/data/`, where the code chunks write their simulation output.
+`docs/` is generated output, please do not edit anything in it by hand, it won't be saved.
+
+### Big output files
+
+By default, all code chunks are run anew with each render. This is not handy for our type of modelling, where we mostly do very long runs and generate big output files. Such files cannot be stored in a GitHub repo. So we propose storing them in a different storage: 
+
+1. **Locally** - good for temporary files when you try things out. Keep the files local, don't commit them to the GitHub repo. Add them to `.gitignore` before you commit the code that generates them. Think whether you want the rendering to re-run that code by default (when someone else or your future self runs it) or should you disable execution as a default. Local files can be promoted to remote files (see below) if you are happy with them and want to share or archive.
+
+2. **Remotely** - in an online archive. 
+
+#### Example of handling big files
+
+The CarboKitten chapter contains code that produces a 48 MB HDF5 (binary) file that is too large for GitHub and takes a few minutes to run, so it is archived on Zenodo (<https://doi.org/10.5281/zenodo.22083206>) and `book/data/output/` is git-ignored. Both the model run and the download are shown in the chapter but the code chunks have the parameter `eval: false`
+
+::: {.callout-note}
+When you clone the repo, the data will not be downloaded and the code will not run by default. You have to either download it by running the `fetch-data` chunk of `CarboKitten_tutorial.qmd` in a Julia session started in `book/`, or equivalently run:
+
+```bash
+cd book
+julia -e 'using Downloads; mkpath("data/output"); Downloads.download("https://zenodo.org/records/22083206/files/carbo-platform.h5?download=1", "data/output/carbo-platform.h5")'
+```
+
+You can also download the file by hand from <https://doi.org/10.5281/zenodo.22083206> if you prefer.
+:::
 
 ### Publishing to GitHub Pages
 
@@ -151,3 +174,9 @@ The code used here requires Julia >= 1.10. Install the Julia packages once, from
 ```bash
 julia --project=. -e 'using Pkg; Pkg.instantiate()'
 ```
+
+## Troubleshooting
+
+### Julia 
+
+If a render of the Julia chapter fails with `ERROR: Read invalid transport file that did not end with a newline` (or `No transport file was found after the timeout`), run the same command again. Quarto waits only about 10 seconds for its Julia server to start up, which is not always enough on a cold start, but the failed attempt leaves that server running, so the second attempt connects immediately. The server shuts down after five minutes idle, so a long pause can bring the message back. This is bizarre, but harmless.

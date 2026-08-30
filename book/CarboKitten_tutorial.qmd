@@ -6,7 +6,7 @@ engine: julia
 In this tutorial we build a small three-dimensional carbonate platform with [CarboKitten.jl](https://github.com/MindTheGap-ERC/CarboKitten.jl), a Julia package that simulates carbonate platform stratigraphy (a reimplementation of Peter Burgess' CarboCAT). We will:
 
 1.  configure a platform whose sea-level history is deliberately "unkind", so that it produces large stratigraphic gaps,
-2.  run the forward model,
+2.  run the forward model — or, as we do here, download its archived output,
 3.  look at the resulting architecture, and
 4.  drill four virtual cores at different positions on the platform, turning each one into a stratigraphic column and an **age-depth model** (ADM) — the curve that tells us how much of geological time is actually recorded as rock at that location, and how much is missing.
 
@@ -130,21 +130,40 @@ input = ALCAP.Input(
 )
 ```
 
-## 3. Running the model
+## 3. Running the model, and where the output comes from
+
+A full run takes several minutes and writes an HDF5 file of about 48 MB — too large to keep in a Git repository. The output has therefore been archived on Zenodo, and everything from here on reads that archived file:
+
+> *Datasets for the Lorentz Workshop "Bridging Stratigraphic Palaeobiology and Phylogenetics"*, <https://doi.org/10.5281/zenodo.22083205> (all versions).
+
+All the chunks below refer to it through a single path:
+
+```{julia}
+#| label: data-file
+FILENAME = "data/output/carbo-platform.h5"
+```
+
+To fetch the file, run the chunk below once — it is not executed when the book is rendered, so you have to run it yourself in your session. `Downloads` is part of Julia's standard library. The download is about 48 MB and takes a few seconds on a decent connection:
+
+```{julia}
+#| label: fetch-data
+#| eval: false
+using Downloads
+
+mkpath(dirname(FILENAME))
+Downloads.download(
+    "https://zenodo.org/records/22083206/files/carbo-platform.h5?download=1",
+    FILENAME)
+```
+
+The chunk below is the code that produced that file. It is shown as the provenance of the dataset and is deliberately **not** executed here; run it yourself only if you want to change the model set-up above and generate your own output:
 
 ```{julia}
 #| label: run-model
-#| cache: true
-#| echo: true
-#| output: false
+#| eval: false
 mkpath("data/output")
-write("data/output/.gitignore", "*\n")
-
-FILENAME = "data/output/carbo-platform.h5"
 run_model(Model{ALCAP}, input, FILENAME)
 ```
-
-Depending on your machine this takes a couple of minutes; the `cache: true` option means Quarto will only re-run it when the code above changes.
 
 ## 4. The stratigraphic architecture of the platform
 
