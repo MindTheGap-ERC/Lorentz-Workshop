@@ -15,19 +15,19 @@ format: revealjs
 
 # Objectives (1) {.smaller}
 
-1. **draft of a book on phylogenetic reconstruction from simulated data** developed *during* the workshop collaboratively on GitHub.
+1. **Draft of a book on stratigraphy & phylogenetic reconstruction from simulated data** developed *during* the workshop collaboratively on GitHub.
 
-2. **best-practices recommendations list** for publishing and reviewing phylogenetic analyses and reporting fossil and stratigraphic information.
+2. **Best-practices recommendations list** for publishing and reviewing phylogenetic analyses and reporting fossil and stratigraphic information as whitepaper.
 
-3. **roadmap for digital infrastructure** needed for landmark use-cases of phylogenetic analysis incorporating fossil data. It will contain a list of priorities from the user perspective.
+3. **Roadmap for digital infrastructure** needed for landmark use-cases of phylogenetic analysis incorporating fossil data. It will contain a list of priorities from the user and developer perspective.
 
 All contributors will be co-authors, provided that they explicitly review and approve the final draft.
 
 # Objectives (2)
 
-- Strenghtening the communication between users, software developers and model developers
+- Strengthening the communication between users, empiricists, software developers and model developers
 
-- Translation of researcher needs into digital infrastructure
+- Translation of researcher needs into digital infrastructure (e.g., for future grant proposals)
 
 - Articles on individual research questions developed during the workshop
 
@@ -43,7 +43,7 @@ All contributors will be co-authors, provided that they explicitly review and ap
 
 - We use the Quarto publishing system for the online book - your work appears on the website shortly after you have pushed your contribution
 
-- You do not need to be an expert in **all** methods used in the workshop
+- You do NOT need to be an expert in **all** methods used in the workshop
 
 - We are seeking participants with prior experience with GitHub, R Markdown or Quarto to be the GitHub secretaries
 
