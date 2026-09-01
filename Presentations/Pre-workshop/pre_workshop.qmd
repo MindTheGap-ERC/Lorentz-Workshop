@@ -7,39 +7,79 @@ format: revealjs
 
 28 September - 2 October 2026, Leiden
 
+*Emilia Jarochowska, Rachel Warnock, Niklas Hohmann, Laura Mulvey, Johan Hidding*
+
+![](lorentz.center.jpg){width="300"}
+
 # Agenda
 
-[needs filling]
+::::: columns
+::: {.column width="50%"}
+1.  Introductions
+
+2.  Objectives of the workshop
+
+3.  Deliverables
+
+4.  Objectives
+
+5.  Programme
+:::
+
+::: {.column width="50%"}
+6.  How we plan to collaborate - space for your input
+
+7.  Pre-workshop questionnaire
+
+8.  Logistics
+
+9.  Questions
+:::
+:::::
 
 # Introductions
 
-# Objectives (1) {.smaller}
+1.  What is your career stage?
 
-1. **Draft of a book on stratigraphy & phylogenetic reconstruction from simulated data** developed *during* the workshop collaboratively on GitHub.
+2.  Why are you interested in this workshop?
 
-2. **Best-practices recommendations list** for publishing and reviewing phylogenetic analyses and reporting fossil and stratigraphic information as whitepaper.
+3.  Do you have any concerns about the workshop?
 
-3. **Roadmap for digital infrastructure** needed for landmark use-cases of phylogenetic analysis incorporating fossil data. It will contain a list of priorities from the user and developer perspective.
+# Deliverables {.smaller}
+
+1.  **Draft of a book on stratigraphy & phylogenetic reconstruction from simulated data** developed *during* the workshop collaboratively on GitHub.
+
+2.  **Best-practices recommendations list** for publishing and reviewing phylogenetic analyses and reporting fossil and stratigraphic information as whitepaper.
+
+3.  **Roadmap for digital infrastructure** needed for landmark use-cases of phylogenetic analysis incorporating fossil data. It will contain a list of priorities from the user and developer perspective.
 
 All contributors will be co-authors, provided that they explicitly review and approve the final draft.
 
-# Objectives (2)
+# Objectives
 
+::::: columns
+::: {.column width="30%"}
+![](cropped-Beast2-logo.jpg){fig-align="center"} <br> ![](8113632.png){fig-align="center"}
+:::
+
+::: {.column width="70%"}
 - Strengthening the communication between users, empiricists, software developers and model developers
 
 - Translation of researcher needs into digital infrastructure (e.g., for future grant proposals)
 
 - Articles on individual research questions developed during the workshop
+:::
+:::::
 
 # Programme of the meeting
 
-[show the programme live in the repo?]
+See the repository: https://github.com/MindTheGap-ERC/Lorentz-Workshop
 
-# How we plan to collaborate 
+# How we plan to collaborate
 
-- ad-hoc groups with mixed expertise, centered around a research question
+- Ad-hoc groups with mixed expertise, centered around a research question
 
-- GitHub secretary takes notes so not everyone needs to edit 
+- GitHub secretary takes notes so not everyone needs to edit
 
 - We use the Quarto publishing system for the online book - your work appears on the website shortly after you have pushed your contribution
 
@@ -47,10 +87,16 @@ All contributors will be co-authors, provided that they explicitly review and ap
 
 - We are seeking participants with prior experience with GitHub, R Markdown or Quarto to be the GitHub secretaries
 
+## Pre-workshop questionnaire {.smaller}
+
+We are collecting input that will also help us create diverse groups. If you haven't yet, please fill out the form:
+
+[![https://forms.cloud.microsoft/e/pV8LGE6X84](QRCode%20for%20Pre-workshop%20background%20questionnaire_%20participant%20self-assessment.jpg){fig-align="center"}](https://forms.cloud.microsoft/e/pV8LGE6X84)
+
 # Logistics
 
-1. Is your travel sorted out?
+1.  Is your travel sorted out?
 
-2. Is your accomodation sorted out?
+2.  Is your accommodation sorted out?
 
-3. Do you need any other help?
+3.  Do you need any other help?
