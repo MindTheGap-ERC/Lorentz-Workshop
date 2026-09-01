@@ -14,22 +14,25 @@ format: revealjs
 # Agenda
 
 ::::: columns
-::: {.column width="50%"}
+::: {.column width="45%"}
 1.  Introductions
 
-2.  Objectives of the workshop
+2.  Objectives
 
 3.  Deliverables
 
-4.  Objectives
+4.  Programme
 
-5.  Programme
+5.  How we plan to collaborate - space for your input
 :::
 
-::: {.column width="50%"}
-6.  How we plan to collaborate - space for your input
+::: {.column width="10%"}
+:::
 
-7.  Pre-workshop questionnaire
+::: {.column width="45%"}
+6.  Pre-workshop questionnaire
+
+7.  Homework
 
 8.  Logistics
 
@@ -43,7 +46,23 @@ format: revealjs
 
 2.  Why are you interested in this workshop?
 
-3.  Do you have any concerns about the workshop?
+# Objectives
+
+::::: columns
+::: {.column width="20%"}
+![](beast2.png){fig-align="center" width="300"} <br> 
+
+![](8113632.png){fig-align="center" width="150"}
+:::
+
+::: {.column width="80%"}
+- Strengthen communication between users, empiricists, model developers, and software developers
+
+- Translation of researcher needs into digital infrastructure (e.g., for future grant proposals, sustainable practices)
+
+- Articles on individual research questions developed during the workshop
+:::
+:::::
 
 # Deliverables {.smaller}
 
@@ -55,43 +74,30 @@ format: revealjs
 
 All contributors will be co-authors, provided that they explicitly review and approve the final draft.
 
-# Objectives
-
-::::: columns
-::: {.column width="30%"}
-![](cropped-Beast2-logo.jpg){fig-align="center"} <br> ![](8113632.png){fig-align="center"}
-:::
-
-::: {.column width="70%"}
-- Strengthening the communication between users, empiricists, software developers and model developers
-
-- Translation of researcher needs into digital infrastructure (e.g., for future grant proposals)
-
-- Articles on individual research questions developed during the workshop
-:::
-:::::
 
 # Programme of the meeting
 
-See the repository: https://github.com/MindTheGap-ERC/Lorentz-Workshop
+See the workshop repository: https://github.com/MindTheGap-ERC/Lorentz-Workshop
 
-# How we plan to collaborate
+# How we plan to collaborate {.smaller}
 
-- Ad-hoc groups with mixed expertise, centered around a research question
+- Ad hoc groups with mixed expertise, centered around a research question or task
 
 - GitHub secretary takes notes so not everyone needs to edit
 
-- We use the Quarto publishing system for the online book - your work appears on the website shortly after you have pushed your contribution
+- You do **not** need to be an expert in **all** methods used in the workshop
 
-- You do NOT need to be an expert in **all** methods used in the workshop
+- We will use the Quarto publishing system for the online book - your work will appear on the website shortly after you have pushed your contribution
 
-- We are seeking participants with prior experience with GitHub, R Markdown or Quarto to be the GitHub secretaries
+- We are seeking participants with prior experience with GitHub, R Markdown or Quarto to take notes during group activities
 
-## Pre-workshop questionnaire {.smaller}
+# Pre-workshop questionnaire {.smaller}
 
-We are collecting input that will also help us create diverse groups. If you haven't yet, please fill out the form:
+We are collecting input that will help us prepare and create diverse groups. 
 
-[![https://forms.cloud.microsoft/e/pV8LGE6X84](QRCode%20for%20Pre-workshop%20background%20questionnaire_%20participant%20self-assessment.jpg){fig-align="center"}](https://forms.cloud.microsoft/e/pV8LGE6X84)
+If you haven't yet, please fill out the form: 
+
+![[https://forms.cloud.microsoft/e/pV8LGE6X84](https://forms.cloud.microsoft/e/pV8LGE6X84)](QRCode.jpg){fig-align="center" width="30%"}
 
 # Logistics
 
@@ -100,3 +106,16 @@ We are collecting input that will also help us create diverse groups. If you hav
 2.  Is your accommodation sorted out?
 
 3.  Do you need any other help?
+
+# Homework
+
+- If you haven't done so yet, fill out the [self-assessment form](https://forms.cloud.microsoft/e/pV8LGE6X84) 
+
+- Reading
+  1. Mulvey et al. (2025) [*From fossils to phylogenies*](https://www.cambridge.org/core/journals/paleobiology/article/from-fossils-to-phylogenies-exploring-the-integration-of-paleontological-data-into-bayesian-phylogenetic-inference/BF7DB160A01BDD5183252BFB89A9699F)
+  2. Mendes et al. (2025) [*How to validate a  model*](https://academic.oup.com/sysbio/article/74/1/158/7882850)
+  3. Holland et al. (2025) [*Stratigraphic Paleobiology*](https://doi.org/10.1017/pab.2024.2)
+
+If you only have time to read 2 - choose the ones furthest from your expertise!
+
+# Any questions, concerns, or suggestions?
