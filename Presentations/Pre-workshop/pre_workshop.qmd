@@ -46,6 +46,15 @@ format: revealjs
 
 2.  Why are you interested in this workshop?
 
+# Why are we still banging on about this?
+
+- It turns out to be very difficult to integrate fossils and phylogenies 
+
+- Methods and software are constantly evolving
+  
+- We still don't fully understand the implications of stratigraphy on phylogenetics
+
+
 # Objectives
 
 ::::: columns
@@ -68,7 +77,7 @@ format: revealjs
 
 1.  **Draft of a book on stratigraphy & phylogenetic reconstruction from simulated data** developed *during* the workshop collaboratively on GitHub.
 
-2.  **Best-practices recommendations list** for publishing and reviewing phylogenetic analyses and reporting fossil and stratigraphic information as whitepaper.
+2.  **Best-practices recommendations list** for reporting and reviewing phylogenetic analyses and reporting fossil and stratigraphic information as whitepaper.
 
 3.  **Roadmap for digital infrastructure** needed for landmark use-cases of phylogenetic analysis incorporating fossil data. It will contain a list of priorities from the user and developer perspective.
 
