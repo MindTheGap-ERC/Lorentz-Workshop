@@ -2,3 +2,7 @@
 title: "Index"
 ---
 
+## Pre-workshop meeting
+
+Slides from the pre-workshop meeting, as a single scrollable page:
+[Pre-workshop meeting](pre_workshop.html).
