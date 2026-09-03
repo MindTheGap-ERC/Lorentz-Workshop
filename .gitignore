@@ -3,5 +3,7 @@
 .RData
 .Ruserdata
 *.docx
-.positai
-*.DS_Store
+
+/.quarto/
+**/*.quarto_ipynb
+

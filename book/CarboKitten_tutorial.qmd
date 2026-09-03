@@ -1,0 +1,276 @@
+---
+title: "Simulating the stratigraphic record"
+engine: julia
+---
+
+In this tutorial we build a small three-dimensional carbonate platform with [CarboKitten.jl](https://github.com/MindTheGap-ERC/CarboKitten.jl), a Julia package that simulates carbonate platform stratigraphy (a reimplementation of Peter Burgess' CarboCAT). We will:
+
+1.  configure a platform whose sea-level history is deliberately "unkind", so that it produces large stratigraphic gaps,
+2.  run the forward model — or, as we do here, download its archived output,
+3.  look at the resulting architecture, and
+4.  drill four virtual cores at different positions on the platform, turning each one into a stratigraphic column and an **age-depth model** (ADM) — the curve that tells us how much of geological time is actually recorded as rock at that location, and how much is missing.
+
+## 1. Set up your Julia environment
+
+CarboKitten requires Julia 1.10 or later (installable via [juliaup](https://github.com/JuliaLang/juliaup)). Create a project and add the packages we need: `CarboKitten` itself, `Unitful` for physical units, and `CairoMakie` for plotting (CarboKitten's visualisation functions are a package extension that only activates once a Makie backend is loaded). If you have cloned this repository onto your computer, you have the `Manifest.toml` file, which contains information on Julia packages that are needed to run the code below. In order to install packages listed in there, run the commands below in your Julia interpreter:
+
+``` julia
+julia> ]                    # enter Julia's package mode
+(@v1.11) pkg> activate .
+(carbokitten-tutorial) pkg> instantiate
+```
+
+Everything below is meant to be run as a sequence of Julia cells in this notebook.
+
+```{julia}
+#| label: packages
+using Unitful
+using CarboKitten
+using CarboKitten.Production: BenthicProduction
+using CairoMakie
+```
+
+## 2. Building a platform with a gappy stratigraphic record
+
+### Facies
+
+We use three benthic carbonate-producing facies, from fast-growing and shallow-tolerant ("euphotic") to slow-growing and shade-tolerant ("aphotic"), each with its own maximum growth rate, light-extinction coefficient, and transport coefficient (how easily its sediment is moved downslope once produced):
+
+```{julia}
+#| label: facies
+facies = [
+    ALCAP.Facies(
+        viability_range=(4, 10),
+        activation_range=(6, 10),
+        production=BenthicProduction(
+            maximum_growth_rate=500u"m/Myr",
+            extinction_coefficient=0.8u"m^-1",
+            saturation_intensity=60u"W/m^2"),
+        transport_coefficient=50.0u"m/yr"),
+    ALCAP.Facies(
+        viability_range=(4, 10),
+        activation_range=(6, 10),
+        production=BenthicProduction(
+            maximum_growth_rate=400u"m/Myr",
+            extinction_coefficient=0.1u"m^-1",
+            saturation_intensity=60u"W/m^2"),
+        transport_coefficient=25.0u"m/yr"),
+    ALCAP.Facies(
+        viability_range=(4, 10),
+        activation_range=(6, 10),
+        production=BenthicProduction(
+            maximum_growth_rate=100u"m/Myr",
+            extinction_coefficient=0.005u"m^-1",
+            saturation_intensity=60u"W/m^2"),
+        transport_coefficient=12.5u"m/yr")
+]
+```
+
+### Geometry, timing, and the four core locations
+
+The platform is a 100 x 50 grid of 150 m cells (15 km x 7.5 km), with a gentle ramp topography sloping away from the coast, and runs for 1 Myr in steps of 0.0002 Myr (5000 steps). Alongside the full-grid `:topography` output (big file!) and a 2D `:profile` slice, we save four **single-pixel columns** along that same profile (`y = 25`), from the shallow, proximal part of the ramp to the deep, distal slope. A single-pixel `OutputSpec` (an `(Int, Int)` slice) reflects that we often have access only to small spatial snapshots of a bigger sedimentary basin:
+
+```{julia}
+#| label: geometry
+box = CarboKitten.Box{Coast}(grid_size=(100, 50), phys_scale=150.0u"m")
+time = TimeProperties(Δt=0.0002u"Myr", steps=5000)
+initial_topography = (x, y) -> -x / 300.0
+
+locations = [
+    (key = :col_proximal, label = "proximal ramp",   x = 10, y = 25),
+    (key = :col_midplat,  label = "mid-platform",    x = 35, y = 25),
+    (key = :col_margin,   label = "platform margin", x = 65, y = 25),
+    (key = :col_slope,    label = "distal slope",    x = 90, y = 25),
+]
+
+output = Dict(
+    :topography => OutputSpec(write_interval=100),
+    :profile    => OutputSpec(slice=(:, 25)),
+)
+
+for loc in locations
+    output[loc.key] = OutputSpec(slice=(loc.x, loc.y), write_interval=1)
+end
+```
+
+### An "icehouse"-type sea-level history leads to large gaps
+
+Stratigraphic gaps form whenever relative sea level falls faster than subsidence can create new accommodation space: the platform top is exposed, carbonate production stops, and previously deposited sediment can be eroded away (`disintegration_rate`). To get relatively large gaps, we use a sea-level curve that oscillates with a high amplitude and short period compared to the subsidence rate, combined with a high disintegration rate:
+
+```{julia}
+#| label: sea-level
+#| echo: true
+#| output: false
+sea_level = t -> 5.5u"m" * sin(2π * t / 0.18u"Myr")
+subsidence_rate = 38.0u"m/Myr"
+disintegration_rate = 80.0u"m/Myr"
+```
+
+Every 0.18 Myr the sea surface swings up and down by 5.5 m while the sea floor only subsides by about 38 m/Myr $\times$ 0.18 Myr $\approx$ 6.8 m per cycle. Each falling limb of the curve will push shallow parts of the platform above sea level, exposing them, before the next rise buries them again. That is our gap-generating machine.
+
+Now we assemble the full input:
+
+```{julia}
+#| label: input
+#| echo: true
+input = ALCAP.Input(
+    box = box,
+    ca_interval = 1,
+    time = time,
+    output = output,
+    initial_topography = initial_topography,
+    sea_level = sea_level,
+    subsidence_rate = subsidence_rate,
+    insolation = 400.0u"W/m^2",
+    facies = facies,
+    depositional_resolution = 0.5u"m",
+    sediment_buffer_size = 50,
+    disintegration_rate = disintegration_rate,
+    lithification_time = 100u"yr",
+)
+```
+
+## 3. Running the model, and where the output comes from
+
+A full run takes several minutes and writes an HDF5 file of about 48 MB — too large to keep in a Git repository. The output has therefore been archived on Zenodo, and everything from here on reads that archived file:
+
+> *Datasets for the Lorentz Workshop "Bridging Stratigraphic Palaeobiology and Phylogenetics"*, <https://doi.org/10.5281/zenodo.22083205> (all versions).
+
+All the chunks below refer to it through a single path:
+
+```{julia}
+#| label: data-file
+FILENAME = "data/output/carbo-platform.h5"
+```
+
+To fetch the file, run the chunk below once — it is not executed when the book is rendered, so you have to run it yourself in your session. `Downloads` is part of Julia's standard library. The download is about 48 MB and takes a few seconds on a decent connection:
+
+```{julia}
+#| label: fetch-data
+#| eval: false
+using Downloads
+
+mkpath(dirname(FILENAME))
+Downloads.download(
+    "https://zenodo.org/records/22083206/files/carbo-platform.h5?download=1",
+    FILENAME)
+```
+
+The chunk below is the code that produced that file. It is shown as the provenance of the dataset and is deliberately **not** executed here; run it yourself only if you want to change the model set-up above and generate your own output:
+
+```{julia}
+#| label: run-model
+#| eval: false
+mkpath("data/output")
+run_model(Model{ALCAP}, input, FILENAME)
+```
+
+## 4. The stratigraphic architecture of the platform
+
+CarboKitten's `sediment_profile` plots the `:profile` slice we saved above, colouring each parcel of sediment by its dominant facies and marking unconformities (subaerial-exposure surfaces) with dashed white lines:
+
+```{julia}
+#| label: fig-profile
+#| fig-cap: "Sediment profile along the platform, y = 25. Dashed white lines mark unconformities."
+using CarboKitten.Export: read_slice
+using CarboKitten.Visualization: sediment_profile
+
+header, section = read_slice(FILENAME, :profile)
+sediment_profile(header, section)
+```
+
+The white dashed lines are erosional/non-depositional surfaces that turn into the gaps we will quantify below. Notice how they cluster in the shallow, proximal part of the ramp (left) — this is the part of the platform that spends most time within reach of the oscillating sea level.
+
+## 5. Four stratigraphic columns
+
+We now read back each of the four stratigraphic columns we saved earlier, and turn each one into a small "core log": a vertical bar coloured by whichever facies contributed most sediment at each preserved interval. We use CarboKitten's own stratigraphic-column algorithm (`CarboKitten.Output.Abstract.stratigraphic_column`), which corrects for sediment that was deposited and later disintegrated.
+
+```{julia}
+#| label: fig-columns
+#| fig-cap: "Stratigraphic columns (virtual cores) at four positions across the platform, from proximal (left) to distal (right)."
+using CarboKitten.Export: read_column, extract_sac, extract_sc, age_depth_model
+
+function column_bands(filename, loc)
+    header, data = read_column(filename, loc.key)
+    sac_df = extract_sac(header, data, loc.key)
+    adm = age_depth_model(sac_df)[:, "adm_$(loc.key)"] |> in_units_of(u"m")
+
+    sc_df = extract_sc(header, data, loc.key)
+    facies_cols = ["sc_$(loc.key)_f$(f)" for f in 1:header.n_facies]
+    sc = Matrix(sc_df[:, facies_cols])
+    dominant = getindex.(argmax(sc, dims=2)[:, 1], 2)
+
+    return adm, dominant
+end
+
+colors = Makie.wong_colors()
+fig_logs = Figure(size=(700, 500))
+axs = Axis[]
+for (i, loc) in enumerate(locations)
+    adm, dominant = column_bands(FILENAME, loc)
+    ax = Axis(fig_logs[1, i], title=loc.label, xticksvisible=false, xticklabelsvisible=false)
+    hspan!(ax, adm[1:end-1], adm[2:end]; color=colors[dominant[1:end-1]])
+    push!(axs, ax)
+end
+axs[1].ylabel = "stratigraphic height [m]"
+linkyaxes!(axs...)
+
+Legend(fig_logs[2, 1:4],
+    [PolyElement(color=colors[f]) for f in 1:3],
+    ["euphotic (shallow, fast)", "oligophotic (mid depth)", "aphotic (deep, slow)"],
+    orientation=:horizontal, tellwidth=false)
+
+fig_logs
+```
+
+## 6. Age-depth models: where did the time go?
+
+The stratigraphic height each column reaches is cumulative: it only goes up when sediment is actually preserved. Plotting that cumulative height against time — the age-depth model — represents every interval of non-deposition or erosion into a flat, horizontal plateau: time passes, but the column does not grow. Long plateaus are large stratigraphic gaps.
+
+```{julia}
+#| label: fig-adm
+#| fig-cap: "Age-depth models for the four columns. Flat segments are stratigraphic gaps: intervals of time that left no rock behind at that location."
+fig_adm = Figure(size=(700, 450))
+ax = Axis(fig_adm[1, 1], xlabel="time [Myr]", ylabel="stratigraphic height [m]",
+          title="Age-depth models across the platform")
+
+for loc in locations
+    header, data = read_column(FILENAME, loc.key)
+    t = header.axes.t |> in_units_of(u"Myr")
+    sac_df = extract_sac(header, data, loc.key)
+    adm = age_depth_model(sac_df)[:, "adm_$(loc.key)"] |> in_units_of(u"m")
+    lines!(ax, t, adm, label=loc.label)
+end
+
+axislegend(ax, position=:rb)
+fig_adm
+```
+
+Compare the four curves: the proximal column (repeatedly exposed by the oscillating sea level) should show the longest flat plateaus, while columns further down the ramp - spending more time below wave base - tend to accumulate more continuously, at least until subsidence carries them out of the photic zone and production itself shuts down. 
+
+## 7. Optional: exporting the columns for further analysis
+
+If you want to work with these curves outside Julia (R, Python, a spreadsheet...), CarboKitten can export the sediment-accumulation curve, age-depth model, per-facies stratigraphic column, and water depth for a set of columns straight to CSV, plus a TOML file with the metadata (coordinates, subsidence rate, etc.) of each location:
+
+```{julia}
+#| label: export-csv
+using CarboKitten.Export: CSV, data_export
+
+cols = Dict(loc.key => read_column(FILENAME, loc.key)[2] for loc in locations)
+header, _ = read_column(FILENAME, first(locations).key)
+
+spec = CSV(
+    :sediment_accumulation_curve => "data/output/columns_sac.csv",
+    :age_depth_model             => "data/output/columns_adm.csv",
+    :stratigraphic_column        => "data/output/columns_sc.csv",
+    :water_depth                 => "data/output/columns_wd.csv",
+    :metadata                    => "data/output/columns_metadata.toml")
+
+data_export(spec, header, cols)
+```
+
+## Wrap-up
+
+-   A single sea-level curve, applied uniformly across a platform, produces a spatially heterogeneous stratigraphic record: gap size and frequency depend strongly on where a section sits relative to sea level and the photic zone.
+-   The age-depth model is the key object that translatesrock thickness into time.
+-   Try changing `sea_level`, `subsidence_rate`, or `disintegration_rate` above and re-running from Section 3 onward: how do the four age-depth models respond? Can you find a parameter combination where the deepest column has the biggest gaps instead of the shallowest one?

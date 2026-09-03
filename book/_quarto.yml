@@ -1,0 +1,28 @@
+project:
+  type: book
+  output-dir: ../docs
+
+book:
+  title: "Bridging Stratigraphic Palaeobiology and Phylogenetics"
+  author: "Emilia Jarochowska, Rachel Warnock, Johannes Hidding, Laura Mulvey, Niklas Hohmann"
+  date: "8/18/2026"
+  chapters:
+    - index.qmd
+    - part: "Day 1: Stratigraphy"
+      chapters:
+        - stratigraphic_paleobiology.qmd
+        - CarboKitten_tutorial.qmd
+        - adms.qmd
+    - part: "Day 2: Fossils"
+    - part: "Day 3: Tree inference"
+    - part: "Day 4: Analysis and software"
+    - part: "Day 5: Results"
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
