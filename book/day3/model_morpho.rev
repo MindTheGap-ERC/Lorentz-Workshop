@@ -1,0 +1,11 @@
+# strict morphological clock
+branch_rates_morpho ~ dnExponential(lambda = 20.0) # set to true mean
+moves.append( mvScale(branch_rates_morpho, weight = 5.0, lambda = 0.1))
+moves.append( mvScale(branch_rates_morpho, weight = 5.0, lambda = 1.0))
+moves.append( mvScale(branch_rates_morpho, weight = 5.0, lambda = 10.0))
+#branch_rates_morpho.setValue(0.05)
+
+# model of morphological evolution
+# Mk model  - no ascertaintment correction
+
+Q_morpho := fnJC(2)

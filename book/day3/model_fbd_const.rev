@@ -1,0 +1,38 @@
+# FBD model with constant sampling, origination, and extinction
+speciation_rate ~ dnExponential(lambda = 1.25) 
+moves.append( mvScale(speciation_rate, weight=5.0, lambda = 0.1) )
+moves.append( mvScale(speciation_rate, weight=5.0, lambda = 1.0) )
+moves.append( mvScale(speciation_rate, weight=5.0, lambda = 5.0) )
+#speciation_rate.setValue(0.8)
+
+extinction_rate ~ dnExponential(lambda = 1.7) 
+moves.append( mvScale(extinction_rate, weight=5.0, lambda = 0.1) )
+moves.append( mvScale(extinction_rate, weight=5.0, lambda = 1.0) )
+moves.append( mvScale(extinction_rate, weight=5.0, lambda = 5.0) )
+#extinction_rate.setValue(0.6)
+
+origin_time ~ dnExponential(lambda = 1.0, offset = 1.0)
+moves.append( mvScale(origin_time, weight=15.0, lambda = 0.1) )
+moves.append( mvScale(origin_time, weight=15.0, lambda = 1.0) )
+moves.append( mvScale(origin_time, weight=15.0, lambda = 5.0) )
+origin_time.setValue(5.0)
+
+
+psi ~ dnExponential(lambda = 0.125)
+moves.append( mvScale( psi, weight = 5.0, lambda = 0.1) )
+moves.append( mvScale( psi, weight = 5.0, lambda = 1.0) )
+moves.append( mvScale( psi, weight = 5.0, lambda = 10.0) )
+
+fbd_tree ~ dnFBDP(origin=origin_time, lambda=speciation_rate, mu=extinction_rate, psi=psi, rho=rho, taxa=taxa)
+
+#fbd_tree.setValue(init_tree)
+moves.append( mvFNPR(fbd_tree, weight=200.0) )
+moves.append( mvGPR(fbd_tree, weight = 100.0))
+moves.append( mvCollapseExpandFossilBranch(fbd_tree, origin_time, weight=500.0) )
+moves.append( mvNodeTimeSlideUniform(fbd_tree, weight=100.0) )
+moves.append( mvNodeTimeScale(fbd_tree, weight = 200.0))
+moves.append( mvRootTimeSlideUniform(fbd_tree, origin_time, weight=50.0) )
+moves.append( mvSubtreeScale(fbd_tree, weight = 100.0))
+moves.append( mvTreeScale(fbd_tree, origin_time, weight = 100.0))
+
+print("fbd bottom")

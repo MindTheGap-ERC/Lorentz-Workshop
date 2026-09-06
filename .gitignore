@@ -8,3 +8,6 @@
 **/*.quarto_ipynb
 
 .positai
+
+*.log
+book/day3/history.txt

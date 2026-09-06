@@ -1,0 +1,72 @@
+morph_name <- "char_mat_1_nchar300.nex"
+#mol_name <- "data/sim/fbd_base/mol_dat_1_nchar30.nex"
+taxa_name <- "fossils_1_nchar300.csv"
+#tree_name <- "data/sim/fbd_base/tree_1_nchar30.nex"
+outfile <- "test1"
+treefile <- "test2"
+
+morph <- readDiscreteCharacterData(morph_name)
+#mol <- readDiscreteCharacterData(mol_name)
+taxa <- readTaxonData(taxa_name)
+#init_tree <- readTrees(tree_name)[1]
+
+outfile_name <- outfile + ".log"
+treefile_name <- treefile + ".log"
+
+# make taxon set consistent
+#morph.addMissingTaxa(taxa)
+#mol.addMissingTaxa(taxa)
+
+moves = VectorMoves()
+
+rho <- 1.0
+
+source("model_fbd_const.rev")
+source("model_morpho.rev")
+#source("code/model_strict_mol_clock.rev")
+#source("model_HKYG.rev")
+
+phy_morpho ~ dnPhyloCTMC(tree = fbd_tree, branchRates = branch_rates_morpho, Q = Q_morpho, type = "Standard", coding = "all")
+phy_morpho.clamp(morph)
+
+#phy_seq ~ dnPhyloCTMC(tree = fbd_tree, Q = Q_mol, siteRates = rates_mol, branchRates = branch_rates_mol, type = "DNA")
+#phy_seq.clamp(mol)
+
+my_model = model(phy_morpho)
+#my_model.graph("dags/fbd_base.dot")
+
+
+# initialize mcmc
+
+# initialize monitors
+monitors = VectorMonitors()
+monitors.append( mnModel(filename=outfile_name, printgen=10) )
+monitors.append(mnFile(filename = treefile_name, printgen = 10, fbd_tree))
+monitors.append( mnScreen(printgen=100, origin_time, speciation_rate, extinction_rate) )
+
+mymcmc = mcmc(my_model, monitors, moves, nruns = 2, ntries = 10000)
+#stopping_rules[1] = srMaxIteration(100000)
+#if (fileExists(outfile + "_run_1.state")){
+#    mymcmc.initializeFromCheckpoint(outfile + ".state")
+#}
+
+
+#mymcmc.burnin(generations=20000,tuningInterval=15000, verbose = TRUE)
+mymcmc.operatorSummary()
+mymcmc.run( generations = 10000)
+mymcmc.operatorSummary()
+
+# generate MAP trees
+#tree2 = treefile + "_run_1.log"
+#tree1 = treefile + "_run_2.log"
+#tree_trace1 = readTreeTrace(tree1)
+#map_tree1 =  mapTree(tree_trace1)
+#write(map_tree1, file = treefile  + "_run_1_MAP.tre")
+#tree_trace2 = readTreeTrace(tree2)
+#map_tree2 =  mapTree(tree_trace2)
+#write(map_tree2, file = treefile  + "_run_2_MAP.tre")
+#combined_tree_trace = readTreeTrace(v(tree1, tree2))
+#map_tree = mapTree(combined_tree_trace)
+#write(map_tree, file = treefile + "_MAP.tre")
+
+q()

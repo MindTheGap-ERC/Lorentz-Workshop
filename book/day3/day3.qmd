@@ -1,0 +1,86 @@
+---
+title: "day3"
+author: "Niklas Hohmann, Rachel Warnock"
+format: html
+editor: visual
+---
+
+## Day 3
+
+Running FBD analysis:
+```{r}
+library("admtools")
+library("StratPal")
+library("TreeSim")
+library("FossilSim")
+library("MorphSim")
+```
+
+```{r}
+
+
+data("scenarioA")
+t = scenarioA$t_myr
+pos = "2km"
+t_max = max(t)
+t_min = min(t)
+
+adm = admtools::tp_to_adm(t = t,
+                h = scenarioA$h_m[,pos],
+                L_unit = "m",
+                T_unit = "Myr")
+plot(adm,
+     lty_destr = 0)
+title(main = "Age depth model")
+T_axis_lab()
+L_axis_lab()
+
+```
+Simulate FBD tree:
+```{r}
+set.seed(4)
+t_max = 2
+tree = TreeSim::sim.bd.age(age = t_max,
+                           numbsim = 1,
+                           lambda = 1.5,
+                           mu = 0.5,
+                           frac = 1,
+                           mrca = TRUE,
+                           complete = TRUE)[[1]]
+plot(tree)
+axis(1)
+
+```
+
+Simulate fossils along tree
+```{r}
+
+f = FossilSim::sim.fossils.poisson(rate = 2.5, tree = tree, root.edge = FALSE)
+plot(f, tree)
+f_extant = FossilSim::sim.extant.samples(fossils = f,
+tree = tree,
+rho = 1)
+plot(f_extant, tree, reconstructed = TRUE)
+plot(f_extant, tree, reconstructed = FALSE)
+
+```
+
+simulate morphology along tree
+```{r}
+
+d <- sim.morpho(time.tree = tree, k = 2, trait.num = 100,
+                br.rates = 0.1,          # scalar = strict clock; vector = relaxed
+                variable = TRUE,          # MkV
+                ACRV = "gamma", alpha.gamma = 1, ACRV.ncats = 4,
+                fossil = f_extant)
+d
+f
+
+d
+write.morpho(d, file = "tree.nex", type = "tree", reconstructed = TRUE)
+write.morpho(d, file = "matrix.nex", type = "matrix", reconstructed = TRUE)
+write.morpho(d, file = "ages.tsv", type = "ages", reconstructed = TRUE)
+
+
+```
+
