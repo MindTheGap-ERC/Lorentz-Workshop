@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>5&nbsp; MorphSim Tutorial – Bridging Stratigraphic Palaeobiology and Phylogenetics</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../day2/complex_models.html" rel="next">
+<link href="../day2/Intro_morpho.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-d3f7f8e73c8d287b30bcf59c2b563615.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../day2/Intro_morpho.html">Day 2: Fossils</a></li><li class="breadcrumb-item"><a href="../day2/morphsim_tutorial.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">MorphSim Tutorial</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Bridging Stratigraphic Palaeobiology and Phylogenetics</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Index</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Day 1: Stratigraphy</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../stratigraphic_paleobiology.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Stratigraphic paleobiology</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../adms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Time in rocks</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Day 2: Fossils</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../day2/Intro_morpho.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to morphological data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../day2/morphsim_tutorial.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">MorphSim Tutorial</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../day2/complex_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Morphological model extensions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../day2/Model-RevBayes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Model assumptions to RevBayes code</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Day 3: Tree inference</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Day 4: Analysis and software</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Day 5: Results</span></span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">References</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#simulating-phylogenetic-trees-in-r" id="toc-simulating-phylogenetic-trees-in-r" class="nav-link active" data-scroll-target="#simulating-phylogenetic-trees-in-r"><span class="header-section-number">5.1</span> Simulating phylogenetic trees in R</a>
+  <ul class="collapse">
+  <li><a href="#generating-the-tree" id="toc-generating-the-tree" class="nav-link" data-scroll-target="#generating-the-tree"><span class="header-section-number">5.1.1</span> Generating the tree</a></li>
+  <li><a href="#checking-the-tree" id="toc-checking-the-tree" class="nav-link" data-scroll-target="#checking-the-tree"><span class="header-section-number">5.1.2</span> Checking the tree</a></li>
+  <li><a href="#visualizing-the-tree" id="toc-visualizing-the-tree" class="nav-link" data-scroll-target="#visualizing-the-tree"><span class="header-section-number">5.1.3</span> Visualizing the tree</a></li>
+  </ul></li>
+  <li><a href="#simulating-morphological-data" id="toc-simulating-morphological-data" class="nav-link" data-scroll-target="#simulating-morphological-data"><span class="header-section-number">5.2</span> Simulating Morphological Data</a>
+  <ul class="collapse">
+  <li><a href="#the-baseline-mk" id="toc-the-baseline-mk" class="nav-link" data-scroll-target="#the-baseline-mk"><span class="header-section-number">5.2.1</span> The baseline: Mk</a></li>
+  <li><a href="#mkv-conditioning-on-variability" id="toc-mkv-conditioning-on-variability" class="nav-link" data-scroll-target="#mkv-conditioning-on-variability"><span class="header-section-number">5.2.2</span> MkV: conditioning on variability</a></li>
+  <li><a href="#making-sure-the-state-space-is-fully-sampled" id="toc-making-sure-the-state-space-is-fully-sampled" class="nav-link" data-scroll-target="#making-sure-the-state-space-is-fully-sampled"><span class="header-section-number">5.2.3</span> Making sure the state space is fully sampled</a></li>
+  <li><a href="#filtering-for-parsimony-informative-characters" id="toc-filtering-for-parsimony-informative-characters" class="nav-link" data-scroll-target="#filtering-for-parsimony-informative-characters"><span class="header-section-number">5.2.4</span> Filtering for parsimony-informative characters</a></li>
+  <li><a href="#among-character-rate-variation-acrv" id="toc-among-character-rate-variation-acrv" class="nav-link" data-scroll-target="#among-character-rate-variation-acrv"><span class="header-section-number">5.2.5</span> Among-character rate variation (ACRV)</a></li>
+  <li><a href="#custom-q-matrices-encoding-your-own-assumptions" id="toc-custom-q-matrices-encoding-your-own-assumptions" class="nav-link" data-scroll-target="#custom-q-matrices-encoding-your-own-assumptions"><span class="header-section-number">5.2.6</span> Custom Q-matrices: encoding your own assumptions</a></li>
+  <li><a href="#partitioning-the-matrix" id="toc-partitioning-the-matrix" class="nav-link" data-scroll-target="#partitioning-the-matrix"><span class="header-section-number">5.2.7</span> Partitioning the matrix</a></li>
+  <li><a href="#missing-data-as-a-taphonomic-layer" id="toc-missing-data-as-a-taphonomic-layer" class="nav-link" data-scroll-target="#missing-data-as-a-taphonomic-layer"><span class="header-section-number">5.2.8</span> Missing data as a taphonomic layer</a></li>
+  <li><a href="#exporting-matrices-trees-and-fossil-ages" id="toc-exporting-matrices-trees-and-fossil-ages" class="nav-link" data-scroll-target="#exporting-matrices-trees-and-fossil-ages"><span class="header-section-number">5.2.9</span> Exporting matrices, trees, and fossil ages</a></li>
+  <li><a href="#your-turn-biology-meets-the-fossil-record" id="toc-your-turn-biology-meets-the-fossil-record" class="nav-link" data-scroll-target="#your-turn-biology-meets-the-fossil-record"><span class="header-section-number">5.2.10</span> Your turn: biology meets the fossil record</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../day2/Intro_morpho.html">Day 2: Fossils</a></li><li class="breadcrumb-item"><a href="../day2/morphsim_tutorial.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">MorphSim Tutorial</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">MorphSim Tutorial</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="simulating-phylogenetic-trees-in-r" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="simulating-phylogenetic-trees-in-r"><span class="header-section-number">5.1</span> Simulating phylogenetic trees in R</h2>
+<p>Before we can simulate morphological data we need a phylogenetic tree along which to simulate our data. In R, trees can be simulated using a number of different packages, most commonly <code>ape</code> and <code>TreeSim</code>. Here we explain how to generate a birth-death time tree using <code>TreeSim</code>.</p>
+<p><code>TreeSim</code> (Stadler 2011) simulates trees under a constant-rate birth-death process, where new lineages are added at rate <code>lambda</code> (speciation) and removed at rate <code>mu</code> (extinction). The function we’ll use, <code>sim.bd.taxa()</code>, simulates a tree conditioned on reaching a fixed number of extant tips.</p>
+<p><code>TreeSim</code> provides several related functions depending on what you want to condition the simulation on:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Conditions on</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>sim.bd.taxa()</code></td>
+<td>number of tips</td>
+</tr>
+<tr class="even">
+<td><code>sim.bd.age()</code></td>
+<td>tree age (time since root)</td>
+</tr>
+<tr class="odd">
+<td><code>sim.bd.taxa.age()</code></td>
+<td>both age and tip number</td>
+</tr>
+<tr class="even">
+<td><code>sim.rateshift.taxa()</code></td>
+<td>number of tips, with rate shifts / mass extinctions over time</td>
+</tr>
+<tr class="odd">
+<td><code>sim.gsa.taxa()</code></td>
+<td>number of tips, sampled from a larger pool of simulated trees</td>
+</tr>
+</tbody>
+</table>
+<p>We’ll focus on <code>sim.bd.taxa()</code> since it’s the simplest entry point, but it’s worth knowing the others exist if your own data calls for a different kind of tree.</p>
+<p>For reproducibility, we set a random seed before simulating: since the birth-death process is stochastic, this ensures the tree (and everything downstream) is identical every time this document is rendered.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(TreeSim)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: ape</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: geiger</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: phytools</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: maps</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ape)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="generating-the-tree" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="generating-the-tree"><span class="header-section-number">5.1.1</span> Generating the tree</h3>
+<p>We simulate a single tree with 10 tips, a speciation rate of 1 and an extinction rate of 0.5. Note that <code>mu</code> must be less than <code>lambda</code>; if extinction is too close to (or exceeds) speciation, the process may need many attempts to reach the target number of tips, and simulation will be slow or may not converge in reasonable time.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>tree_list <span class="ot">&lt;-</span> <span class="fu">sim.bd.taxa</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">n        =</span> <span class="dv">10</span>,   <span class="co"># number of extant tips</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">numbsim  =</span> <span class="dv">1</span>,    <span class="co"># number of trees to simulate</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">lambda   =</span> <span class="dv">1</span>,    <span class="co"># speciation rate</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mu       =</span> <span class="fl">0.5</span>,  <span class="co"># extinction rate</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">complete =</span> <span class="cn">TRUE</span> <span class="co"># drop extinct/non-sampled lineages; keep only extant tips</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>tree <span class="ot">&lt;-</span> tree_list[[<span class="dv">1</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Note that <code>sim.bd.taxa()</code> always returns a <strong>list</strong> of trees, with length equal to <code>numbsim</code>. Even when simulating a single tree, we still need to index into the list (<code>[[1]]</code>) to extract the <code>phylo</code> object itself. This trips a lot of people up the first time, so it’s worth calling out explicitly.</p>
+<p>We set <code>complete = TRUE</code> so we want the whole tree, including lineages that went extinct before the present, rather than one pruned down to extant taxa only. It’s important to understand what <code>n</code> controls here: <code>sim.bd.taxa()</code> only lets you specify the number of extant tips, not the total number of tips in the tree. So with <code>n = 10</code> and <code>complete = TRUE</code>, the simulation keeps adding and removing lineages until it reaches exactly 10 tips at the present, but every lineage that went extinct along the way is also retained in the output. That means the final tree will generally have more than 10 tips in total once extinct lineages are counted. If you instead want a tree with exactly 10 tips and no fossils at all, set <code>complete = FALSE</code>, which drops the extinct lineages and returns only the extant-tip tree.</p>
+</section>
+<section id="checking-the-tree" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="checking-the-tree"><span class="header-section-number">5.1.2</span> Checking the tree</h3>
+<p>Before moving on to simulating morphology, it’s good practice to confirm the tree looks the way we expect. A few quick checks:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># total tip count, including BOTH extant and fossil lineages</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># (this will be &gt; 10, since n only controls extant tips)</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Ntip</span>(tree)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 14</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># this is the check that actually confirms n = 10 was enforced:</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># count tips whose distance from the root equals the tree's max depth</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># (i.e. tips sampled at the present)</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>node_depths <span class="ot">&lt;-</span> <span class="fu">node.depth.edgelength</span>(tree)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>tip_depths  <span class="ot">&lt;-</span> node_depths[<span class="dv">1</span><span class="sc">:</span><span class="fu">Ntip</span>(tree)]</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">abs</span>(tip_depths <span class="sc">-</span> <span class="fu">max</span>(tip_depths)) <span class="sc">&lt;</span> <span class="fl">1e-8</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># with complete = TRUE, the tree should generally NOT be ultrametric,</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># since fossil tips end before the present</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">is.ultrametric</span>(tree)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># branch lengths should all be positive and finite</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(tree<span class="sc">$</span>edge.length)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+0.007114 0.216468 0.480171 0.498485 0.649550 1.361996 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># TreeSim always produces a strictly bifurcating tree so this</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># should be TRUE regardless of complete = TRUE/FALSE</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">is.binary</span>(tree)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</section>
+<section id="visualizing-the-tree" class="level3" data-number="5.1.3">
+<h3 data-number="5.1.3" class="anchored" data-anchor-id="visualizing-the-tree"><span class="header-section-number">5.1.3</span> Visualizing the tree</h3>
+<p>A quick plot lets us see the fossil tips (branches ending before the present) alongside the extant ones:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(tree, <span class="at">cex =</span> <span class="fl">0.8</span>, <span class="at">no.margin =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="morphsim_tutorial_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>With a validated <code>phylo</code> object, extant and fossil tips both retained,we’re ready to simulate morphological character data along its branches using <code>MorphSim</code>.</p>
+</section>
+</section>
+<section id="simulating-morphological-data" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="simulating-morphological-data"><span class="header-section-number">5.2</span> Simulating Morphological Data</h2>
+<p>Now that we have a validated tree (extant tips plus fossils, from <code>TreeSim</code>), we can simulate morphological character data along it using <code>MorphSim</code>. We’ll build up the model one assumption at a time, starting from the simplest possible case and progressively relaxing it, the same tree is used throughout, so any differences in the resulting data are purely down to the model, not the tree.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MorphSim)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="the-baseline-mk" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="the-baseline-mk"><span class="header-section-number">5.2.1</span> The baseline: Mk</h3>
+<p>The simplest model for discrete morphological data is the <strong>Mk model</strong> (Lewis 2001), a direct extension of the Jukes-Cantor idea to morphology: <code>k</code> possible states per character, one shared substitution rate, and no direction favoured over any other. It’s a strong assumption. Unlike a nucleotide, state “1” in one character has no inherent relationship to state “1” in another, but it’s the natural starting point,.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>morpho_mk <span class="ot">&lt;-</span> <span class="fu">sim.morpho</span>(<span class="at">k =</span> <span class="dv">3</span>, <span class="at">time.tree =</span> tree, <span class="at">br.rates =</span> <span class="fl">0.1</span>, <span class="at">trait.num =</span> <span class="dv">15</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotMorphoGrid</span>(morpho_mk)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="morphsim_tutorial_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Take a look at the grid, you’ll likely spot at least one invariant column (a character that never changes across any tip). Real morphological datasets essentially never look like this, for a specific reason we’ll get to next.</p>
+</section>
+<section id="mkv-conditioning-on-variability" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="mkv-conditioning-on-variability"><span class="header-section-number">5.2.2</span> MkV: conditioning on variability</h3>
+<p>Empirical matrices are curated by systematists, and nobody writes down a character that doesn’t vary, invariant characters simply aren’t scored in the first place. If we simulated data and then deleted invariant columns after the fact, we’d bias our branch length and rate estimates, since we’d have thrown away information about how rare change actually is. MkV builds the exclusion directly into the model, so the simulation (and the corresponding likelihood, if you’re fitting a model back to this data) correctly accounts for the fact that we conditioned on variability from the start.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>morpho_mkv <span class="ot">&lt;-</span> <span class="fu">sim.morpho</span>(<span class="at">k =</span> <span class="dv">3</span>, <span class="at">time.tree =</span> tree, <span class="at">br.rates =</span> <span class="fl">0.1</span>,</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">trait.num =</span> <span class="dv">15</span>, <span class="at">variable =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="making-sure-the-state-space-is-fully-sampled" class="level3" data-number="5.2.3">
+<h3 data-number="5.2.3" class="anchored" data-anchor-id="making-sure-the-state-space-is-fully-sampled"><span class="header-section-number">5.2.3</span> Making sure the state space is fully sampled</h3>
+<p>Even with <code>k = 3</code> allowed, a finite simulation on a finite tree might just never sample one of those states, especially with a small tree, low rates, or few characters. If you’re using simulated data to test a 3-state model but only two states ever show up at the tips, you’ve unintentionally built a test case for a simpler model than you think you have. <code>full.states</code> forces the simulation to keep resampling until every state you specified actually appears somewhere in the matrix.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>morpho_full <span class="ot">&lt;-</span> <span class="fu">sim.morpho</span>(<span class="at">k =</span> <span class="dv">3</span>, <span class="at">time.tree =</span> tree, <span class="at">br.rates =</span> <span class="fl">0.1</span>,</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">trait.num =</span> <span class="dv">15</span>, <span class="at">variable =</span> <span class="cn">TRUE</span>, <span class="at">full.states =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="filtering-for-parsimony-informative-characters" class="level3" data-number="5.2.4">
+<h3 data-number="5.2.4" class="anchored" data-anchor-id="filtering-for-parsimony-informative-characters"><span class="header-section-number">5.2.4</span> Filtering for parsimony-informative characters</h3>
+<p>A second, related issue: real matrices are mostly composed of <strong>parsimony-informative</strong> characters, at least two states, each seen in two or more taxa. A raw simulation will happily generate autapomorphies (a state found in only a single taxon) or characters that are technically variable but still uninformative for resolving relationships. Rather than hand-filtering afterwards, <code>MorphSim</code> lets you enforce this directly:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tolerate autapomorphies</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>morpho_pars_standard <span class="ot">&lt;-</span> <span class="fu">sim.morpho</span>(<span class="at">k =</span> <span class="dv">3</span>, <span class="at">time.tree =</span> tree, <span class="at">br.rates =</span> <span class="fl">0.1</span>,</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">trait.num =</span> <span class="dv">15</span>, <span class="at">variable =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">parsimony =</span> <span class="st">"standard"</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co"># every state must occur in 2+ taxa = stricter</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>morpho_pars_strict <span class="ot">&lt;-</span> <span class="fu">sim.morpho</span>(<span class="at">k =</span> <span class="dv">3</span>, <span class="at">time.tree =</span> tree, <span class="at">br.rates =</span> <span class="fl">0.1</span>,</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">trait.num =</span> <span class="dv">15</span>, <span class="at">variable =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">parsimony =</span> <span class="st">"strict"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Both <code>full.states</code> and <code>parsimony</code> work by rejection sampling: generate, check, discard, and retry. If <code>k</code> is set too high, rates too low, or the tree too small, this can take a long time to converge, <code>MorphSim</code> caps at 1 million iterations and will tell you to relax a parameter if it can’t satisfy your constraints.</p>
+</div>
+</div>
+</section>
+<section id="among-character-rate-variation-acrv" class="level3" data-number="5.2.5">
+<h3 data-number="5.2.5" class="anchored" data-anchor-id="among-character-rate-variation-acrv"><span class="header-section-number">5.2.5</span> Among-character rate variation (ACRV)</h3>
+<p>So far every character has shared a single rate, which is biologically implausible: some traits are under tight functional or developmental constraint and barely change, while others are close to neutral and drift quickly. Among-character rate variation lets each character draw its own rate multiplier, typically from a discretized gamma distribution, the same approach used for among-site rate variation in molecular models.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>morpho_acrv <span class="ot">&lt;-</span> <span class="fu">sim.morpho</span>(<span class="at">k =</span> <span class="dv">3</span>, <span class="at">time.tree =</span> tree, <span class="at">br.rates =</span> <span class="fl">0.1</span>, <span class="at">trait.num =</span> <span class="dv">15</span>,</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">variable =</span> <span class="cn">TRUE</span>, <span class="at">ACRV =</span> <span class="st">"gamma"</span>, <span class="at">alpha.gamma =</span> <span class="dv">1</span>, <span class="at">ACRV.ncats =</span> <span class="dv">4</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plotMorphoGrid</span>(morpho_acrv)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="morphsim_tutorial_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Same tree, same branch rates, the only thing that changed is the character-rate distribution. Does this look closer to a matrix you’d recognize from real data?</p>
+</section>
+<section id="custom-q-matrices-encoding-your-own-assumptions" class="level3" data-number="5.2.6">
+<h3 data-number="5.2.6" class="anchored" data-anchor-id="custom-q-matrices-encoding-your-own-assumptions"><span class="header-section-number">5.2.6</span> Custom Q-matrices: encoding your own assumptions</h3>
+<p>Everything above still assumes equal rates in every direction between states. That’s often <em>wrong</em> for a specific character rather than merely simplified. Meristic characters, or anything that must pass through intermediate states, shouldn’t be able to jump directly from state 0 to state 2. An <strong>ordered</strong> model encodes exactly that constraint:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>ord_Q <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.0</span>,</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>                   <span class="fl">0.3333333</span>, <span class="sc">-</span><span class="fl">0.6666667</span>, <span class="fl">0.3333333</span>,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                   <span class="fl">0.0</span>, <span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.5</span>),</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>morpho_ordered <span class="ot">&lt;-</span> <span class="fu">sim.morpho</span>(<span class="at">k =</span> <span class="dv">3</span>, <span class="at">time.tree =</span> tree, <span class="at">br.rates =</span> <span class="fl">0.1</span>, <span class="at">trait.num =</span> <span class="dv">15</span>,</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>                              <span class="at">variable =</span> <span class="cn">TRUE</span>, <span class="at">ACRV =</span> <span class="st">"gamma"</span>, <span class="at">alpha.gamma =</span> <span class="dv">1</span>,</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>                              <span class="at">ACRV.ncats =</span> <span class="dv">4</span>, <span class="at">define.Q =</span> ord_Q)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(morpho_ordered, <span class="at">trait =</span> <span class="dv">1</span>, <span class="at">box.cex =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Note: no fossil data available, fossils will not be shown</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Note: no fossil data available, reconstructed tree will not be shown</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="morphsim_tutorial_files/figure-html/sim-ordered-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><code>plot.morpho()</code> lets you follow one character’s full transition history along the tree, a useful way to see the ordering constraint actually playing out branch by branch, rather than just inferring it from the tip states.</p>
+</section>
+<section id="partitioning-the-matrix" class="level3" data-number="5.2.7">
+<h3 data-number="5.2.7" class="anchored" data-anchor-id="partitioning-the-matrix"><span class="header-section-number">5.2.7</span> Partitioning the matrix</h3>
+<p>So far every character in a given call to <code>sim.morpho()</code> has shared the same number of states and the same model. Real morphological matrices are rarely that homogeneous, a matrix might include binary presence/absence characters, three-state characters describing shape variation, and four-state meristic counts, all in the same dataset. <code>MorphSim</code> handles this with the <code>partition</code> argument: you specify how many traits belong to each partition, and give <code>k</code> as a vector with the number of states for each partition (in the same order).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>part_data <span class="ot">&lt;-</span> <span class="fu">sim.morpho</span>(</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">time.tree  =</span> tree,</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">k          =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">trait.num  =</span> <span class="dv">20</span>,</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">partition  =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">5</span>),</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">br.rates   =</span> <span class="fl">0.1</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="co"># model specification per partition</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>part_data<span class="sc">$</span>model<span class="sc">$</span>Specified</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Mk_Part:10states:2" "Mk_Part:5states:3"  "Mk_Part:5states:4" </code></pre>
+</div>
+</div>
+<p>Here, the first 10 traits are binary (<code>k = 2</code>), the next 5 have three states, and the last 5 have four states. The values in <code>partition</code> must sum to <code>trait.num</code>, or <code>sim.morpho()</code> will throw an error.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>partition</code> only lets you vary the number of states (<code>k</code>) across groups of characters within a single call. If you want different partitions to use <em>different models entirely</em> for example, some ordered with a custom <code>Q</code>, others unordered with gamma rate variation you can’t do that in one call. Instead, simulate each partition separately with its own <code>sim.morpho()</code> call, then merge them with <code>combine.morpho()</code>. Both objects must share the same tree, branch lengths, and (if used) fossil object.</p>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># partition 1: ordered characters with a custom Q matrix</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>partition_1 <span class="ot">&lt;-</span> <span class="fu">sim.morpho</span>(<span class="at">time.tree =</span> tree, <span class="at">k =</span> <span class="dv">3</span>, <span class="at">trait.num =</span> <span class="dv">10</span>,</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">br.rates =</span> <span class="fl">0.1</span>, <span class="at">define.Q =</span> ord_Q)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co"># partition 2: unordered binary characters with MkV + gamma ACRV</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>partition_2 <span class="ot">&lt;-</span> <span class="fu">sim.morpho</span>(<span class="at">time.tree =</span> tree, <span class="at">k =</span> <span class="dv">2</span>, <span class="at">trait.num =</span> <span class="dv">10</span>,</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>                           <span class="at">br.rates =</span> <span class="fl">0.1</span>, <span class="at">variable =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>                           <span class="at">ACRV =</span> <span class="st">"gamma"</span>, <span class="at">alpha.gamma =</span> <span class="dv">1</span>, <span class="at">ACRV.ncats =</span> <span class="dv">4</span>)</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>combined <span class="ot">&lt;-</span> <span class="fu">combine.morpho</span>(partition_1, partition_2)</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 20 traits total, model info from both partitions preserved</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(combined<span class="sc">$</span>sequences<span class="sc">$</span>tips[[<span class="dv">1</span>]])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 20</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>combined<span class="sc">$</span>model<span class="sc">$</span>Specified</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Mk_Part:10states:3"       "MkgammaV_Part:10states:2"</code></pre>
+</div>
+</div>
+</section>
+<section id="missing-data-as-a-taphonomic-layer" class="level3" data-number="5.2.8">
+<h3 data-number="5.2.8" class="anchored" data-anchor-id="missing-data-as-a-taphonomic-layer"><span class="header-section-number">5.2.8</span> Missing data as a taphonomic layer</h3>
+<p>Everything up to this point has been about the <em>evolutionary</em> process, how characters change along the tree. Real fossil matrices are also shaped by a second, independent process: <strong>preservation</strong>. Not every character that existed is observable in a fossil, and different anatomical regions have very different preservation potential. This is where stratigraphy and taphonomy come back into the picture: the pattern of missing data in a real matrix isn’t random noise, it’s a signal about what kind of tissue, environment, and depositional setting produced the fossil record you’re working with.</p>
+<p><code>sim.missing.data()</code> lets us impose that layer on top of a simulated matrix, replacing observed states with <code>"?"</code> under different missingness scenarios.</p>
+<p><strong>By partition</strong>: mirrors the character partitions we just built: some anatomical regions (e.g., robust skeletal elements) preserve far more reliably than others (e.g., soft tissue characters).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># hard tissue characters (partition 1): 10% missing</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co"># soft tissue characters (partition 2): 70% missing</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>missing_part <span class="ot">&lt;-</span> <span class="fu">sim.missing.data</span>(</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> combined, <span class="at">method =</span> <span class="st">"partition"</span>,</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">seq =</span> <span class="st">"tips"</span>, <span class="at">probability =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.7</span>)</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Extinct taxa only</strong>: leaves extant tips fully observed and only introduces missing data in fossil taxa, reflecting the common (and very real) asymmetry that living specimens can be studied completely while fossils cannot.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>missing_extinct <span class="ot">&lt;-</span> <span class="fu">sim.missing.data</span>(</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> combined , <span class="at">method =</span> <span class="st">"extinct"</span>,</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">seq =</span> <span class="st">"tips"</span>, <span class="at">probability =</span> <span class="fl">0.5</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Other available <code>method</code> options worth knowing about: <code>"random"</code> (uniform missing data across the whole matrix, useful as a naive baseline), <code>"rate"</code> (missing data tied to a character’s ACRV rate category, useful for testing whether fast- or slow-evolving characters are preferentially lost), and <code>"trait"</code> / <code>"taxa"</code> / <code>"trait_taxa"</code> for targeting specific characters or specimens directly.</p>
+</section>
+<section id="exporting-matrices-trees-and-fossil-ages" class="level3" data-number="5.2.9">
+<h3 data-number="5.2.9" class="anchored" data-anchor-id="exporting-matrices-trees-and-fossil-ages"><span class="header-section-number">5.2.9</span> Exporting matrices, trees, and fossil ages</h3>
+<p>Once you’re happy with a simulated dataset, <code>write.morpho()</code> provides a single interface for exporting everything you need to move into downstream phylogenetic software (RevBayes, BEAST2, or similar): the tree, the character matrix, and fossil occurrence ages. The <code>type</code> argument controls what gets written, and <code>reconstructed</code> controls whether you export the full simulated tree/matrix or only the reconstructed version (i.e., only the sampled lineages, relevant once fossils are involved, see day 3).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># full tree</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.morpho</span>(missing_part, <span class="at">file =</span> <span class="st">"tree.tre"</span>, <span class="at">type =</span> <span class="st">"tree"</span>,</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">reconstructed =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co"># character matrix</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="fu">write.morpho</span>(missing_part, <span class="at">file =</span> <span class="st">"matrix.nex"</span>, <span class="at">type =</span> <span class="st">"matrix"</span>, <span class="at">reconstructed =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="co"># fossil occurrence ages (compatible with RevBayes)</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="fu">write.morpho</span>(missing_part, <span class="at">file =</span> <span class="st">"ages.tsv"</span>, <span class="at">type =</span> <span class="st">"ages"</span>)</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="co"># ages with associated uncertainty</span></span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a><span class="fu">write.morpho</span>(missing_part, <span class="at">file =</span> <span class="st">"ages.tsv"</span>, <span class="at">type =</span> <span class="st">"ages"</span>,</span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">uncertainty =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Why simulate at all?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Before starting the next section it is worth thinking about why we need simulation studies. It might seem backwards to spend a workshop generating <em>fake</em> data when the goal is to understand <em>real</em> fossil datasets. But simulation is one of the few tools we have for testing whether our inference methods actually recover what we think they recover.</p>
+<p>With real data, we never know the true tree, the true model, or the true pattern of missing data, we’re always inferring all three at once, which makes it hard to tell whether a surprising result reflects real biology or a limitation of the method. With simulated data, we control every one of those pieces. That means we can:</p>
+<ul>
+<li><strong>Test methods against a known truth.</strong> Simulate under a model with a known Q-matrix, known rate heterogeneity, and known tree, then run inference on the result. Ff the method recovers something far from what you simulated, that tells you something important about its limits, not about the fossil record.</li>
+<li><strong>Separate process from artifact.</strong> When something looks unusual in a real matrix (e.g.&nbsp;surprisingly low homoplasy, or an odd concentration of missing data), simulation lets you ask: <em>could this pattern arise just from preservation bias, even under a perfectly ordinary evolutionary process?</em> If yes, that’s a caution against over-interpreting the pattern biologically.</li>
+<li><strong>Build intuition for what “normal” looks like.</strong> Once you’ve seen how an Mk matrix, an MkV matrix, and a partitioned matrix with realistic missing data each look and behave differently, you’re much better equipped to look at someone else’s real dataset and have an informed opinion about what its statistics are (and aren’t) telling you.</li>
+</ul>
+<p>This is also exactly why we built the model up one assumption at a time today, rather than jumping straight to something maximally realistic: every mismatch between a simple model and a real dataset is potentially meaningful, but only if you know precisely which assumption you relaxed to close that gap.</p>
+</div>
+</div>
+</section>
+<section id="your-turn-biology-meets-the-fossil-record" class="level3" data-number="5.2.10">
+<h3 data-number="5.2.10" class="anchored" data-anchor-id="your-turn-biology-meets-the-fossil-record"><span class="header-section-number">5.2.10</span> Your turn: biology meets the fossil record</h3>
+<p>Everything in this section has been two separate layers stacked on top of each other: an <strong>evolutionary model</strong> (partitions, rates, Q-matrices) that describes how characters actually change, and a <strong>preservation model</strong> (missing data) that describes what we can actually observe of that change once fossils are involved. Real morphological matrices are the product of both and it’s easy to mistake a pattern caused by preservation for one caused by evolution, or vice versa, if you’re not thinking about them as distinct layers.</p>
+<p>For this exercise, work in groups and design <strong>one scenario</strong> that combines both layers:</p>
+<p><strong>Step 1: the biology.</strong> Choose a partition structure that reflects a real hypothesis about your organism of interest. For example:</p>
+<ul>
+<li>A skeletal dataset with slow-evolving, ordered meristic characters (limb segment counts) alongside fast-evolving, unordered characters (colour pattern, if it were preservable).</li>
+<li>A dataset where one partition is under strong functional constraint (low rate, few states) and another is closer to neutral (higher rate, more states).</li>
+</ul>
+<p>Build this with <code>sim.morpho()</code>, using <code>partition</code> and <code>k</code> (or <code>combine.morpho()</code> if your partitions need genuinely different models, not just different state numbers).</p>
+<p><strong>Step 2: the stratigraphy.</strong> Now decide <em>why</em> some of this data would be missing in a real fossil dataset, and choose a <code>sim.missing.data()</code> method that reflects that reasoning rather than picking probabilities arbitrarily. Questions to ground this in:</p>
+<ul>
+<li>Which of your partitions corresponds to tissue that preserves well (bone, teeth) versus poorly (integument, soft anatomy)? → <code>method =   "partition"</code></li>
+<li>Are your fossil taxa systematically less complete than your extant taxa, independent of which characters they are? → <code>method = "extinct"</code></li>
+<li>Is there a specific, well-known taphonomic bias for your group, e.g., a particular character system that’s notoriously hard to score from compressed or fragmentary material? → <code>method = "trait"</code> or <code>"trait_taxa"</code></li>
+</ul>
+<p><strong>Step 3: Are there some limitations to what we can simulate?</strong> Think about all the models you have seen so far, are there any process you think we are not capturing would be important for modeling morphological data from fossils? What assumptions could we include to improve our modeling of morphological data?</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../day2/Intro_morpho.html" class="pagination-link" aria-label="Introduction to morphological data">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Introduction to morphological data</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../day2/complex_models.html" class="pagination-link" aria-label="Morphological model extensions">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Morphological model extensions</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

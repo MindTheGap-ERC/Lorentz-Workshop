@@ -14,6 +14,11 @@ book:
         - CarboKitten_tutorial.qmd
         - adms.qmd
     - part: "Day 2: Fossils"
+      chapters:
+        - day2/Intro_morpho.qmd
+        - day2/morphsim_tutorial.qmd
+        - day2/complex_models.qmd
+        - day2/Model-RevBayes.qmd
     - part: "Day 3: Tree inference"
     - part: "Day 4: Analysis and software"
     - part: "Day 5: Results"

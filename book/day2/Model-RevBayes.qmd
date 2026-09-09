@@ -1,0 +1,5 @@
+---
+title: "Model assumptions to RevBayes code"
+---
+
+This file will contain code snippets of how to implement a number of models into RevBayes code so they can easily copied and pasted for analyses.
