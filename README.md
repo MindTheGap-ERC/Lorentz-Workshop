@@ -48,29 +48,18 @@
 | 16:30         | Wrap-up: plenary discussion, collecting feedback and adding notes                                                                                                                                                                                    |                                         |
 | 18:30         | Workshop dinner                                                                                                                                                                                                                                      |                                         |
 | **Thursday**  |                                                                                                                                                                                                                                                      | Rachel Warnock and Niklas Hohmann       |
-
-| 09:15         | Talk *Architecture and limitations of common frameworks used in phylogenetic software development* | Joëlle Barido-Sottani           |
-
-| 10:00          | Talk *Community led phylogenetic software development*                                      | Ugne Stolz                            |
-
-| 10:45         | Coffee break                                                                                |                                        |
-
+| 09:00         | Talk *Architecture and limitations of common frameworks used in phylogenetic software development* | Joëlle Barido-Sottani           |
+| 09:45          | Talk *Community led phylogenetic software development*                                      | Ugne Stolz                            |
+| 10:30         | Coffee break                                                                                |                                        |
 | 11:15         | Round table discussion                                                                       | Rachel Warnock                        |
-
 | 12:15         | Lunch break                                                                                                                           | 
-
 | 13:30         | Breakout group activity:*Debugging reports*                                                  | Rachel Warnock                          |
-
 | 14:45         | Coffee break                                                                                                                          |
-
-| 15:15         | Breakout group activity:*Debugging reports*                                                  | Rachel Warnock                         |
-
+| 15:15         | Breakout group activity:*Reproducibility in phylogenetics*                                                  | Rachel Warnock                         |
 | 16:30         | Wrap-up: plenary discussion, collecting feedback and adding notes                           |                                         |
-
-| **Friday**    |                                                                                                                                                                                                                                                      | All organisers                          |
+| **Friday**    |                                                                                                                                                                                                                                                     | All organisers                          |
 | 9:15          | Breakout group activity:*Digital infrastructure for tree inference from fossil data*       |                                         |
-
-| 10:30         | Coffee break                                                                                                                                                                                                                                         |                                         |
+| 10:30         | Coffee break                                                                                                                                                                                                                                     |                                         |
 | 11:00         | Breakout group coding and writing activity                                                                                                                                                                                                           |                                         |
 | 11:30         | Plenary summary of the analyses: challenges and results thus far                                                                                                                                                                                     |                                         |
 | 12:00         | Lunch break                                                                                                                                                                                                                                          |                                         |
