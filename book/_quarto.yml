@@ -26,6 +26,12 @@ book:
 
 bibliography: references.bib
 
+# Cache chapter outputs in book/_freeze/ so a full-project render does not
+# require both Julia and R to be installed. Only edited chapters re-execute.
+# Commit _freeze/ along with any re-rendered chapter.
+execute:
+  freeze: auto
+
 format:
   html:
     theme: cosmo
