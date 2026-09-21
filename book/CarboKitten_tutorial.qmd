@@ -12,11 +12,11 @@ In this tutorial we build a small three-dimensional carbonate platform with [Car
 
 ## 1. Set up your Julia environment
 
-CarboKitten requires Julia 1.10 or later (installable via [juliaup](https://github.com/JuliaLang/juliaup)). Create a project and add the packages we need: `CarboKitten` itself, `Unitful` for physical units, and `CairoMakie` for plotting (CarboKitten's visualisation functions are a package extension that only activates once a Makie backend is loaded). If you have cloned this repository onto your computer, you have the `Manifest.toml` file, which contains information on Julia packages that are needed to run the code below. In order to install packages listed in there, run the commands below in your Julia interpreter:
+CarboKitten requires Julia 1.12 or later (installable via [juliaup](https://github.com/JuliaLang/juliaup)). It is recommended to always run with the latest version of Julia (currently 1.13.0). Create a project and add the packages we need: `CarboKitten` itself, `Unitful` for physical units, and `CairoMakie` for plotting (CarboKitten's visualisation functions are a package extension that only activates once a Makie backend is loaded). If you have cloned this repository (i.e. [MindTheGap-ERC/Lorentz-Workshop](https://github.com/MindTheGap-ERC/Lorentz-Workshop/)) onto your computer, you have the `Manifest.toml` file, which contains information on Julia packages that are needed to run the code below. In order to install packages listed in there, run the commands below in your Julia interpreter:
 
 ``` julia
 julia> ]                    # enter Julia's package mode
-(@v1.11) pkg> activate .
+(@v1.13) pkg> activate .
 (carbokitten-tutorial) pkg> instantiate
 ```
 
@@ -26,7 +26,6 @@ Everything below is meant to be run as a sequence of Julia cells in this noteboo
 #| label: packages
 using Unitful
 using CarboKitten
-using CarboKitten.Production: BenthicProduction
 using CairoMakie
 ```
 
