@@ -2,17 +2,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>3&nbsp; Simulating the stratigraphic record – Bridging Stratigraphic Palaeobiology and Phylogenetics</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -69,15 +75,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="./stratigraphic_paleobiology.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-0dd2bd5de344125cf763a379ddc3eb04.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-631496449bf32ff9b0bb69a6bfd9195d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -110,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -163,9 +168,7 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="./index.html" class="sidebar-logo-link">
-      </a>
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Bridging Stratigraphic Palaeobiology and Phylogenetics</a> 
     </div>
@@ -248,8 +251,21 @@ window.Quarto = {
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Day 3: Tree inference</span></span>
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Day 3: Tree inference</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./day3/day3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">day3</span></span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">
@@ -262,7 +278,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
     </ul>
@@ -450,265 +466,24 @@ window.Quarto = {
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkpath</span>(<span class="fu">dirname</span>(FILENAME))</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="bu">Downloads</span>.<span class="fu">download</span>(</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://zenodo.org/records/22083206/files/carbo-platform.h5?download=1"</span>,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://zenodo.org/records/22893028/files/carbo-platform.h5?download=1"</span>,</span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    FILENAME)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The chunk below is the code that produced that file. It is shown as the provenance of the dataset and is deliberately <strong>not</strong> executed here; run it yourself only if you want to change the model set-up above and generate your own output:</p>
-<div id="cell-run-model" class="cell" data-execution_count="1">
+<div id="run-model" class="cell" data-execution_count="0">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkpath</span>(<span class="st">"data/output"</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">run_model</span>(Model{ALCAP}, input, FILENAME)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-cyan-fg ansi-bold">[ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>output: setting attribute tag to untagged run
-<span class="ansi-cyan-fg ansi-bold">[ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>output: setting dataset t
-<span class="ansi-cyan-fg ansi-bold">[ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>output: setting attribute t0 to 0.0
-<span class="ansi-cyan-fg ansi-bold">[ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>output: setting attribute delta_t to 0.0002
-<span class="ansi-cyan-fg ansi-bold">[ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>output: setting attribute time_steps to 5000
-<span class="ansi-cyan-fg ansi-bold">[ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>output: setting dataset x
-<span class="ansi-cyan-fg ansi-bold">[ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>output: setting dataset y
-<span class="ansi-cyan-fg ansi-bold">[ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>output: setting attribute grid_size_x to 100
-<span class="ansi-cyan-fg ansi-bold">[ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>output: setting attribute grid_size_y to 50
-<span class="ansi-cyan-fg ansi-bold">[ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>output: setting attribute phys_scale to 150.0
-<span class="ansi-cyan-fg ansi-bold">[ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>output: setting attribute n_facies to 3
-<span class="ansi-cyan-fg ansi-bold">[ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>output: setting dataset insolation
-<span class="ansi-cyan-fg ansi-bold">[ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>output: setting attribute facies1/type to benthic
-<span class="ansi-cyan-fg ansi-bold">[ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>output: setting attribute facies1/maximum_growth_rate to 500.0
-<span class="ansi-cyan-fg ansi-bold">[ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>output: setting attribute facies1/extinction_coefficient to 0.8
-<span class="ansi-cyan-fg ansi-bold">[ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>output: setting attribute facies1/saturation_intensity to 60.0
-<span class="ansi-cyan-fg ansi-bold">[ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>output: setting attribute facies2/type to benthic
-<span class="ansi-cyan-fg ansi-bold">[ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>output: setting attribute facies2/maximum_growth_rate to 400.0
-<span class="ansi-cyan-fg ansi-bold">[ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>output: setting attribute facies2/extinction_coefficient to 0.1
-<span class="ansi-cyan-fg ansi-bold">[ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>output: setting attribute facies2/saturation_intensity to 60.0
-<span class="ansi-cyan-fg ansi-bold">[ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>output: setting attribute facies3/type to benthic
-<span class="ansi-cyan-fg ansi-bold">[ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>output: setting attribute facies3/maximum_growth_rate to 100.0
-<span class="ansi-cyan-fg ansi-bold">[ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>output: setting attribute facies3/extinction_coefficient to 0.005
-<span class="ansi-cyan-fg ansi-bold">[ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>output: setting attribute facies3/saturation_intensity to 60.0
-<span class="ansi-cyan-fg ansi-bold">[ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>output: setting dataset initial_topography
-<span class="ansi-cyan-fg ansi-bold">[ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>output: setting dataset sea_level
-<span class="ansi-cyan-fg ansi-bold">[ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>output: setting attribute subsidence_rate to 38.0
-<span class="ansi-cyan-fg ansi-bold">[ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>output: setting attribute intertidal_zone to 0.0
-<span class="ansi-cyan-fg ansi-bold">[ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>output: setting attribute disintegration_rate to 80.0
-<span class="ansi-cyan-fg ansi-bold">[ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>output: setting attribute lithification_time to 0.0001
-<span class="ansi-cyan-fg ansi-bold">[ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>output: setting dataset facies1/initial_sediment
-<span class="ansi-cyan-fg ansi-bold">[ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>output: setting dataset facies2/initial_sediment
-<span class="ansi-cyan-fg ansi-bold">[ </span><span class="ansi-cyan-fg ansi-bold">Info: </span>output: setting dataset facies3/initial_sediment
-<span class="ansi-green-fg">Progress:   0%|                                         |  ETA: N/A</span>
-<span class="ansi-green-fg">Progress:   1%|▎                                        |  ETA: 0:13:10</span>
-<span class="ansi-green-fg">Progress:   1%|▍                                        |  ETA: 0:07:13</span>
-<span class="ansi-green-fg">Progress:   2%|▋                                        |  ETA: 0:05:07</span>
-<span class="ansi-green-fg">Progress:   2%|▉                                        |  ETA: 0:04:09</span>
-<span class="ansi-green-fg">Progress:   3%|█                                        |  ETA: 0:03:35</span>
-<span class="ansi-green-fg">Progress:   3%|█▎                                       |  ETA: 0:03:18</span>
-<span class="ansi-green-fg">Progress:   4%|█▌                                       |  ETA: 0:03:05</span>
-<span class="ansi-green-fg">Progress:   4%|█▋                                       |  ETA: 0:02:54</span>
-<span class="ansi-green-fg">Progress:   5%|█▉                                       |  ETA: 0:02:42</span>
-<span class="ansi-green-fg">Progress:   5%|██▏                                      |  ETA: 0:02:34</span>
-<span class="ansi-green-fg">Progress:   6%|██▎                                      |  ETA: 0:02:27</span>
-<span class="ansi-green-fg">Progress:   6%|██▌                                      |  ETA: 0:02:21</span>
-<span class="ansi-green-fg">Progress:   7%|██▊                                      |  ETA: 0:02:15</span>
-<span class="ansi-green-fg">Progress:   7%|███                                      |  ETA: 0:02:10</span>
-<span class="ansi-green-fg">Progress:   8%|███▏                                     |  ETA: 0:02:06</span>
-<span class="ansi-green-fg">Progress:   8%|███▍                                     |  ETA: 0:02:01</span>
-<span class="ansi-green-fg">Progress:   9%|███▋                                     |  ETA: 0:01:57</span>
-<span class="ansi-green-fg">Progress:   9%|███▊                                     |  ETA: 0:01:53</span>
-<span class="ansi-green-fg">Progress:  10%|████                                     |  ETA: 0:01:50</span>
-<span class="ansi-green-fg">Progress:  10%|████▎                                    |  ETA: 0:01:48</span>
-<span class="ansi-green-fg">Progress:  11%|████▍                                    |  ETA: 0:01:45</span>
-<span class="ansi-green-fg">Progress:  11%|████▋                                    |  ETA: 0:01:43</span>
-<span class="ansi-green-fg">Progress:  12%|████▉                                    |  ETA: 0:01:41</span>
-<span class="ansi-green-fg">Progress:  12%|█████                                    |  ETA: 0:01:39</span>
-<span class="ansi-green-fg">Progress:  13%|█████▎                                   |  ETA: 0:01:37</span>
-<span class="ansi-green-fg">Progress:  13%|█████▌                                   |  ETA: 0:01:35</span>
-<span class="ansi-green-fg">Progress:  14%|█████▋                                   |  ETA: 0:01:34</span>
-<span class="ansi-green-fg">Progress:  14%|█████▉                                   |  ETA: 0:01:32</span>
-<span class="ansi-green-fg">Progress:  15%|██████▏                                  |  ETA: 0:01:30</span>
-<span class="ansi-green-fg">Progress:  15%|██████▎                                  |  ETA: 0:01:29</span>
-<span class="ansi-green-fg">Progress:  16%|██████▌                                  |  ETA: 0:01:27</span>
-<span class="ansi-green-fg">Progress:  16%|██████▊                                  |  ETA: 0:01:26</span>
-<span class="ansi-green-fg">Progress:  17%|██████▉                                  |  ETA: 0:01:25</span>
-<span class="ansi-green-fg">Progress:  17%|███████▏                                 |  ETA: 0:01:24</span>
-<span class="ansi-green-fg">Progress:  18%|███████▍                                 |  ETA: 0:01:22</span>
-<span class="ansi-green-fg">Progress:  18%|███████▌                                 |  ETA: 0:01:21</span>
-<span class="ansi-green-fg">Progress:  19%|███████▊                                 |  ETA: 0:01:20</span>
-<span class="ansi-green-fg">Progress:  19%|████████                                 |  ETA: 0:01:19</span>
-<span class="ansi-green-fg">Progress:  20%|████████▏                                |  ETA: 0:01:18</span>
-<span class="ansi-green-fg">Progress:  20%|████████▍                                |  ETA: 0:01:17</span>
-<span class="ansi-green-fg">Progress:  21%|████████▌                                |  ETA: 0:01:16</span>
-<span class="ansi-green-fg">Progress:  21%|████████▊                                |  ETA: 0:01:15</span>
-<span class="ansi-green-fg">Progress:  22%|█████████                                |  ETA: 0:01:14</span>
-<span class="ansi-green-fg">Progress:  22%|█████████▏                               |  ETA: 0:01:13</span>
-<span class="ansi-green-fg">Progress:  23%|█████████▍                               |  ETA: 0:01:12</span>
-<span class="ansi-green-fg">Progress:  23%|█████████▋                               |  ETA: 0:01:11</span>
-<span class="ansi-green-fg">Progress:  24%|█████████▊                               |  ETA: 0:01:10</span>
-<span class="ansi-green-fg">Progress:  24%|██████████                               |  ETA: 0:01:09</span>
-<span class="ansi-green-fg">Progress:  25%|██████████▎                              |  ETA: 0:01:08</span>
-<span class="ansi-green-fg">Progress:  25%|██████████▍                              |  ETA: 0:01:08</span>
-<span class="ansi-green-fg">Progress:  26%|██████████▋                              |  ETA: 0:01:07</span>
-<span class="ansi-green-fg">Progress:  26%|██████████▉                              |  ETA: 0:01:06</span>
-<span class="ansi-green-fg">Progress:  27%|███████████                              |  ETA: 0:01:06</span>
-<span class="ansi-green-fg">Progress:  27%|███████████▎                             |  ETA: 0:01:05</span>
-<span class="ansi-green-fg">Progress:  28%|███████████▌                             |  ETA: 0:01:04</span>
-<span class="ansi-green-fg">Progress:  28%|███████████▋                             |  ETA: 0:01:04</span>
-<span class="ansi-green-fg">Progress:  29%|███████████▉                             |  ETA: 0:01:03</span>
-<span class="ansi-green-fg">Progress:  29%|████████████                             |  ETA: 0:01:02</span>
-<span class="ansi-green-fg">Progress:  30%|████████████▎                            |  ETA: 0:01:02</span>
-<span class="ansi-green-fg">Progress:  30%|████████████▌                            |  ETA: 0:01:01</span>
-<span class="ansi-green-fg">Progress:  31%|████████████▋                            |  ETA: 0:01:00</span>
-<span class="ansi-green-fg">Progress:  31%|████████████▉                            |  ETA: 0:01:00</span>
-<span class="ansi-green-fg">Progress:  32%|█████████████▏                           |  ETA: 0:00:59</span>
-<span class="ansi-green-fg">Progress:  32%|█████████████▎                           |  ETA: 0:00:58</span>
-<span class="ansi-green-fg">Progress:  33%|█████████████▌                           |  ETA: 0:00:58</span>
-<span class="ansi-green-fg">Progress:  33%|█████████████▊                           |  ETA: 0:00:57</span>
-<span class="ansi-green-fg">Progress:  34%|█████████████▉                           |  ETA: 0:00:57</span>
-<span class="ansi-green-fg">Progress:  34%|██████████████▏                          |  ETA: 0:00:56</span>
-<span class="ansi-green-fg">Progress:  35%|██████████████▍                          |  ETA: 0:00:56</span>
-<span class="ansi-green-fg">Progress:  35%|██████████████▌                          |  ETA: 0:00:55</span>
-<span class="ansi-green-fg">Progress:  36%|██████████████▊                          |  ETA: 0:00:54</span>
-<span class="ansi-green-fg">Progress:  36%|███████████████                          |  ETA: 0:00:54</span>
-<span class="ansi-green-fg">Progress:  37%|███████████████▏                         |  ETA: 0:00:53</span>
-<span class="ansi-green-fg">Progress:  37%|███████████████▍                         |  ETA: 0:00:52</span>
-<span class="ansi-green-fg">Progress:  38%|███████████████▋                         |  ETA: 0:00:52</span>
-<span class="ansi-green-fg">Progress:  38%|███████████████▊                         |  ETA: 0:00:51</span>
-<span class="ansi-green-fg">Progress:  39%|████████████████                         |  ETA: 0:00:51</span>
-<span class="ansi-green-fg">Progress:  40%|████████████████▎                        |  ETA: 0:00:50</span>
-<span class="ansi-green-fg">Progress:  40%|████████████████▍                        |  ETA: 0:00:50</span>
-<span class="ansi-green-fg">Progress:  40%|████████████████▋                        |  ETA: 0:00:49</span>
-<span class="ansi-green-fg">Progress:  41%|████████████████▉                        |  ETA: 0:00:49</span>
-<span class="ansi-green-fg">Progress:  42%|█████████████████                        |  ETA: 0:00:49</span>
-<span class="ansi-green-fg">Progress:  42%|█████████████████▎                       |  ETA: 0:00:48</span>
-<span class="ansi-green-fg">Progress:  43%|█████████████████▍                       |  ETA: 0:00:48</span>
-<span class="ansi-green-fg">Progress:  43%|█████████████████▋                       |  ETA: 0:00:47</span>
-<span class="ansi-green-fg">Progress:  44%|█████████████████▉                       |  ETA: 0:00:47</span>
-<span class="ansi-green-fg">Progress:  44%|██████████████████                       |  ETA: 0:00:46</span>
-<span class="ansi-green-fg">Progress:  45%|██████████████████▎                      |  ETA: 0:00:46</span>
-<span class="ansi-green-fg">Progress:  45%|██████████████████▌                      |  ETA: 0:00:45</span>
-<span class="ansi-green-fg">Progress:  46%|██████████████████▋                      |  ETA: 0:00:45</span>
-<span class="ansi-green-fg">Progress:  46%|██████████████████▉                      |  ETA: 0:00:44</span>
-<span class="ansi-green-fg">Progress:  47%|███████████████████▏                     |  ETA: 0:00:44</span>
-<span class="ansi-green-fg">Progress:  47%|███████████████████▎                     |  ETA: 0:00:43</span>
-<span class="ansi-green-fg">Progress:  48%|███████████████████▌                     |  ETA: 0:00:43</span>
-<span class="ansi-green-fg">Progress:  48%|███████████████████▊                     |  ETA: 0:00:42</span>
-<span class="ansi-green-fg">Progress:  49%|███████████████████▉                     |  ETA: 0:00:42</span>
-<span class="ansi-green-fg">Progress:  49%|████████████████████▏                    |  ETA: 0:00:41</span>
-<span class="ansi-green-fg">Progress:  50%|████████████████████▍                    |  ETA: 0:00:41</span>
-<span class="ansi-green-fg">Progress:  50%|████████████████████▌                    |  ETA: 0:00:40</span>
-<span class="ansi-green-fg">Progress:  51%|████████████████████▊                    |  ETA: 0:00:40</span>
-<span class="ansi-green-fg">Progress:  51%|█████████████████████                    |  ETA: 0:00:39</span>
-<span class="ansi-green-fg">Progress:  52%|█████████████████████▏                   |  ETA: 0:00:39</span>
-<span class="ansi-green-fg">Progress:  52%|█████████████████████▍                   |  ETA: 0:00:39</span>
-<span class="ansi-green-fg">Progress:  53%|█████████████████████▌                   |  ETA: 0:00:38</span>
-<span class="ansi-green-fg">Progress:  53%|█████████████████████▊                   |  ETA: 0:00:38</span>
-<span class="ansi-green-fg">Progress:  54%|██████████████████████                   |  ETA: 0:00:37</span>
-<span class="ansi-green-fg">Progress:  54%|██████████████████████▏                  |  ETA: 0:00:37</span>
-<span class="ansi-green-fg">Progress:  55%|██████████████████████▍                  |  ETA: 0:00:36</span>
-<span class="ansi-green-fg">Progress:  55%|██████████████████████▋                  |  ETA: 0:00:36</span>
-<span class="ansi-green-fg">Progress:  56%|██████████████████████▊                  |  ETA: 0:00:35</span>
-<span class="ansi-green-fg">Progress:  56%|███████████████████████                  |  ETA: 0:00:35</span>
-<span class="ansi-green-fg">Progress:  57%|███████████████████████▎                 |  ETA: 0:00:35</span>
-<span class="ansi-green-fg">Progress:  57%|███████████████████████▍                 |  ETA: 0:00:34</span>
-<span class="ansi-green-fg">Progress:  58%|███████████████████████▋                 |  ETA: 0:00:34</span>
-<span class="ansi-green-fg">Progress:  58%|███████████████████████▉                 |  ETA: 0:00:33</span>
-<span class="ansi-green-fg">Progress:  59%|████████████████████████                 |  ETA: 0:00:33</span>
-<span class="ansi-green-fg">Progress:  59%|████████████████████████▎                |  ETA: 0:00:32</span>
-<span class="ansi-green-fg">Progress:  60%|████████████████████████▌                |  ETA: 0:00:32</span>
-<span class="ansi-green-fg">Progress:  60%|████████████████████████▋                |  ETA: 0:00:32</span>
-<span class="ansi-green-fg">Progress:  61%|████████████████████████▉                |  ETA: 0:00:31</span>
-<span class="ansi-green-fg">Progress:  61%|█████████████████████████▏               |  ETA: 0:00:31</span>
-<span class="ansi-green-fg">Progress:  62%|█████████████████████████▎               |  ETA: 0:00:30</span>
-<span class="ansi-green-fg">Progress:  62%|█████████████████████████▌               |  ETA: 0:00:30</span>
-<span class="ansi-green-fg">Progress:  63%|█████████████████████████▊               |  ETA: 0:00:29</span>
-<span class="ansi-green-fg">Progress:  63%|█████████████████████████▉               |  ETA: 0:00:29</span>
-<span class="ansi-green-fg">Progress:  64%|██████████████████████████▏              |  ETA: 0:00:29</span>
-<span class="ansi-green-fg">Progress:  64%|██████████████████████████▍              |  ETA: 0:00:28</span>
-<span class="ansi-green-fg">Progress:  65%|██████████████████████████▌              |  ETA: 0:00:28</span>
-<span class="ansi-green-fg">Progress:  65%|██████████████████████████▊              |  ETA: 0:00:27</span>
-<span class="ansi-green-fg">Progress:  66%|██████████████████████████▉              |  ETA: 0:00:27</span>
-<span class="ansi-green-fg">Progress:  66%|███████████████████████████▏             |  ETA: 0:00:26</span>
-<span class="ansi-green-fg">Progress:  67%|███████████████████████████▍             |  ETA: 0:00:26</span>
-<span class="ansi-green-fg">Progress:  67%|███████████████████████████▌             |  ETA: 0:00:26</span>
-<span class="ansi-green-fg">Progress:  68%|███████████████████████████▊             |  ETA: 0:00:25</span>
-<span class="ansi-green-fg">Progress:  68%|████████████████████████████             |  ETA: 0:00:25</span>
-<span class="ansi-green-fg">Progress:  69%|████████████████████████████▏            |  ETA: 0:00:24</span>
-<span class="ansi-green-fg">Progress:  69%|████████████████████████████▍            |  ETA: 0:00:24</span>
-<span class="ansi-green-fg">Progress:  70%|████████████████████████████▋            |  ETA: 0:00:24</span>
-<span class="ansi-green-fg">Progress:  70%|████████████████████████████▊            |  ETA: 0:00:23</span>
-<span class="ansi-green-fg">Progress:  71%|█████████████████████████████            |  ETA: 0:00:23</span>
-<span class="ansi-green-fg">Progress:  71%|█████████████████████████████▎           |  ETA: 0:00:22</span>
-<span class="ansi-green-fg">Progress:  72%|█████████████████████████████▍           |  ETA: 0:00:22</span>
-<span class="ansi-green-fg">Progress:  72%|█████████████████████████████▋           |  ETA: 0:00:22</span>
-<span class="ansi-green-fg">Progress:  73%|█████████████████████████████▉           |  ETA: 0:00:21</span>
-<span class="ansi-green-fg">Progress:  73%|██████████████████████████████           |  ETA: 0:00:21</span>
-<span class="ansi-green-fg">Progress:  74%|██████████████████████████████▎          |  ETA: 0:00:20</span>
-<span class="ansi-green-fg">Progress:  74%|██████████████████████████████▌          |  ETA: 0:00:20</span>
-<span class="ansi-green-fg">Progress:  75%|██████████████████████████████▋          |  ETA: 0:00:20</span>
-<span class="ansi-green-fg">Progress:  75%|██████████████████████████████▉          |  ETA: 0:00:19</span>
-<span class="ansi-green-fg">Progress:  76%|███████████████████████████████          |  ETA: 0:00:19</span>
-<span class="ansi-green-fg">Progress:  76%|███████████████████████████████▎         |  ETA: 0:00:18</span>
-<span class="ansi-green-fg">Progress:  77%|███████████████████████████████▌         |  ETA: 0:00:18</span>
-<span class="ansi-green-fg">Progress:  77%|███████████████████████████████▋         |  ETA: 0:00:18</span>
-<span class="ansi-green-fg">Progress:  78%|███████████████████████████████▉         |  ETA: 0:00:17</span>
-<span class="ansi-green-fg">Progress:  78%|████████████████████████████████▏        |  ETA: 0:00:17</span>
-<span class="ansi-green-fg">Progress:  79%|████████████████████████████████▎        |  ETA: 0:00:16</span>
-<span class="ansi-green-fg">Progress:  79%|████████████████████████████████▌        |  ETA: 0:00:16</span>
-<span class="ansi-green-fg">Progress:  80%|████████████████████████████████▊        |  ETA: 0:00:16</span>
-<span class="ansi-green-fg">Progress:  80%|████████████████████████████████▉        |  ETA: 0:00:15</span>
-<span class="ansi-green-fg">Progress:  81%|█████████████████████████████████▏       |  ETA: 0:00:15</span>
-<span class="ansi-green-fg">Progress:  81%|█████████████████████████████████▍       |  ETA: 0:00:14</span>
-<span class="ansi-green-fg">Progress:  82%|█████████████████████████████████▌       |  ETA: 0:00:14</span>
-<span class="ansi-green-fg">Progress:  82%|█████████████████████████████████▊       |  ETA: 0:00:14</span>
-<span class="ansi-green-fg">Progress:  83%|██████████████████████████████████       |  ETA: 0:00:13</span>
-<span class="ansi-green-fg">Progress:  83%|██████████████████████████████████▏      |  ETA: 0:00:13</span>
-<span class="ansi-green-fg">Progress:  84%|██████████████████████████████████▍      |  ETA: 0:00:12</span>
-<span class="ansi-green-fg">Progress:  84%|██████████████████████████████████▋      |  ETA: 0:00:12</span>
-<span class="ansi-green-fg">Progress:  85%|██████████████████████████████████▊      |  ETA: 0:00:12</span>
-<span class="ansi-green-fg">Progress:  85%|███████████████████████████████████      |  ETA: 0:00:11</span>
-<span class="ansi-green-fg">Progress:  86%|███████████████████████████████████▎     |  ETA: 0:00:11</span>
-<span class="ansi-green-fg">Progress:  86%|███████████████████████████████████▍     |  ETA: 0:00:10</span>
-<span class="ansi-green-fg">Progress:  87%|███████████████████████████████████▋     |  ETA: 0:00:10</span>
-<span class="ansi-green-fg">Progress:  87%|███████████████████████████████████▉     |  ETA: 0:00:10</span>
-<span class="ansi-green-fg">Progress:  88%|████████████████████████████████████     |  ETA: 0:00:09</span>
-<span class="ansi-green-fg">Progress:  88%|████████████████████████████████████▎    |  ETA: 0:00:09</span>
-<span class="ansi-green-fg">Progress:  89%|████████████████████████████████████▌    |  ETA: 0:00:08</span>
-<span class="ansi-green-fg">Progress:  89%|████████████████████████████████████▋    |  ETA: 0:00:08</span>
-<span class="ansi-green-fg">Progress:  90%|████████████████████████████████████▉    |  ETA: 0:00:08</span>
-<span class="ansi-green-fg">Progress:  90%|█████████████████████████████████████    |  ETA: 0:00:07</span>
-<span class="ansi-green-fg">Progress:  91%|█████████████████████████████████████▎   |  ETA: 0:00:07</span>
-<span class="ansi-green-fg">Progress:  91%|█████████████████████████████████████▌   |  ETA: 0:00:07</span>
-<span class="ansi-green-fg">Progress:  92%|█████████████████████████████████████▋   |  ETA: 0:00:06</span>
-<span class="ansi-green-fg">Progress:  92%|█████████████████████████████████████▉   |  ETA: 0:00:06</span>
-<span class="ansi-green-fg">Progress:  93%|██████████████████████████████████████▏  |  ETA: 0:00:05</span>
-<span class="ansi-green-fg">Progress:  93%|██████████████████████████████████████▎  |  ETA: 0:00:05</span>
-<span class="ansi-green-fg">Progress:  94%|██████████████████████████████████████▌  |  ETA: 0:00:05</span>
-<span class="ansi-green-fg">Progress:  94%|██████████████████████████████████████▊  |  ETA: 0:00:04</span>
-<span class="ansi-green-fg">Progress:  95%|██████████████████████████████████████▉  |  ETA: 0:00:04</span>
-<span class="ansi-green-fg">Progress:  95%|███████████████████████████████████████▏ |  ETA: 0:00:03</span>
-<span class="ansi-green-fg">Progress:  96%|███████████████████████████████████████▍ |  ETA: 0:00:03</span>
-<span class="ansi-green-fg">Progress:  96%|███████████████████████████████████████▌ |  ETA: 0:00:03</span>
-<span class="ansi-green-fg">Progress:  97%|███████████████████████████████████████▊ |  ETA: 0:00:02</span>
-<span class="ansi-green-fg">Progress:  97%|████████████████████████████████████████ |  ETA: 0:00:02</span>
-<span class="ansi-green-fg">Progress:  98%|████████████████████████████████████████▏|  ETA: 0:00:02</span>
-<span class="ansi-green-fg">Progress:  98%|████████████████████████████████████████▍|  ETA: 0:00:01</span>
-<span class="ansi-green-fg">Progress:  99%|████████████████████████████████████████▋|  ETA: 0:00:01</span>
-<span class="ansi-green-fg">Progress:  99%|████████████████████████████████████████▊|  ETA: 0:00:00</span>
-<span class="ansi-green-fg">Progress: 100%|█████████████████████████████████████████|  ETA: 0:00:00</span>
-<span class="ansi-bright-black-fg">Progress: 100%|█████████████████████████████████████████| Time: 0:01:16</span>
-</pre>
-</div>
-</div>
-<div id="run-model" class="cell-output cell-output-display" data-execution_count="1">
-<pre><code>"data/output/carbo-platform.h5"</code></pre>
-</div>
 </div>
 </section>
 <section id="the-stratigraphic-architecture-of-the-platform" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="the-stratigraphic-architecture-of-the-platform"><span class="header-section-number">3.4</span> 4. The stratigraphic architecture of the platform</h2>
 <p>CarboKitten’s <code>sediment_profile</code> plots the <code>:profile</code> slice we saved above, colouring each parcel of sediment by its dominant facies and marking unconformities (subaerial-exposure surfaces) with dashed white lines:</p>
 <div id="cell-fig-profile" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CarboKitten.Export</span>: read_slice</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CarboKitten.Visualization</span>: sediment_profile</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>header, section <span class="op">=</span> <span class="fu">read_slice</span>(FILENAME, <span class="op">:</span>profile)</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sediment_profile</span>(header, section)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CarboKitten.Export</span>: read_slice</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CarboKitten.Visualization</span>: sediment_profile</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>header, section <span class="op">=</span> <span class="fu">read_slice</span>(FILENAME, <span class="op">:</span>profile)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sediment_profile</span>(header, section)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="fig-profile" class="cell-output cell-output-display quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="1">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-profile-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -726,39 +501,39 @@ Figure&nbsp;3.1: Sediment profile along the platform, y = 25. Dashed white lines
 <h2 data-number="3.5" class="anchored" data-anchor-id="four-stratigraphic-columns"><span class="header-section-number">3.5</span> 5. Four stratigraphic columns</h2>
 <p>We now read back each of the four stratigraphic columns we saved earlier, and turn each one into a small “core log”: a vertical bar coloured by whichever facies contributed most sediment at each preserved interval. We use CarboKitten’s own stratigraphic-column algorithm (<code>CarboKitten.Output.Abstract.stratigraphic_column</code>), which corrects for sediment that was deposited and later disintegrated.</p>
 <div id="cell-fig-columns" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CarboKitten.Export</span>: read_column, extract_sac, extract_sc, age_depth_model</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">column_bands</span>(filename, loc)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    header, data <span class="op">=</span> <span class="fu">read_column</span>(filename, loc.key)</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    sac_df <span class="op">=</span> <span class="fu">extract_sac</span>(header, data, loc.key)</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    adm <span class="op">=</span> <span class="fu">age_depth_model</span>(sac_df)[<span class="op">:</span>, <span class="st">"adm_</span><span class="sc">$</span>(loc.key)<span class="st">"</span>] <span class="op">|&gt;</span> <span class="fu">in_units_of</span>(u<span class="st">"m"</span>)</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    sc_df <span class="op">=</span> <span class="fu">extract_sc</span>(header, data, loc.key)</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    facies_cols <span class="op">=</span> [<span class="st">"sc_</span><span class="sc">$</span>(loc.key)<span class="st">_f</span><span class="sc">$</span>(f)<span class="st">"</span> for f <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>header.n_facies]</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    sc <span class="op">=</span> <span class="fu">Matrix</span>(sc_df[<span class="op">:</span>, facies_cols])</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    dominant <span class="op">=</span> <span class="fu">getindex</span>.(<span class="fu">argmax</span>(sc, dims<span class="op">=</span><span class="fl">2</span>)[<span class="op">:</span>, <span class="fl">1</span>], <span class="fl">2</span>)</span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> adm, dominant</span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> Makie.<span class="fu">wong_colors</span>()</span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>fig_logs <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">700</span>, <span class="fl">500</span>))</span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>axs <span class="op">=</span> Axis[]</span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i, loc) <span class="kw">in</span> <span class="fu">enumerate</span>(locations)</span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    adm, dominant <span class="op">=</span> <span class="fu">column_bands</span>(FILENAME, loc)</span>
-<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig_logs[<span class="fl">1</span>, i], title<span class="op">=</span>loc.label, xticksvisible<span class="op">=</span><span class="cn">false</span>, xticklabelsvisible<span class="op">=</span><span class="cn">false</span>)</span>
-<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hspan!</span>(ax, adm[<span class="fl">1</span><span class="op">:</span><span class="kw">end</span><span class="op">-</span><span class="fl">1</span>], adm[<span class="fl">2</span><span class="op">:</span><span class="kw">end</span>]; color<span class="op">=</span>colors[dominant[<span class="fl">1</span><span class="op">:</span><span class="kw">end</span><span class="op">-</span><span class="fl">1</span>]])</span>
-<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">push!</span>(axs, ax)</span>
-<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span>
-<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>axs[<span class="fl">1</span>].ylabel <span class="op">=</span> <span class="st">"stratigraphic height [m]"</span></span>
-<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a><span class="fu">linkyaxes!</span>(axs<span class="op">...</span>)</span>
-<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a><span class="fu">Legend</span>(fig_logs[<span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>],</span>
-<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>    [<span class="fu">PolyElement</span>(color<span class="op">=</span>colors[f]) for f <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>],</span>
-<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"euphotic (shallow, fast)"</span>, <span class="st">"oligophotic (mid depth)"</span>, <span class="st">"aphotic (deep, slow)"</span>],</span>
-<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>    orientation<span class="op">=:</span>horizontal, tellwidth<span class="op">=</span><span class="cn">false</span>)</span>
-<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>fig_logs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CarboKitten.Export</span>: read_column, extract_sac, extract_sc, age_depth_model</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">column_bands</span>(filename, loc)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    header, data <span class="op">=</span> <span class="fu">read_column</span>(filename, loc.key)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    sac_df <span class="op">=</span> <span class="fu">extract_sac</span>(header, data, loc.key)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    adm <span class="op">=</span> <span class="fu">age_depth_model</span>(sac_df)[<span class="op">:</span>, <span class="st">"adm_</span><span class="sc">$</span>(loc.key)<span class="st">"</span>] <span class="op">|&gt;</span> <span class="fu">in_units_of</span>(u<span class="st">"m"</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    sc_df <span class="op">=</span> <span class="fu">extract_sc</span>(header, data, loc.key)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    facies_cols <span class="op">=</span> [<span class="st">"sc_</span><span class="sc">$</span>(loc.key)<span class="st">_f</span><span class="sc">$</span>(f)<span class="st">"</span> for f <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span>header.n_facies]</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    sc <span class="op">=</span> <span class="fu">Matrix</span>(sc_df[<span class="op">:</span>, facies_cols])</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    dominant <span class="op">=</span> <span class="fu">getindex</span>.(<span class="fu">argmax</span>(sc, dims<span class="op">=</span><span class="fl">2</span>)[<span class="op">:</span>, <span class="fl">1</span>], <span class="fl">2</span>)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> adm, dominant</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> Makie.<span class="fu">wong_colors</span>()</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>fig_logs <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">700</span>, <span class="fl">500</span>))</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>axs <span class="op">=</span> Axis[]</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i, loc) <span class="kw">in</span> <span class="fu">enumerate</span>(locations)</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    adm, dominant <span class="op">=</span> <span class="fu">column_bands</span>(FILENAME, loc)</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> <span class="fu">Axis</span>(fig_logs[<span class="fl">1</span>, i], title<span class="op">=</span>loc.label, xticksvisible<span class="op">=</span><span class="cn">false</span>, xticklabelsvisible<span class="op">=</span><span class="cn">false</span>)</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hspan!</span>(ax, adm[<span class="fl">1</span><span class="op">:</span><span class="kw">end</span><span class="op">-</span><span class="fl">1</span>], adm[<span class="fl">2</span><span class="op">:</span><span class="kw">end</span>]; color<span class="op">=</span>colors[dominant[<span class="fl">1</span><span class="op">:</span><span class="kw">end</span><span class="op">-</span><span class="fl">1</span>]])</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">push!</span>(axs, ax)</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>axs[<span class="fl">1</span>].ylabel <span class="op">=</span> <span class="st">"stratigraphic height [m]"</span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="fu">linkyaxes!</span>(axs<span class="op">...</span>)</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="fu">Legend</span>(fig_logs[<span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>],</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>    [<span class="fu">PolyElement</span>(color<span class="op">=</span>colors[f]) for f <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>],</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"euphotic (shallow, fast)"</span>, <span class="st">"oligophotic (mid depth)"</span>, <span class="st">"aphotic (deep, slow)"</span>],</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>    orientation<span class="op">=:</span>horizontal, tellwidth<span class="op">=</span><span class="cn">false</span>)</span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>fig_logs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="fig-columns" class="cell-output cell-output-display quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="1">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-columns-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -775,20 +550,20 @@ Figure&nbsp;3.2: Stratigraphic columns (virtual cores) at four positions across 
 <h2 data-number="3.6" class="anchored" data-anchor-id="age-depth-models-where-did-the-time-go"><span class="header-section-number">3.6</span> 6. Age-depth models: where did the time go?</h2>
 <p>The stratigraphic height each column reaches is cumulative: it only goes up when sediment is actually preserved. Plotting that cumulative height against time — the age-depth model — represents every interval of non-deposition or erosion into a flat, horizontal plateau: time passes, but the column does not grow. Long plateaus are large stratigraphic gaps.</p>
 <div id="cell-fig-adm" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>fig_adm <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">700</span>, <span class="fl">450</span>))</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> <span class="fu">Axis</span>(fig_adm[<span class="fl">1</span>, <span class="fl">1</span>], xlabel<span class="op">=</span><span class="st">"time [Myr]"</span>, ylabel<span class="op">=</span><span class="st">"stratigraphic height [m]"</span>,</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>          title<span class="op">=</span><span class="st">"Age-depth models across the platform"</span>)</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> loc <span class="kw">in</span> locations</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    header, data <span class="op">=</span> <span class="fu">read_column</span>(FILENAME, loc.key)</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> header.axes.t <span class="op">|&gt;</span> <span class="fu">in_units_of</span>(u<span class="st">"Myr"</span>)</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    sac_df <span class="op">=</span> <span class="fu">extract_sac</span>(header, data, loc.key)</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    adm <span class="op">=</span> <span class="fu">age_depth_model</span>(sac_df)[<span class="op">:</span>, <span class="st">"adm_</span><span class="sc">$</span>(loc.key)<span class="st">"</span>] <span class="op">|&gt;</span> <span class="fu">in_units_of</span>(u<span class="st">"m"</span>)</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax, t, adm, label<span class="op">=</span>loc.label)</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="fu">axislegend</span>(ax, position<span class="op">=:</span>rb)</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>fig_adm</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>fig_adm <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">700</span>, <span class="fl">450</span>))</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> <span class="fu">Axis</span>(fig_adm[<span class="fl">1</span>, <span class="fl">1</span>], xlabel<span class="op">=</span><span class="st">"time [Myr]"</span>, ylabel<span class="op">=</span><span class="st">"stratigraphic height [m]"</span>,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>          title<span class="op">=</span><span class="st">"Age-depth models across the platform"</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> loc <span class="kw">in</span> locations</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    header, data <span class="op">=</span> <span class="fu">read_column</span>(FILENAME, loc.key)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> header.axes.t <span class="op">|&gt;</span> <span class="fu">in_units_of</span>(u<span class="st">"Myr"</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    sac_df <span class="op">=</span> <span class="fu">extract_sac</span>(header, data, loc.key)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    adm <span class="op">=</span> <span class="fu">age_depth_model</span>(sac_df)[<span class="op">:</span>, <span class="st">"adm_</span><span class="sc">$</span>(loc.key)<span class="st">"</span>] <span class="op">|&gt;</span> <span class="fu">in_units_of</span>(u<span class="st">"m"</span>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines!</span>(ax, t, adm, label<span class="op">=</span>loc.label)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="fu">axislegend</span>(ax, position<span class="op">=:</span>rb)</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>fig_adm</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="fig-adm" class="cell-output cell-output-display quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="1">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-adm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -806,19 +581,19 @@ Figure&nbsp;3.3: Age-depth models for the four columns. Flat segments are strati
 <h2 data-number="3.7" class="anchored" data-anchor-id="optional-exporting-the-columns-for-further-analysis"><span class="header-section-number">3.7</span> 7. Optional: exporting the columns for further analysis</h2>
 <p>If you want to work with these curves outside Julia (R, Python, a spreadsheet…), CarboKitten can export the sediment-accumulation curve, age-depth model, per-facies stratigraphic column, and water depth for a set of columns straight to CSV, plus a TOML file with the metadata (coordinates, subsidence rate, etc.) of each location:</p>
 <div id="export-csv" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CarboKitten.Export</span>: CSV, data_export</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>cols <span class="op">=</span> <span class="fu">Dict</span>(loc.key <span class="op">=&gt;</span> <span class="fu">read_column</span>(FILENAME, loc.key)[<span class="fl">2</span>] <span class="cf">for</span> loc <span class="kw">in</span> locations)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>header, _ <span class="op">=</span> <span class="fu">read_column</span>(FILENAME, <span class="fu">first</span>(locations).key)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>spec <span class="op">=</span> <span class="fu">CSV</span>(</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">:</span>sediment_accumulation_curve <span class="op">=&gt;</span> <span class="st">"data/output/columns_sac.csv"</span>,</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">:</span>age_depth_model             <span class="op">=&gt;</span> <span class="st">"data/output/columns_adm.csv"</span>,</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">:</span>stratigraphic_column        <span class="op">=&gt;</span> <span class="st">"data/output/columns_sc.csv"</span>,</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">:</span>water_depth                 <span class="op">=&gt;</span> <span class="st">"data/output/columns_wd.csv"</span>,</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">:</span>metadata                    <span class="op">=&gt;</span> <span class="st">"data/output/columns_metadata.toml"</span>)</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="fu">data_export</span>(spec, header, cols)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CarboKitten.Export</span>: CSV, data_export</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>cols <span class="op">=</span> <span class="fu">Dict</span>(loc.key <span class="op">=&gt;</span> <span class="fu">read_column</span>(FILENAME, loc.key)[<span class="fl">2</span>] <span class="cf">for</span> loc <span class="kw">in</span> locations)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>header, _ <span class="op">=</span> <span class="fu">read_column</span>(FILENAME, <span class="fu">first</span>(locations).key)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>spec <span class="op">=</span> <span class="fu">CSV</span>(</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">:</span>sediment_accumulation_curve <span class="op">=&gt;</span> <span class="st">"data/output/columns_sac.csv"</span>,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">:</span>age_depth_model             <span class="op">=&gt;</span> <span class="st">"data/output/columns_adm.csv"</span>,</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">:</span>stratigraphic_column        <span class="op">=&gt;</span> <span class="st">"data/output/columns_sc.csv"</span>,</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">:</span>water_depth                 <span class="op">=&gt;</span> <span class="st">"data/output/columns_wd.csv"</span>,</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">:</span>metadata                    <span class="op">=&gt;</span> <span class="st">"data/output/columns_metadata.toml"</span>)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="fu">data_export</span>(spec, header, cols)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="wrap-up" class="level2" data-number="3.8">
