@@ -16,10 +16,10 @@ We recommend installing the following software before the workshop:
 
 - [Git](https://git-scm.com/install/) (for windows users we recommend installing [Git BASH](https://gitforwindows.org/))
 - [Julia](https://julialang.org/downloads/) (version >= 1.10)
-- [R](https://www.r-project.org) 
+- [R](https://www.r-project.org) (version >=4.6)
 - [RStudio](https://posit.co/downloads)
-- [BEAST2](https://www.beast2.org)
-- [RevBayes](https://revbayes.github.io/download)
+- [BEAST2](https://www.beast2.org) (version >= 2.7)
+- [RevBayes](https://revbayes.github.io/download) (version >=1.4.1) 
 - [Tracer](https://github.com/beast-dev/tracer/releases)
 - [FigTree](https://github.com/rambaut/figtree/releases)
 
@@ -183,6 +183,22 @@ The code used here requires Julia >= 1.10. Install the Julia packages required f
 
 ```bash
 julia --project=. -e 'using Pkg; Pkg.instantiate()'
+```
+
+### R packages
+
+```R
+# devtools allows you to download the latest version of a package from github
+install.packages("devtools")
+
+# TreeSim - used for simulating trees
+install.packages("TreeSim")
+
+# MorphSim - used for simulating discrete morphology
+devtools::install_github("https://github.com/fossilsim/morphsim")
+
+# FossilSim - used for simulating fossils
+devtools::install_github("https://github.com/fossilsim/fossilsim")
 ```
 
 ## Troubleshooting
