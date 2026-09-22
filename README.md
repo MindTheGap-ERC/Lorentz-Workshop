@@ -2,7 +2,7 @@
 
 ## Lorentz Center workshop 28 September - 2 October 2026
 
-### Scientific organizers:
+### Scientific organizers
 
 1. Emilia Jarochowska, Utrecht University and Münster University
 2. Johan Hidding, Netherlands eScience Center
@@ -10,7 +10,22 @@
 4. Rachel Warnock, Friedrich-Alexander-Universität Erlangen-Nürnberg
 5. Niklas Hohmann, Utrecht University
 
-### Preliminary program
+### Software 
+
+We recommend installing the following software before the workshop:
+
+- [Git](https://git-scm.com/install/) (for windows users we recommend installing [Git BASH](https://gitforwindows.org/))
+- [Julia](https://julialang.org/downloads/) (version >= 1.10)
+- [R](https://www.r-project.org) 
+- [RStudio](https://posit.co/downloads)
+- [BEAST2](https://www.beast2.org)
+- [RevBayes](https://revbayes.github.io/download)
+- [Tracer](https://github.com/beast-dev/tracer/releases)
+- [FigTree](https://github.com/rambaut/figtree/releases)
+
+Program specific packages can be installed during the workshop.
+
+### Program
 
 
 | Time          | Activity                                                                                                                                                                                                                                             | Coordinator                             |
@@ -164,7 +179,7 @@ If you are used to R Markdown, you will hardly notice any differences:
 
 ### Julia 
 
-The code used here requires Julia >= 1.10. Install the Julia packages once, from the repository root:
+The code used here requires Julia >= 1.10. Install the Julia packages required for the practical once, from the repository root:
 
 ```bash
 julia --project=. -e 'using Pkg; Pkg.instantiate()'
