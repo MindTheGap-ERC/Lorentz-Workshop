@@ -2,7 +2,7 @@
 
 ## Lorentz Center workshop 28 September - 2 October 2026
 
-### Scientific organizers:
+### Scientific organizers
 
 1.  Emilia Jarochowska, Utrecht University and Münster University
 2.  Johan Hidding, Netherlands eScience Center
@@ -10,60 +10,74 @@
 4.  Rachel Warnock, Friedrich-Alexander-Universität Erlangen-Nürnberg
 5.  Niklas Hohmann, Utrecht University
 
-### Preliminary program
+### Software 
 
-| Time | Activity | Coordinator |
-|:----------|:-------------------------------------------------|-----------|
-| **Monday** |  | Johannes Hidding and Emilia Jarochowska |
-| 10:00 | Lorentz Center welcome and opening |  |
-| 10:15 | Talk *Principles of Stratigraphic Palaeobiology* | Mark Patzkowsky |
-| 11:00 | Ice-breaker group coding activity: *Make your own geological record* | Johannes Hidding and Emilia Jarochowska |
-| 12:00 | Lunch |  |
-| 13:15 | Ice-breaker group coding activity: *Make your own geological record* | Johannes Hidding and Emilia Jarochowska |
-| 14:00 | Talk *Age-depth models* | Niklas Hohmann |
-| 14:45 | Coffee break |  |
-| 15:15 | Diving deep group coding activity: *Extracting information for phylogenies from strata* | Emilia Jarochowska and Johannes Hidding |
-| 16:30 | Wrap-up: plenary discussion, collecting feedback and adding notes |  |
-| 17:00 | Welcome reception |  |
-| **Tuesday** |  | Laura Mulvey |
-| 9:00 | Talk: *Modelling morphological evolution* <br />An overview of the conceptual foundations of morphological evolution, including trait coding, evolutionary models, their application in phylogenetic inference, and the limitations of the data. | April Wright |
-| 10:30 | Coffee break |  |
-| 11:00 | Group coding practical: *Incorporating morphological data into phylogenetic analysis* | Laura Mulvey |
-| 12:00 | Lunch break |  |
-| 13:30 | Talk: *Extensions to Common Morphological Models* | Sergei Tarasov |
-| 15:00 | Coffee break |  |
-| 15:30 | Group coding practical: *Incorporating morphological data into phylogenetic analysis* | Laura Mulvey |
-| 16:30 | Wrap-up: collecting feedback and adding notes |  |
-| **Wednesday** |  | Niklas Hohmann and Rachel Warnock |
-| 9:00 | Talk |  |
-| 9:45 | Talk |  |
-| 10:30 | Coffee break |  |
-| 11:00 | Group coding practical: *A simulation-based approach to integrating stratigraphic paleobiology and phylogenetics* | Rachel Warnock and Niklas Hohmann |
-| 12:00 | Lunch break |  |
-| 13:30 | Lecture*Extensions to the FBD processes and challenges* | Rachel Warnock |
-| 14:15 | Group coding practical: *A simulation-based approach to integrating stratigraphic paleobiology and phylogenetics* | Rachel Warnock and Niklas Hohmann |
-| 14:45 | Coffee break |  |
-| 15:15 | Breakout group activity:*The stratigraphic record as a source of information* | Niklas Hohmann and Rachel Warnock |
-| 16:30 | Wrap-up: plenary discussion, collecting feedback and adding notes |  |
-| 18:30 | Workshop dinner |  |
-| **Thursday** |  | Rachel Warnock and Niklas Hohmann |
-| 09:00 | Breakout group activity:*Reproducibility in phylogenetics* | Rachel Warnock |
-| 10:30 | Coffee break |  |
-| 11:00 | Breakout group activity:*Debugging reports* | Rachel Warnock |
-| 12:00 | Lunch break |  |
-| 13:30 | Talk *Community led phylogenetic software development* | Ugne Stolz |
-| 14:15 | Round table discussion (part 1) | Rachel Warnock |
-| 14:45 | Coffee break |  |
-| 15:15 | Talk *Architecture and limitations of common frameworks used in phylogenetic software development* | Joëlle Barido-Sottani |
-| 16:00 | Round table discussion (part 2) | Rachel Warnock |
-| **Friday** |  | All organisers |
-| 9:15 | Breakout group activity:*Digital infrastructure for tree inference from fossil data* |  |
-| 10:30 | Coffee break |  |
-| 11:00 | Breakout group coding and writing activity |  |
-| 11:30 | Plenary summary of the analyses: challenges and results thus far |  |
-| 12:00 | Lunch break |  |
-| 13:30 | Breakout group coding and writing activity |  |
-| 14:40 | Plenary discussion and conclusions, planning next steps |  |
+We recommend installing the following software before the workshop:
+
+- [Git](https://git-scm.com/install/) (for windows users we recommend installing [Git BASH](https://gitforwindows.org/))
+- [Julia](https://julialang.org/downloads/) (version >= 1.10)
+- [R](https://www.r-project.org) (version >=4.6)
+- [RStudio](https://posit.co/downloads)
+- [BEAST2](https://www.beast2.org) (version >= 2.7)
+- [RevBayes](https://revbayes.github.io/download) (version >=1.4.1) 
+- [Tracer](https://github.com/beast-dev/tracer/releases)
+- [FigTree](https://github.com/rambaut/figtree/releases)
+
+Program specific packages can be installed during the workshop.
+
+### Program
+
+| Time          | Activity                                                                                                                                                                                                                                             | Coordinator                             |
+| :-------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| **Monday**    |                                                                                                                                                                                                                                                      | Johannes Hidding and Emilia Jarochowska |
+| 10:00         | Lorentz Center welcome and opening                                                                                                                                                                                                                   |                                         |
+| 10:15         | Talk *Principles of Stratigraphic Palaeobiology*                                                                                                                                                                                                | Mark Patzkowsky                         |
+| 11:00         | Ice-breaker group coding activity: *Make your own geological record*                                                                                                                                                                                  | Johannes Hidding and Emilia Jarochowska |
+| 12:00         | Lunch                                                                                                                                                                                                                                                |                                         |
+| 13:15         | Ice-breaker group coding activity: *Make your own geological record*                                                                                                                                                                                  | Johannes Hidding and Emilia Jarochowska |
+| 14:00         | Talk *Age-depth models*                                                                                                                                                                                                                             | Niklas Hohmann                                     |
+| 14:45         | Coffee break                                                                                                                                                                                                                                         |                                         |
+| 15:15         | Diving deep group coding activity: *Extracting information for phylogenies from strata*                                                                                                                                                               | Emilia Jarochowska and Johannes Hidding |
+| 16:30         | Wrap-up: plenary discussion, collecting feedback and adding notes                                                                                                                                        |                                         |
+| 17:00         | Welcome reception                                                                                                                                                                                                                                    |                                         |
+| **Tuesday**   |                                                                                                                                                                                                                                                      | Laura Mulvey                            |
+| 09:00          | Talk: *Modelling morphological evolution* <br />An overview of the conceptual foundations of morphological evolution, including trait coding, evolutionary models, their application in phylogenetic inference, and the limitations of the data. | April Wright                            |
+| 10:30         | Coffee break                                                                                                                                                                                                                                         |                                         |
+| 11:00         | Group coding practical: *Incorporating morphological data into phylogenetic analysis*                                                                                                                                                                 | Laura Mulvey                            |
+| 12:00         | Lunch break                                                                                                                                                                                                                                          |                                         |
+| 13:30         | Talk: *Extensions to Common Morphological Models*                                                                                                                                                                                                | Sergei Tarasov                          |
+| 15:00         | Coffee break                                                                                                                                                                                                                                         |                                         |
+| 15:30         | Group coding practical: *Incorporating morphological data into phylogenetic analysis*                                                                                                                                                                                       | Laura Mulvey                            |
+| 16:30         | Wrap-up: collecting feedback and adding notes                                                                                                                                                                                                        |                                         |
+| **Wednesday** |                                                                                                                                                                                                                                                      | Niklas Hohmann and Rachel Warnock       |
+| 09:00         | Group coding practical: *Simulating trees under the FBD model*                                                  | Niklas Hohmann, Rachel Warnock         |                                         |
+| 10:30         | Coffee break                                                                                                                                                                                                                                         |                                         |
+| 11:00         | Group coding practical: *Simulating stratigraphy in a phylogenetic framework*                                                                                                                                     | Niklas Hohmann       |
+| 12:00         | Lunch break                                                                                                                                                                                                                                          |                                         |
+| 13:20         | Group photo (weather dependent)                                                                                                                                                                                                                                          |                                         |
+| 13:30         | Group coding practical:  *Bringing everything together (simulation)*                                                                                                                                                                                              | Niklas Hohmann, Rachel Warnock                          |
+| 14:45         | Coffee break                                                                                                                                                                                                                                         |                                         |
+| 15:15         | Group coding practical:  *Bringing everything together (inference)*                                                                                                                                                                             | Niklas Hohmann and Rachel Warnock       |
+| 16:30         | Wrap-up: plenary discussion, collecting feedback and adding notes                                                                                                                                                                                    |                                         |
+| 18:30         | Workshop dinner                                                                                                                                                                                                                                      |                                         |
+| **Thursday**  |                                                                                                                                                                                                                                                      | Rachel Warnock and Niklas Hohmann       |
+| 09:00         | Breakout group activity:*Reproducibility in phylogenetics*                                                  | Rachel Warnock         |
+| 10:30         | Coffee break                                                                                |                                        |
+| 11:00         | Breakout group activity:*Debugging reports*                                                  | Rachel Warnock                         |
+| 12:00         | Lunch break                                                                                                                           | 
+| 13:30         | Talk *Community led phylogenetic software development*                                      | Ugne Stolz                            |
+| 14:15         | Round table discussion (part 1)                                      | Rachel Warnock                            |
+| 14:45         | Coffee break                                                                                                                          |
+| 15:15         | Talk *Architecture and limitations of common frameworks used in phylogenetic software development* | Joëlle Barido-Sottani           |
+| 16:00         | Round table discussion (part 2)                                                                      | Rachel Warnock                        |
+| **Friday**    |                                                                                                                                                                                                                                                     | All organisers                          |
+| 09:00          | Breakout group activity:*Digital infrastructure for tree inference from fossil data*       |                                         |
+| 10:30         | Coffee break                                                                                                                                                                                                                                     |                                         |
+| 11:00         | Breakout group activity: coding, writing, or brainstorming|                                         |
+| 11:30         | Plenary summary of the analyses: challenges and results thus far                                                                                                                                                                                     |                                         |
+| 12:00         | Lunch break                                                                                                                                                                                                                                          |                                         |
+| 13:30         | Breakout group activity: coding, writing, or brainstorming                                                                                                                                                                                                           |                                         |
+| 14:40         | Plenary discussion and conclusions, planning next steps                                                                                                                                                                                              |                                         |
 
 ## Workshop book - instructions for contributors
 
@@ -163,10 +177,25 @@ If you are used to R Markdown, you will hardly notice any differences:
 
 ### Julia
 
-The code used here requires Julia \>= 1.10. Install the Julia packages once, from the book directory:
 
 ``` bash
 julia --project=. -e 'using Pkg; Pkg.instantiate()'
+```
+
+### R packages
+
+```R
+# devtools allows you to download the latest version of a package from github
+install.packages("devtools")
+
+# TreeSim - used for simulating trees
+install.packages("TreeSim")
+
+# MorphSim - used for simulating discrete morphology
+devtools::install_github("https://github.com/fossilsim/morphsim")
+
+# FossilSim - used for simulating fossils
+devtools::install_github("https://github.com/fossilsim/fossilsim")
 ```
 
 ## Troubleshooting
