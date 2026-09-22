@@ -20,6 +20,8 @@ book:
         - day2/complex_models.qmd
         - day2/Model-RevBayes.qmd
     - part: "Day 3: Tree inference"
+      chapters:
+        - day3/day3.qmd
     - part: "Day 4: Analysis and software"
     - part: "Day 5: Results"
     - references.qmd
