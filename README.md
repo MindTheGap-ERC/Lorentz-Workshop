@@ -111,14 +111,14 @@ By default, all code chunks are run anew with each render. This is not handy for
 
 #### Example of handling big files
 
-The CarboKitten chapter contains code that produces a 48 MB HDF5 (binary) file that is too large for GitHub and takes a few minutes to run, so it is archived on Zenodo (<https://doi.org/10.5281/zenodo.22083206>) and `book/data/output/` is git-ignored. Both the model run and the download are shown in the chapter but the code chunks have the parameter `eval: false`
+The CarboKitten chapter contains code that produces a 48 MB HDF5 (binary) file that is too large for GitHub and takes a few minutes to run, so it is archived on Zenodo ([https://doi.org/10.5281/zenodo.](https://doi.org/10.5281/zenodo.22083206){.uri}[22893028](https://doi.org/10.5281/zenodo.22893028)) and `book/data/output/` is git-ignored. Both the model run and the download are shown in the chapter but the code chunks have the parameter `eval: false`
 
 ::: callout-note
 When you clone the repo, the data will not be downloaded and the code will not run by default. You have to either download it by running the `fetch-data` chunk of `CarboKitten_tutorial.qmd` in a Julia session started in `book/`, or equivalently run:
 
 ``` bash
 cd book
-julia -e 'using Downloads; mkpath("data/output"); Downloads.download("https://zenodo.org/records/22083206/files/carbo-platform.h5?download=1", "data/output/carbo-platform.h5")'
+julia -e 'using Downloads; mkpath("data/output"); Downloads.download("https://zenodo.org/records/22893028/files/carbo-platform.h5?download=1", "data/output/carbo-platform.h5")'
 ```
 
 You can also download the file by hand from <https://doi.org/10.5281/zenodo.22083206> if you prefer.
