@@ -22,6 +22,7 @@ We recommend installing the following software before the workshop:
 - [RevBayes](https://revbayes.github.io/download) (version >=1.4.1) 
 - [Tracer](https://github.com/beast-dev/tracer/releases)
 - [FigTree](https://github.com/rambaut/figtree/releases)
+- A code editor of your choice, such as [Visual Studio Code](https://code.visualstudio.com)
 
 Program specific packages can be installed during the workshop.
 
