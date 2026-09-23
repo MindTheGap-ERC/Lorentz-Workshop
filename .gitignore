@@ -13,5 +13,6 @@
 *.log
 *.trees
 *history.txt
+*output/
 
 *.pdf
