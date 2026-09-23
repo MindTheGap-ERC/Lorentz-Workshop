@@ -313,7 +313,10 @@ fossils_misassigned_age = fossils |>
   admtools::time_to_strat(adm_true) |>
   admtools::strat_to_time(adm_assumed) |>
     admtools::rev_dir(ref = t_max)
-plot(fossils_misassigned_age, tree)
+plot(fossils_misassigned_age, tree,
+     main = "Tree with wrong reconstructed fossil ages")
 ```
 
-FIXME: BUG IN ADMTOOLS
+Here you can immediately see the contradiction between the timing of the underlying biological truth (the tree) and the (wrongly) reconstructed ages of the fossils. At multiple locations, fossils associated with a lineage extend beyond the duration of the lineage, and fossils of an ancestoral lineage are present long after a branching event.
+
+Using these fossil ages for tree inference will clearly lead to wrong results.
