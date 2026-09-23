@@ -4,4 +4,316 @@ format: html
 editor: visual
 ---
 
-## Stratigraphic paleobiology and fossil occurrences
+## Introduction
+
+In this chapter we will explore some advanced topics in stratigraphic paleobiology, specifically
+
+1.  How taphonomic and ecological effects shape the stratigraphic distribution of fossils
+2.  How the misidentification of age-depth relationships changes the inference of temporal dynamics.
+
+To slowly approach this, we use two data types: event data as introduced on the first day (e.g., fossil ages/locations and last occurrences) and the `fossil` objects simulated by `FossilSim` that are associated with a phylogenetic tree.
+
+## What we know
+
+As before, we focus on one of the simulated age-depth models.
+
+```{r}
+adm_location = "../data/output/columns_adm.csv" # adjust if you have a different output location
+data_adm = read.csv(adm_location) # read age-depth model data
+key = "mid"
+
+t =  data_adm[,which(grepl("Myr",names(data_adm)))] # time step
+# select height column that contains the key
+h = data_adm[,which(grepl(key,names(data_adm)))]
+# define age-depth model
+adm = admtools::tp_to_adm(t = t,
+                          h = h,
+                          T_unit = "Myr",
+                          L_unit = "m")
+plot(adm,
+     lwd_destr = 1, # line width destructive interval (hiatus)
+     lwd_acc = 2, # line width accumulative interval
+     col_destr = NULL,
+     col_acc = "black")
+admtools::T_axis_lab() # add time axis label
+admtools::L_axis_lab()
+```
+
+Let's simulate a tree over the time interval of observation and some fossils along the tree:
+
+```{r}
+seed = 42
+lambda = 2
+mu = 0.3
+psi = 70
+set.seed(seed)
+t_min = admtools::min_time(adm)
+t_max = admtools::max_time(adm)
+h_max = admtools::max_height(adm)
+h_min = admtools::min_height(adm)
+
+tree = TreeSim::sim.bd.age(age = t_max,
+                              numbsim = 1,
+                              lambda = lambda,
+                              mu = mu,
+                              frac = 1,
+                              mrca = FALSE,
+                              complete = TRUE)[[1]]
+fossils = FossilSim::sim.fossils.poisson(rate = psi,
+                                         tree = tree)
+plot(fossils, tree)
+```
+
+These three components (age-depth model, the tree, and the fossil object) form our reference data.
+
+## Ecological and taphonomic effects
+
+Ecology and taphonomy act identically on fossil occurrences:
+
+-   Niche preferences determine whether a taxon will be observed at a specific location/time: If some environmental gradient matches the preferred environment of the taxon it is more likely to be observed. The more the environmental cline deviates from the optimum, the more unlikely an observation is
+
+-   Taphonomy conditions determine whether a fossil is preserved or not. Again, this is a joint expression of an environmental gradient (e.g., water depth, grain size, burial velocity) and an intrinsic property, meaning the preservation probability under the specified taphonomic conditions.
+
+For this example, we focus on water depth as an ecological gradient for simplicity. Generally, and gradient/model output can be used.
+
+Let's start by importing the water depth:
+
+```{r}
+wd_location = "../data/output/columns_wd.csv" # adjust if you have a different output location
+data_wd = read.csv(wd_location) # read age-depth model data
+key = "mid"
+t =  data_wd[,names(data_wd)[2]] # time step
+# select height column that contains the key
+wd = data_wd[,which(grepl(key,names(data_wd)))]
+
+plot(x = t,
+     y = wd,
+     type = "l",
+     xlab = "Time [Myr]",
+     ylab = "Water depth [m]",
+     main = "Water depth")
+```
+
+Next we need to define a niche, which specifies how likely it is to observe a taxon at a given water depth. Here we use a helper function for this:
+
+```{r}
+niche_def = StratPal::snd_niche(opt = 5, # pref. water depth 5 m
+                                tol = 10, # water depth tolerance 10 m (sd)
+                                cutoff_val = 0) # does not live above water 
+wd_vals = seq(from = min(wd),
+              to = max(wd),
+              length.out = 100)
+plot(x = wd_vals,
+     y = niche_def(wd_vals),
+     type = "l",
+     xlab = "Water depth [m]",
+     ylab = "Sampling probability",
+     main = "Niche definition")
+```
+
+The next piece of information is to encode the environmental gradient as a function
+
+```{r}
+gradient = approxfun(x = t,
+                     y = wd)
+plot(x = t,
+     y = gradient(t),
+     type = "l",
+     xlab = "Time [Myr]",
+     ylab = "Water depth [m]",
+     main = "Water depth as gradient")
+```
+
+Combining the two gives the sampling probability with time:
+
+```{r}
+plot(x = t,
+     y = t |> gradient() |> niche_def(),
+     type = "l",
+     xlab = "Time",
+     ylab = "Sampling probability",
+     main = "Sampling probability of taxon")
+```
+
+Note that here the sampling probability drops to 0 not because of erosion or a hiatus, but because the simulated taxon is strictly marine.
+
+### Effect on fossil occurrences
+
+With these pieces of information in place - niche and gradient - we can start to simulate how ecology would influence the abundance of a taxon:
+
+```{r}
+# baseline scenarion without ecological effects
+StratPal::p3_var_rate(x = c(0,1),
+                      y = c(1,2),
+                      from = 0,
+                      to = 1,
+                      n = 1000) |>
+  hist(breaks = seq(0, 1, by = 0.05),
+       main = "Baseline without ecological effect",
+       xlab = "Time",
+       ylab = "Fossil occurrences")
+```
+
+To incorporate the ecological effects, you simply insert `apply_niche` into the pipeline:
+
+```{r}
+StratPal::p3_var_rate(x = c(0,1),
+                      y = c(1,2),
+                      from = 0,
+                      to = 1,
+                      n = 1000) |>
+  StratPal::apply_niche(niche_def = niche_def,
+                        gc = gradient) |>
+  hist(breaks = seq(0, 1, length.out = 30),
+       main = "Fossil abundance with ecological effect",
+       xlab = "Time",
+       ylab = "Fossil occurrences")
+```
+
+It is then simple to insert stratigraphic effects into the pipeline to study the joint effect:
+
+```{r}
+StratPal::p3_var_rate(x = c(0,1),
+                      y = c(1,2),
+                      from = t_min,
+                      to = t_max,
+                      n = 1000) |>
+  StratPal::apply_niche(niche_def = niche_def,
+                        gc = gradient) |>
+  admtools::time_to_strat(adm) |>
+  hist(breaks = seq(from = 0, to = h_max, length.out = 30),
+       main = "Fossil abundance with ecological effects\nin the stratigraphic domain",
+       xlab = "Stratigraphic position",
+       ylab = "Fossil occurrences")
+```
+
+That's how easy this is!
+
+### Application to fossil objects associated with phylogenetic trees
+
+Everything said above applies identical to fossil objects simulated along a tree: Define a niche (valid for all taxa record in the tree) and a gradient, and use `apply_niche`. There is one major caveat though: age-depth models count time ***forward*** as the simulation evolved, while fossil objects record \***age**. This requires flipping the time axis to make everything work out correctly:
+
+```{r}
+# As baseline
+plot(fossils, tree,
+     main = "Full fossil record without ecological effects")
+```
+
+Now let's introduce the ecological effects:
+
+```{r}
+fossils_after_ecol = fossils |>
+  admtools::rev_dir(ref = t_max) |>
+  StratPal::apply_niche(niche_def = niche_def, gc = gradient) |>
+  admtools::rev_dir(ref = t_max)
+plot(fossils_after_ecol, tree)
+
+```
+
+Note the significant thinning of fossil sampling towards the top of the tree due to repeated subaerial exposure. Note again that this effect has nothing to do with gaps, just the fact that the taxon does only live underwater.
+
+### Taphonomic effects
+
+Taphonomic effects are modeled identical to ecological effects, with the taphonomic gradient (e.g., burial velocity) taking the role of the ecological gradient, and the preservation potential taking the role of the niche definition.
+
+As a simple example, we define a taphonomic gradient that filters all occurrences that fall in a gap:
+
+```{r}
+# defines taphonomic filter that removes all fossils coinciding with gaps
+f = StratPal::strat_filter(adm)
+fossils_filtered = fossils |>
+  admtools::rev_dir(ref = t_max) |>
+  StratPal::apply_taphonomy(identity, f) |>
+  admtools::rev_dir(ref = t_max)
+
+plot(fossils_filtered, tree,
+     main = "Fossils during gaps removed")
+```
+
+Of course this pipeline can be extended to include stratigraphic effects and multiple ecological and taphonomic gradients.
+
+### Extensions and limitations
+
+Both ecological and taphonomic effects work out of the box for multivariate functions due the the magic of function composition. However, this modeling approach does currently not allow to model state-dependent effects (e.g., evolution of niches, variations in preservation between branches). In addition, this does not yet integrate with `MorphoSim` to selectively remove characters.
+
+## Age misidentification
+
+Up to now, we have assumed that age-depth models are fully known, which in reality is never really the case. Here we examine how this can effect interpretations of temporal dynamics.
+
+The underlying idea is that there are 2 age-depth models at play: a "true" age-depth model that is used for forward modeling to determine the stratigraphic distribution of fossils, and a "assumed" age-depth model that is in a second step used to reconstruct ages from the observed stratigraphic positions of fossils.
+
+Let's assume the simulated age-depth model is our true model, and our assumed model assumes naively that sediment accumulation is constant over the observed time interval:
+
+```{r}
+#| layout-ncol: 2
+adm_true = adm # "truth"
+adm_assumed = admtools::tp_to_adm(t = seq(t_min, t_max, length.out = 1000),
+                                  h = seq(h_min, h_max, length.out = 1000),
+                                  T_unit = "Myr",
+                                  L_unit = "m")
+plot(adm_true)
+title(main = "True age-depth model")
+plot(adm_assumed)
+title(main = "Assumed age-depth model")
+```
+
+### Effect on fossil occurrences and last occurrences
+
+To determine the inferred age of a fossil, first determine its stratigraphic position using the correct age-depth model, and the reconstruct its age using the assumed age-depth model:
+
+```{r}
+true_age = 0.75
+assumed_age = true_age |>
+  admtools::time_to_strat(adm_true) |>
+  admtools::strat_to_time(adm_assumed)
+assumed_age
+```
+
+This immediately generalizes, e.g. under a constant extinction rate (and assuming every taxon is abundantly sampled), the reconstructed pattern of last occurrences is
+
+```{r}
+StratPal::p3(rate = 1,
+   from = t_min,
+   to = t_max,
+   n = 1000) |>
+  admtools::time_to_strat(adm_true, destructive = FALSE) |>
+  admtools::strat_to_time(adm_assumed) |>
+  hist(breaks = seq(from = t_min, to = t_max, length.out = 30),
+       xlab = "Time [Myr]",
+       main = "Inferred extinction dymanics",
+       freq = FALSE,
+       ylab = "Last occcurrences")
+```
+
+Think through this to validate that the peaks in the histogram correspond to the gaps in the age-depth model.
+
+This approach allows to immediately determine how wrong our age-estimates really are due to the wrong age-depth model:
+
+```{r}
+inferred_time = t |> 
+  admtools::time_to_strat(adm_true) |>
+  admtools::strat_to_time(adm_assumed)  
+plot(x = t,
+     y = t - inferred_time,
+     type = "l",
+     xlab = "Time [Myr]",
+     ylab = "Error [Myr]")
+lines(x = c(t_min, t_max),
+      y = c(0,0),
+      lty = 3)
+```
+
+### Application to fossil objects associated with a tree
+
+As before, this approach immediately expands to fossil objects simulated along a tree, again with the complication that the direction of time needs to be flipped:
+
+```{r}
+fossils_misassigned_age = fossils |>
+    admtools::rev_dir(ref = t_max) |>
+  admtools::time_to_strat(adm_true) |>
+  admtools::strat_to_time(adm_assumed) |>
+    admtools::rev_dir(ref = t_max)
+plot(fossils_misassigned_age, tree)
+```
+
+FIXME: BUG IN ADMTOOLS

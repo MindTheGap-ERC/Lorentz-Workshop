@@ -4,4 +4,183 @@ format: html
 editor: visual
 ---
 
-## Combining phylogeny and stratigraphy
+## Introduction
+
+This tutorial combines everything we have learned so far by combining stratigraphic paleobiology and phylogenetics into one forward simulation.
+
+## Age-depth model and environmental gradient
+
+Let's begin by loading the age-depth model data. For simplicity, we focus on the mid-platform section only
+
+```{r}
+adm_location = "../data/output/columns_adm.csv" # adjust if you have a different output location
+data_adm = read.csv(adm_location) # read age-depth model data
+key = "mid"
+
+t =  data_adm[,names(data_adm)[2]] # time step
+# select height column that contains the key
+h = data_adm[,which(grepl(key,names(data_adm)))]
+# define age-depth model
+adm = admtools::tp_to_adm(t = t,
+                          h = h,
+                          T_unit = "Myr",
+                          L_unit = "m")
+plot(adm,
+     lwd_destr = 1, # line width destructive interval (hiatus)
+     lwd_acc = 2, # line width accumulative interval
+     col_destr = NULL,
+     col_acc = "black")
+admtools::T_axis_lab() # add time axis label
+admtools::L_axis_lab() # add length axis label (stratigraphic domain)
+```
+
+For an environemental gradient, we will focus on water depth:
+
+```{r}
+wd_location = "../data/output/columns_wd.csv" # adjust if you have a different output location
+data_wd = read.csv(wd_location) # read age-depth model data
+key = "mid"
+t =  data_wd[,names(data_wd)[2]] # time step
+# select height column that contains the key
+wd = data_wd[,which(grepl(key,names(data_wd)))]
+
+plot(x = t,
+     y = wd,
+     type = "l",
+     xlab = "Time [Myr]",
+     ylab = "Water depth [m]",
+     main = "Water depth")
+```
+
+## Constants
+
+For convenience, let's introduce some constants:
+
+```{r}
+seed = 42
+t_max = admtools::max_time(adm) # duration of the observed time interval
+h_max = admtools::max_height(adm)
+lambda = 2
+mu = 0.3
+psi = 70
+```
+
+## Simulating the tree and fossils
+
+```{r}
+set.seed(seed)
+tree = TreeSim::sim.bd.age(age = t_max,
+                              numbsim = 1,
+                              lambda = lambda,
+                              mu = mu,
+                              frac = 1,
+                              mrca = FALSE,
+                              complete = TRUE)[[1]]
+plot(tree)
+```
+
+Now let's simulate some fossils along that tree:
+
+```{r}
+fossils = FossilSim::sim.fossils.poisson(rate = psi,
+                                         tree = tree)
+plot(fossils, tree)
+```
+
+this is all in the time domain.
+
+## Ecological and taphonomic assumptions
+
+We focus on ecological preferences here, taphonomy works mutatis mutandis.
+
+```{r}
+gc = approxfun(x = t, # gradient change with time
+               y = wd)
+niche_def = StratPal::snd_niche(opt = 5, # preferred water depth 5 m
+                      tol = 10, # tolerance to fluctuations 10 m (sd)
+                      cutoff_val = 0) # no preservation on land
+wd_range = range(wd)
+wd_vals = seq(min(wd), max(wd), by = 0.1)
+plot(wd_vals,
+     niche_def(wd_vals),
+     type = "l",
+     xlab = "Water depth [m]",
+     ylab = "Preservation probability",
+     main = "Ecological niche")
+```
+
+Now we can determine the preservation probability in the time domain:
+
+```{r}
+plot(t, t |> gc() |> niche_def(),
+     type = "l",
+     xlab = "Time [Myr]",
+     ylab = "Collection probability")
+```
+
+Note that here the collection probability drops to 0 during gaps NOT because of erosion and gaps, but because the modeled taxa are strictly marine
+
+## Observed tree and fossils in the stratigraphic domain
+
+Let's see what we can observe in the stratigraphic domain:
+
+```{r}
+tree_strat = tree |> 
+  admtools::time_to_strat(adm) |>
+  plot()
+axis(side = 1, labels = TRUE)
+mtext("Height", side = 2, line = 1.4)
+```
+
+You can nicely see how branching events that coincide with gaps are expressed as polytomies in the stratigraphic domain.
+
+Now let's add some fossils:
+
+Note the rev_dir to account for the fact that age-depth models are forward in time and trees use age:
+
+```{r, eval=FALSE}
+fossils_strat = fossils |> 
+  admtools::rev_dir(ref = t_max) |>
+  admtools::time_to_strat(adm) |>
+  admtools::rev_dir(ref = h_max) |>
+  plot(tree_strat)
+axis(side = 1, labels = TRUE)
+mtext("Height", side = 2, line = 1.4)
+```
+
+## Modifying the fossil record
+
+All stratigraphic paleobiology pipelines as described before work with fossil objects.
+
+```{r}
+f = StratPal::strat_filter(adm)
+
+fossils_filtered = StratPal::apply_taphonomy(fossils, identity, f)
+print(fossils_filtered)
+
+fossils |>
+  admtools::rev_dir(ref = t_max) |>
+  StratPal::apply_taphonomy(identity, f) |>
+  StratPal::apply_niche(niche_def, gc) |>
+  admtools::rev_dir(ref = t_max) |>
+  plot(tree)
+```
+
+```{r}
+morpho_mk <- MorphSim::sim.morpho(k = 2, time.tree = tree, br.rates = 0.1, trait.num = 15,  fossil = fossils)
+MorphSim::plotMorphoGrid(morpho_mk)
+MorphSim::write.morpho(morpho_mk, file = "hello.nex", reconstructed = FALSE)
+```
+
+```{r}
+plot(x = morpho_mk, 
+     trait= 2, 
+     timetree = T, 
+     show.fossil = T,
+     root.edge = T, 
+     reconstructed = T)
+```
+
+```{r}
+
+```
