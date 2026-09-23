@@ -3,6 +3,7 @@
 .RData
 .Ruserdata
 *.docx
+*.DS_Store
 
 /.quarto/
 **/*.quarto_ipynb
@@ -11,6 +12,6 @@
 
 *.log
 *.trees
-book/day3/history.txt
+*history.txt
 
 *.pdf
