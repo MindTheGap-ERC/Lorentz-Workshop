@@ -21,12 +21,21 @@ book:
         - day2/Model-RevBayes.qmd
     - part: "Day 3: Tree inference"
       chapters:
-        - day3/day3.qmd
+        - day3/FBD_sim.qmd
+        - day3/StratPal_fossils.qmd
+        - day3/StratPal_phylo.qmd
+        - day3/FBD_strat_inference.qmd
     - part: "Day 4: Analysis and software"
     - part: "Day 5: Results"
     - references.qmd
 
 bibliography: references.bib
+
+# Cache chapter outputs in book/_freeze/ so a full-project render does not
+# require both Julia and R to be installed. Only edited chapters re-execute.
+# Commit _freeze/ along with any re-rendered chapter.
+execute:
+  freeze: auto
 
 format:
   html:

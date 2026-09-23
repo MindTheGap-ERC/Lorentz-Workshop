@@ -1,0 +1,15 @@
+{
+  "hash": "059d8ce0233c116563f83a811a384974",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Index\"\n---\n\n## Introduction\n\nWelcome to the online materials for the workshop \"Bridging Stratigraphic Paleobiology and Phylogenetics\". This page collects all contents (code, text, references, and notes) used during the workshop.\n\n## Installation instructions\n\nSoftware for phylogenetic inference is spread over multiple specialized software systems. Broadly, we will use\n\n-   `Julia` for stratigraphic forward simulations\n\n-   `R` for phylogenetic simulations and to build models of stratigraphic paleobiology\n\n-   `revbayes` or `BEAST` for phylogenetic inference\n\n-   `FigTree` and `Tracer` for the visualization of posteriors\n\n-   An IDE (integrated development environment) of your choice (e.g., `VSCode` or `RStudio`) to conveniently interact with this software.\n\n### Installing R, RStudio, and packages\n\n`R` can be directly installed from CRAN (the comprehensive R archive network) [here](https://cran.r-project.org/). Choose the latest version for your operating system and follow the installation instructions. At the time of the workshop, the latest version is R 4.6.1 (\"Happy Hop\").\n\nYou can interact with `R` using the IDE of your choice. Most `R` users are familiar with `RStudio`, which provides a lot of convenient functionality. RStudio can be downloaded from [Posit here](https://docs.posit.co/ide/user/#rstudio-ide-oss-downloads).\n\nOnce you have downloaded R, install all required packages by running the following code in R (e.g., in your RStudio console):\n\n\n::: {.cell}\n\n```{.r .cell-code}\ninstall.packages(\"remotes\")\nremotes::install_github(\"fossilsim/morphsim\")\nremotes::install_github(\"fossilsim/FossilSim\")\nremotes::install_github(\"MindTheGap-ERC/admtools\")\nremotes::install_github(\"MindTheGap-ERC/StratPal\")\ninstall.packages(\"TreeSim\")\n```\n:::\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

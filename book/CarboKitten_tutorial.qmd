@@ -152,7 +152,7 @@ using Downloads
 
 mkpath(dirname(FILENAME))
 Downloads.download(
-    "https://zenodo.org/records/22083206/files/carbo-platform.h5?download=1",
+    "https://zenodo.org/records/22893028/files/carbo-platform.h5?download=1",
     FILENAME)
 ```
 
