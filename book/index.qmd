@@ -2,3 +2,38 @@
 title: "Index"
 ---
 
+## Introduction
+
+Welcome to the online materials for the workshop "Bridging Stratigraphic Paleobiology and Phylogenetics". This page collects all contents (code, text, references, and notes) used during the workshop.
+
+## Installation instructions
+
+Software for phylogenetic inference is spread over multiple specialized software systems. Broadly, we will use
+
+-   `Julia` for stratigraphic forward simulations
+
+-   `R` for phylogenetic simulations and to build models of stratigraphic paleobiology
+
+-   `revbayes` or `BEAST` for phylogenetic inference
+
+-   `FigTree` and `Tracer` for the visualization of posteriors
+
+-   An IDE (integrated development environment) of your choice (e.g., `VSCode` or `RStudio`) to conveniently interact with this software.
+
+### Installing R, RStudio, and packages
+
+`R` can be directly installed from CRAN (the comprehensive R archive network) [here](https://cran.r-project.org/). Choose the latest version for your operating system and follow the installation instructions. At the time of the workshop, the latest version is R 4.6.1 ("Happy Hop").
+
+You can interact with `R` using the IDE of your choice. Most `R` users are familiar with `RStudio`, which provides a lot of convenient functionality. RStudio can be downloaded from [Posit here](https://docs.posit.co/ide/user/#rstudio-ide-oss-downloads).
+
+Once you have downloaded R, install all required packages by running the following code in R (e.g., in your RStudio console):
+
+```{r}
+#| eval: false
+install.packages("remotes")
+remotes::install_github("fossilsim/morphsim")
+remotes::install_github("fossilsim/FossilSim")
+remotes::install_github("MindTheGap-ERC/admtools")
+remotes::install_github("MindTheGap-ERC/StratPal")
+install.packages("TreeSim")
+```

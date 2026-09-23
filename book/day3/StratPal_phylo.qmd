@@ -1,0 +1,7 @@
+---
+title: "Phylogeny and stratigraphy"
+format: html
+editor: visual
+---
+
+## Combining phylogeny and stratigraphy

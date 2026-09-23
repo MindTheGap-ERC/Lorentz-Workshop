@@ -21,7 +21,10 @@ book:
         - day2/Model-RevBayes.qmd
     - part: "Day 3: Tree inference"
       chapters:
-        - day3/day3.qmd
+        - day3/FBD_sim.qmd
+        - day3/StratPal_fossils.qmd
+        - day3/StratPal_phylo.qmd
+        - day3/FBD_strat_inference.qmd
     - part: "Day 4: Analysis and software"
     - part: "Day 5: Results"
     - references.qmd

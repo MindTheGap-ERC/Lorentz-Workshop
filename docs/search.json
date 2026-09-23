@@ -1,5 +1,25 @@
 [
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Bridging Stratigraphic Palaeobiology and Phylogenetics",
+    "section": "",
+    "text": "0.1 Introduction\nWelcome to the online materials for the workshop “Bridging Stratigraphic Paleobiology and Phylogenetics”. This page collects all contents (code, text, references, and notes) used during the workshop.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Index</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#installation-instructions",
+    "href": "index.html#installation-instructions",
+    "title": "Bridging Stratigraphic Palaeobiology and Phylogenetics",
+    "section": "0.2 Installation instructions",
+    "text": "0.2 Installation instructions\nSoftware for phylogenetic inference is spread over multiple specialized software systems. Broadly, we will use\n\nJulia for stratigraphic forward simulations\nR for phylogenetic simulations and to build models of stratigraphic paleobiology\nrevbayes or BEAST for phylogenetic inference\nFigTree and Tracer for the visualization of posteriors\nAn IDE (integrated development environment) of your choice (e.g., VSCode or RStudio) to conveniently interact with this software.\n\n\n0.2.1 Installing R, RStudio, and packages\nR can be directly installed from CRAN (the comprehensive R archive network) here. Choose the latest version for your operating system and follow the installation instructions. At the time of the workshop, the latest version is R 4.6.1 (“Happy Hop”).\nYou can interact with R using the IDE of your choice. Most R users are familiar with RStudio, which provides a lot of convenient functionality. RStudio can be downloaded from Posit here.\nOnce you have downloaded R, install all required packages by running the following code in R (e.g., in your RStudio console):\n\ninstall.packages(\"remotes\")\nremotes::install_github(\"fossilsim/morphsim\")\nremotes::install_github(\"fossilsim/FossilSim\")\nremotes::install_github(\"MindTheGap-ERC/admtools\")\nremotes::install_github(\"MindTheGap-ERC/StratPal\")\ninstall.packages(\"TreeSim\")",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Index</span>"
+    ]
+  },
+  {
     "objectID": "CarboKitten_tutorial.html",
     "href": "CarboKitten_tutorial.html",
     "title": "3  Simulating the stratigraphic record",
@@ -143,14 +163,47 @@
     ]
   },
   {
-    "objectID": "day3/day3.html",
-    "href": "day3/day3.html",
-    "title": "9  day3",
+    "objectID": "day3/FBD_sim.html",
+    "href": "day3/FBD_sim.html",
+    "title": "9  Simulating trees under the FBD model",
     "section": "",
-    "text": "9.1 Day 3\nRunning FBD analysis:\nlibrary(\"admtools\")\nlibrary(\"StratPal\")\nlibrary(\"TreeSim\")\n\nLoading required package: ape\n\n\nLoading required package: geiger\n\n\nLoading required package: phytools\n\n\nLoading required package: maps\n\nlibrary(\"FossilSim\")\nlibrary(\"MorphSim\")\ndata(\"scenarioA\")\nt = scenarioA$t_myr\npos = \"2km\"\nt_max = max(t)\nt_min = min(t)\n\nadm = admtools::tp_to_adm(t = t,\n                h = scenarioA$h_m[,pos],\n                L_unit = \"m\",\n                T_unit = \"Myr\")\nplot(adm,\n     lty_destr = 0)\ntitle(main = \"Age depth model\")\nT_axis_lab()\nL_axis_lab()\nSimulate FBD tree:\nset.seed(4)\nt_max = 2\ntree = TreeSim::sim.bd.age(age = t_max,\n                           numbsim = 1,\n                           lambda = 1.5,\n                           mu = 0.5,\n                           frac = 1,\n                           mrca = TRUE,\n                           complete = TRUE)[[1]]\nplot(tree)\naxis(1)\nSimulate fossils along tree\nf = FossilSim::sim.fossils.poisson(rate = 2.5, tree = tree, root.edge = FALSE)\nplot(f, tree)\n\n\n\n\n\n\n\nf_extant = FossilSim::sim.extant.samples(fossils = f,\ntree = tree,\nrho = 1)\nplot(f_extant, tree, reconstructed = TRUE)\n\n\n\n\n\n\n\nplot(f_extant, tree, reconstructed = FALSE)\nsimulate morphology along tree\nd &lt;- sim.morpho(time.tree = tree, k = 2, trait.num = 100,\n                br.rates = 0.1,          # scalar = strict clock; vector = relaxed\n                variable = TRUE,          # MkV\n                ACRV = \"gamma\", alpha.gamma = 1, ACRV.ncats = 4,\n                fossil = f_extant)\nd\n\n    [,1] [,2] [,3] [,4] [,5]\nt5     0    0    0    0    0\nt9     0    0    0    0    0\nt3     0    0    0    0    0\nt12    0    0    0    1    0\nt4     0    0    0    1    0\nt8     1    0    0    0    1\nt13    1    0    0    0    1\nt14    0    1    0    1    0\nt11    1    1    1    0    0\nt17    1    1    1    0    0\nt16    1    1    1    0    0\nt7     1    1    1    0    0\nt15    1    1    1    0    0\nt1     1    1    1    0    0\nt18    1    1    1    0    0\nt2     1    1    1    0    0\nt6     1    1    1    0    0\nt10    1    1    1    0    0\nMorphological data for 18 taxa with 100 traits per taxon and 0 1 as character states\nShowing maximum of 5 traits here for now\n\nf\n\n   sp edge       hmin       hmax\n1   1    1 1.65764071 1.65764071\n2   2    2 0.42412436 0.42412436\n3   2    2 0.47806444 0.47806444\n4   2    2 0.64499288 0.64499288\n5   2    2 0.89403795 0.89403795\n6   3    3 0.62182182 0.62182182\n7  11   11 0.92539881 0.92539881\n8  12   12 0.13287929 0.13287929\n9  12   12 0.33283062 0.33283062\n10 18   18 0.01954315 0.01954315\n...\nFossil record with 22 occurrences representing 12 species\nFossil record not simulated using taxonomy: all speciation events are assumed to be symmetric \n\nd\n\n    [,1] [,2] [,3] [,4] [,5]\nt5     0    0    0    0    0\nt9     0    0    0    0    0\nt3     0    0    0    0    0\nt12    0    0    0    1    0\nt4     0    0    0    1    0\nt8     1    0    0    0    1\nt13    1    0    0    0    1\nt14    0    1    0    1    0\nt11    1    1    1    0    0\nt17    1    1    1    0    0\nt16    1    1    1    0    0\nt7     1    1    1    0    0\nt15    1    1    1    0    0\nt1     1    1    1    0    0\nt18    1    1    1    0    0\nt2     1    1    1    0    0\nt6     1    1    1    0    0\nt10    1    1    1    0    0\nMorphological data for 18 taxa with 100 traits per taxon and 0 1 as character states\nShowing maximum of 5 traits here for now\n\nwrite.morpho(d, file = \"tree.nex\", type = \"tree\", reconstructed = TRUE)\nwrite.morpho(d, file = \"matrix.nex\", type = \"matrix\", reconstructed = TRUE)\nwrite.morpho(d, file = \"ages.tsv\", type = \"ages\", reconstructed = TRUE)",
+    "text": "9.1 Simulating the FBD model\nMore to come soon",
     "crumbs": [
       "Day 3: Tree inference",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>day3</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Simulating trees under the FBD model</span>"
+    ]
+  },
+  {
+    "objectID": "day3/StratPal_fossils.html",
+    "href": "day3/StratPal_fossils.html",
+    "title": "10  Stratigraphic paleobiology and fossil occurrences",
+    "section": "",
+    "text": "10.1 Stratigraphic paleobiology and fossil occurrences",
+    "crumbs": [
+      "Day 3: Tree inference",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Stratigraphic paleobiology and fossil occurrences</span>"
+    ]
+  },
+  {
+    "objectID": "day3/StratPal_phylo.html",
+    "href": "day3/StratPal_phylo.html",
+    "title": "11  Phylogeny and stratigraphy",
+    "section": "",
+    "text": "11.1 Combining phylogeny and stratigraphy",
+    "crumbs": [
+      "Day 3: Tree inference",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Phylogeny and stratigraphy</span>"
+    ]
+  },
+  {
+    "objectID": "day3/FBD_strat_inference.html",
+    "href": "day3/FBD_strat_inference.html",
+    "title": "12  Stratigraphic information in phylogenetic inference",
+    "section": "",
+    "text": "12.1 Introduction\nTBA",
+    "crumbs": [
+      "Day 3: Tree inference",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Stratigraphic information in phylogenetic inference</span>"
     ]
   }
 ]
