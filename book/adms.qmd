@@ -11,7 +11,7 @@ At the end of the chapter you will
 * be able to explain what an age-depth model is and what stratigraphic information it contains
 * have an intuition on how age-depth models modify the stratigraphic distribution of fossils
 
-These materials are adopted form the workshop "(Modeling Stratigraphic Paleobiology in R)[https://mindthegap-erc.github.io/StratPal_workshop_materials/]". The full workshop materials are available online and archived on Zenodo [@Hoh]
+These materials are adopted form the workshop "(Modeling Stratigraphic Paleobiology in R)[https://mindthegap-erc.github.io/StratPal_workshop_materials/]".
 
 ## Age-depth models
 

@@ -184,20 +184,32 @@ plot(x = t_low_res,
      ylab = "Effective sampling rate")
 ```
 
+Often, the original sampling rate `psi` needs to be chosen high to make sure any fossils are preserved. If you would like to subsample your fossils to a fixed small number, you can use the following function for it. We subsample to 30 fossils to reduce runtime in the inference later.
+
+```{r}
+subsample_fossils = function(fossils, n){
+  #' randomly select a number of fossils
+  ind = sample(seq_len(length(fossils$sp)), size = n)
+  return(fossils[ind,])
+}
+fossils_used = fossils_pres |>
+  subsample_fossils(n = 30)
+```
+
 ## Simulate morphological characters
 
 Now we can simulate morphological characters along the tree and the preserved fossils:
 
 ```{r}
 n_states = 2
-br_rate = 0.1
-trait_num = 15
+br_rate = 0.5
+trait_num = 100
 morpho_mkv = MorphSim::sim.morpho(k = n_states,
                         time.tree = tree,
                         br.rates = br_rate,
                         trait.num = trait_num, 
                         variable = FALSE,
-                        fossil = fossils_pres)
+                        fossil = fossils_used)
 ```
 
 ## Modify ages
@@ -219,4 +231,16 @@ Do you know why this is only done now and not in one of the earlier steps that m
 
 ## Export data
 
-Finally, we can export the tree, character matrix, and fossil ages
+Finally, we can export the tree, character matrix, and fossil ages:
+
+```{r}
+MorphSim::write.morpho(data = morpho_mkv,
+                       file = "char_mat.nex",
+                       type = "matrix",
+                       all = TRUE)
+
+MorphSim::write.morpho(data = morpho_mkv,
+                       file = "ages.tsv",
+                       type = "ages",
+                       all = TRUE)
+```
