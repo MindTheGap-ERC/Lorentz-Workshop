@@ -1,0 +1,17 @@
+{
+  "hash": "15bd0f574fa38f48f12945d6808ba29a",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Time in rocks\"\n---\n\n## Introduction\n\nThis chapter introduces the concept of **age-depth models**, which formalize geochronological knowledge and contain a lot of stratigraphic information, e.g. on sedimentattion rates and hiatus location and duration.\n\nAt the end of the chapter you will\n\n* be able to explain what an age-depth model is and what stratigraphic information it contains\n* have an intuition on how age-depth models modify the stratigraphic distribution of fossils\n\nThese materials are adopted form the workshop \"(Modeling Stratigraphic Paleobiology in R)[https://mindthegap-erc.github.io/StratPal_workshop_materials/]\".\n\n## Age-depth models\n\nFirst load the data from your stratigraphic forward model:\n\n\n::: {.cell}\n\n```{.r .cell-code}\nadm_name = \"data/output/columns_adm.csv\" # adjust if you have a different output location\ndata_adm = read.csv(adm_name) # read age-depth model data\nnames(data_adm) # inspect names\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] \"timestep...\"          \"time..Myr.\"           \"adm_col_slope..m.\"   \n[4] \"adm_col_margin..m.\"   \"adm_col_proximal..m.\" \"adm_col_midplat..m.\" \n```\n\n\n:::\n:::\n\n\nNext, extract the time-steps and the associated heights at the examined location. Your results and location heights might differ depending on your simulation setup\n\n::: {.cell}\n\n```{.r .cell-code}\nt =  data_adm[,names(data_adm)[2]] # time step\nh_slope = data_adm[,names(data_adm)[3]]\nh_margin = data_adm[,names(data_adm)[4]]\nh_proximal = data_adm[,names(data_adm)[5]]\nh_midplat = data_adm[,names(data_adm)[5]]\n```\n:::\n\n\nNow we can start constructing age-depth models:\n\n\n::: {.cell}\n\n```{.r .cell-code}\nadm_midplat = admtools::tp_to_adm(t = t,\n                                  h = h_midplat,\n                                  T_unit = \"Myr\",\n                                  L_unit = \"m\")\n```\n:::\n\n\nThese age-depth model objects automatically identify hiatuses, and allow convenient extraction of information that is not obvious from the time and height data alone.\n\nLet's start by plotting the age-depth model:\n\n\n::: {.cell}\n\n```{.r .cell-code}\nplot(adm_midplat,\n     lwd_destr = 1, # line width destructive interval (hiatus)\n     lwd_acc = 2, # line width accumulative interval\n     col_destr = \"blue\",\n     col_acc = \"black\")\nadmtools::T_axis_lab() # add time axis label\nadmtools::L_axis_lab() # add length axis label (stratigraphic domain)\n```\n\n::: {.cell-output-display}\n![](adms_files/figure-html/unnamed-chunk-4-1.png){width=672}\n:::\n:::\n\n\n### Extracting information from age-depth models\n\nAge-depth models encode a lot of crucial stratigraphic information\n\n\n::: {.cell}\n\n:::\n\n\n\n### Points of discussion\n\n1. \n",
+    "supporting": [
+      "adms_files\\figure-html"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

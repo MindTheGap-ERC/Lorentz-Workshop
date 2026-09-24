@@ -119,6 +119,39 @@
     ]
   },
   {
+    "objectID": "adms.html",
+    "href": "adms.html",
+    "title": "4  Time in rocks",
+    "section": "",
+    "text": "4.1 Introduction\nThis chapter introduces the concept of age-depth models, which formalize geochronological knowledge and contain a lot of stratigraphic information, e.g. on sedimentattion rates and hiatus location and duration.\nAt the end of the chapter you will\nThese materials are adopted form the workshop “(Modeling Stratigraphic Paleobiology in R)[https://mindthegap-erc.github.io/StratPal_workshop_materials/]”.",
+    "crumbs": [
+      "Day 1: Stratigraphy",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Time in rocks</span>"
+    ]
+  },
+  {
+    "objectID": "adms.html#introduction",
+    "href": "adms.html#introduction",
+    "title": "4  Time in rocks",
+    "section": "",
+    "text": "be able to explain what an age-depth model is and what stratigraphic information it contains\nhave an intuition on how age-depth models modify the stratigraphic distribution of fossils",
+    "crumbs": [
+      "Day 1: Stratigraphy",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Time in rocks</span>"
+    ]
+  },
+  {
+    "objectID": "adms.html#age-depth-models",
+    "href": "adms.html#age-depth-models",
+    "title": "4  Time in rocks",
+    "section": "4.2 Age-depth models",
+    "text": "4.2 Age-depth models\nFirst load the data from your stratigraphic forward model:\n\nadm_name = \"data/output/columns_adm.csv\" # adjust if you have a different output location\ndata_adm = read.csv(adm_name) # read age-depth model data\nnames(data_adm) # inspect names\n\n[1] \"timestep...\"          \"time..Myr.\"           \"adm_col_slope..m.\"   \n[4] \"adm_col_margin..m.\"   \"adm_col_proximal..m.\" \"adm_col_midplat..m.\" \n\n\nNext, extract the time-steps and the associated heights at the examined location. Your results and location heights might differ depending on your simulation setup\n\nt =  data_adm[,names(data_adm)[2]] # time step\nh_slope = data_adm[,names(data_adm)[3]]\nh_margin = data_adm[,names(data_adm)[4]]\nh_proximal = data_adm[,names(data_adm)[5]]\nh_midplat = data_adm[,names(data_adm)[5]]\n\nNow we can start constructing age-depth models:\n\nadm_midplat = admtools::tp_to_adm(t = t,\n                                  h = h_midplat,\n                                  T_unit = \"Myr\",\n                                  L_unit = \"m\")\n\nThese age-depth model objects automatically identify hiatuses, and allow convenient extraction of information that is not obvious from the time and height data alone.\nLet’s start by plotting the age-depth model:\n\nplot(adm_midplat,\n     lwd_destr = 1, # line width destructive interval (hiatus)\n     lwd_acc = 2, # line width accumulative interval\n     col_destr = \"blue\",\n     col_acc = \"black\")\nadmtools::T_axis_lab() # add time axis label\nadmtools::L_axis_lab() # add length axis label (stratigraphic domain)\n\n\n\n\n\n\n\n\n\n4.2.1 Extracting information from age-depth models\nAge-depth models encode a lot of crucial stratigraphic information\n\n\n4.2.2 Points of discussion",
+    "crumbs": [
+      "Day 1: Stratigraphy",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Time in rocks</span>"
+    ]
+  },
+  {
     "objectID": "day2/morphsim_tutorial.html",
     "href": "day2/morphsim_tutorial.html",
     "title": "6  MorphSim Tutorial",
@@ -167,7 +200,29 @@
     "href": "day3/FBD_sim.html",
     "title": "9  Simulating trees under the FBD model",
     "section": "",
-    "text": "9.1 Simulating the FBD model\nMore to come soon",
+    "text": "9.1 Introduction\nThis chapter introduces the Fossilized Birth-Death (FBD) process using forward simulations.\nAt the end of the chapter you will be able to",
+    "crumbs": [
+      "Day 3: Tree inference",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Simulating trees under the FBD model</span>"
+    ]
+  },
+  {
+    "objectID": "day3/FBD_sim.html#introduction",
+    "href": "day3/FBD_sim.html#introduction",
+    "title": "9  Simulating trees under the FBD model",
+    "section": "",
+    "text": "describe the biological and geological processes that are part of the FBD model\nBe familiar with the different paramterisations of the model\nUnderstand the difference between the complete and the sampled tree",
+    "crumbs": [
+      "Day 3: Tree inference",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Simulating trees under the FBD model</span>"
+    ]
+  },
+  {
+    "objectID": "day3/FBD_sim.html#simulating-the-fbd-model",
+    "href": "day3/FBD_sim.html#simulating-the-fbd-model",
+    "title": "9  Simulating trees under the FBD model",
+    "section": "9.2 Simulating the FBD model",
+    "text": "9.2 Simulating the FBD model\nMore to come soon",
     "crumbs": [
       "Day 3: Tree inference",
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>Simulating trees under the FBD model</span>"
@@ -178,7 +233,51 @@
     "href": "day3/StratPal_fossils.html",
     "title": "10  Stratigraphic paleobiology and fossil occurrences",
     "section": "",
-    "text": "10.1 Stratigraphic paleobiology and fossil occurrences",
+    "text": "10.1 Introduction\nIn this chapter we will explore some advanced topics in stratigraphic paleobiology, specifically\nTo slowly approach this, we use two data types: event data as introduced on the first day (e.g., fossil ages/locations and last occurrences) and the fossil objects simulated by FossilSim that are associated with a phylogenetic tree.",
+    "crumbs": [
+      "Day 3: Tree inference",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Stratigraphic paleobiology and fossil occurrences</span>"
+    ]
+  },
+  {
+    "objectID": "day3/StratPal_fossils.html#introduction",
+    "href": "day3/StratPal_fossils.html#introduction",
+    "title": "10  Stratigraphic paleobiology and fossil occurrences",
+    "section": "",
+    "text": "How taphonomic and ecological effects shape the stratigraphic distribution of fossils\nHow the misidentification of age-depth relationships changes the inference of temporal dynamics.",
+    "crumbs": [
+      "Day 3: Tree inference",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Stratigraphic paleobiology and fossil occurrences</span>"
+    ]
+  },
+  {
+    "objectID": "day3/StratPal_fossils.html#what-we-know",
+    "href": "day3/StratPal_fossils.html#what-we-know",
+    "title": "10  Stratigraphic paleobiology and fossil occurrences",
+    "section": "10.2 What we know",
+    "text": "10.2 What we know\nAs before, we focus on one of the simulated age-depth models.\n\nadm_location = \"../data/output/columns_adm.csv\" # adjust if you have a different output location\ndata_adm = read.csv(adm_location) # read age-depth model data\nkey = \"mid\"\n\nt =  data_adm[,which(grepl(\"Myr\",names(data_adm)))] # time step\n# select height column that contains the key\nh = data_adm[,which(grepl(key,names(data_adm)))]\n# define age-depth model\nadm = admtools::tp_to_adm(t = t,\n                          h = h,\n                          T_unit = \"Myr\",\n                          L_unit = \"m\")\nplot(adm,\n     lwd_destr = 1, # line width destructive interval (hiatus)\n     lwd_acc = 2, # line width accumulative interval\n     col_destr = NULL,\n     col_acc = \"black\")\nadmtools::T_axis_lab() # add time axis label\nadmtools::L_axis_lab()\n\n\n\n\n\n\n\n\nLet’s simulate a tree over the time interval of observation and some fossils along the tree:\n\nseed = 42\nlambda = 2\nmu = 0.3\npsi = 70\nset.seed(seed)\nt_min = admtools::min_time(adm)\nt_max = admtools::max_time(adm)\nh_max = admtools::max_height(adm)\nh_min = admtools::min_height(adm)\n\ntree = TreeSim::sim.bd.age(age = t_max,\n                              numbsim = 1,\n                              lambda = lambda,\n                              mu = mu,\n                              frac = 1,\n                              mrca = FALSE,\n                              complete = TRUE)[[1]]\nfossils = FossilSim::sim.fossils.poisson(rate = psi,\n                                         tree = tree)\nplot(fossils, tree)\n\n\n\n\n\n\n\n\nThese three components (age-depth model, the tree, and the fossil object) form our reference data.",
+    "crumbs": [
+      "Day 3: Tree inference",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Stratigraphic paleobiology and fossil occurrences</span>"
+    ]
+  },
+  {
+    "objectID": "day3/StratPal_fossils.html#ecological-and-taphonomic-effects",
+    "href": "day3/StratPal_fossils.html#ecological-and-taphonomic-effects",
+    "title": "10  Stratigraphic paleobiology and fossil occurrences",
+    "section": "10.3 Ecological and taphonomic effects",
+    "text": "10.3 Ecological and taphonomic effects\nEcology and taphonomy act identically on fossil occurrences:\n\nNiche preferences determine whether a taxon will be observed at a specific location/time: If some environmental gradient matches the preferred environment of the taxon it is more likely to be observed. The more the environmental cline deviates from the optimum, the more unlikely an observation is\nTaphonomy conditions determine whether a fossil is preserved or not. Again, this is a joint expression of an environmental gradient (e.g., water depth, grain size, burial velocity) and an intrinsic property, meaning the preservation probability under the specified taphonomic conditions.\n\nFor this example, we focus on water depth as an ecological gradient for simplicity. Generally, and gradient/model output can be used.\nLet’s start by importing the water depth:\n\nwd_location = \"../data/output/columns_wd.csv\" # adjust if you have a different output location\ndata_wd = read.csv(wd_location) # read age-depth model data\nkey = \"mid\"\nt =  data_wd[,names(data_wd)[2]] # time step\n# select height column that contains the key\nwd = data_wd[,which(grepl(key,names(data_wd)))]\n\nplot(x = t,\n     y = wd,\n     type = \"l\",\n     xlab = \"Time [Myr]\",\n     ylab = \"Water depth [m]\",\n     main = \"Water depth\")\n\n\n\n\n\n\n\n\nNext we need to define a niche, which specifies how likely it is to observe a taxon at a given water depth. Here we use a helper function for this:\n\nniche_def = StratPal::snd_niche(opt = 5, # pref. water depth 5 m\n                                tol = 10, # water depth tolerance 10 m (sd)\n                                cutoff_val = 0) # does not live above water \nwd_vals = seq(from = min(wd),\n              to = max(wd),\n              length.out = 100)\nplot(x = wd_vals,\n     y = niche_def(wd_vals),\n     type = \"l\",\n     xlab = \"Water depth [m]\",\n     ylab = \"Sampling probability\",\n     main = \"Niche definition\")\n\n\n\n\n\n\n\n\nThe next piece of information is to encode the environmental gradient as a function\n\ngradient = approxfun(x = t,\n                     y = wd)\nplot(x = t,\n     y = gradient(t),\n     type = \"l\",\n     xlab = \"Time [Myr]\",\n     ylab = \"Water depth [m]\",\n     main = \"Water depth as gradient\")\n\n\n\n\n\n\n\n\nCombining the two gives the sampling probability with time:\n\nplot(x = t,\n     y = t |&gt; gradient() |&gt; niche_def(),\n     type = \"l\",\n     xlab = \"Time\",\n     ylab = \"Sampling probability\",\n     main = \"Sampling probability of taxon\")\n\n\n\n\n\n\n\n\nNote that here the sampling probability drops to 0 not because of erosion or a hiatus, but because the simulated taxon is strictly marine.\n\n10.3.1 Effect on fossil occurrences\nWith these pieces of information in place - niche and gradient - we can start to simulate how ecology would influence the abundance of a taxon:\n\n# baseline scenarion without ecological effects\nStratPal::p3_var_rate(x = c(0,1),\n                      y = c(1,2),\n                      from = 0,\n                      to = 1,\n                      n = 1000) |&gt;\n  hist(breaks = seq(0, 1, by = 0.05),\n       main = \"Baseline without ecological effect\",\n       xlab = \"Time\",\n       ylab = \"Fossil occurrences\")\n\nWarning in rej_samp(f = f, x_min = from, x_max = to, n = n, f_max = f_max):\nf_max &lt; f on between x_min and x_max. f_max was adjusted to be 2.14358881\n\n\n\n\n\n\n\n\n\nTo incorporate the ecological effects, you simply insert apply_niche into the pipeline:\n\nStratPal::p3_var_rate(x = c(0,1),\n                      y = c(1,2),\n                      from = 0,\n                      to = 1,\n                      n = 1000) |&gt;\n  StratPal::apply_niche(niche_def = niche_def,\n                        gc = gradient) |&gt;\n  hist(breaks = seq(0, 1, length.out = 30),\n       main = \"Fossil abundance with ecological effect\",\n       xlab = \"Time\",\n       ylab = \"Fossil occurrences\")\n\nWarning in rej_samp(f = f, x_min = from, x_max = to, n = n, f_max = f_max):\nf_max &lt; f on between x_min and x_max. f_max was adjusted to be 2.14358881\n\n\n\n\n\n\n\n\n\nIt is then simple to insert stratigraphic effects into the pipeline to study the joint effect:\n\nStratPal::p3_var_rate(x = c(0,1),\n                      y = c(1,2),\n                      from = t_min,\n                      to = t_max,\n                      n = 1000) |&gt;\n  StratPal::apply_niche(niche_def = niche_def,\n                        gc = gradient) |&gt;\n  admtools::time_to_strat(adm) |&gt;\n  hist(breaks = seq(from = 0, to = h_max, length.out = 30),\n       main = \"Fossil abundance with ecological effects\\nin the stratigraphic domain\",\n       xlab = \"Stratigraphic position\",\n       ylab = \"Fossil occurrences\")\n\nWarning in rej_samp(f = f, x_min = from, x_max = to, n = n, f_max = f_max):\nf_max &lt; f on between x_min and x_max. f_max was adjusted to be 2.14358881\n\n\n\n\n\n\n\n\n\nThat’s how easy this is!\n\n\n10.3.2 Application to fossil objects associated with phylogenetic trees\nEverything said above applies identical to fossil objects simulated along a tree: Define a niche (valid for all taxa record in the tree) and a gradient, and use apply_niche. There is one major caveat though: age-depth models count time forward as the simulation evolved, while fossil objects record *age. This requires flipping the time axis to make everything work out correctly:\n\n# As baseline\nplot(fossils, tree,\n     main = \"Full fossil record without ecological effects\")\n\n\n\n\n\n\n\n\nNow let’s introduce the ecological effects:\n\nfossils_after_ecol = fossils |&gt;\n  admtools::rev_dir(ref = t_max) |&gt;\n  StratPal::apply_niche(niche_def = niche_def, gc = gradient) |&gt;\n  admtools::rev_dir(ref = t_max)\nplot(fossils_after_ecol, tree)\n\n\n\n\n\n\n\n\nNote the significant thinning of fossil sampling towards the top of the tree due to repeated subaerial exposure. Note again that this effect has nothing to do with gaps, just the fact that the taxon does only live underwater.\n\n\n10.3.3 Taphonomic effects\nTaphonomic effects are modeled identical to ecological effects, with the taphonomic gradient (e.g., burial velocity) taking the role of the ecological gradient, and the preservation potential taking the role of the niche definition.\nAs a simple example, we define a taphonomic gradient that filters all occurrences that fall in a gap:\n\n# defines taphonomic filter that removes all fossils coinciding with gaps\nf = StratPal::strat_filter(adm)\nfossils_filtered = fossils |&gt;\n  admtools::rev_dir(ref = t_max) |&gt;\n  StratPal::apply_taphonomy(identity, f) |&gt;\n  admtools::rev_dir(ref = t_max)\n\nplot(fossils_filtered, tree,\n     main = \"Fossils during gaps removed\")\n\n\n\n\n\n\n\n\nOf course this pipeline can be extended to include stratigraphic effects and multiple ecological and taphonomic gradients.\n\n\n10.3.4 Extensions and limitations\nBoth ecological and taphonomic effects work out of the box for multivariate functions due the the magic of function composition. However, this modeling approach does currently not allow to model state-dependent effects (e.g., evolution of niches, variations in preservation between branches). In addition, this does not yet integrate with MorphoSim to selectively remove characters.",
+    "crumbs": [
+      "Day 3: Tree inference",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Stratigraphic paleobiology and fossil occurrences</span>"
+    ]
+  },
+  {
+    "objectID": "day3/StratPal_fossils.html#age-misidentification",
+    "href": "day3/StratPal_fossils.html#age-misidentification",
+    "title": "10  Stratigraphic paleobiology and fossil occurrences",
+    "section": "10.4 Age misidentification",
+    "text": "10.4 Age misidentification\nUp to now, we have assumed that age-depth models are fully known, which in reality is never really the case. Here we examine how this can effect interpretations of temporal dynamics.\nThe underlying idea is that there are 2 age-depth models at play: a “true” age-depth model that is used for forward modeling to determine the stratigraphic distribution of fossils, and a “assumed” age-depth model that is in a second step used to reconstruct ages from the observed stratigraphic positions of fossils.\nLet’s assume the simulated age-depth model is our true model, and our assumed model assumes naively that sediment accumulation is constant over the observed time interval:\nadm_true = adm # \"truth\"\nadm_assumed = admtools::tp_to_adm(t = seq(t_min, t_max, length.out = 1000),\n                                  h = seq(h_min, h_max, length.out = 1000),\n                                  T_unit = \"Myr\",\n                                  L_unit = \"m\")\nplot(adm_true)\ntitle(main = \"True age-depth model\")\nplot(adm_assumed)\ntitle(main = \"Assumed age-depth model\")\n\n\n\n\n\n\n\n\n\n\n\n10.4.1 Effect on fossil occurrences and last occurrences\nTo determine the inferred age of a fossil, first determine its stratigraphic position using the correct age-depth model, and the reconstruct its age using the assumed age-depth model:\n\ntrue_age = 0.75\nassumed_age = true_age |&gt;\n  admtools::time_to_strat(adm_true) |&gt;\n  admtools::strat_to_time(adm_assumed)\nassumed_age\n\n[1] 0.8250585\n\n\nThis immediately generalizes, e.g. under a constant extinction rate (and assuming every taxon is abundantly sampled), the reconstructed pattern of last occurrences is\n\nStratPal::p3(rate = 1,\n   from = t_min,\n   to = t_max,\n   n = 1000) |&gt;\n  admtools::time_to_strat(adm_true, destructive = FALSE) |&gt;\n  admtools::strat_to_time(adm_assumed) |&gt;\n  hist(breaks = seq(from = t_min, to = t_max, length.out = 30),\n       xlab = \"Time [Myr]\",\n       main = \"Inferred extinction dymanics\",\n       freq = FALSE,\n       ylab = \"Last occcurrences\")\n\n\n\n\n\n\n\n\nThink through this to validate that the peaks in the histogram correspond to the gaps in the age-depth model.\nThis approach allows to immediately determine how wrong our age-estimates really are due to the wrong age-depth model:\n\ninferred_time = t |&gt; \n  admtools::time_to_strat(adm_true) |&gt;\n  admtools::strat_to_time(adm_assumed)  \nplot(x = t,\n     y = t - inferred_time,\n     type = \"l\",\n     xlab = \"Time [Myr]\",\n     ylab = \"Error [Myr]\")\nlines(x = c(t_min, t_max),\n      y = c(0,0),\n      lty = 3)\n\n\n\n\n\n\n\n\n\n\n10.4.2 Application to fossil objects associated with a tree\nAs before, this approach immediately expands to fossil objects simulated along a tree, again with the complication that the direction of time needs to be flipped:\n\nfossils_misassigned_age = fossils |&gt;\n    admtools::rev_dir(ref = t_max) |&gt;\n  admtools::time_to_strat(adm_true) |&gt;\n  admtools::strat_to_time(adm_assumed) |&gt;\n    admtools::rev_dir(ref = t_max)\nplot(fossils_misassigned_age, tree,\n     main = \"Tree with wrong reconstructed fossil ages\")\n\n\n\n\n\n\n\n\nHere you can immediately see the contradiction between the timing of the underlying biological truth (the tree) and the (wrongly) reconstructed ages of the fossils. At multiple locations, fossils associated with a lineage extend beyond the duration of the lineage, and fossils of an ancestoral lineage are present long after a branching event.\nUsing these fossil ages for tree inference will clearly lead to wrong results.",
     "crumbs": [
       "Day 3: Tree inference",
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>Stratigraphic paleobiology and fossil occurrences</span>"
@@ -189,7 +288,95 @@
     "href": "day3/StratPal_phylo.html",
     "title": "11  Phylogeny and stratigraphy",
     "section": "",
-    "text": "11.1 Combining phylogeny and stratigraphy",
+    "text": "11.1 Introduction\nThis chapter combines everything we have learned so far by combining stratigraphic paleobiology and phylogenetics into one forward simulation. At the end of this chapter, you will have built a complete simulation pipeline consisting of\nWith all these pieces in place, we can then address two key questions in the next chapter:\nYour task for this chapter is to modify the provided pipeline according to your work in the last 3 days and simulate your very own fossil record. At the end you should have two components: (1) simulated biased data that you would usually use for inference, specifically a character matrix and fossil ages and (2) the biological and stratigraphic “truth” to compare inference results to. Specifically, this should contain the true sampled tree, age-depth relationship, clock rate, and model of morphological evolution.",
+    "crumbs": [
+      "Day 3: Tree inference",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Phylogeny and stratigraphy</span>"
+    ]
+  },
+  {
+    "objectID": "day3/StratPal_phylo.html#introduction",
+    "href": "day3/StratPal_phylo.html#introduction",
+    "title": "11  Phylogeny and stratigraphy",
+    "section": "",
+    "text": "A stratigraphic forward model (CarboKitten) that simulates age-depth models and environmental gradients such as water depth and facies\nA FBD tree that describes the evolutionary relationship between taxa\nFossils sampled along the tree according to an originally constant sampling rate, which is modified by gaps in the stratigraphic record and ecological as well as taphonomic effects\nA character matrix for the fossils evolving according to a specified model of evolution and potentially missing characters due to differential preservation\nFossil ages that are potentially offset due to age misassignment or uncertain\n\n\n\nWhen we run inference on the simulated data (fossil ages, character matrices), can we recover the “true” evolutionary history (e.g., tree topology, model parameters)? More speculatively, can we potentially recover stratigraphic information such as sediment accumulation rates and gap duration from phylogenetic inference?\nHaving build the forward simulation pipeline, can we use our knowledge of stratigraphy and the sampling process as sources of information in the inference? And if yes, does it improve the inference?",
+    "crumbs": [
+      "Day 3: Tree inference",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Phylogeny and stratigraphy</span>"
+    ]
+  },
+  {
+    "objectID": "day3/StratPal_phylo.html#true-and-assumed-age-depth-model",
+    "href": "day3/StratPal_phylo.html#true-and-assumed-age-depth-model",
+    "title": "11  Phylogeny and stratigraphy",
+    "section": "11.2 True and assumed age-depth model",
+    "text": "11.2 True and assumed age-depth model\nLet’s begin by loading the age-depth model data. For simplicity, we focus on the mid-platform section only\nadm_location = \"../data/output/columns_adm.csv\" \ndata_adm = read.csv(adm_location) # read age-depth model data\nkey = \"mid\"\n\nt =  data_adm[,which(grepl(\"Myr\", names(data_adm)))] # time step\n# select height column that contains the key\nh = data_adm[,which(grepl(key,names(data_adm)))]\n# define age-depth model\nadm = admtools::tp_to_adm(t = t,\n                          h = h,\n                          T_unit = \"Myr\",\n                          L_unit = \"m\")\n\nh_max = admtools::max_height(adm)\nh_min = admtools::min_height(adm)\nt_max = admtools::max_time(adm)\nt_min = admtools::min_height(adm)\n\nadm_assumed = admtools::tp_to_adm(t = c(t_min, t_max),\n                                  h = c(h_min, h_max),\n                                  T_unit = \"Myr\",\n                                  L_unit = \"m\")\nplot(adm,\n     lwd_destr = 1, # line width destructive interval (hiatus)\n     lwd_acc = 2, # line width accumulative interval\n     col_destr = NULL,\n     col_acc = \"black\")\nadmtools::T_axis_lab() # add time axis label\nadmtools::L_axis_lab() # add length axis label (stratigraphic domain)\ntitle(main = \"True age-depth model\")\nplot(adm_assumed,\n     lwd_destr = 1, # line width destructive interval (hiatus)\n     lwd_acc = 2, # line width accumulative interval\n     col_destr = NULL,\n     col_acc = \"black\")\nadmtools::T_axis_lab() # add time axis label\nadmtools::L_axis_lab() # add length axis label (stratigraphic domain)\ntitle(main = \"Assumed age-depth model\")",
+    "crumbs": [
+      "Day 3: Tree inference",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Phylogeny and stratigraphy</span>"
+    ]
+  },
+  {
+    "objectID": "day3/StratPal_phylo.html#taphonomy-and-ecology",
+    "href": "day3/StratPal_phylo.html#taphonomy-and-ecology",
+    "title": "11  Phylogeny and stratigraphy",
+    "section": "11.3 Taphonomy and ecology",
+    "text": "11.3 Taphonomy and ecology\nAgain, we use water depth as ecological gradient:\n\nwd_opt = 5\nwd_tol = 10\ncutoff_val = 0\n#| layout-ncol: 2\nwd_location = \"../data/output/columns_wd.csv\" # adjust if you have a different output location\ndata_wd = read.csv(wd_location) # read age-depth model data\nt =  data_wd[,names(data_wd)[2]] # time step\n# select height column that contains the key\nwd = data_wd[,which(grepl(key,names(data_wd)))]\n\ngradient = approxfun(x = t,\n                     y = wd)\nplot(x = t,\n     y = gradient(t),\n     type = \"l\",\n     xlab = \"Time [Myr]\",\n     ylab = \"Water depth [m]\",\n     main = \"Water depth as gradient\")\n\n\n\n\n\n\n\nniche_def = StratPal::snd_niche(opt = wd_opt, # pref. water depth 5 m\n                                tol = wd_tol, # water depth tolerance 10 m (sd)\n                                cutoff_val = cutoff_val) # does not live above water \nwd_vals = seq(from = min(wd),\n              to = max(wd),\n              length.out = 100)\nplot(x = wd_vals,\n     y = niche_def(wd_vals),\n     type = \"l\",\n     xlab = \"Water depth [m]\",\n     ylab = \"Sampling probability\",\n     main = \"Niche definition\")\n\n\n\n\n\n\n\n\nThis results in the following sampling probability:\n\nplot(x = t,\n     y = t |&gt; gradient() |&gt; niche_def(),\n     type = \"l\",\n     xlab = \"Time\",\n     ylab = \"Sampling probability\",\n     main = \"Sampling probability of fossils\")\n\n\n\n\n\n\n\n\nFor the taphonomy, we again remove all fossils coinciding with gaps:\n\ngap_remove = StratPal::strat_filter(adm)\nplot(t, gap_remove(t),\n     type = \"l\",\n     xlab = \"Time [Myr]\",\n     ylab = \"Sampling probability\")",
+    "crumbs": [
+      "Day 3: Tree inference",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Phylogeny and stratigraphy</span>"
+    ]
+  },
+  {
+    "objectID": "day3/StratPal_phylo.html#fbd-simulation",
+    "href": "day3/StratPal_phylo.html#fbd-simulation",
+    "title": "11  Phylogeny and stratigraphy",
+    "section": "11.4 FBD simulation",
+    "text": "11.4 FBD simulation\nNext, simulate the tree and the fossils along it:\n\nseed = 42\nset.seed(seed)\nlambda = 2\nmu = 0.3\npsi = 70\ntree = TreeSim::sim.bd.age(age = t_max,\n                              numbsim = 1,\n                              lambda = lambda,\n                              mu = mu,\n                              frac = 1,\n                              mrca = FALSE,\n                              complete = TRUE)[[1]]\nfossils = FossilSim::sim.fossils.poisson(rate = psi,\n                                         tree = tree)\nplot(fossils, tree)",
+    "crumbs": [
+      "Day 3: Tree inference",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Phylogeny and stratigraphy</span>"
+    ]
+  },
+  {
+    "objectID": "day3/StratPal_phylo.html#taphonomic-and-ecological-effects-on-fossils",
+    "href": "day3/StratPal_phylo.html#taphonomic-and-ecological-effects-on-fossils",
+    "title": "11  Phylogeny and stratigraphy",
+    "section": "11.5 Taphonomic and ecological effects on fossils",
+    "text": "11.5 Taphonomic and ecological effects on fossils\nNow we can apply our ecological and taphonomic filters to the fossil object:\n\nfossils_pres = fossils |&gt;\n  admtools::rev_dir(ref = t_max) |&gt;\n  StratPal::apply_niche(niche_def = niche_def,\n                        gc = gradient) |&gt;\n  StratPal::apply_taphonomy(pres_potential = gap_remove,\n                            ctc = identity) |&gt;\n  admtools::rev_dir(ref = t_max)\nplot(fossils_pres, tree)\n\n\n\n\n\n\n\n\nNote that we can combine the original fossil sampling rate psi with the ecological and taphonomic effects to determine the continuously varying sampling rate in time:\n\ntotal_sampling_rate = function(x){\n  y = psi * niche_def(gradient(x)) * gap_remove(x)\n  return(y)\n}\n# use lower temporal resolution\nt_low_res = seq(t_min, t_max, length.out = 100)\nplot(x = t_low_res,\n     y = total_sampling_rate(t_low_res),\n     type = \"l\",\n     xlab = \"Time\",\n     ylab = \"Effective sampling rate\")\n\n\n\n\n\n\n\n\nOften, the original sampling rate psi needs to be chosen high to make sure any fossils are preserved. If you would like to subsample your fossils to a fixed small number, you can use the following function for it. We subsample to 30 fossils to reduce runtime in the inference later.\n\nsubsample_fossils = function(fossils, n){\n  #' randomly select a number of fossils\n  ind = sample(seq_len(length(fossils$sp)), size = n)\n  return(fossils[ind,])\n}\nfossils_used = fossils_pres |&gt;\n  subsample_fossils(n = 30)",
+    "crumbs": [
+      "Day 3: Tree inference",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Phylogeny and stratigraphy</span>"
+    ]
+  },
+  {
+    "objectID": "day3/StratPal_phylo.html#simulate-morphological-characters",
+    "href": "day3/StratPal_phylo.html#simulate-morphological-characters",
+    "title": "11  Phylogeny and stratigraphy",
+    "section": "11.6 Simulate morphological characters",
+    "text": "11.6 Simulate morphological characters\nNow we can simulate morphological characters along the tree and the preserved fossils:\n\nn_states = 2\nbr_rate = 0.5\ntrait_num = 100\nmorpho_mkv = MorphSim::sim.morpho(k = n_states,\n                        time.tree = tree,\n                        br.rates = br_rate,\n                        trait.num = trait_num, \n                        variable = FALSE,\n                        fossil = fossils_used)\n\nWarning in MorphSim::sim.morpho(k = n_states, time.tree = tree, br.rates = br_rate, : 1 fossil sampling event(s) found along the root edge were removed,\n        as characters evolve from a root state.",
+    "crumbs": [
+      "Day 3: Tree inference",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Phylogeny and stratigraphy</span>"
+    ]
+  },
+  {
+    "objectID": "day3/StratPal_phylo.html#modify-ages",
+    "href": "day3/StratPal_phylo.html#modify-ages",
+    "title": "11  Phylogeny and stratigraphy",
+    "section": "11.7 Modify ages",
+    "text": "11.7 Modify ages\nNow we can modify the ages stored in the fossil object:\n\nfossils_age_misassigned = morpho_mkv$fossil |&gt; \n  admtools::rev_dir(ref = t_max) |&gt;\n  admtools::time_to_strat(adm) |&gt; \n  admtools::strat_to_time(adm_assumed) |&gt;\n  admtools::rev_dir(ref = t_max)\n# replace correct ages with misassigned ages\n# for easier export via MorphSim::write.morpho\nmorpho_mkv$fossil = fossils_age_misassigned\n\nDo you know why this is only done now and not in one of the earlier steps that modify the fossils?",
+    "crumbs": [
+      "Day 3: Tree inference",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Phylogeny and stratigraphy</span>"
+    ]
+  },
+  {
+    "objectID": "day3/StratPal_phylo.html#export-data",
+    "href": "day3/StratPal_phylo.html#export-data",
+    "title": "11  Phylogeny and stratigraphy",
+    "section": "11.8 Export data",
+    "text": "11.8 Export data\nFinally, we can export the tree, character matrix, and fossil ages:\n\nMorphSim::write.morpho(data = morpho_mkv,\n                       file = \"char_mat.nex\",\n                       type = \"matrix\",\n                       all = TRUE)\n\nMorphSim::write.morpho(data = morpho_mkv,\n                       file = \"ages.tsv\",\n                       type = \"ages\",\n                       all = TRUE)",
     "crumbs": [
       "Day 3: Tree inference",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Phylogeny and stratigraphy</span>"
@@ -200,10 +387,65 @@
     "href": "day3/FBD_strat_inference.html",
     "title": "12  Stratigraphic information in phylogenetic inference",
     "section": "",
-    "text": "12.1 Introduction\nTBA",
+    "text": "12.1 Introduction\nIn this chapter you will explore how all the stratigraphic effects we have explored so far interact with phylogenetic inference. We focus on two things:\nWe provide some templates for the inference in the next chapter, so you will not have to set up the whole pipeline yourself.",
     "crumbs": [
       "Day 3: Tree inference",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Stratigraphic information in phylogenetic inference</span>"
+    ]
+  },
+  {
+    "objectID": "day3/FBD_strat_inference.html#introduction",
+    "href": "day3/FBD_strat_inference.html#introduction",
+    "title": "12  Stratigraphic information in phylogenetic inference",
+    "section": "",
+    "text": "Do stratigraphic effects bias inference, meaning when we run inference under simplified assumptions (e.g., constant rates) using biased data, does this change our results?\nDoes stratigraphic information improve inference, meaning if we know how sampling rates vary with time, can we incorporate this into the inference to improve results?",
+    "crumbs": [
+      "Day 3: Tree inference",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Stratigraphic information in phylogenetic inference</span>"
+    ]
+  },
+  {
+    "objectID": "day3/FBD_strat_inference.html#inference-using-biased-data",
+    "href": "day3/FBD_strat_inference.html#inference-using-biased-data",
+    "title": "12  Stratigraphic information in phylogenetic inference",
+    "section": "12.2 Inference using biased data",
+    "text": "12.2 Inference using biased data\nRun phylogenetic inference using your preferred software (BEAST, revbayes), where the setup matches the biological truth you simulated, but provide the stratigraphically biased data as input.",
+    "crumbs": [
+      "Day 3: Tree inference",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Stratigraphic information in phylogenetic inference</span>"
+    ]
+  },
+  {
+    "objectID": "day3/FBD_strat_inference.html#providing-stratigraphic-data-into-phylogenetic-inference",
+    "href": "day3/FBD_strat_inference.html#providing-stratigraphic-data-into-phylogenetic-inference",
+    "title": "12  Stratigraphic information in phylogenetic inference",
+    "section": "12.3 Providing stratigraphic data into phylogenetic inference",
+    "text": "12.3 Providing stratigraphic data into phylogenetic inference\nAdd stratigraphic information to the inference by using the FBD skyline model. Use the skyline for the sampling rate to distinguish between intervals where (1) you know nothing can be sampled due to gaps in the fossil record, (2) intervals where fossils are sampled and you have an estimate of the sampling rate available and (3) intervals where fossils are sampled but you have no estimate of the sampling rate.\n\nYou can use the following code to determine the breakpoints of your skyline model more easily:\n\nget_skyline_breakpoints = function(adm,\n                                   min_gap_duration){\n  #' determines skyline breakpoints (in age)\n  #' for gaps above a minimum gap duration\n  #' @param adm an age-depth model\n  #' @param min_gap_duration positive number, minimum gap duration to filter by\n  #' \n  #' @description\n    #' does return breakpoints in age!\n    #' \n  t_max = admtools::max_time(adm)\n  hiat_mat =  do.call(rbind, admtools::get_hiat_list(adm))\n  long_enough = (hiat_mat[, \"end\"] - hiat_mat[, \"start\"]) &gt; min_gap_duration\n  long_hiat = hiat_mat[long_enough,2:3] |&gt; \n    t() |&gt;\n    as.vector()\n  # convert to age\n  breakpoints = rev(t_max - long_hiat)\n  return(breakpoints)\n}\n\nAnother useful helper function to construct priors is to determine the average effective sampling rate over an age interval:\n\navg_sampling_age = function(adm,\n                            niche_def,\n                            gradient,\n                            gap_remove,\n                            age_1,\n                            age_2,\n                            psi){\n  #' determines average effective sampling rate\n  #' @param adm age-depth model\n  #' @param nich_def niche definition\n  #' @param gradient ecological gradient\n  #' @param gap_remove stratigraphic filter as defined in previous chapter\n  #' @param age_1 first age\n  #' @param age_2 second age\n  #' @param psi fossil sampling parameter from the FBD model\n  #' \n  #' @description\n  #' determines the average effective sampling rate for the interval between\n  #' age_1 and age_2\n  #' \n  total_sampling_rate = function(x){\n    y = psi * niche_def(gradient(x)) * gap_remove(x)\n    return(y)\n  }\n  t_max = admtools::get_max_time(adm)\n  t_1 = t_max - age_1\n  t_2 = t_max - age_2\n  t_lower = min(c(t_1, t_2))\n  t_upper = max(c(t_1, t_2))\n  integral = integrate(f = total_sampling_rate,\n                       lower = t_lower,\n                       upper = t_upper,\n                       subdivisions = 1000)[[1]]\n  avg_sampling = integral/(t_upper - t_lower)\n  return(avg_sampling)\n}\n\nNote that if you have subsampled your fossils to reduce sample size, this will not match the effective sample size on the FBD tree.",
+    "crumbs": [
+      "Day 3: Tree inference",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Stratigraphic information in phylogenetic inference</span>"
+    ]
+  },
+  {
+    "objectID": "day3/inference_helpers.html",
+    "href": "day3/inference_helpers.html",
+    "title": "13  Inference",
+    "section": "",
+    "text": "13.1 Bayesian inference\nThis chapter contains code to help set up phylogenetic inference pipelines.",
+    "crumbs": [
+      "Day 3: Tree inference",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Inference</span>"
+    ]
+  },
+  {
+    "objectID": "day3/inference_helpers.html#revbayes",
+    "href": "day3/inference_helpers.html#revbayes",
+    "title": "13  Inference",
+    "section": "13.2 Revbayes",
+    "text": "13.2 Revbayes\nAll revbayes scripts can also be downloaded: fbd_inference_base.rev model_clock.rev model_morpho.rev model_fbd_base.rev model_fbd_skyline_sampling.rev fbd_inference_skyline.rev\n\n13.2.1 Standard FBD inference\nThis as a simple setup for a constant rate FBD inference. For more complex cases (e.g., age uncertainty, total evidence etc.) see this tutorial.\nWe use this basic setup, available in the file fbd_inference_base.rev:\n\nchar_mat &lt;- \"char_mat.nex\"\ntaxon_ages &lt;- \"ages.tsv\"\n#init_tree_name &lt;- \"INSERT_HERE\" - not used, if you want to initialize the starting tree\noutfile &lt;- \"trace\"\ntreefile &lt;- \"trees\"\noutfile_name &lt;- outfile + \".log\"\ntreefile_name &lt;- treefile + \".log\"\n\n# import data\nmorph &lt;- readDiscreteCharacterData(char_mat)\ntaxa &lt;- readTaxonData(taxon_ages)\n\n# true model parameters to specify initial state & priors if needed\nrho &lt;- 1.0\ntrue_origination_rate &lt;- 2\ntrue_extinction_rate &lt;- 0.3\ntrue_sampling_rate &lt;- 10\ntrue_origin_time &lt;- 2\ntrue_clock_rate = 0.5\n\n# initialize moves\nmoves = VectorMoves()\n\n# load tree model\nsource(\"model_fbd_const.rev\")\n# load clock model\nsource(\"model_clock.rev\")\n# load model of morphological evolution\nsource(\"model_morpho.rev\")\n\nphy_morpho ~ dnPhyloCTMC(tree = fbd_tree, branchRates = branch_rates_morpho, Q = Q_morpho, type = \"Standard\", coding = \"all\")\nphy_morpho.clamp(morph)\n\nmy_model = model(phy_morpho)\n#my_model.graph(\"fbd_base.dot\") generate model graph\n\n\n# initialize monitors\nmonitors = VectorMonitors()\n# write state to tracefile\nmonitors.append( mnModel(filename=outfile_name, printgen=10) )\n# write tree to tree file\nmonitors.append(mnFile(filename = treefile_name, printgen = 10, fbd_tree))\n# output to the screen\nmonitors.append(mnScreen(printgen=100, origin_time, speciation_rate, extinction_rate) )\n\n# initialize mcmc\nmymcmc = mcmc(my_model, monitors, moves, nruns = 2, ntries = 10000)\nmymcmc.burnin(generations=2000,tuningInterval=1500, verbose = TRUE)\nmymcmc.operatorSummary()\nmymcmc.run(generations = 10000)\nmymcmc.operatorSummary()\n\nq()\n\nNote that the “true” model parameters are provided. This is to accelerate convergence by defining appropriate priors and set the initial state of the analysis. Empirically, this is would never be the case.\nThe base analysis calls the three key model components: clock, morphological model, and tree model.\nThe clock model is specified in model_clock.rev:\n\n# strict morphological clock\nbranch_rates_morpho ~ dnExponential(lambda = 1/true_clock_rate) \nbranch_rates_morpho.setValue(true_clock_rate)\nmoves.append( mvScale(branch_rates_morpho, weight = 5.0, lambda = 0.1))\nmoves.append( mvScale(branch_rates_morpho, weight = 5.0, lambda = 1.0))\nmoves.append( mvScale(branch_rates_morpho, weight = 5.0, lambda = 10.0))\n\nThe morphological model is specified in model_morpho.rev:\n\n# model of morphological evolution\n# Mk2 model  - no ascertaintment correction\nQ_morpho := fnJC(2)\n\nAnd last, the tree model is specified in model_fbd_tree.rev:\n\nspeciation_rate ~ dnExponential(lambda = 1/true_origination_rate) # set to true mean\nmoves.append( mvScale(speciation_rate, weight=5.0, lambda = 0.1) )\nmoves.append( mvScale(speciation_rate, weight=5.0, lambda = 1.0) )\nmoves.append( mvScale(speciation_rate, weight=5.0, lambda = 5.0) )\nspeciation_rate.setValue(true_origination_rate)\n\nextinction_rate ~ dnExponential(lambda = 1/true_extinction_rate) # set to true mean\nmoves.append( mvScale(extinction_rate, weight=5.0, lambda = 0.1) )\nmoves.append( mvScale(extinction_rate, weight=5.0, lambda = 1.0) )\nmoves.append( mvScale(extinction_rate, weight=5.0, lambda = 5.0) )\nextinction_rate.setValue(true_extinction_rate)\n\norigin_time ~ dnExponential(lambda = 1.0)\nmoves.append( mvScale(origin_time, weight=5.0, lambda = 0.1) )\nmoves.append( mvScale(origin_time, weight=5.0, lambda = 1.0) )\nmoves.append( mvScale(origin_time, weight=5.0, lambda = 5.0) )\norigin_time.setValue(true_origin_time)\n\npsi ~ dnExponential(lambda = 1/true_sampling_rate)\npsi.setValue(true_sampling_rate)\nmoves.append( mvScale( psi, weight = 5.0, lambda = 0.1) )\nmoves.append( mvScale( psi, weight = 5.0, lambda = 1.0) )\nmoves.append( mvScale( psi, weight = 5.0, lambda = 10.0) )\n\n\nfbd_tree ~ dnFBDP(origin=origin_time, lambda=speciation_rate, mu=extinction_rate, psi=psi, rho=rho, taxa=taxa)\n\nmoves.append( mvFNPR(fbd_tree, weight=20.0) )\nmoves.append( mvGPR(fbd_tree, weight = 10.0))\nmoves.append( mvCollapseExpandFossilBranch(fbd_tree, origin_time, weight=50.0) )\nmoves.append( mvNodeTimeSlideUniform(fbd_tree, weight=10.0) )\nmoves.append( mvNodeTimeScale(fbd_tree, weight = 20.0))\nmoves.append( mvRootTimeSlideUniform(fbd_tree, origin_time, weight=50.0) )\nmoves.append( mvSubtreeScale(fbd_tree, weight = 10.0))\nmoves.append( mvTreeScale(fbd_tree, origin_time, weight = 10.0))\n\nWith all these parts in place, you can run the analysis\n\nrb fbd_inference.rev\n\nin your terminal. This might take a while, and there are useful tools such as nohup (for Linux) that allow you to run these analyses in the background:\n\nnohup rb fbd_inference.rev &gt; out.log 2&gt;&1 &\n\n\n\n13.2.2 Skyline FBD analysis\nFor the FBD skyline sampling analysis that formalizes stratigraphic knowledge as priors we use a very similar base setup, available in fbd_inference_skyline.rev:\n\nchar_mat &lt;- \"char_mat.nex\"\ntaxon_ages &lt;- \"ages.tsv\"\n#init_tree_name &lt;- \"INSERT_HERE\" - not used, if you want to initialize the starting tree\noutfile &lt;- \"trace_skyline\"\ntreefile &lt;- \"trees_skyline\"\noutfile_name &lt;- outfile + \".log\"\ntreefile_name &lt;- treefile + \".log\"\n\n# import data\nmorph &lt;- readDiscreteCharacterData(char_mat)\ntaxa &lt;- readTaxonData(taxon_ages)\n\n# true model parameters to specify initial state & priors if needed\nrho &lt;- 1.0\ntrue_origination_rate &lt;- 2\ntrue_extinction_rate &lt;- 0.3\ntrue_origin_time &lt;- 2\ntrue_clock_rate = 0.5\n\n# initialize moves\nmoves = VectorMoves()\n\n# load tree model\nsource(\"model_fbd_skyline_sampling.rev\")\n# load clock model\nsource(\"model_clock.rev\")\n# load model of morphological evolution\nsource(\"model_morpho.rev\")\n\nphy_morpho ~ dnPhyloCTMC(tree = fbd_tree, branchRates = branch_rates_morpho, Q = Q_morpho, type = \"Standard\", coding = \"all\")\nphy_morpho.clamp(morph)\n\nmy_model = model(phy_morpho)\n#my_model.graph(\"fbd_base.dot\") generate model graph\n\n\n# initialize monitors\nmonitors = VectorMonitors()\n# write state to tracefile\nmonitors.append( mnModel(filename=outfile_name, printgen=10) )\n# write tree to tree file\nmonitors.append(mnFile(filename = treefile_name, printgen = 10, fbd_tree))\n# output to the screen\nmonitors.append(mnScreen(printgen=100, origin_time, speciation_rate, extinction_rate, psi) )\n\n# initialize mcmc\nmymcmc = mcmc(my_model, monitors, moves, nruns = 2, ntries = 10000)\nmymcmc.burnin(generations=2000,tuningInterval=1500, verbose = TRUE)\nmymcmc.operatorSummary()\nmymcmc.run(generations = 10000)\nmymcmc.operatorSummary()\n\nq()\n\nThe tree model is slightly different because of the skyline analysis. The contents of model_fbd_skyline_sampling.rev are\n\nspeciation_rate ~ dnExponential(lambda = 1/true_origination_rate) # set to true mean\nmoves.append( mvScale(speciation_rate, weight=5.0, lambda = 0.1) )\nmoves.append( mvScale(speciation_rate, weight=5.0, lambda = 1.0) )\nmoves.append( mvScale(speciation_rate, weight=5.0, lambda = 5.0) )\nspeciation_rate.setValue(true_origination_rate)\n\nextinction_rate ~ dnExponential(lambda = 1/true_extinction_rate) # set to true mean\nmoves.append( mvScale(extinction_rate, weight=5.0, lambda = 0.1) )\nmoves.append( mvScale(extinction_rate, weight=5.0, lambda = 1.0) )\nmoves.append( mvScale(extinction_rate, weight=5.0, lambda = 5.0) )\nextinction_rate.setValue(true_extinction_rate)\n\norigin_time ~ dnExponential(lambda = 1.0)\nmoves.append( mvScale(origin_time, weight=5.0, lambda = 0.1) )\nmoves.append( mvScale(origin_time, weight=5.0, lambda = 1.0) )\nmoves.append( mvScale(origin_time, weight=5.0, lambda = 5.0) )\norigin_time.setValue(true_origin_time)\n\n# skyline breakpoints from the example age-depth model\n# focusing on gaps longer than 0.1 Myr\ntimeline &lt;- v(0.0978, 0.2250, 0.2772, 0.4090, 0.4622, 0.5702)\n\npsi[1] ~ dnExponential(lambda = 0.2)\npsi[2] &lt;- 0.00001 # fix to small numeric value to formalize that no fossils are sampled in the gap\npsi[3] ~ dnExponential(lambda = 0.2)\npsi[4] &lt;- 0.00001\npsi[5] ~ dnExponential(lambda = 0.2)\npsi[6] &lt;- 0.00001\npsi[7] ~ dnExponential(lambda = 0.2)\n\nmoves.append( mvScale( psi[1], weight = 5.0, lambda = 0.1) )\nmoves.append( mvScale( psi[1], weight = 5.0, lambda = 1.0) )\nmoves.append( mvScale( psi[1], weight = 5.0, lambda = 10.0) )\nmoves.append( mvScale( psi[3], weight = 5.0, lambda = 0.1) )\nmoves.append( mvScale( psi[3], weight = 5.0, lambda = 1.0) )\nmoves.append( mvScale( psi[3], weight = 5.0, lambda = 10.0) )\nmoves.append( mvScale( psi[5], weight = 5.0, lambda = 0.1) )\nmoves.append( mvScale( psi[5], weight = 5.0, lambda = 1.0) )\nmoves.append( mvScale( psi[5], weight = 5.0, lambda = 10.0) )\nmoves.append( mvScale( psi[7], weight = 5.0, lambda = 0.1) )\nmoves.append( mvScale( psi[7], weight = 5.0, lambda = 1.0) )\nmoves.append( mvScale( psi[7], weight = 5.0, lambda = 10.0) )\n\nfbd_tree ~ dnFBDP(origin=origin_time, lambda=speciation_rate, mu=extinction_rate, psi=psi, rho=rho, taxa=taxa, timeline = timeline)\n\n#fbd_tree.setValue(init_tree)\nmoves.append( mvFNPR(fbd_tree, weight=20.0) )\nmoves.append( mvGPR(fbd_tree, weight = 10.0))\nmoves.append( mvCollapseExpandFossilBranch(fbd_tree, origin_time, weight=500.0) )\nmoves.append( mvNodeTimeSlideUniform(fbd_tree, weight=10.0) )\nmoves.append( mvNodeTimeScale(fbd_tree, weight = 20.0))\nmoves.append( mvRootTimeSlideUniform(fbd_tree, origin_time, weight=0.0) )\nmoves.append( mvSubtreeScale(fbd_tree, weight = 100.0))\nmoves.append( mvTreeScale(fbd_tree, origin_time, weight = 100.0))",
+    "crumbs": [
+      "Day 3: Tree inference",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Inference</span>"
     ]
   }
 ]

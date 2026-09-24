@@ -26,6 +26,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -36,7 +71,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../references.html" rel="next">
+<link href="../day3/inference_helpers.html" rel="next">
 <link href="../day3/StratPal_phylo.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -216,6 +251,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Stratigraphic information in phylogenetic inference</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../day3/inference_helpers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Inference</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -229,7 +270,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
     </ul>
@@ -243,6 +284,8 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">12.1</span> Introduction</a></li>
+  <li><a href="#inference-using-biased-data" id="toc-inference-using-biased-data" class="nav-link" data-scroll-target="#inference-using-biased-data"><span class="header-section-number">12.2</span> Inference using biased data</a></li>
+  <li><a href="#providing-stratigraphic-data-into-phylogenetic-inference" id="toc-providing-stratigraphic-data-into-phylogenetic-inference" class="nav-link" data-scroll-target="#providing-stratigraphic-data-into-phylogenetic-inference"><span class="header-section-number">12.3</span> Providing stratigraphic data into phylogenetic inference</a></li>
   </ul>
 </nav>
     </div>
@@ -270,7 +313,84 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="introduction" class="level2" data-number="12.1">
 <h2 data-number="12.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">12.1</span> Introduction</h2>
-<p>TBA</p>
+<p>In this chapter you will explore how all the stratigraphic effects we have explored so far interact with phylogenetic inference. We focus on two things:</p>
+<ol type="1">
+<li>Do stratigraphic effects bias inference, meaning when we run inference under simplified assumptions (e.g., constant rates) using biased data, does this change our results?</li>
+<li>Does stratigraphic information improve inference, meaning if we know how sampling rates vary with time, can we incorporate this into the inference to improve results?</li>
+</ol>
+<p>We provide some templates for the inference in the next chapter, so you will not have to set up the whole pipeline yourself.</p>
+</section>
+<section id="inference-using-biased-data" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="inference-using-biased-data"><span class="header-section-number">12.2</span> Inference using biased data</h2>
+<p>Run phylogenetic inference using your preferred software (BEAST, revbayes), where the setup matches the biological truth you simulated, but provide the stratigraphically biased data as input.</p>
+</section>
+<section id="providing-stratigraphic-data-into-phylogenetic-inference" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="providing-stratigraphic-data-into-phylogenetic-inference"><span class="header-section-number">12.3</span> Providing stratigraphic data into phylogenetic inference</h2>
+<p>Add stratigraphic information to the inference by using the FBD skyline model. Use the skyline for the sampling rate to distinguish between intervals where (1) you know nothing can be sampled due to gaps in the fossil record, (2) intervals where fossils are sampled and you have an estimate of the sampling rate available and (3) intervals where fossils are sampled but you have no estimate of the sampling rate.</p>
+<!--- [Download the dataset](ages.tsv){download="ages.tsv"} --->
+<p>You can use the following code to determine the breakpoints of your skyline model more easily:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>get_skyline_breakpoints <span class="ot">=</span> <span class="cf">function</span>(adm,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                                   min_gap_duration){</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">#' determines skyline breakpoints (in age)</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">#' for gaps above a minimum gap duration</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">#' @param adm an age-depth model</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#' @param min_gap_duration positive number, minimum gap duration to filter by</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#' </span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">#' @description</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">#' does return breakpoints in age!</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">#' </span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  t_max <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">max_time</span>(adm)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  hiat_mat <span class="ot">=</span>  <span class="fu">do.call</span>(rbind, admtools<span class="sc">::</span><span class="fu">get_hiat_list</span>(adm))</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  long_enough <span class="ot">=</span> (hiat_mat[, <span class="st">"end"</span>] <span class="sc">-</span> hiat_mat[, <span class="st">"start"</span>]) <span class="sc">&gt;</span> min_gap_duration</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  long_hiat <span class="ot">=</span> hiat_mat[long_enough,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>] <span class="sc">|&gt;</span> </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">t</span>() <span class="sc">|&gt;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.vector</span>()</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># convert to age</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  breakpoints <span class="ot">=</span> <span class="fu">rev</span>(t_max <span class="sc">-</span> long_hiat)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(breakpoints)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Another useful helper function to construct priors is to determine the average effective sampling rate over an age interval:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>avg_sampling_age <span class="ot">=</span> <span class="cf">function</span>(adm,</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                            niche_def,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                            gradient,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                            gap_remove,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                            age_1,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                            age_2,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                            psi){</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">#' determines average effective sampling rate</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">#' @param adm age-depth model</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">#' @param nich_def niche definition</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">#' @param gradient ecological gradient</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">#' @param gap_remove stratigraphic filter as defined in previous chapter</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">#' @param age_1 first age</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">#' @param age_2 second age</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">#' @param psi fossil sampling parameter from the FBD model</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">#' </span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="co">#' @description</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="co">#' determines the average effective sampling rate for the interval between</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="co">#' age_1 and age_2</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="co">#' </span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  total_sampling_rate <span class="ot">=</span> <span class="cf">function</span>(x){</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    y <span class="ot">=</span> psi <span class="sc">*</span> <span class="fu">niche_def</span>(<span class="fu">gradient</span>(x)) <span class="sc">*</span> <span class="fu">gap_remove</span>(x)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(y)</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  t_max <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">get_max_time</span>(adm)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  t_1 <span class="ot">=</span> t_max <span class="sc">-</span> age_1</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  t_2 <span class="ot">=</span> t_max <span class="sc">-</span> age_2</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  t_lower <span class="ot">=</span> <span class="fu">min</span>(<span class="fu">c</span>(t_1, t_2))</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  t_upper <span class="ot">=</span> <span class="fu">max</span>(<span class="fu">c</span>(t_1, t_2))</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  integral <span class="ot">=</span> <span class="fu">integrate</span>(<span class="at">f =</span> total_sampling_rate,</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>                       <span class="at">lower =</span> t_lower,</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>                       <span class="at">upper =</span> t_upper,</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>                       <span class="at">subdivisions =</span> <span class="dv">1000</span>)[[<span class="dv">1</span>]]</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  avg_sampling <span class="ot">=</span> integral<span class="sc">/</span>(t_upper <span class="sc">-</span> t_lower)</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(avg_sampling)</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Note that if you have subsampled your fossils to reduce sample size, this will not match the effective sample size on the FBD tree.</p>
 
 
 </section>
@@ -683,8 +803,8 @@ ul.task-list li input[type="checkbox"] {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../references.html" class="pagination-link" aria-label="References">
-        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">References</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../day3/inference_helpers.html" class="pagination-link" aria-label="Inference">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Inference</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
