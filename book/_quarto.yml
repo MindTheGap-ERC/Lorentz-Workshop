@@ -25,6 +25,7 @@ book:
         - day3/StratPal_fossils.qmd
         - day3/StratPal_phylo.qmd
         - day3/FBD_strat_inference.qmd
+        - day3/inference_helpers.qmd
     - part: "Day 4: Analysis and software"
     - part: "Day 5: Results"
     - references.qmd

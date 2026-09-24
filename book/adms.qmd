@@ -2,3 +2,69 @@
 title: "Time in rocks"
 ---
 
+## Introduction
+
+This chapter introduces the concept of **age-depth models**, which formalize geochronological knowledge and contain a lot of stratigraphic information, e.g. on sedimentattion rates and hiatus location and duration.
+
+At the end of the chapter you will
+
+* be able to explain what an age-depth model is and what stratigraphic information it contains
+* have an intuition on how age-depth models modify the stratigraphic distribution of fossils
+
+These materials are adopted form the workshop "(Modeling Stratigraphic Paleobiology in R)[https://mindthegap-erc.github.io/StratPal_workshop_materials/]".
+
+## Age-depth models
+
+First load the data from your stratigraphic forward model:
+
+```{r}
+adm_name = "data/output/columns_adm.csv" # adjust if you have a different output location
+data_adm = read.csv(adm_name) # read age-depth model data
+names(data_adm) # inspect names
+
+```
+
+Next, extract the time-steps and the associated heights at the examined location. Your results and location heights might differ depending on your simulation setup
+```{r}
+t =  data_adm[,names(data_adm)[2]] # time step
+h_slope = data_adm[,names(data_adm)[3]]
+h_margin = data_adm[,names(data_adm)[4]]
+h_proximal = data_adm[,names(data_adm)[5]]
+h_midplat = data_adm[,names(data_adm)[5]]
+```
+
+Now we can start constructing age-depth models:
+
+```{r}
+adm_midplat = admtools::tp_to_adm(t = t,
+                                  h = h_midplat,
+                                  T_unit = "Myr",
+                                  L_unit = "m")
+```
+
+These age-depth model objects automatically identify hiatuses, and allow convenient extraction of information that is not obvious from the time and height data alone.
+
+Let's start by plotting the age-depth model:
+
+```{r}
+plot(adm_midplat,
+     lwd_destr = 1, # line width destructive interval (hiatus)
+     lwd_acc = 2, # line width accumulative interval
+     col_destr = "blue",
+     col_acc = "black")
+admtools::T_axis_lab() # add time axis label
+admtools::L_axis_lab() # add length axis label (stratigraphic domain)
+```
+
+### Extracting information from age-depth models
+
+Age-depth models encode a lot of crucial stratigraphic information
+
+```{r}
+
+```
+
+
+### Points of discussion
+
+1. 

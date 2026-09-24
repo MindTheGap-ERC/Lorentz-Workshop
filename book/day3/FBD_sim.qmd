@@ -4,6 +4,16 @@ format: html
 editor: visual
 ---
 
+## Introduction
+
+This chapter introduces the Fossilized Birth-Death (FBD) process using forward simulations.
+
+At the end of the chapter you will be able to
+
+-   describe the biological and geological processes that are part of the FBD model
+-   Be familiar with the different paramterisations of the model
+-   Understand the difference between the complete and the sampled tree
+
 ## Simulating the FBD model
 
 More to come soon

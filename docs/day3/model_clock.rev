@@ -1,0 +1,6 @@
+# strict morphological clock
+branch_rates_morpho ~ dnExponential(lambda = 1/true_clock_rate) 
+branch_rates_morpho.setValue(true_clock_rate)
+moves.append( mvScale(branch_rates_morpho, weight = 5.0, lambda = 0.1))
+moves.append( mvScale(branch_rates_morpho, weight = 5.0, lambda = 1.0))
+moves.append( mvScale(branch_rates_morpho, weight = 5.0, lambda = 10.0))

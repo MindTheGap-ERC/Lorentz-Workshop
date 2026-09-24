@@ -6,4 +6,88 @@ editor: visual
 
 ## Introduction
 
-TBA
+In this chapter you will explore how all the stratigraphic effects we have explored so far interact with phylogenetic inference. We focus on two things:
+
+1.  Do stratigraphic effects bias inference, meaning when we run inference under simplified assumptions (e.g., constant rates) using biased data, does this change our results?
+2.  Does stratigraphic information improve inference, meaning if we know how sampling rates vary with time, can we incorporate this into the inference to improve results?
+
+We provide some templates for the inference in the next chapter, so you will not have to set up the whole pipeline yourself.
+
+## Inference using biased data
+
+Run phylogenetic inference using your preferred software (BEAST, revbayes), where the setup matches the biological truth you simulated, but provide the stratigraphically biased data as input.
+
+## Providing stratigraphic data into phylogenetic inference
+
+Add stratigraphic information to the inference by using the FBD skyline model. Use the skyline for the sampling rate to distinguish between intervals where (1) you know nothing can be sampled due to gaps in the fossil record, (2) intervals where fossils are sampled and you have an estimate of the sampling rate available and (3) intervals where fossils are sampled but you have no estimate of the sampling rate.
+
+<!--- [Download the dataset](ages.tsv){download="ages.tsv"} ---> 
+
+You can use the following code to determine the breakpoints of your skyline model more easily:
+
+```{r}
+#| eval: false
+get_skyline_breakpoints = function(adm,
+                                   min_gap_duration){
+  #' determines skyline breakpoints (in age)
+  #' for gaps above a minimum gap duration
+  #' @param adm an age-depth model
+  #' @param min_gap_duration positive number, minimum gap duration to filter by
+  #' 
+  #' @description
+    #' does return breakpoints in age!
+    #' 
+  t_max = admtools::max_time(adm)
+  hiat_mat =  do.call(rbind, admtools::get_hiat_list(adm))
+  long_enough = (hiat_mat[, "end"] - hiat_mat[, "start"]) > min_gap_duration
+  long_hiat = hiat_mat[long_enough,2:3] |> 
+    t() |>
+    as.vector()
+  # convert to age
+  breakpoints = rev(t_max - long_hiat)
+  return(breakpoints)
+}
+```
+
+Another useful helper function to construct priors is to determine the average effective sampling rate over an age interval:
+
+```{r}
+avg_sampling_age = function(adm,
+                            niche_def,
+                            gradient,
+                            gap_remove,
+                            age_1,
+                            age_2,
+                            psi){
+  #' determines average effective sampling rate
+  #' @param adm age-depth model
+  #' @param nich_def niche definition
+  #' @param gradient ecological gradient
+  #' @param gap_remove stratigraphic filter as defined in previous chapter
+  #' @param age_1 first age
+  #' @param age_2 second age
+  #' @param psi fossil sampling parameter from the FBD model
+  #' 
+  #' @description
+  #' determines the average effective sampling rate for the interval between
+  #' age_1 and age_2
+  #' 
+  total_sampling_rate = function(x){
+    y = psi * niche_def(gradient(x)) * gap_remove(x)
+    return(y)
+  }
+  t_max = admtools::get_max_time(adm)
+  t_1 = t_max - age_1
+  t_2 = t_max - age_2
+  t_lower = min(c(t_1, t_2))
+  t_upper = max(c(t_1, t_2))
+  integral = integrate(f = total_sampling_rate,
+                       lower = t_lower,
+                       upper = t_upper,
+                       subdivisions = 1000)[[1]]
+  avg_sampling = integral/(t_upper - t_lower)
+  return(avg_sampling)
+}
+```
+
+Note that if you have subsampled your fossils to reduce sample size, this will not match the effective sample size on the FBD tree.
