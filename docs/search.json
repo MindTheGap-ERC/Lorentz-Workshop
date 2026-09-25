@@ -200,29 +200,51 @@
     "href": "day3/FBD_sim.html",
     "title": "9  Simulating trees under the FBD model",
     "section": "",
-    "text": "9.1 Introduction\nThis chapter introduces the Fossilized Birth-Death (FBD) process using forward simulations.\nAt the end of the chapter you will be able to",
+    "text": "9.1 Introduction\nThis chapter introduces the Fossilized Birth-Death (FBD) process using forward simulations.",
     "crumbs": [
       "Day 3: Tree inference",
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>Simulating trees under the FBD model</span>"
     ]
   },
   {
-    "objectID": "day3/FBD_sim.html#introduction",
-    "href": "day3/FBD_sim.html#introduction",
+    "objectID": "day3/FBD_sim.html#simulating-the-complete-bd-tree",
+    "href": "day3/FBD_sim.html#simulating-the-complete-bd-tree",
     "title": "9  Simulating trees under the FBD model",
-    "section": "",
-    "text": "describe the biological and geological processes that are part of the FBD model\nBe familiar with the different paramterisations of the model\nUnderstand the difference between the complete and the sampled tree",
+    "section": "9.2 Simulating the complete BD tree",
+    "text": "9.2 Simulating the complete BD tree\nWe start by simulating a tree using the TreeSim package. This package simulates trees conditioned on age, number of tips, or both. In stratigraphic paleobiology, the timescale of observation is often prescribed (e.g., lifespan of a basin, time interval covered by a section), which is why we focus on simulating conditioned on age.\n\n# fix random seed for reproducibility\nseed = 42\nset.seed(seed)\n# model parameters, modify as you see fit\nlambda = 2 # speciation rate\nmu = 0.3 # extinction rate\nt_max = 1 # duration of the simulation\ntree = TreeSim::sim.bd.age(age = t_max,\n                           numbsim = 1,\n                           lambda = lambda,\n                           mu = mu,\n                           mrca = FALSE,\n                           complete = TRUE)[[1]]\ntree\n\n\nPhylogenetic tree with 7 tips and 6 internal nodes.\n\nTip labels:\n  t6, t3, t2, t4, t5, t7, ...\n\nRooted; includes branch length(s).\n\n\nThis produces a phylo object, which we can plot:\n\nplot(tree)\n\n\n\n\n\n\n\n\nNote that this is a complete tree, meaning it contains extinct lineages. For comparison, let’s plot the reconstructed tree, which prunes all extinct lineages:\n\nreconstructed_tree = tree |&gt;\n  geiger::drop.extinct(tol = 10^-8)\nplot(reconstructed_tree)",
     "crumbs": [
       "Day 3: Tree inference",
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>Simulating trees under the FBD model</span>"
     ]
   },
   {
-    "objectID": "day3/FBD_sim.html#simulating-the-fbd-model",
-    "href": "day3/FBD_sim.html#simulating-the-fbd-model",
+    "objectID": "day3/FBD_sim.html#simulating-fossils-along-the-tree",
+    "href": "day3/FBD_sim.html#simulating-fossils-along-the-tree",
     "title": "9  Simulating trees under the FBD model",
-    "section": "9.2 Simulating the FBD model",
-    "text": "9.2 Simulating the FBD model\nMore to come soon",
+    "section": "9.3 Simulating fossils along the tree",
+    "text": "9.3 Simulating fossils along the tree\nNow, let’s sample some fossil occurrences along the tree according to a specified sampling rate\n\npsi = 5 # fossil sampling rate\nfossils = FossilSim::sim.fossils.poisson(rate = psi,\n                                         tree = tree)\nfossils\n\n   sp edge       hmin       hmax\n1   2    2 0.65280066 0.65280066\n2   3    3 0.03348379 0.03348379\n3   3    3 0.64393334 0.64393334\n4   3    3 0.58243031 0.58243031\n5   3    3 0.14728030 0.14728030\n6   3    3 0.22452495 0.22452495\n7   3    3 0.44237404 0.44237404\n8   4    4 0.48318219 0.48318219\n9   4    4 0.37341457 0.37341457\n10  4    4 0.27850257 0.27850257\n...\nFossil record with 18 occurrences representing 7 species\nFossil record not simulated using taxonomy: all speciation events are assumed to be symmetric \n\n\nHere you can inspect the generated fossil object, which contains information about species, the corresponding edge in the tree and age in the hmin and hmax column. Be aware that the entries in hmin and hmax are ages, even though the naming implicitly suggests that they might be heights.\nNow, let’s plot these fossils along the tree\n\nplot(fossils,\n     tree = tree,\n     show.tip.label = TRUE,\n     rho = 0) # suppress highlighting of extant tips\n\n\n\n\n\n\n\n\nThere are plenty of plotting options available in FossilSim, e.g., you can plot the stratigraphic ranges:\n\nplot(fossils, tree = tree, show.ranges = TRUE, rho = 0)\n\n\n\n\n\n\n\n\nSo far, we have focused on simulating fossils only. Now let’s sample some of the extant tips too by adding them to the fossil object. Here the parameter rho specifies what portion of the extant tips are sampled\n\nrho = 0.5 # proportion of extant tips that are sampled\nfossils2 = FossilSim::sim.extant.samples(fossils = fossils,\n                                         tree = tree,\n                                         rho = rho)\n\n# plot the output\nplot(fossils2,\n     tree = tree,\n     extant.col = \"red\")\n\n\n\n\n\n\n\n\nIf you inspect the newly generated fossil object, you can see the new fossils of age 0 added.\nThis gives us the option to introduce the concept of the sampled tree:\nplot(fossils2,\n     tree = tree,\n     extant.col = \"red\",\n     reconstructed = FALSE,\n     main = \"Simulated tree and fossils\")\nplot(fossils2,\n     tree = tree,\n     extant.col = \"red\",\n     reconstructed = TRUE,\n     main = \"Sampled tree\")\n\n\n\n\n\n\n\n\n\n\nThe sampled tree is the tree with all unsampled lineages (extant and extinct) removed. The sampled tree is the best we can hope to recover from our available data, as we will never recover unsampled lineages.",
+    "crumbs": [
+      "Day 3: Tree inference",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Simulating trees under the FBD model</span>"
+    ]
+  },
+  {
+    "objectID": "day3/FBD_sim.html#tasks-and-discussion-points",
+    "href": "day3/FBD_sim.html#tasks-and-discussion-points",
+    "title": "9  Simulating trees under the FBD model",
+    "section": "9.4 Tasks and discussion points",
+    "text": "9.4 Tasks and discussion points",
+    "crumbs": [
+      "Day 3: Tree inference",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Simulating trees under the FBD model</span>"
+    ]
+  },
+  {
+    "objectID": "day3/FBD_sim.html#advanced-topics",
+    "href": "day3/FBD_sim.html#advanced-topics",
+    "title": "9  Simulating trees under the FBD model",
+    "section": "9.5 Advanced topics",
+    "text": "9.5 Advanced topics\n\n9.5.1 Exporting trees with sampled ancestors\nFor comparability with other software packages, fossil objects have to be “baked in” the phylo object as tips at the end of an edge of length 0. We show this for the curious:\n# generate sampled ancestor tree\nSAt = FossilSim::SAtree.from.fossils(tree = tree, fossils = fossils2)\nplot(SAt$tree,\n     main = \"Sampled ancestor tree\\n\n     not sampled\")\n# select extant tips based on the fossil object\nsampled_extant_tips = SAt$fossils$tip.label[SAt$fossils$hmin == 0]\n# generate sampled tree from SAtree\nSAt_sampled = FossilSim::sampled.tree.from.combined(tree = SAt$tree, sampled_tips = sampled_extant_tips)\nplot(SAt_sampled,\n     main = \"Sampled ancestor tree, sampled\")\n\n\n\n\n\n\n\n\n\n\nIf you compare these trees to the ones above you will see that they correspond the the tree with the fossils plotted along the edges (with the exception of a change in tip labels).\n\n\n9.5.2 Simulating morphological data\nSimulation of morphological data works as before by handing the fossil object to sim.morpho:\n# simple Mk2 model\nn_states = 2\nbr_rate = 0.5\ntrait_num = 10\ntrait_to_display = 2\nmorpho_mk = MorphSim::sim.morpho(k = n_states,\n                        time.tree = tree,\n                        br.rates = br_rate,\n                        trait.num = trait_num, \n                        variable = FALSE,\n                        fossil = fossils)\nMorphSim::plotMorphoGrid(morpho_mk)\nplot(morpho_mk,\n     trait = trait_to_display)\ntitle(main = paste0(\"Trait no. \", trait_to_display))\n\n\n\n\n\n\n\n\n\n\n\n\n9.5.3 Inference\nWith the morphological data simulated, you can then export the simulated data:\n\nMorphSim::write.morpho(data = morpho_mk,\n                       file = \"char_mat_temp.nex\",\n                       type = \"matrix\",\n                       all = TRUE)\n\nMorphSim::write.morpho(data = morpho_mk,\n                       file = \"ages_temp.tsv\",\n                       type = \"ages\",\n                       all = TRUE)\n\nNote that this quietly assumes that rho = 1.\nWith this data at hand, you can now try to recover your simulation setup parameters using the Bayesian tree inference tool of your choice. Example scripts for this are available under “Inference helpers” (chapter 13).",
     "crumbs": [
       "Day 3: Tree inference",
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>Simulating trees under the FBD model</span>"
