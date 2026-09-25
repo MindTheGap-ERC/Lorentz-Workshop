@@ -170,7 +170,7 @@ morpho_mk = MorphSim::sim.morpho(k = n_states,
                         br.rates = br_rate,
                         trait.num = trait_num, 
                         variable = FALSE,
-                        fossil = fossils)
+                        fossil = fossils2)
 MorphSim::plotMorphoGrid(morpho_mk)
 plot(morpho_mk,
      trait = trait_to_display)
@@ -188,14 +188,14 @@ With the morphological data simulated, you can then export the simulated data:
 MorphSim::write.morpho(data = morpho_mk,
                        file = "char_mat_temp.nex",
                        type = "matrix",
-                       all = TRUE)
+                       all = TRUE,
+                       reconstructed = TRUE)
 # export taxon ages
 MorphSim::write.morpho(data = morpho_mk,
                        file = "ages_temp.tsv",
                        type = "ages",
-                       all = TRUE)
+                       all = TRUE,
+                       reconstructed = TRUE)
 ```
 
 With this data at hand, you can now try to recover your simulation setup parameters using the Bayesian tree inference tool of your choice. Example scripts for this are available under "Inference helpers" (chapter 13).
-
-Note that this exports data for all fossils as well as for potentially unsampled extant and extinct tips.
