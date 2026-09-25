@@ -21,7 +21,7 @@ Run phylogenetic inference using your preferred software (BEAST, revbayes), wher
 
 Add stratigraphic information to the inference by using the FBD skyline model. Use the skyline for the sampling rate to distinguish between intervals where (1) you know nothing can be sampled due to gaps in the fossil record, (2) intervals where fossils are sampled and you have an estimate of the sampling rate available and (3) intervals where fossils are sampled but you have no estimate of the sampling rate.
 
-<!--- [Download the dataset](ages.tsv){download="ages.tsv"} ---> 
+<!--- [Download the dataset](ages.tsv){download="ages.tsv"} --->
 
 You can use the following code to determine the breakpoints of your skyline model more easily:
 
