@@ -185,6 +185,8 @@ julia --project=. -e 'using Pkg; Pkg.instantiate()'
 
 ### R packages
 
+Note that the function `pak::pak()` replaces the now deprecated `devtools::install_github()`.
+
 ```R
 # devtools allows you to download the latest version of a package from github
 install.packages("devtools")
@@ -193,10 +195,16 @@ install.packages("devtools")
 install.packages("TreeSim")
 
 # MorphSim - used for simulating discrete morphology
-devtools::install_github("https://github.com/fossilsim/morphsim")
+pak::pak("https://github.com/cran/StratPal")("https://github.com/fossilsim/morphsim")
 
 # FossilSim - used for simulating fossils
-devtools::install_github("https://github.com/fossilsim/fossilsim")
+pak::pak("https://github.com/cran/StratPal")("https://github.com/fossilsim/fossilsim")
+
+# StratPal - used for simulating biostratigraphy
+pak::pak("https://github.com/cran/StratPal")
+
+# admtools - used for working with age-depth models
+pak::pak("https://github.com/cran/admtools")
 ```
 
 ## Troubleshooting
