@@ -14,9 +14,7 @@ Before we can simulate morphological data we need a phylogenetic tree along whic
 |------------------------------------|------------------------------------|
 | `sim.bd.taxa()` | number of tips |
 | `sim.bd.age()` | tree age (time since root) |
-| `sim.bd.taxa.age()` | both age and tip number |
 | `sim.rateshift.taxa()` | number of tips, with rate shifts / mass extinctions over time |
-| `sim.gsa.taxa()` | number of tips, sampled from a larger pool of simulated trees |
 
 We'll focus on `sim.bd.taxa()` since it's the simplest entry point, but it's worth knowing the others exist if your own data calls for a different kind of tree.
 
@@ -75,11 +73,6 @@ is.ultrametric(tree)
 ```
 
 ```{r}
-# branch lengths should all be positive and finite
-summary(tree$edge.length)
-```
-
-```{r}
 # TreeSim always produces a strictly bifurcating tree so this
 # should be TRUE regardless of complete = TRUE/FALSE
 is.binary(tree)
@@ -99,7 +92,7 @@ With a validated `phylo` object, extant and fossil tips both retained,we're read
 
 ## Simulating Morphological Data
 
-Now that we have a validated tree (extant tips plus fossils, from `TreeSim`), we can simulate morphological character data along it using `MorphSim`. We'll build up the model one assumption at a time, starting from the simplest possible case and progressively relaxing it, the same tree is used throughout, so any differences in the resulting data are purely down to the model, not the tree.
+Now that we have a validated tree (extant tips plus fossils, from `TreeSim`. We will simulate fossil sampling using the FBD model tomorrow!), we can simulate morphological character data along it using `MorphSim`. We'll build up the model one assumption at a time, starting from the simplest possible case and progressively relaxing it, the same tree is used throughout, so any differences in the resulting data are purely down to the model, not the tree.
 
 ```{r}
 library(MorphSim)
