@@ -16,7 +16,7 @@ This chapter combines everything we have learned so far by combining stratigraph
 
 -   A character matrix for the fossils evolving according to a specified model of evolution and potentially missing characters due to differential preservation
 
--   Fossil ages that are potentially offset due to age misassignment or uncertain
+-   Fossil ages that are potentially offset due to age misassignment or uncertainy
 
 With all these pieces in place, we can then address two key questions in the next chapter:
 
@@ -25,34 +25,34 @@ With all these pieces in place, we can then address two key questions in the nex
 
 Your **task** for this chapter is to modify the provided pipeline according to your work in the last 3 days and simulate your very own fossil record. At the end you should have two components: (1) simulated biased data that you would usually use for inference, specifically a character matrix and fossil ages and (2) the biological and stratigraphic "truth" to compare inference results to. Specifically, this should contain the true sampled tree, age-depth relationship, clock rate, and model of morphological evolution.
 
-## True and assumed age-depth model
+## Premliminaries
 
-Let's begin by loading the age-depth model data. For simplicity, we focus on the mid-platform section only
+### Stratigraphic data
 
-```{r}
+Let's begin by loading the stratigraphic information (age-depth model and water depth data).
+
+```{r load-adm-and-water-depth}
 #| layout-ncol: 2
 adm_location = "../data/output/columns_adm.csv" 
+wd_location = "../data/output/columns_wd.csv" # adjust if you have a different output location
 data_adm = read.csv(adm_location) # read age-depth model data
+data_wd = read.csv(wd_location) # read age-depth model data
 key = "mid"
-
 t =  data_adm[,which(grepl("Myr", names(data_adm)))] # time step
 # select height column that contains the key
 h = data_adm[,which(grepl(key,names(data_adm)))]
+wd = data_wd[,which(grepl(key,names(data_wd)))]
 # define age-depth model
 adm = admtools::tp_to_adm(t = t,
                           h = h,
                           T_unit = "Myr",
                           L_unit = "m")
-
+# some constants for simplicity
 h_max = admtools::max_height(adm)
 h_min = admtools::min_height(adm)
 t_max = admtools::max_time(adm)
 t_min = admtools::min_height(adm)
 
-adm_assumed = admtools::tp_to_adm(t = c(t_min, t_max),
-                                  h = c(h_min, h_max),
-                                  T_unit = "Myr",
-                                  L_unit = "m")
 plot(adm,
      lwd_destr = 1, # line width destructive interval (hiatus)
      lwd_acc = 2, # line width accumulative interval
@@ -62,80 +62,18 @@ admtools::T_axis_lab() # add time axis label
 admtools::L_axis_lab() # add length axis label (stratigraphic domain)
 title(main = "True age-depth model")
 
-plot(adm_assumed,
-     lwd_destr = 1, # line width destructive interval (hiatus)
-     lwd_acc = 2, # line width accumulative interval
-     col_destr = NULL,
-     col_acc = "black")
-admtools::T_axis_lab() # add time axis label
-admtools::L_axis_lab() # add length axis label (stratigraphic domain)
-title(main = "Assumed age-depth model")
-```
-
-## Taphonomy and ecology
-
-Again, we use water depth as ecological gradient:
-
-```{r}
-wd_opt = 5
-wd_tol = 10
-cutoff_val = 0
-#| layout-ncol: 2
-wd_location = "../data/output/columns_wd.csv" # adjust if you have a different output location
-data_wd = read.csv(wd_location) # read age-depth model data
-t =  data_wd[,names(data_wd)[2]] # time step
-# select height column that contains the key
-wd = data_wd[,which(grepl(key,names(data_wd)))]
-
-gradient = approxfun(x = t,
-                     y = wd)
 plot(x = t,
-     y = gradient(t),
-     type = "l",
+     y = wd,
      xlab = "Time [Myr]",
      ylab = "Water depth [m]",
-     main = "Water depth as gradient")
-
-niche_def = StratPal::snd_niche(opt = wd_opt, # pref. water depth 5 m
-                                tol = wd_tol, # water depth tolerance 10 m (sd)
-                                cutoff_val = cutoff_val) # does not live above water 
-wd_vals = seq(from = min(wd),
-              to = max(wd),
-              length.out = 100)
-plot(x = wd_vals,
-     y = niche_def(wd_vals),
-     type = "l",
-     xlab = "Water depth [m]",
-     ylab = "Sampling probability",
-     main = "Niche definition")
+     main = "Water depth")
 ```
 
-This results in the following sampling probability:
-
-```{r}
-plot(x = t,
-     y = t |> gradient() |> niche_def(),
-     type = "l",
-     xlab = "Time",
-     ylab = "Sampling probability",
-     main = "Sampling probability of fossils")
-```
-
-For the taphonomy, we again remove all fossils coinciding with gaps:
-
-```{r}
-gap_remove = StratPal::strat_filter(adm)
-plot(t, gap_remove(t),
-     type = "l",
-     xlab = "Time [Myr]",
-     ylab = "Sampling probability")
-```
-
-## FBD simulation
+### FBD tree
 
 Next, simulate the tree and the fossils along it:
 
-```{r}
+```{r simulate-fbd-tree-and-fossils}
 seed = 42
 set.seed(seed)
 lambda = 2
@@ -149,15 +87,70 @@ tree = TreeSim::sim.bd.age(age = t_max,
                               mrca = FALSE,
                               complete = TRUE)[[1]]
 fossils = FossilSim::sim.fossils.poisson(rate = psi,
-                                         tree = tree)
-plot(fossils, tree)
+                                         tree = tree,
+                                         root.edge = FALSE) # no fossils on root edge to avoid problems with MorphSim
+plot(fossils, 
+     tree = tree,
+     main = "FBD tree",
+     rho = 0)
 ```
 
-## Taphonomic and ecological effects on fossils
+## Taphonomy and ecology
+
+As first part of the pipeline, let's introduce ecological and taphonomic effects. As before, we use water depth as ecological gradient:
+
+```{r define-niche-and-ecological-gradient}
+#| layout-ncol: 2
+wd_opt = 5
+wd_tol = 10
+cutoff_val = 0
+gradient = approxfun(x = t,
+                     y = wd)
+plot(x = t,
+     y = gradient(t),
+     type = "l",
+     xlab = "Time [Myr]",
+     ylab = "Water depth [m]",
+     main = "Water depth as gradient")
+niche_def = StratPal::snd_niche(opt = wd_opt, # pref. water depth
+                                tol = wd_tol, # water depth tolerance (sd)
+                                cutoff_val = cutoff_val) # does not live above water 
+wd_vals = seq(from = min(wd),
+              to = max(wd),
+              length.out = 100)
+plot(x = wd_vals,
+     y = niche_def(wd_vals),
+     type = "l",
+     xlab = "Water depth [m]",
+     ylab = "Sampling probability",
+     main = "Niche definition")
+```
+
+Combined, this results in the following sampling probability with time:
+
+```{r plot-sampling-probability-due-to-fossils}
+plot(x = t,
+     y = t |> gradient() |> niche_def(),
+     type = "l",
+     xlab = "Time",
+     ylab = "Sampling probability",
+     main = "Sampling probability of fossils\ndue to ecology")
+```
+
+For the taphonomic effects, we again remove all fossils coinciding with gaps:
+
+```{r plot-sampling-probability-due-to-gaps}
+gap_remove = StratPal::strat_filter(adm)
+plot(t, gap_remove(t),
+     type = "l",
+     xlab = "Time [Myr]",
+     ylab = "Sampling probability",
+     main = "Sampling probability due to gaps")
+```
 
 Now we can apply our ecological and taphonomic filters to the fossil object:
 
-```{r}
+```{r thin-fossils-with-ecol-and-taphonomy}
 fossils_pres = fossils |>
   admtools::rev_dir(ref = t_max) |>
   StratPal::apply_niche(niche_def = niche_def,
@@ -165,12 +158,14 @@ fossils_pres = fossils |>
   StratPal::apply_taphonomy(pres_potential = gap_remove,
                             ctc = identity) |>
   admtools::rev_dir(ref = t_max)
-plot(fossils_pres, tree)
+plot(fossils_pres,
+     tree = tree,
+     rho = 0)
 ```
 
 Note that we can combine the original fossil sampling rate `psi` with the ecological and taphonomic effects to determine the continuously varying sampling rate in time:
 
-```{r}
+```{r plot-effective-sampling-rate}
 total_sampling_rate = function(x){
   y = psi * niche_def(gradient(x)) * gap_remove(x)
   return(y)
@@ -180,31 +175,54 @@ t_low_res = seq(t_min, t_max, length.out = 100)
 plot(x = t_low_res,
      y = total_sampling_rate(t_low_res),
      type = "l",
-     xlab = "Time",
-     ylab = "Effective sampling rate")
+     xlab = "Time [Myr]",
+     ylab = "Effective sampling rate",
+     main = "Effective sampling rate")
 ```
 
 Often, the original sampling rate `psi` needs to be chosen high to make sure any fossils are preserved. If you would like to subsample your fossils to a fixed small number, you can use the following function for it. We subsample to 30 fossils to reduce runtime in the inference later.
 
-```{r}
+```{r subsample-fossils-to-fixed-samplesize}
+n_preserved = 30
 subsample_fossils = function(fossils, n){
   #' randomly select a number of fossils
   ind = sample(seq_len(length(fossils$sp)), size = n)
   return(fossils[ind,])
 }
-fossils_used = fossils_pres |>
-  subsample_fossils(n = 30)
+fossils2 = fossils_pres |>
+  subsample_fossils(n = n_preserved)
+plot(fossils2,
+     tree = tree,
+     show.tip.label = TRUE,
+     rho = 0)
+```
+
+## Add extant samples
+
+Now we add the extant samples to the fossil object. This yields the sampled tree after after taphonomic and ecological effects.
+```{r add-extant-samples}
+rho = 0.5 # proportion of extant tips that are sampled
+fossils_used = FossilSim::sim.extant.samples(fossils = fossils2,
+                                         tree = tree,
+                                         rho = rho)
+# plot the output
+plot(fossils_used,
+     tree = tree,
+     extant.col = "red",
+     show.tip.label = TRUE,
+     reconstructed = TRUE,
+     main = "Sampled tree")
 ```
 
 ## Simulate morphological characters
 
-Now we can simulate morphological characters along the tree and the preserved fossils:
+Now we can simulate morphological characters along the tree and the preserved fossils. We focus on the simple Mk2 model here, insert your own if you like.
 
-```{r}
+```{r simulate-morphological-characters}
 n_states = 2
 br_rate = 0.5
 trait_num = 100
-morpho_mkv = MorphSim::sim.morpho(k = n_states,
+morpho_mk = MorphSim::sim.morpho(k = n_states,
                         time.tree = tree,
                         br.rates = br_rate,
                         trait.num = trait_num, 
@@ -212,19 +230,31 @@ morpho_mkv = MorphSim::sim.morpho(k = n_states,
                         fossil = fossils_used)
 ```
 
-## Modify ages
+## Age-misassignment
+
+Now we introduce age-misassignment of the fossils. Again, we assume a simplified age-depth model based on the assumption of constant and uninterrupted sedimentation:
+
+```{r define-assumed-age-depth-model}
+adm_assumed = admtools::tp_to_adm(t = c(t_min, t_max),
+                                  h = c(h_min, h_max),
+                                  T_unit = "Myr",
+                                  L_unit = "m")
+```
+
+You can also use a more complex assumed age-depth model, e.g., one from another location. This would emulate the situation where you wrongly correlate through a basin.
 
 Now we can modify the ages stored in the fossil object:
 
-```{r}
-fossils_age_misassigned = morpho_mkv$fossil |> 
+```{r introduce-age-misassignment}
+fossils_age_misassigned = morpho_mk$fossil |> 
   admtools::rev_dir(ref = t_max) |>
-  admtools::time_to_strat(adm) |> 
+  admtools::time_to_strat(adm, destructive = FALSE) |> 
   admtools::strat_to_time(adm_assumed) |>
   admtools::rev_dir(ref = t_max)
+# set destructive = FALSE to avoid destruction of extant samples
 # replace correct ages with misassigned ages
 # for easier export via MorphSim::write.morpho
-morpho_mkv$fossil = fossils_age_misassigned
+morpho_mk$fossil = fossils_age_misassigned
 ```
 
 Do you know why this is only done now and not in one of the earlier steps that modify the fossils?
@@ -233,14 +263,28 @@ Do you know why this is only done now and not in one of the earlier steps that m
 
 Finally, we can export the tree, character matrix, and fossil ages:
 
-```{r}
-MorphSim::write.morpho(data = morpho_mkv,
+```{r export-all-data}
+MorphSim::write.morpho(data = morpho_mk,
                        file = "char_mat.nex",
                        type = "matrix",
-                       all = TRUE)
+                       all = TRUE,
+                       reconstructed = TRUE)
 
-MorphSim::write.morpho(data = morpho_mkv,
+MorphSim::write.morpho(data = morpho_mk,
                        file = "ages.tsv",
                        type = "ages",
-                       all = TRUE)
+                       all = TRUE,
+                       reconstructed = TRUE)
+
+MorphSim::write.morpho(data = morpho_mk,
+                       file = "sampled_tree.nex",
+                       type = "tree",
+                       all = TRUE,
+                       reconstructed = TRUE)
 ```
+
+## Tasks and discussion points
+
+* You now know many different effects that go into the sampled tree, character data, and ages. For your study system, which do you think are most relevant?
+
+* We have focused on forward simulation so far. If you had perfect knowledge of all these effects, how would you incorporate them in phylogenetic inference?
