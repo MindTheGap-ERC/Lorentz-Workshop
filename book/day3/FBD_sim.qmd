@@ -8,12 +8,167 @@ editor: visual
 
 This chapter introduces the Fossilized Birth-Death (FBD) process using forward simulations.
 
-At the end of the chapter you will be able to
+## Simulating the complete BD tree
 
--   describe the biological and geological processes that are part of the FBD model
--   Be familiar with the different paramterisations of the model
--   Understand the difference between the complete and the sampled tree
+We start by simulating a tree using the `TreeSim` package. This package simulates trees conditioned on age, number of tips, or both. In stratigraphic paleobiology, the timescale of observation is often prescribed (e.g., lifespan of a basin, time interval covered by a section), which is why we focus on simulating conditioned on age.
 
-## Simulating the FBD model
+```{r}
+# fix random seed for reproducibility
+seed = 42
+set.seed(seed)
+# model parameters, modify as you see fit
+lambda = 2 # speciation rate
+mu = 0.3 # extinction rate
+t_max = 1 # duration of the simulation
+tree = TreeSim::sim.bd.age(age = t_max,
+                           numbsim = 1,
+                           lambda = lambda,
+                           mu = mu,
+                           mrca = FALSE,
+                           complete = TRUE)[[1]]
+tree
+```
 
-More to come soon
+This produces a `phylo` object, which we can plot:
+
+```{r}
+plot(tree)
+```
+
+Note that this is a *complete* tree, meaning it contains extinct lineages. For comparison, let's plot the reconstructed tree, which prunes all extinct lineages:
+
+```{r}
+reconstructed_tree = tree |>
+  geiger::drop.extinct(tol = 10^-8)
+plot(reconstructed_tree)
+```
+
+## Simulating fossils along the tree
+
+Now, let's sample some fossil occurrences along the tree according to a specified sampling rate
+
+```{r}
+psi = 5 # fossil sampling rate
+fossils = FossilSim::sim.fossils.poisson(rate = psi,
+                                         tree = tree)
+fossils
+```
+
+Here you can inspect the generated fossil object, which contains information about species, the corresponding edge in the tree and age in the `hmin` and `hmax` column. Be aware that the entries in `hmin` and `hmax` are *ages*, even though the naming implicitly suggests that they might be heights.
+
+Now, let's plot these fossils along the tree
+
+```{r}
+plot(fossils,
+     tree = tree,
+     show.tip.label = TRUE,
+     rho = 0) # suppress highlighting of extant tips
+```
+
+There are plenty of plotting options available in `FossilSim`, e.g., you can plot the stratigraphic ranges:
+
+```{r}
+plot(fossils, tree = tree, show.ranges = TRUE, rho = 0)
+```
+
+So far, we have focused on simulating fossils only. Now let's sample some of the extant tips too by adding them to the fossil object. Here the parameter `rho` specifies what portion of the extant tips are sampled
+
+```{r}
+rho = 0.5 # proportion of extant tips that are sampled
+fossils2 = FossilSim::sim.extant.samples(fossils = fossils,
+                                         tree = tree,
+                                         rho = rho)
+
+# plot the output
+plot(fossils2,
+     tree = tree,
+     extant.col = "red")
+```
+
+If you inspect the newly generated fossil object, you can see the new fossils of age 0 added.
+
+This gives us the option to introduce the concept of the *sampled tree*:
+
+```{r}
+#| layout-ncol: 2
+plot(fossils2,
+     tree = tree,
+     extant.col = "red",
+     reconstructed = FALSE,
+     main = "Simulated tree and fossils")
+plot(fossils2,
+     tree = tree,
+     extant.col = "red",
+     reconstructed = TRUE,
+     main = "Sampled tree")
+```
+
+The sampled tree is the tree with all unsampled lineages (extant and extinct) removed. The sampled tree is the best we can hope to recover from our available data, as we will never recover unsampled lineages.
+
+## Tasks and discussion points
+
+## Advanced topics
+
+### Exporting trees with sampled ancestors
+
+For comparability with other software packages, fossil objects have to be "baked in" the phylo object as tips at the end of an edge of length 0. We show this for the curious:
+
+```{r}
+#| layout-ncol: 2
+# generate sampled ancestor tree
+SAt = FossilSim::SAtree.from.fossils(tree = tree, fossils = fossils2)
+plot(SAt$tree,
+     main = "Sampled ancestor tree\n
+     not sampled")
+# select extant tips based on the fossil object
+sampled_extant_tips = SAt$fossils$tip.label[SAt$fossils$hmin == 0]
+# generate sampled tree from SAtree
+SAt_sampled = FossilSim::sampled.tree.from.combined(tree = SAt$tree, sampled_tips = sampled_extant_tips)
+plot(SAt_sampled,
+     main = "Sampled ancestor tree, sampled")
+```
+
+If you compare these trees to the ones above you will see that they correspond the the tree with the fossils plotted along the edges (with the exception of a change in tip labels).
+
+### Simulating morphological data
+
+Simulation of morphological data works as before by handing the `fossil` object to `sim.morpho`:
+
+```{r}
+#| layout-ncol: 2
+# simple Mk2 model
+n_states = 2
+br_rate = 0.5
+trait_num = 10
+trait_to_display = 2
+morpho_mk = MorphSim::sim.morpho(k = n_states,
+                        time.tree = tree,
+                        br.rates = br_rate,
+                        trait.num = trait_num, 
+                        variable = FALSE,
+                        fossil = fossils)
+MorphSim::plotMorphoGrid(morpho_mk)
+plot(morpho_mk,
+     trait = trait_to_display)
+title(main = paste0("Trait no. ", trait_to_display))
+```
+
+### Inference
+
+With the morphological data simulated, you can then export the simulated data:
+
+```{r}
+MorphSim::write.morpho(data = morpho_mk,
+                       file = "char_mat_temp.nex",
+                       type = "matrix",
+                       all = TRUE)
+
+MorphSim::write.morpho(data = morpho_mk,
+                       file = "ages_temp.tsv",
+                       type = "ages",
+                       all = TRUE)
+```
+
+Note that this quietly assumes that `rho = 1`.
+
+With this data at hand, you can now try to recover your simulation setup parameters using the Bayesian tree inference tool of your choice. Example scripts for this are available under "Inference helpers" (chapter 13).
