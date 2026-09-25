@@ -25,7 +25,7 @@ With all these pieces in place, we can then address two key questions in the nex
 
 Your **task** for this chapter is to modify the provided pipeline according to your work in the last 3 days and simulate your very own fossil record. At the end you should have two components: (1) simulated biased data that you would usually use for inference, specifically a character matrix and fossil ages and (2) the biological and stratigraphic "truth" to compare inference results to. Specifically, this should contain the true sampled tree, age-depth relationship, clock rate, and model of morphological evolution.
 
-## Premliminaries
+## Preliminaries
 
 ### Stratigraphic data
 

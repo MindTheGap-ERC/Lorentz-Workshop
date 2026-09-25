@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>8&nbsp; Model assumptions to RevBayes code – Bridging Stratigraphic Palaeobiology and Phylogenetics</title>
+<title>8&nbsp; Setting up morphological models in RevBayes, MrBayes, and BEAST2 – Bridging Stratigraphic Palaeobiology and Phylogenetics</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -25,6 +25,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -88,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../day2/Intro_morpho.html">Day 2: Fossils</a></li><li class="breadcrumb-item"><a href="../day2/Model-RevBayes.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model assumptions to RevBayes code</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../day2/Intro_morpho.html">Day 2: Fossils</a></li><li class="breadcrumb-item"><a href="../day2/Model-RevBayes.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Setting up morphological models in RevBayes, MrBayes, and BEAST2</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -178,7 +213,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../day2/Model-RevBayes.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model assumptions to RevBayes code</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Setting up morphological models in RevBayes, MrBayes, and BEAST2</span></span></a>
   </div>
 </li>
       </ul>
@@ -243,15 +278,26 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#how-each-program-is-actually-used" id="toc-how-each-program-is-actually-used" class="nav-link active" data-scroll-target="#how-each-program-is-actually-used"><span class="header-section-number">8.1</span> How each program is actually used</a></li>
+  <li><a href="#the-mk-model" id="toc-the-mk-model" class="nav-link" data-scroll-target="#the-mk-model"><span class="header-section-number">8.2</span> The Mk model</a></li>
+  <li><a href="#mkv-conditioning-on-variable-characters" id="toc-mkv-conditioning-on-variable-characters" class="nav-link" data-scroll-target="#mkv-conditioning-on-variable-characters"><span class="header-section-number">8.3</span> MkV: conditioning on variable characters</a></li>
+  <li><a href="#gamma-distributed-rate-variation-across-characters-acrv" id="toc-gamma-distributed-rate-variation-across-characters-acrv" class="nav-link" data-scroll-target="#gamma-distributed-rate-variation-across-characters-acrv"><span class="header-section-number">8.4</span> Gamma-distributed rate variation across characters (ACRV)</a></li>
+  <li><a href="#ordered-characters" id="toc-ordered-characters" class="nav-link" data-scroll-target="#ordered-characters"><span class="header-section-number">8.5</span> Ordered characters</a></li>
+  <li><a href="#partitioned-matrices" id="toc-partitioned-matrices" class="nav-link" data-scroll-target="#partitioned-matrices"><span class="header-section-number">8.6</span> Partitioned matrices</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../day2/Intro_morpho.html">Day 2: Fossils</a></li><li class="breadcrumb-item"><a href="../day2/Model-RevBayes.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model assumptions to RevBayes code</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../day2/Intro_morpho.html">Day 2: Fossils</a></li><li class="breadcrumb-item"><a href="../day2/Model-RevBayes.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Setting up morphological models in RevBayes, MrBayes, and BEAST2</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model assumptions to RevBayes code</span></h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Setting up morphological models in RevBayes, MrBayes, and BEAST2</span></h1>
 </div>
 
 
@@ -268,9 +314,257 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This file will contain code snippets of how to implement a number of models into RevBayes code so they can easily copied and pasted for analyses.</p>
+<p>The models we’ve been simulating with <code>MorphSim</code>, Mk, MkV, gamma-distributed ACRV, ordered characters, and partitioned matrices, are exactly the models you’ll want to specify when analysing real (or simulated) morphological data in Bayesian inference software. This page shows the same five models set up in three commonly used programs: <code>RevBayes</code>, <code>MrBayes</code>, and <code>BEAST2</code> via the <code>morph-models</code> (MM) package. Comparing them side by side is also a good way to see that “the same model” can look quite different depending on the software’s design philosophy, RevBayes and BEAST2 build the model graphically from named pieces, while MrBayes configures it through a more compact command interface. Of the three, RevBayes is generally the most flexible: because its models are assembled explicitly from interchangeable pieces (a Q-matrix, a rate-variation distribution, a tree prior, and so on), you can combine them in ways that weren’t specifically anticipated by the software’s developers. MrBayes and BEAST2 instead offer a curated set of pre-built model combinations, which covers most standard analyses well and is often quicker to set up, but doesn’t extend as readily to a model outside that set.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>These are template snippets, not copy-paste-ready scripts, variable names, taxon counts, and file paths need to match your own data. Syntax can also shift slightly between software versions, so it’s worth checking your installed version’s documentation if something doesn’t run as expected.</p>
+</div>
+</div>
+<section id="how-each-program-is-actually-used" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="how-each-program-is-actually-used"><span class="header-section-number">8.1</span> How each program is actually used</h2>
+<p>Before getting into the model syntax, it’s worth being explicit about the overall workflow for each program, since they differ quite a bit.</p>
+<p><strong>RevBayes</strong> is scripted. You write a <code>.Rev</code> script (plain text, run from the command line or an interactive console) that reads in your data, builds the model piece by piece as a graph of named variables, sets up moves and monitors, and launches the MCMC all in one file, executed top to bottom. There’s no separate GUI step: the script is the analysis. See example script for the MkVP+G model.</p>
+<p><strong>MrBayes</strong> blends the two: your data (as a NEXUS file) and your analysis commands typically live together, either as a <code>mrbayes</code> block appended directly to the bottom of the NEXUS data file, or as a separate command file read in from an interactive MrBayes session. Commands are issued sequentially (<code>lset</code>, <code>prset</code>, <code>mcmc</code>, etc.) rather than built up as an explicit model graph. See example script for the MkVP+G model.</p>
+<p><strong>BEAST2</strong> is normally set up graphically, through <strong>BEAUti</strong>: you import your alignment(s), configure site models, clock models, and priors through a series of GUI panels, and BEAUti writes out the actual XML file that BEAST2 runs. You <em>can</em> hand-edit that XML directly (which is what the snippets on this page show), but the intended workflow is BEAUti first, with manual XML editing reserved for tweaks BEAUti’s interface doesn’t expose. BEAUTi reqquires you to load packages (like in R) depending on the analyses you are intending to run. For morphological data we need to install the pacakge <code>morph-models</code>. See example XML for the MkVP+G model (note: BEAST2 does not allow for unconstrained analyses, so this script includes a clock model.</p>
+<p>This is also part of why RevBayes tends to be the most flexible of the three (as mentioned above): since the model is assembled explicitly in script from named, swappable pieces, there’s no GUI or fixed command set constraining which combinations are possible in the first place.</p>
+</section>
+<section id="the-mk-model" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="the-mk-model"><span class="header-section-number">8.2</span> The Mk model</h2>
+<p>The baseline model: <code>k</code> states, one shared rate, no direction favoured over any other (Lewis 2001).</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">RevBayes</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">MrBayes</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">BEAST2 (MM)</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<pre><code>Q_morpho &lt;- fnJC(3)   # equal-rates Mk with 3 states
+
+moves = VectorMoves()
+monitors = VectorMonitors()
+
+phylogeny ~ dnUniformTopology(taxa)
+moves.append(mvNNI(phylogeny, weight=n_taxa))
+
+seq ~ dnPhyloCTMC(tree=phylogeny, Q=Q_morpho, type="Standard")
+seq.clamp(morpho)
+
+mymodel = model(phylogeny)</code></pre>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>The Mk model is applied automatically to any partition with <code>datatype = standard</code>. With constant characters included, use <code>coding = all</code>:</p>
+<pre><code>lset applyto = (1) coding = all</code></pre>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<p>Each block of characters sharing the same number of states gets its own <code>LewisMK</code> substitution model, referencing a <code>StandardData</code> datatype with that many states:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode xml code-with-copy"><code class="sourceCode xml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">data</span> <span class="ot">id=</span><span class="st">"morph1"</span> <span class="ot">spec=</span><span class="st">"FilteredAlignment"</span> <span class="ot">data=</span><span class="st">"@morphAlignment"</span> <span class="ot">filter=</span><span class="st">"1-10"</span>&gt;</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">userDataType</span> <span class="ot">id=</span><span class="st">"morphDataType.morph1"</span> <span class="ot">spec=</span><span class="st">"StandardData"</span> <span class="ot">nrOfStates=</span><span class="st">"3"</span>/&gt;</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">data</span>&gt;</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">siteModel</span> <span class="ot">id=</span><span class="st">"morphSiteModel.s:morph1"</span> <span class="ot">spec=</span><span class="st">"SiteModel"</span>&gt;</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">substModel</span> <span class="ot">id=</span><span class="st">"LewisMK.s:morph1"</span> <span class="ot">spec=</span><span class="st">"LewisMK"</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                <span class="ot">datatype=</span><span class="st">"@morphDataType.morph1"</span>/&gt;</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">siteModel</span>&gt;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>In BEAUti, this is what “Add MK Morphological Data” sets up automatically. It partitions the matrix by state count and assigns one <code>LewisMK</code> model per partition.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="mkv-conditioning-on-variable-characters" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="mkv-conditioning-on-variable-characters"><span class="header-section-number">8.3</span> MkV: conditioning on variable characters</h2>
+<p>Tells the model that all traits are expected to have at least one character varing. It also excludes invariant characters from the likelihood, since empirical matrices are curated to only include variable traits.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">RevBayes</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">MrBayes</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false" href="">BEAST2 (MM)</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<p>Add <code>coding="variable"</code> to the CTMC:</p>
+<pre><code>seq ~ dnPhyloCTMC(tree=phylogeny, Q=Q_morpho, type="Standard", coding="variable")
+seq.clamp(morpho)</code></pre>
+<p>Constant characters will be removed automatically before the inference starts.</p>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<pre><code>lset applyto = (1) coding = variable rates = gamma</code></pre>
+<p>Constant characters are excluded automatically once <code>coding = variable</code> is set, but MrBayes will not remove them from the matrix for you — if your input file still contains constant characters, either let <code>coding = variable</code> handle it during likelihood calculation, or explicitly exclude them from the matrix first:</p>
+<pre><code>exclude 7 31 61 83 107</code></pre>
+</div>
+<div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
+<p>MkV support is provided by the same <code>LewisMK</code> substitution model as plain Mk — the difference lives in the <strong>alignment</strong>, not the substitution model. BEAST2 implements the ascertainment correction by setting <code>ascertained="true"</code> on the alignment and telling it which columns represent the “all constant states” categories to correct for (via <code>excludefrom</code>/<code>excludeto</code>), rather than removing invariant characters from the matrix directly:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode xml code-with-copy"><code class="sourceCode xml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">data</span> <span class="ot">id=</span><span class="st">"morph1"</span> <span class="ot">spec=</span><span class="st">"FilteredAlignment"</span> <span class="ot">data=</span><span class="st">"@morphAlignment"</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>      <span class="ot">filter=</span><span class="st">"1-10"</span> <span class="ot">ascertained=</span><span class="st">"true"</span> <span class="ot">excludefrom=</span><span class="st">"10"</span> <span class="ot">excludeto=</span><span class="st">"12"</span>&gt;</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">userDataType</span> <span class="ot">id=</span><span class="st">"morphDataType.morph1"</span> <span class="ot">spec=</span><span class="st">"StandardData"</span> <span class="ot">nrOfStates=</span><span class="st">"3"</span>/&gt;</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">data</span>&gt;</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">siteModel</span> <span class="ot">id=</span><span class="st">"morphSiteModel.s:morph1"</span> <span class="ot">spec=</span><span class="st">"SiteModel"</span>&gt;</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">substModel</span> <span class="ot">id=</span><span class="st">"LewisMK.s:morph1"</span> <span class="ot">spec=</span><span class="st">"LewisMK"</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>                <span class="ot">datatype=</span><span class="st">"@morphDataType.morph1"</span>/&gt;</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">siteModel</span>&gt;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>In BEAUti, this is what “condition on coding only variable characters” sets up for you when adding morphological data, you don’t need to hand-edit <code>excludefrom</code>/<code>excludeto</code> yourself in the normal workflow, but it’s worth knowing what’s actually happening underneath, since a mismatched <code>excludefrom</code>/<code>excludeto</code> range relative to your actual matrix is a known source of <code>NaN</code> likelihoods and initialization failures if you ever do end up editing this block by hand.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="gamma-distributed-rate-variation-across-characters-acrv" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="gamma-distributed-rate-variation-across-characters-acrv"><span class="header-section-number">8.4</span> Gamma-distributed rate variation across characters (ACRV)</h2>
+<p>Each character draws its own rate multiplier from a discretized gamma distribution, the same idea as among-site rate variation for molecular data.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">RevBayes</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">MrBayes</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-3" role="tab" aria-controls="tabset-3-3" aria-selected="false" href="">BEAST2 (MM)</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<pre><code>alpha_morpho ~ dnUniform(0, 1E6)
+moves.append(mvScale(alpha_morpho, weight=2.0))
+rates_morpho := fnDiscretizeGamma(alpha_morpho, alpha_morpho, 4)
+
+seq ~ dnPhyloCTMC(tree=phylogeny, Q=Q_morpho, siteRates=rates_morpho,
+                   type="Standard", coding="variable")
+seq.clamp(morpho)</code></pre>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<pre><code>lset applyto = (1) coding = variable rates = gamma
+prset applyto = (1) shapepr = exponential(1.0)</code></pre>
+<p>The <code>rates = gamma</code> flag is the same one used above for MkV — in MrBayes, gamma rate variation is just another <code>lset</code> option layered on top of whichever coding scheme you’ve chosen, rather than a separate model.</p>
+</div>
+<div id="tabset-3-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-3-tab">
+<p>Gamma category count and shape are set on the <code>SiteModel</code> wrapping the <code>LewisMK</code> substitution model:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode xml code-with-copy"><code class="sourceCode xml"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">siteModel</span> <span class="ot">id=</span><span class="st">"morphSiteModel.s:morph1"</span> <span class="ot">spec=</span><span class="st">"SiteModel"</span> <span class="ot">gammaCategoryCount=</span><span class="st">"4"</span>&gt;</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">parameter</span> <span class="ot">id=</span><span class="st">"gammaShape.s:morph1"</span> <span class="ot">name=</span><span class="st">"shape"</span> <span class="ot">value=</span><span class="st">"1.0"</span> <span class="ot">estimate=</span><span class="st">"true"</span>/&gt;</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">substModel</span> <span class="ot">id=</span><span class="st">"LewisMK.s:morph1"</span> <span class="ot">spec=</span><span class="st">"LewisMK"</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                <span class="ot">datatype=</span><span class="st">"@morphDataType.morph1"</span>/&gt;</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">siteModel</span>&gt;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>In BEAUti’s Site Model panel, this is the “Gamma Category Count” field plus the “estimate” checkbox on Shape — leave “Proportion Invariant” fixed to zero, since that parameter isn’t meaningful once you’re using MkV-style conditioning.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="ordered-characters" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="ordered-characters"><span class="header-section-number">8.5</span> Ordered characters</h2>
+<p>Transitions only occur between adjacent states (0↔︎1↔︎2, not 0↔︎2 directly).</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">RevBayes</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href="">MrBayes</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-3" role="tab" aria-controls="tabset-4-3" aria-selected="false" href="">BEAST2 (MM)</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<pre><code>q_01 &lt;- 1
+q_12 &lt;- 1
+Q_ordered := fnFreeK(v(0, q_01, 0,
+                        q_01, 0, q_12,
+                        0, q_12, 0),
+                      rescaled=false)
+
+seq ~ dnPhyloCTMC(tree=phylogeny, Q=Q_ordered, siteRates=rates_morpho,
+                   type="Standard", coding="variable")
+seq.clamp(morpho)</code></pre>
+</div>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<p>Ordering is set per-character with <code>ctype</code>, independent of the <code>lset</code> options above — a matrix can mix ordered and unordered characters freely:</p>
+<pre><code>ctype ordered: 20 23 27 30 36 41 42 44 46 48</code></pre>
+<p>Characters not listed remain unordered by default. If different characters need different orderings, <code>ctype</code> must be called once per group.</p>
+</div>
+<div id="tabset-4-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-3-tab">
+<p>The <code>morph-models</code> package does not readily implement ordered characters in BEAST2. We recommend using one of the other two software if you require this option or editing the XML manually.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="partitioned-matrices" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="partitioned-matrices"><span class="header-section-number">8.6</span> Partitioned matrices</h2>
+<p>There are two different reasons to partition a matrix, and it’s worth keeping them distinct:</p>
+<ol type="1">
+<li><strong>By state count</strong>: a technical requirement in some software, since a single Q-matrix has fixed dimensions. Characters with different numbers of observed states can’t share one Q-matrix, purely as a matter of linear algebra.</li>
+<li><strong>By custom character groups</strong>: a modelling choice, motivated by biology (different anatomical regions, different evolutionary processes) rather than by how many states a character happens to have.</li>
+</ol>
+<p>Whether a given program needs (1) at all differs between the three: RevBayes needs an explicit loop, MrBayes does it automatically and invisibly, and BEAST2 does it automatically via BEAUti but offers nothing further for (2) without hand-editing XML.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href="">RevBayes</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false" href="">MrBayes</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-3" role="tab" aria-controls="tabset-5-3" aria-selected="false" href="">BEAST2 (MM)</a></li></ul>
+<div class="tab-content">
+<div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
+<p>RevBayes doesn’t have a single “partition” function — each partition is its own <code>dnPhyloCTMC</code> node, clamped to its own subset of the data, all sharing the same <code>phylogeny</code>. Because each <code>dnPhyloCTMC</code> needs one fixed-size Q-matrix, <strong>splitting by state count is required</strong> whenever your matrix mixes characters with different numbers of states. A loop like this is the common way to do that automatically:</p>
+<pre><code>n_max_states &lt;- 4                                              # 4 being the max state
+idx = 1
+morpho_bystate[1] &lt;- morpho
+for (i in 2:n_max_states) {
+    morpho_bystate[i] &lt;- morpho                                # local tmp copy of data
+    morpho_bystate[i].setNumStatesPartition(i)                 # keep only characters with i states
+    nc = morpho_bystate[i].nchar()
+
+    if (nc &gt; 0) {
+        q[idx] &lt;- fnJC(i)
+        m_morph[idx] ~ dnPhyloCTMC(tree=phylogeny, Q=q[idx], nSites=nc,
+                                    siteRates=rates_morpho, type="Standard",
+                                    coding="variable")
+        m_morph[idx].clamp(morpho_bystate[i])
+        idx = idx + 1
+    }
+}</code></pre>
+<p><strong>Custom character groups</strong> work the same way structurally, but you assign each subset yourself rather than looping over state counts, useful when your partitions are motivated by biology rather than by <code>k</code>:</p>
+<pre><code># partition 1: characters 1-10, ordered
+seq_1 ~ dnPhyloCTMC(tree=phylogeny, Q=Q_ordered, type="Standard", coding="variable")
+seq_1.clamp(morpho_partition1)
+
+# partition 2: characters 11-20, unordered, with gamma ACRV
+seq_2 ~ dnPhyloCTMC(tree=phylogeny, Q=Q_morpho_binary, siteRates=rates_morpho,
+                     type="Standard", coding="variable")
+seq_2.clamp(morpho_partition2)
+
+mymodel = model(phylogeny)</code></pre>
+<p>Because both stochastic nodes are clamped under the same model graph, their likelihoods are combined automatically during MCMC. The two approaches above can also be combined (e.g.&nbsp;loop by state count <em>within</em> one biologically-motivated group).</p>
+</div>
+<div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
+<p>MrBayes automatically bins characters by their maximum number of observed states internally, you don’t need to write anything to split characters by state count the way RevBayes’s loop does explicitly. MrBayes just handles it as part of reading in <code>datatype = standard</code> data.</p>
+<p><strong>Custom character groups</strong>, by contrast, still need to be defined explicitly with <code>charset</code>/<code>partition</code>, since that’s a modelling choice MrBayes has no way to infer from the data itself:</p>
+<pre><code>charset morph_ordered   = 1-10
+charset morph_unordered = 11-20
+
+partition morph = 2: morph_ordered, morph_unordered
+set partition = morph
+
+lset applyto = (1,2) coding = variable
+lset applyto = (2)   rates = gamma
+
+ctype ordered: 1 2 3 4 5 6 7 8 9 10
+
+unlink shape = (all)
+prset applyto = (all) ratepr = variable</code></pre>
+<p><code>unlink</code> and <code>ratepr = variable</code> let each partition have its own rate multiplier and shape parameter rather than forcing them to be shared.</p>
+</div>
+<div id="tabset-5-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-3-tab">
+<p><code>LewisMK</code> needs one fixed number of states per morphological model, so BEAUti partitions by state count automatically. Each resulting group gets its own <code>FilteredAlignment</code>, <code>StandardData</code> datatype, and <code>LewisMK</code> model, as shown in the Mk section above.</p>
+<p>For <strong>custom character groups</strong> a partition motivated by biology rather than state count BEAUti offers nothing and the XML must be edited manually giving each group its own <code>substModel</code> block:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode xml code-with-copy"><code class="sourceCode xml"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">data</span> <span class="ot">id=</span><span class="st">"morph_regionA"</span> <span class="ot">spec=</span><span class="st">"FilteredAlignment"</span> <span class="ot">data=</span><span class="st">"@morphAlignment"</span> <span class="ot">filter=</span><span class="st">"1-10"</span>&gt;</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">userDataType</span> <span class="ot">id=</span><span class="st">"morphDataType.regionA"</span> <span class="ot">spec=</span><span class="st">"StandardData"</span> <span class="ot">nrOfStates=</span><span class="st">"3"</span>/&gt;</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">data</span>&gt;</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">data</span> <span class="ot">id=</span><span class="st">"morph_regionB"</span> <span class="ot">spec=</span><span class="st">"FilteredAlignment"</span> <span class="ot">data=</span><span class="st">"@morphAlignment"</span> <span class="ot">filter=</span><span class="st">"11-20"</span>&gt;</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">userDataType</span> <span class="ot">id=</span><span class="st">"morphDataType.regionB"</span> <span class="ot">spec=</span><span class="st">"StandardData"</span> <span class="ot">nrOfStates=</span><span class="st">"3"</span>/&gt;</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">data</span>&gt;</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">siteModel</span> <span class="ot">id=</span><span class="st">"morphSiteModel.s:regionA"</span> <span class="ot">spec=</span><span class="st">"SiteModel"</span>&gt;</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">substModel</span> <span class="ot">id=</span><span class="st">"LewisMK.s:regionA"</span> <span class="ot">spec=</span><span class="st">"LewisMK"</span> <span class="ot">datatype=</span><span class="st">"@morphDataType.regionA"</span>/&gt;</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">siteModel</span>&gt;</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">siteModel</span> <span class="ot">id=</span><span class="st">"morphSiteModel.s:regionB"</span> <span class="ot">spec=</span><span class="st">"SiteModel"</span>&gt;</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">substModel</span> <span class="ot">id=</span><span class="st">"LewisMK.s:regionB"</span> <span class="ot">spec=</span><span class="st">"LewisMK"</span> <span class="ot">datatype=</span><span class="st">"@morphDataType.regionB"</span>/&gt;</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">siteModel</span>&gt;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>So for BEAST2, “partitioning” through BEAUti alone only ever means “grouped by state count.” Any partition structure motivated by biology requires this kind of manual XML hacking.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

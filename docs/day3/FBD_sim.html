@@ -213,7 +213,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../day2/Model-RevBayes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model assumptions to RevBayes code</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Setting up morphological models in RevBayes, MrBayes, and BEAST2</span></span></a>
   </div>
 </li>
       </ul>
@@ -287,11 +287,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#simulating-the-complete-bd-tree" id="toc-simulating-the-complete-bd-tree" class="nav-link" data-scroll-target="#simulating-the-complete-bd-tree"><span class="header-section-number">9.2</span> Simulating the complete BD tree</a></li>
   <li><a href="#simulating-fossils-along-the-tree" id="toc-simulating-fossils-along-the-tree" class="nav-link" data-scroll-target="#simulating-fossils-along-the-tree"><span class="header-section-number">9.3</span> Simulating fossils along the tree</a></li>
   <li><a href="#tasks-and-discussion-points" id="toc-tasks-and-discussion-points" class="nav-link" data-scroll-target="#tasks-and-discussion-points"><span class="header-section-number">9.4</span> Tasks and discussion points</a></li>
-  <li><a href="#advanced-topics" id="toc-advanced-topics" class="nav-link" data-scroll-target="#advanced-topics"><span class="header-section-number">9.5</span> Advanced topics</a>
+  <li><a href="#advanced-topics" id="toc-advanced-topics" class="nav-link" data-scroll-target="#advanced-topics"><span class="header-section-number">9.5</span> Advanced topics</a></li>
+  <li><a href="#exporting-trees-with-sampled-ancestors" id="toc-exporting-trees-with-sampled-ancestors" class="nav-link" data-scroll-target="#exporting-trees-with-sampled-ancestors"><span class="header-section-number">9.6</span> Exporting trees with sampled ancestors</a>
   <ul class="collapse">
-  <li><a href="#exporting-trees-with-sampled-ancestors" id="toc-exporting-trees-with-sampled-ancestors" class="nav-link" data-scroll-target="#exporting-trees-with-sampled-ancestors"><span class="header-section-number">9.5.1</span> Exporting trees with sampled ancestors</a></li>
-  <li><a href="#simulating-morphological-data" id="toc-simulating-morphological-data" class="nav-link" data-scroll-target="#simulating-morphological-data"><span class="header-section-number">9.5.2</span> Simulating morphological data</a></li>
-  <li><a href="#inference" id="toc-inference" class="nav-link" data-scroll-target="#inference"><span class="header-section-number">9.5.3</span> Inference</a></li>
+  <li><a href="#simulating-morphological-data-along-an-fbd-tree" id="toc-simulating-morphological-data-along-an-fbd-tree" class="nav-link" data-scroll-target="#simulating-morphological-data-along-an-fbd-tree"><span class="header-section-number">9.6.1</span> Simulating morphological data along an FBD tree</a></li>
+  <li><a href="#inference" id="toc-inference" class="nav-link" data-scroll-target="#inference"><span class="header-section-number">9.6.2</span> Inference</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -324,7 +324,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="simulating-the-complete-bd-tree" class="level2" data-number="9.2">
 <h2 data-number="9.2" class="anchored" data-anchor-id="simulating-the-complete-bd-tree"><span class="header-section-number">9.2</span> Simulating the complete BD tree</h2>
-<p>We start by simulating a tree using the <code>TreeSim</code> package. This package simulates trees conditioned on age, number of tips, or both. In stratigraphic paleobiology, the timescale of observation is often prescribed (e.g., lifespan of a basin, time interval covered by a section), which is why we focus on simulating conditioned on age.</p>
+<p>We start by simulating a tree using the TreeSim package. This package simulates trees conditioned on age, number of tips, or both. In stratigraphic paleobiology, the timescale of observation is often prescribed (e.g., lifespan of a basin, time interval covered by a section), which is why we focus on simulating conditioned on age.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fix random seed for reproducibility</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>seed <span class="ot">=</span> <span class="dv">42</span></span>
@@ -334,12 +334,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">=</span> <span class="fl">0.3</span> <span class="co"># extinction rate</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>t_max <span class="ot">=</span> <span class="dv">1</span> <span class="co"># duration of the simulation</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>tree <span class="ot">=</span> TreeSim<span class="sc">::</span><span class="fu">sim.bd.age</span>(<span class="at">age =</span> t_max,</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                           <span class="at">numbsim =</span> <span class="dv">1</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                           <span class="at">numbsim =</span> <span class="dv">1</span>, <span class="co"># only simulate one tree</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                           <span class="at">lambda =</span> lambda,</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                           <span class="at">mu =</span> mu,</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                           <span class="at">mrca =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                           <span class="at">complete =</span> <span class="cn">TRUE</span>)[[<span class="dv">1</span>]]</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>tree</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                           <span class="at">mrca =</span> <span class="cn">FALSE</span>, <span class="co"># age is time since origin, tree has a rood edge</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                           <span class="at">complete =</span> <span class="cn">TRUE</span>)[[<span class="dv">1</span>]] <span class="co"># get the complete tree</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect the tree</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>tree</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Phylogenetic tree with 7 tips and 6 internal nodes.
@@ -350,26 +351,34 @@ Tip labels:
 Rooted; includes branch length(s).</code></pre>
 </div>
 </div>
-<p>This produces a <code>phylo</code> object, which we can plot:</p>
+<p>This produces a phylo object, which we can plot:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(tree)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(tree,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">root.edge =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Birth-death tree"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">"Time since origin [Myr]"</span>, <span class="at">side =</span> <span class="dv">1</span>, <span class="at">line =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="FBD_sim_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="FBD_sim_files/figure-html/simple-bd-tree-plot-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Note that this is a <em>complete</em> tree, meaning it contains extinct lineages. For comparison, let’s plot the reconstructed tree, which prunes all extinct lineages:</p>
+<p>Note that this is a complete tree, meaning it contains extinct lineages. For comparison, let’s plot the reconstructed tree, which prunes all extinct lineages:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>reconstructed_tree <span class="ot">=</span> tree <span class="sc">|&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  geiger<span class="sc">::</span><span class="fu">drop.extinct</span>(<span class="at">tol =</span> <span class="dv">10</span><span class="sc">^-</span><span class="dv">8</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(reconstructed_tree)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(reconstructed_tree,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">root.edge =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Reconstructed tree"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">"Time since origin [Myr]"</span>, <span class="at">side =</span> <span class="dv">1</span>, <span class="at">line =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="FBD_sim_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="FBD_sim_files/figure-html/plot_reconstructed-tree-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -377,12 +386,13 @@ Rooted; includes branch length(s).</code></pre>
 </section>
 <section id="simulating-fossils-along-the-tree" class="level2" data-number="9.3">
 <h2 data-number="9.3" class="anchored" data-anchor-id="simulating-fossils-along-the-tree"><span class="header-section-number">9.3</span> Simulating fossils along the tree</h2>
-<p>Now, let’s sample some fossil occurrences along the tree according to a specified sampling rate</p>
+<p>Now, let’s sample some fossil occurrences along the tree according to a specified sampling rate:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>psi <span class="ot">=</span> <span class="dv">5</span> <span class="co"># fossil sampling rate</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>fossils <span class="ot">=</span> FossilSim<span class="sc">::</span><span class="fu">sim.fossils.poisson</span>(<span class="at">rate =</span> psi,</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">tree =</span> tree)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>fossils</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect the fossils</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>fossils</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   sp edge       hmin       hmax
 1   2    2 0.65280066 0.65280066
@@ -400,7 +410,7 @@ Fossil record with 18 occurrences representing 7 species
 Fossil record not simulated using taxonomy: all speciation events are assumed to be symmetric </code></pre>
 </div>
 </div>
-<p>Here you can inspect the generated fossil object, which contains information about species, the corresponding edge in the tree and age in the <code>hmin</code> and <code>hmax</code> column. Be aware that the entries in <code>hmin</code> and <code>hmax</code> are <em>ages</em>, even though the naming implicitly suggests that they might be heights.</p>
+<p>Here you can inspect the generated fossil object, which contains information about species, the corresponding edge in the tree and age in the hmin and hmax column. Be aware that the entries in hmin and hmax are ages, even though the naming implicitly suggests that they might be heights (which is doubly confusing).</p>
 <p>Now, let’s plot these fossils along the tree</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fossils,</span>
@@ -410,43 +420,46 @@ Fossil record not simulated using taxonomy: all speciation events are assumed to
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="FBD_sim_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="FBD_sim_files/figure-html/plot-fossils-along-tree-basic-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>There are plenty of plotting options available in <code>FossilSim</code>, e.g., you can plot the stratigraphic ranges:</p>
+<p>There are plenty of plotting options available in FossilSim, e.g., you can plot the stratigraphic ranges (sic):</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fossils, <span class="at">tree =</span> tree, <span class="at">show.ranges =</span> <span class="cn">TRUE</span>, <span class="at">rho =</span> <span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fossils,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">tree =</span> tree, </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">show.ranges =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">rho =</span> <span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="FBD_sim_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="FBD_sim_files/figure-html/plot-fossils-along-tree-ranges-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>So far, we have focused on simulating fossils only. Now let’s sample some of the extant tips too by adding them to the fossil object. Here the parameter <code>rho</code> specifies what portion of the extant tips are sampled</p>
+<p>So far, we have focused on simulating fossils only. Now let’s sample some of the extant tips too by adding them to the fossil object. Here the parameter <code>rho</code> specifies what portion of the extant tips are sampled.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>rho <span class="ot">=</span> <span class="fl">0.5</span> <span class="co"># proportion of extant tips that are sampled</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>fossils2 <span class="ot">=</span> FossilSim<span class="sc">::</span><span class="fu">sim.extant.samples</span>(<span class="at">fossils =</span> fossils,</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">tree =</span> tree,</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">rho =</span> rho)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the output</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fossils2,</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">tree =</span> tree,</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">extant.col =</span> <span class="st">"red"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the output</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fossils2,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">tree =</span> tree,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">extant.col =</span> <span class="st">"red"</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">show.tip.label =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="FBD_sim_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="FBD_sim_files/figure-html/simulate-and-plot-fossils-and-extant-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>If you inspect the newly generated fossil object, you can see the new fossils of age 0 added.</p>
-<p>This gives us the option to introduce the concept of the <em>sampled tree</em>:</p>
+<p>This gives us the option to introduce the concept of the sampled tree:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fossils2,</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">tree =</span> tree,</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">extant.col =</span> <span class="st">"red"</span>,</span>
@@ -460,10 +473,10 @@ Fossil record not simulated using taxonomy: all speciation events are assumed to
 <div class="cell quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="FBD_sim_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+<p><img src="FBD_sim_files/figure-html/compare-sampled-tree-with-base-tree-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="FBD_sim_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid" width="672"></p>
+<p><img src="FBD_sim_files/figure-html/compare-sampled-tree-with-base-tree-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
@@ -471,38 +484,46 @@ Fossil record not simulated using taxonomy: all speciation events are assumed to
 </section>
 <section id="tasks-and-discussion-points" class="level2" data-number="9.4">
 <h2 data-number="9.4" class="anchored" data-anchor-id="tasks-and-discussion-points"><span class="header-section-number">9.4</span> Tasks and discussion points</h2>
+<ol type="1">
+<li><p>Explore the simulation pipeline by modifying the parameters and the random seed. How large is the intrinsic variation in the trees when parameters are fixed? Are there parameters where the true tree, reconstructed tree, and sampled tree differ most/least?</p></li>
+<li><p>Think of the timescale you are usually on. What parameters work well on this scale?</p></li>
+<li><p>Sampling rate: What determines the sampling rate on your timescale? Does the sampling rate depend on different drivers on different spatial and temporal scales (e.g., section vs.&nbsp;basin. vs.&nbsp;global scale)? If you put in more effort, could you increase it?</p></li>
+<li><p>Sampling in the present, fully extinct trees, and <code>rho</code>: <code>rho</code> states that the extant tips undergo a different sampling regime. If you are working on fully extinct phyla, what is an appropriate choice of <code>rho</code> and what counts as the present? What about the case where you observe a fixed time-interval in the past, but taxa potentially survive longer than the observed time interval? How would work in the inference?</p></li>
+</ol>
 </section>
 <section id="advanced-topics" class="level2" data-number="9.5">
 <h2 data-number="9.5" class="anchored" data-anchor-id="advanced-topics"><span class="header-section-number">9.5</span> Advanced topics</h2>
-<section id="exporting-trees-with-sampled-ancestors" class="level3" data-number="9.5.1">
-<h3 data-number="9.5.1" class="anchored" data-anchor-id="exporting-trees-with-sampled-ancestors"><span class="header-section-number">9.5.1</span> Exporting trees with sampled ancestors</h3>
+<p>These topics are not necessary for the workshop, but if you’re interested and have time you can work through them and potentially already start your first inference.</p>
+</section>
+<section id="exporting-trees-with-sampled-ancestors" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="exporting-trees-with-sampled-ancestors"><span class="header-section-number">9.6</span> Exporting trees with sampled ancestors</h2>
 <p>For comparability with other software packages, fossil objects have to be “baked in” the phylo object as tips at the end of an edge of length 0. We show this for the curious:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># generate sampled ancestor tree</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>SAt <span class="ot">=</span> FossilSim<span class="sc">::</span><span class="fu">SAtree.from.fossils</span>(<span class="at">tree =</span> tree, <span class="at">fossils =</span> fossils2)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(SAt<span class="sc">$</span>tree,</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Sampled ancestor tree</span><span class="sc">\n</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="st">     not sampled"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>SAt <span class="ot">=</span> FossilSim<span class="sc">::</span><span class="fu">SAtree.from.fossils</span>(<span class="at">tree =</span> tree,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">fossils =</span> fossils2)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(SAt<span class="sc">$</span>tree,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Sampled ancestor tree</span><span class="sc">\n</span><span class="st"> simulated"</span>)</span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># select extant tips based on the fossil object</span></span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>sampled_extant_tips <span class="ot">=</span> SAt<span class="sc">$</span>fossils<span class="sc">$</span>tip.label[SAt<span class="sc">$</span>fossils<span class="sc">$</span>hmin <span class="sc">==</span> <span class="dv">0</span>]</span>
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># generate sampled tree from SAtree</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>SAt_sampled <span class="ot">=</span> FossilSim<span class="sc">::</span><span class="fu">sampled.tree.from.combined</span>(<span class="at">tree =</span> SAt<span class="sc">$</span>tree, <span class="at">sampled_tips =</span> sampled_extant_tips)</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(SAt_sampled,</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Sampled ancestor tree, sampled"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>SAt_sampled <span class="ot">=</span> FossilSim<span class="sc">::</span><span class="fu">sampled.tree.from.combined</span>(<span class="at">tree =</span> SAt<span class="sc">$</span>tree,</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>                                                    <span class="at">sampled_tips =</span> sampled_extant_tips)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(SAt_sampled,</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Sampled ancestor tree, sampled"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="FBD_sim_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+<p><img src="FBD_sim_files/figure-html/bake-fossils-into-tree-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="FBD_sim_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid" width="672"></p>
+<p><img src="FBD_sim_files/figure-html/bake-fossils-into-tree-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
 <p>If you compare these trees to the ones above you will see that they correspond the the tree with the fossils plotted along the edges (with the exception of a change in tip labels).</p>
-</section>
-<section id="simulating-morphological-data" class="level3" data-number="9.5.2">
-<h3 data-number="9.5.2" class="anchored" data-anchor-id="simulating-morphological-data"><span class="header-section-number">9.5.2</span> Simulating morphological data</h3>
-<p>Simulation of morphological data works as before by handing the <code>fossil</code> object to <code>sim.morpho</code>:</p>
+<section id="simulating-morphological-data-along-an-fbd-tree" class="level3" data-number="9.6.1">
+<h3 data-number="9.6.1" class="anchored" data-anchor-id="simulating-morphological-data-along-an-fbd-tree"><span class="header-section-number">9.6.1</span> Simulating morphological data along an FBD tree</h3>
+<p>Simulation of morphological data along an FBD tree works as before by handing the fossil object to sim.morpho:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simple Mk2 model</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>n_states <span class="ot">=</span> <span class="dv">2</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>br_rate <span class="ot">=</span> <span class="fl">0.5</span></span>
@@ -513,7 +534,7 @@ Fossil record not simulated using taxonomy: all speciation events are assumed to
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>                        <span class="at">br.rates =</span> br_rate,</span>
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>                        <span class="at">trait.num =</span> trait_num, </span>
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>                        <span class="at">variable =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>                        <span class="at">fossil =</span> fossils)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>                        <span class="at">fossil =</span> fossils2)</span>
 <span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>MorphSim<span class="sc">::</span><span class="fu">plotMorphoGrid</span>(morpho_mk)</span>
 <span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(morpho_mk,</span>
 <span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">trait =</span> trait_to_display)</span>
@@ -521,29 +542,32 @@ Fossil record not simulated using taxonomy: all speciation events are assumed to
 <div class="cell quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="FBD_sim_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+<p><img src="FBD_sim_files/figure-html/simulate-mk-along-fbd-tree-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="FBD_sim_files/figure-html/unnamed-chunk-10-2.png" class="img-fluid" width="672"></p>
+<p><img src="FBD_sim_files/figure-html/simulate-mk-along-fbd-tree-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
+<p>Note that <code>plotMorphoGrid</code> shows the traits at the (potentially unsampled) extant and extinct tips.</p>
 </section>
-<section id="inference" class="level3" data-number="9.5.3">
-<h3 data-number="9.5.3" class="anchored" data-anchor-id="inference"><span class="header-section-number">9.5.3</span> Inference</h3>
+<section id="inference" class="level3" data-number="9.6.2">
+<h3 data-number="9.6.2" class="anchored" data-anchor-id="inference"><span class="header-section-number">9.6.2</span> Inference</h3>
 <p>With the morphological data simulated, you can then export the simulated data:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>MorphSim<span class="sc">::</span><span class="fu">write.morpho</span>(<span class="at">data =</span> morpho_mk,</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">file =</span> <span class="st">"char_mat_temp.nex"</span>,</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">type =</span> <span class="st">"matrix"</span>,</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">all =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>MorphSim<span class="sc">::</span><span class="fu">write.morpho</span>(<span class="at">data =</span> morpho_mk,</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>                       <span class="at">file =</span> <span class="st">"ages_temp.tsv"</span>,</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">type =</span> <span class="st">"ages"</span>,</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">all =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># export character matrix</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>MorphSim<span class="sc">::</span><span class="fu">write.morpho</span>(<span class="at">data =</span> morpho_mk,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">file =</span> <span class="st">"char_mat_temp.nex"</span>,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">type =</span> <span class="st">"matrix"</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">all =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">reconstructed =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># export taxon ages</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>MorphSim<span class="sc">::</span><span class="fu">write.morpho</span>(<span class="at">data =</span> morpho_mk,</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">file =</span> <span class="st">"ages_temp.tsv"</span>,</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">type =</span> <span class="st">"ages"</span>,</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>                       <span class="at">all =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>                       <span class="at">reconstructed =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Note that this quietly assumes that <code>rho = 1</code>.</p>
 <p>With this data at hand, you can now try to recover your simulation setup parameters using the Bayesian tree inference tool of your choice. Example scripts for this are available under “Inference helpers” (chapter 13).</p>
 
 
@@ -953,8 +977,8 @@ Fossil record not simulated using taxonomy: all speciation events are assumed to
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../day2/Model-RevBayes.html" class="pagination-link" aria-label="Model assumptions to RevBayes code">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Model assumptions to RevBayes code</span></span>
+      <a href="../day2/Model-RevBayes.html" class="pagination-link" aria-label="Setting up morphological models in RevBayes, MrBayes, and BEAST2">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Setting up morphological models in RevBayes, MrBayes, and BEAST2</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
