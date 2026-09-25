@@ -10,9 +10,9 @@ This chapter introduces the Fossilized Birth-Death (FBD) process using forward s
 
 ## Simulating the complete BD tree
 
-We start by simulating a tree using the `TreeSim` package. This package simulates trees conditioned on age, number of tips, or both. In stratigraphic paleobiology, the timescale of observation is often prescribed (e.g., lifespan of a basin, time interval covered by a section), which is why we focus on simulating conditioned on age.
+We start by simulating a tree using the TreeSim package. This package simulates trees conditioned on age, number of tips, or both. In stratigraphic paleobiology, the timescale of observation is often prescribed (e.g., lifespan of a basin, time interval covered by a section), which is why we focus on simulating conditioned on age.
 
-```{r}
+```{r simple-bd-tree-simulation}
 # fix random seed for reproducibility
 seed = 42
 set.seed(seed)
@@ -21,75 +21,88 @@ lambda = 2 # speciation rate
 mu = 0.3 # extinction rate
 t_max = 1 # duration of the simulation
 tree = TreeSim::sim.bd.age(age = t_max,
-                           numbsim = 1,
+                           numbsim = 1, # only simulate one tree
                            lambda = lambda,
                            mu = mu,
-                           mrca = FALSE,
-                           complete = TRUE)[[1]]
+                           mrca = FALSE, # age is time since origin, tree has a rood edge
+                           complete = TRUE)[[1]] # get the complete tree
+# inspect the tree
 tree
 ```
 
-This produces a `phylo` object, which we can plot:
+This produces a phylo object, which we can plot:
 
-```{r}
-plot(tree)
+```{r simple-bd-tree-plot}
+plot(tree,
+     root.edge = TRUE,
+     main = "Birth-death tree")
+axis(1)
+mtext("Time since origin [Myr]", side = 1, line = 2)
 ```
 
-Note that this is a *complete* tree, meaning it contains extinct lineages. For comparison, let's plot the reconstructed tree, which prunes all extinct lineages:
+Note that this is a complete tree, meaning it contains extinct lineages. For comparison, let's plot the reconstructed tree, which prunes all extinct lineages:
 
-```{r}
+```{r plot_reconstructed-tree}
 reconstructed_tree = tree |>
   geiger::drop.extinct(tol = 10^-8)
-plot(reconstructed_tree)
+plot(reconstructed_tree,
+     root.edge = TRUE,
+     main = "Reconstructed tree")
+axis(1)
+mtext("Time since origin [Myr]", side = 1, line = 2)
 ```
 
 ## Simulating fossils along the tree
 
-Now, let's sample some fossil occurrences along the tree according to a specified sampling rate
+Now, let's sample some fossil occurrences along the tree according to a specified sampling rate:
 
-```{r}
+```{r simulate-fossil-object}
 psi = 5 # fossil sampling rate
 fossils = FossilSim::sim.fossils.poisson(rate = psi,
                                          tree = tree)
+# inspect the fossils
 fossils
 ```
 
-Here you can inspect the generated fossil object, which contains information about species, the corresponding edge in the tree and age in the `hmin` and `hmax` column. Be aware that the entries in `hmin` and `hmax` are *ages*, even though the naming implicitly suggests that they might be heights.
+Here you can inspect the generated fossil object, which contains information about species, the corresponding edge in the tree and age in the hmin and hmax column. Be aware that the entries in hmin and hmax are ages, even though the naming implicitly suggests that they might be heights (which is doubly confusing).
 
 Now, let's plot these fossils along the tree
 
-```{r}
+```{r plot-fossils-along-tree-basic}
 plot(fossils,
      tree = tree,
      show.tip.label = TRUE,
      rho = 0) # suppress highlighting of extant tips
 ```
 
-There are plenty of plotting options available in `FossilSim`, e.g., you can plot the stratigraphic ranges:
+There are plenty of plotting options available in FossilSim, e.g., you can plot the stratigraphic ranges (sic):
 
-```{r}
-plot(fossils, tree = tree, show.ranges = TRUE, rho = 0)
+```{r plot-fossils-along-tree-ranges}
+plot(fossils,
+     tree = tree, 
+     show.ranges = TRUE,
+     rho = 0)
 ```
 
-So far, we have focused on simulating fossils only. Now let's sample some of the extant tips too by adding them to the fossil object. Here the parameter `rho` specifies what portion of the extant tips are sampled
+So far, we have focused on simulating fossils only. Now let's sample some of the extant tips too by adding them to the fossil object. Here the parameter `rho` specifies what portion of the extant tips are sampled.
 
-```{r}
+```{r simulate-and-plot-fossils-and-extant}
 rho = 0.5 # proportion of extant tips that are sampled
 fossils2 = FossilSim::sim.extant.samples(fossils = fossils,
                                          tree = tree,
                                          rho = rho)
-
 # plot the output
 plot(fossils2,
      tree = tree,
-     extant.col = "red")
+     extant.col = "red",
+     show.tip.label = TRUE)
 ```
 
 If you inspect the newly generated fossil object, you can see the new fossils of age 0 added.
 
-This gives us the option to introduce the concept of the *sampled tree*:
+This gives us the option to introduce the concept of the sampled tree:
 
-```{r}
+```{r compare-sampled-tree-with-base-tree}
 #| layout-ncol: 2
 plot(fossils2,
      tree = tree,
@@ -107,34 +120,45 @@ The sampled tree is the tree with all unsampled lineages (extant and extinct) re
 
 ## Tasks and discussion points
 
+1. Explore the simulation pipeline by modifying the parameters and the random seed. How large is the intrinsic variation in the trees when parameters are fixed? Are there parameters where the true tree, reconstructed tree, and sampled tree differ most/least?
+
+2. Think of the timescale you are usually on. What parameters work well on this scale?
+
+3. Sampling rate: What determines the sampling rate on your timescale? Does the sampling rate depend on different drivers on different spatial and temporal scales (e.g., section vs. basin. vs. global scale)? If you put in more effort, could you increase it?
+
+4. Sampling in the present, fully extinct trees, and `rho`: `rho` states that the extant tips undergo a different sampling regime. If you are working on fully extinct phyla, what is an appropriate choice of `rho` and what counts as the present? What about the case where you observe a fixed time-interval in the past, but taxa potentially survive longer than the observed time interval? How would work in the inference?
+
 ## Advanced topics
 
-### Exporting trees with sampled ancestors
+These topics are not necessary for the workshop, but if you're interested and have time you can work through them and potentially already start your first inference.
+
+## Exporting trees with sampled ancestors
 
 For comparability with other software packages, fossil objects have to be "baked in" the phylo object as tips at the end of an edge of length 0. We show this for the curious:
 
-```{r}
+```{r bake-fossils-into-tree}
 #| layout-ncol: 2
 # generate sampled ancestor tree
-SAt = FossilSim::SAtree.from.fossils(tree = tree, fossils = fossils2)
+SAt = FossilSim::SAtree.from.fossils(tree = tree,
+                                     fossils = fossils2)
 plot(SAt$tree,
-     main = "Sampled ancestor tree\n
-     not sampled")
+     main = "Sampled ancestor tree\n simulated")
 # select extant tips based on the fossil object
 sampled_extant_tips = SAt$fossils$tip.label[SAt$fossils$hmin == 0]
 # generate sampled tree from SAtree
-SAt_sampled = FossilSim::sampled.tree.from.combined(tree = SAt$tree, sampled_tips = sampled_extant_tips)
+SAt_sampled = FossilSim::sampled.tree.from.combined(tree = SAt$tree,
+                                                    sampled_tips = sampled_extant_tips)
 plot(SAt_sampled,
      main = "Sampled ancestor tree, sampled")
 ```
 
 If you compare these trees to the ones above you will see that they correspond the the tree with the fossils plotted along the edges (with the exception of a change in tip labels).
 
-### Simulating morphological data
+### Simulating morphological data along an FBD tree
 
-Simulation of morphological data works as before by handing the `fossil` object to `sim.morpho`:
+Simulation of morphological data along an FBD tree works as before by handing the fossil object to sim.morpho:
 
-```{r}
+```{r simulate-mk-along-fbd-tree}
 #| layout-ncol: 2
 # simple Mk2 model
 n_states = 2
@@ -153,22 +177,25 @@ plot(morpho_mk,
 title(main = paste0("Trait no. ", trait_to_display))
 ```
 
+Note that `plotMorphoGrid` shows the traits at the (potentially unsampled) extant and extinct tips.
+
 ### Inference
 
 With the morphological data simulated, you can then export the simulated data:
 
-```{r}
+``` {r export-morpho-and-age-data}
+# export character matrix
 MorphSim::write.morpho(data = morpho_mk,
                        file = "char_mat_temp.nex",
                        type = "matrix",
                        all = TRUE)
-
+# export taxon ages
 MorphSim::write.morpho(data = morpho_mk,
                        file = "ages_temp.tsv",
                        type = "ages",
                        all = TRUE)
 ```
 
-Note that this quietly assumes that `rho = 1`.
-
 With this data at hand, you can now try to recover your simulation setup parameters using the Bayesian tree inference tool of your choice. Example scripts for this are available under "Inference helpers" (chapter 13).
+
+Note that this exports data for all fossils as well as for potentially unsampled extant and extinct tips.
