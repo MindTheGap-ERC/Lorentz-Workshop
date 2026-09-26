@@ -1,0 +1,58 @@
+---
+title: "Welcome and introduction"
+format: revealjs
+---
+
+## Bridging Stratigraphic Palaeobiology and Phylogenetics 
+
+28 September - 2 October 2026, Leiden
+
+*Emilia Jarochowska, Rachel Warnock, Niklas Hohmann, Laura Mulvey, Johan Hidding*
+
+![](../Pre-workshop/lorentz.center.jpg){width="300"}
+
+## Motivation {.smaller}
+
+::::: columns
+::: {.column width="20%"}
+![](../Pre-workshop/beast2.png){fig-align="center" width="300"} <br>
+
+![](../Pre-workshop/8113632.png){fig-align="center" width="150"}
+:::
+
+::: {.column width="80%"}
+- Inter-community inspiration and exchange of knowledge
+
+- Strengthen collaboration between users, empiricists, model developers, and software developers
+
+- Translation of researcher needs into digital infrastructure (e.g., for future grant proposals, sustainable practices)
+
+- Articles on individual research questions developed during the workshop, focussing on reconstructing phylogenies incorporating fossil and rock information
+
+:::
+:::::
+-------------------------------------------------------------------------------
+
+## Program for the week
+
+GitHub repository: [https://github.com/MindTheGap-ERC/Lorentz-Workshop](https://github.com/MindTheGap-ERC/Lorentz-Workshop)
+
+`[screenshot of the program - to be added in the last moment?]`
+
+
+## Program today {.smaller}
+
+| Time | Activity | Coordinator |
+|:----------|:-------------------------------------------------|-----------|
+| 10:00 | 👋 Lorentz Center welcome and opening |  |
+| 10:15 | Talk *Principles of Stratigraphic Palaeobiology* | Mark |
+| 11:00 | *How to collaborate on workshop materials?* | Emilia |
+| 11:10 | Ice-breaker group coding activity: *Make your own geological record* | Johan and Emilia |
+| 12:00 | 🥙 Lunch |  |
+| 13:15 | Group coding activity: *Make your own geological record* | Johan and Emilia |
+| 14:00 | Talk *Age-depth models* | Niklas |
+| 14:45 | ☕ Coffee break |  |
+| 15:15 | Diving deep group coding activity: *Age-depth models and the stratigraphic distribution of fossils* | Niklas and Emilia |
+| 16:30 | Wrap-up: plenary discussion, collecting feedback and adding notes |  |
+| 17:00 | 🎈 Welcome reception |  |
+
