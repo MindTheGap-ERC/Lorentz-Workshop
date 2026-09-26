@@ -80,13 +80,33 @@ Program specific packages can be installed during the workshop.
 | 13:30         | Breakout group activity: coding, writing, or brainstorming                                                                                                                                                                                                           |                                         |
 | 14:40         | Plenary discussion and conclusions, planning next steps                                                                                                                                                                                              |                                         |
 
-## Workshop book - instructions for contributors
+## Workshop book - instructions for *editors*
 
-The teaching materials in this repository are a [Quarto](https://quarto.org) book. The sources live in `book/`; rendering writes the finished website into `docs/`, which is the folder GitHub Pages serves.
+The teaching materials in this repository are a [Quarto](https://quarto.org) book. Quarto is a publishing system based on markdown which integrates text, media and code. The source files (`.qmd` files) live in `book/`; rendering writes the finished website (`.html`) into `docs/`. The book webpage is displayed from files in `docs/`, but it may take a few minutes before pushed changes become visible (try refreshing the page several times).
+
+::: {.callout-tip}
+You don't need to be an editor to contribute to the book. Editors need the mindspace to engage with `git` and `quarto`, so if these tools are new to you and too much distraction on top of the science, please take it as an opportunity to collaborate with others in the workshop. When you work on own problems, we recommend working in a group (can be as small as a pair) and make sure you have a *GitHub editor* - this person will be in charge of adding the group's contributions to the book. You can also be a *secretary* or ask someone to be one: this person should just take notes from your discussions into a text file and collaborate with the GitHub editor to add them to the book. 
+:::
+
+### Installation
+
+You can edit `.qmd` files in any text/markdown editor (please avoid Word though). You only need to install Quarto if you want to take an editor role.
+
+You need Quarto (\>= 1.4). Quarto is built into R Studio, but here we will refer to the command-line interface, which is not installed automatically with R Studio. Please [get Quarto here](https://quarto.org/docs/get-started/). This page also contains information how to use it with different IDEs, but if you don't use them, don't worry: you can run quarto from any terminal.
 
 ### Rendering to HTML
 
-Requirements: Quarto (\>= 1.4; already installed in recent RStudio versions). To run non-R code (code is run during rendering unless set otherwise by the author of the chapter), you need the respective language installed, please see a separate section on this below.
+By default, rendering means exporting the `.qmd` into formatted `html` and executing all code blocks: generate plots, save files created in the code etc. This comes with two caveats:
+
+1. If you don't have all software needed to execute all code blocks, the rendering will interrupt.
+
+2. If the code takes long to run, you would have to wait that time whenever you need to re-render the book.
+
+We use the following solutions:
+
+1. Render only the file you just edited and push it to the repo - **recommended**. If something major breaks in the entire book, please tell Emilia, Johan or Niklas - we will try to fix the Big Render.
+
+2. Switch off execution of some code blocks- the code will be displayed but not run by default. People still can run it on demand. Just add `#| echo: false` at the beginning of the code block. 
 
 All Quarto commands are run from the `book/` directory:
 
@@ -94,22 +114,16 @@ All Quarto commands are run from the `book/` directory:
 cd book
 ```
 
-The simplest way to build:
+Render a chapter (here: `adm.qmd`):
+
+``` bash
+quarto render adms.qmd
+```
+
+The Big Render (render the whole book) - may take some time and will only work if have the entire toolchain installed on your computer (Julia, R, CarboKitten etc).
 
 ``` bash
 quarto render
-```
-
-Currently the book renders to HTML AND PDF by default. If you want only HTML, do:
-
-``` bash
-quarto render --to html 
-```
-
-While drafting, a single chapter can be rendered on its own (standalone page, without book navigation):
-
-``` bash
-quarto render adms.qmd --to html
 ```
 
 In RStudio, the **Build \> Render Book** button only appears when `_quarto.yml` sits in the RStudio project root, which is not the case with the sources in `book/`. Use the Terminal pane instead (`cd book`, then the commands above), or the **Render** button on an individual open `.qmd`.
@@ -118,7 +132,7 @@ In RStudio, the **Build \> Render Book** button only appears when `_quarto.yml` 
 
 ### Big output files
 
-By default, all code chunks are run anew with each render. This is not handy for our type of modelling, where we mostly do very long runs and generate big output files. Such files cannot be stored in a GitHub repo. So we propose storing them in a different storage:
+Big files cannot be stored in a GitHub repo. How to store?
 
 1.  **Locally** - good for temporary files when you try things out. Keep the files local, don't commit them to the GitHub repo. Add them to `.gitignore` before you commit the code that generates them. Think whether you want the rendering to re-run that code by default (when someone else or your future self runs it) or should you disable execution as a default. Local files can be promoted to remote files (see below) if you are happy with them and want to share or archive.
 
@@ -145,11 +159,13 @@ The site is **served directly from the repository** (not rendered with GitHub Ac
 
 ``` bash
 cd book
-quarto render --to html
-git add ../docs
-git commit -m "rebuild the book"
+quarto render example.qmd
+git add ../docs/example.html 
+git commit -m "add foo to example"
 git push
 ```
+
+If you have images or other artefacts in your chapter, you may have to stage (`git add`) these files too.
 
 GitHub rebuilds the site within a minute or so and it appears at <https://mindthegap-erc.github.io/Lorentz-Workshop/>.
 
