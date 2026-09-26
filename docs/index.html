@@ -285,7 +285,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#installation-instructions" id="toc-installation-instructions" class="nav-link" data-scroll-target="#installation-instructions"><span class="header-section-number">0.2</span> Installation instructions</a>
   <ul class="collapse">
   <li><a href="#git-and-github---optional" id="toc-git-and-github---optional" class="nav-link" data-scroll-target="#git-and-github---optional"><span class="header-section-number">0.2.1</span> Git and GitHub - optional</a></li>
-  <li><a href="#installing-r-r-studio-and-packages" id="toc-installing-r-r-studio-and-packages" class="nav-link" data-scroll-target="#installing-r-r-studio-and-packages"><span class="header-section-number">0.2.2</span> Installing R, R Studio, and packages</a></li>
+  <li><a href="#julia" id="toc-julia" class="nav-link" data-scroll-target="#julia"><span class="header-section-number">0.2.2</span> Julia</a></li>
+  <li><a href="#installing-r-r-studio-and-packages" id="toc-installing-r-r-studio-and-packages" class="nav-link" data-scroll-target="#installing-r-r-studio-and-packages"><span class="header-section-number">0.2.3</span> Installing R, R Studio, and packages</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -330,8 +331,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="installation-instructions" class="level2" data-number="0.2">
 <h2 data-number="0.2" class="anchored" data-anchor-id="installation-instructions"><span class="header-section-number">0.2</span> Installation instructions</h2>
-<p>Software for phylogenetic inference is spread over multiple software systems. Broadly, we will use</p>
+<p>Software for phylogenetic inference is spread over multiple software systems. We will use:</p>
 <ul>
+<li><p><code>git</code> and GitHub to exchange code and collaborate on its annotation</p></li>
 <li><p><code>Julia</code> for stratigraphic forward simulations</p></li>
 <li><p><code>R</code> for phylogenetic simulations and to build models of stratigraphic paleobiology</p></li>
 <li><p><code>revbayes</code> or <code>BEAST</code> for phylogenetic inference</p></li>
@@ -380,8 +382,12 @@ Tip
 </section>
 </section>
 </section>
-<section id="installing-r-r-studio-and-packages" class="level3" data-number="0.2.2">
-<h3 data-number="0.2.2" class="anchored" data-anchor-id="installing-r-r-studio-and-packages"><span class="header-section-number">0.2.2</span> Installing R, R Studio, and packages</h3>
+<section id="julia" class="level3" data-number="0.2.2">
+<h3 data-number="0.2.2" class="anchored" data-anchor-id="julia"><span class="header-section-number">0.2.2</span> Julia</h3>
+<p>To install Julia, please go to the <a href="https://julialang.org/install/">Julia Language Downloads</a> page. It will automatically detect your system and provide a link to the correct installation file. It will install <code>juliaup</code>, which is a tool for managing Julia installations on your system and takes care of any version issues.</p>
+</section>
+<section id="installing-r-r-studio-and-packages" class="level3" data-number="0.2.3">
+<h3 data-number="0.2.3" class="anchored" data-anchor-id="installing-r-r-studio-and-packages"><span class="header-section-number">0.2.3</span> Installing R, R Studio, and packages</h3>
 <p><code>R</code> can be directly installed from CRAN (the comprehensive R archive network) <a href="https://cran.r-project.org/">here</a>. Choose the latest version for your operating system and follow the installation instructions. At the time of the workshop, the latest version is R 4.6.1 (“Happy Hop”).</p>
 <p>You can interact with <code>R</code> using the IDE of your choice. Most <code>R</code> users are familiar with <code>RStudio</code>, which provides a lot of convenient functionality. R Studio can be downloaded from <a href="https://docs.posit.co/ide/user/#rstudio-ide-oss-downloads">Posit here</a>.</p>
 <p>Once you have downloaded R, install all required packages by running the following code in R (e.g., in your R Studio console):</p>

@@ -8,7 +8,9 @@ Welcome to the online materials for the workshop "Bridging Stratigraphic Paleobi
 
 ## Installation instructions
 
-Software for phylogenetic inference is spread over multiple software systems. Broadly, we will use
+Software for phylogenetic inference is spread over multiple software systems. We will use:
+
+-   `git` and GitHub to exchange code and collaborate on its annotation
 
 -   `Julia` for stratigraphic forward simulations
 
@@ -48,6 +50,10 @@ If you want to contribute code or text directly from your computer to the worksh
 ::: {.callout-tip}
 Remmeber: as long as you work on a separate branch, you can't break anything - don't hesitate to experiment, this is how you learn.
 :::
+
+### Julia
+
+To install Julia, please go to the [Julia Language Downloads](https://julialang.org/install/) page. It will automatically detect your system and provide a link to the correct installation file. It will install `juliaup`, which is a tool for managing Julia installations on your system and takes care of any version issues.
 
 ### Installing R, R Studio, and packages
 
