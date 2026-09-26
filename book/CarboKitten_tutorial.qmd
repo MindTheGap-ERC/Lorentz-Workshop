@@ -272,5 +272,5 @@ data_export(spec, header, cols)
 ## Wrap-up
 
 -   A single sea-level curve, applied uniformly across a platform, produces a spatially heterogeneous stratigraphic record: gap size and frequency depend strongly on where a section sits relative to sea level and the photic zone.
--   The age-depth model is the key object that translatesrock thickness into time.
+-   The age-depth model is the key object that translates rock thickness into time.
 -   Try changing `sea_level`, `subsidence_rate`, or `disintegration_rate` above and re-running from Section 3 onward: how do the four age-depth models respond? Can you find a parameter combination where the deepest column has the biggest gaps instead of the shallowest one?

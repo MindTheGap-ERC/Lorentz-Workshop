@@ -1,8 +1,6 @@
 ---
-title: "Index"
+title: "Introduction"
 ---
-
-## Introduction
 
 Welcome to the online materials for the workshop "Bridging Stratigraphic Paleobiology and Phylogenetics". This page collects all contents (code, text, references, and notes) used during the workshop.
 
@@ -81,3 +79,20 @@ remotes::install_github("MindTheGap-ERC/admtools")
 remotes::install_github("MindTheGap-ERC/StratPal")
 install.packages("TreeSim")
 ```
+
+## Example workflows
+
+### Variant "User": I don't want to contribute to the book files, I just want to run the code on my computer
+
+Option 1 (no git): You can copy & paste the code from the webpage into new files on your computer; note there is a discrete clipboard icon in the topright corner that copies the entire code block.
+
+Option 2 (minimum git): Clone the repository using the link on its landing page. If you are using GitHub Desktop, https://github.com/MindTheGap-ERC/Lorentz-Workshop should suffice. Open the repository contents in your file system. Most code chunks will run directly when opened in `.qmd` files, e.g. in R Studio or VS Code - this will feel like using a notebook. Alternatively, you can render the `.qmd` files (see above), but this executes all code chunks at once, which is a bit less interactive.
+
+### Variant "Contributor": I want to modify the text or scripts and make my own variants of the analysis. 
+
+1. Give us (organizers) your GitHub name so we can add you to the repository. As an alternative, you could fork it and contribute, but we will not cover this here lest we have further variants and reading the instructions take the remainder of the workshop.
+
+2. Clone the repository onto your computer.
+
+3. Let's take Day 1 as an example. You're looking at the [CarboKitten](https://mindthegap-erc.github.io/Lorentz-Workshop/CarboKitten_tutorial.html) tutorial and you want to run and modify it.
+

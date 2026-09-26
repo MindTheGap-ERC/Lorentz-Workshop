@@ -167,8 +167,6 @@ git push
 
 If you have images or other artefacts in your chapter, you may have to stage (`git add`) these files too.
 
-GitHub rebuilds the site within a minute or so and it appears at <https://mindthegap-erc.github.io/Lorentz-Workshop/>.
-
 Note to self: The empty `docs/.nojekyll` file must stay, without it GitHub runs Jekyll over the output and drops everything in folders with names starting with an underscore.
 
 ### Editing
