@@ -120,13 +120,13 @@ The sampled tree is the tree with all unsampled lineages (extant and extinct) re
 
 ## Tasks and discussion points
 
-1. Explore the simulation pipeline by modifying the parameters and the random seed. How large is the intrinsic variation in the trees when parameters are fixed? Are there parameters where the true tree, reconstructed tree, and sampled tree differ most/least?
+1.  Explore the simulation pipeline by modifying the parameters and the random seed. How large is the intrinsic variation in the trees when parameters are fixed? Are there parameters where the true tree, reconstructed tree, and sampled tree differ most/least?
 
-2. Think of the timescale you are usually on. What parameters work well on this scale?
+2.  Think of the timescale you are usually on. What parameters work well on this scale?
 
-3. Sampling rate: What determines the sampling rate on your timescale? Does the sampling rate depend on different drivers on different spatial and temporal scales (e.g., section vs. basin. vs. global scale)? If you put in more effort, could you increase it?
+3.  Sampling rate: What determines the sampling rate on your timescale? Does the sampling rate depend on different drivers on different spatial and temporal scales (e.g., section vs. basin. vs. global scale)? If you put in more effort, could you increase it?
 
-4. Sampling in the present, fully extinct trees, and `rho`: `rho` states that the extant tips undergo a different sampling regime. If you are working on fully extinct phyla, what is an appropriate choice of `rho` and what counts as the present? What about the case where you observe a fixed time-interval in the past, but taxa potentially survive longer than the observed time interval? How would work in the inference?
+4.  Sampling in the present, fully extinct trees, and `rho`: `rho` states that the extant tips undergo a different sampling regime. If you are working on fully extinct phyla, what is an appropriate choice of `rho` and what counts as the present? What about the case where you observe a fixed time-interval in the past, but taxa potentially survive longer than the observed time interval? How would work in the inference?
 
 ## Advanced topics
 
@@ -183,7 +183,7 @@ Note that `plotMorphoGrid` shows the traits at the (potentially unsampled) extan
 
 With the morphological data simulated, you can then export the simulated data:
 
-``` {r export-morpho-and-age-data}
+```{r export-morpho-and-age-data}
 # export character matrix
 MorphSim::write.morpho(data = morpho_mk,
                        file = "char_mat_temp.nex",
