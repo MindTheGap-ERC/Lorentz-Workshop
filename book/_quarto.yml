@@ -8,6 +8,9 @@ book:
   date: "8/18/2026"
   chapters:
     - index.qmd
+    - part: "How to use this book"
+      chapters: 
+        - instructions.qmd
     - part: "Day 1: Stratigraphy"
       chapters:
         - stratigraphic_paleobiology.qmd
