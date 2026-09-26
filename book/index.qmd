@@ -48,12 +48,21 @@ Configuration instructions will depend on which one you choose, but we focus her
 If you want to contribute code or text directly from your computer to the workshop's open book, you will need to use operations such as **switching between branches**, **pulling other people's contributions**, **commiting your changes**, and **pushing your changes**. You can collaborate with someone and do this together, or take a look at the [instructions online](https://docs.github.com/en/desktop/overview/getting-started-with-github-desktop#making-changes-in-a-branch) and try on your own. 
 
 ::: {.callout-tip}
-Remmeber: as long as you work on a separate branch, you can't break anything - don't hesitate to experiment, this is how you learn.
+Remember: as long as you work on a separate branch, you can't break anything - don't hesitate to experiment, this is how you learn.
 :::
 
 ### Julia
 
 To install Julia, please go to the [Julia Language Downloads](https://julialang.org/install/) page. It will automatically detect your system and provide a link to the correct installation file. It will install `juliaup`, which is a tool for managing Julia installations on your system and takes care of any version issues.
+
+Once you have installed `juliaup`, you can easily install different version of Julia. All Julia code was tested using Julia version 1.13.0, which you can install using
+
+```{bash}
+#| eval: false
+juliaup add 1.13.0
+juliaup default 1.13.0
+```
+
 
 ### Installing R, R Studio, and packages
 
