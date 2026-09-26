@@ -1,0 +1,4 @@
+[deps]
+CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
+CarboKitten = "690c6d5c-626a-429f-a06b-981a1dae1c19"
+Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"

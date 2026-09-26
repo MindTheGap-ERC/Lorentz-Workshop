@@ -1,0 +1,30 @@
+# molecular evolution
+# HKY model, 5 categories for the gamma distribution. alpha shape parameter set to 0.25, transition to transversion ratio is 5
+
+# transition to transversion ratio
+# construct prior using the true kappa value as mean
+kappa ~ dnExponential(lambda = 0.2) # set to true mean
+moves.append( mvScale(kappa, weight = 5.0, lambda = 0.1))
+moves.append( mvScale(kappa, weight = 5.0, lambda = 1.0))
+moves.append( mvScale(kappa, weight = 5.0, lambda = 10.0))
+#kappa.setValue(5.0)
+
+# prior on base frequencies - all equal
+pi ~ dnDirichlet( v(1,1,1,1))
+moves.append(mvSimplexElementScale(pi, alpha = 10.0, weight = 10.0))
+moves.append(mvSimplexElementScale(pi, alpha = 1.0, weight = 10.0))
+moves.append(mvSimplexElementScale(pi, alpha = 0.1, weight = 10.0))
+# Q matrix for HKY model
+Q_mol := fnHKY(kappa = kappa, baseFrequencies = pi)
+
+# rate heterogeniety
+# construct prior using the correct value as mean and the correct number of categories
+no_cat <- 5
+alpha_shape <- 0.25
+alpha_mol ~ dnExponential(lambda = 1/alpha_shape)
+moves.append( mvScale(alpha_mol, weight = 15.0, lambda = 0.1))
+moves.append( mvScale(alpha_mol, weight = 15.0, lambda = 1.0))
+moves.append( mvScale(alpha_mol, weight = 15.0, lambda = 10.0))
+#alpha_mol.setValue(0.25)
+
+rates_mol := fnDiscretizeGamma(shape = alpha_mol, rate = alpha_mol, numCats = no_cat)

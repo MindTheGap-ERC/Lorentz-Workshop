@@ -3,3 +3,16 @@
 .RData
 .Ruserdata
 *.docx
+*.DS_Store
+
+/.quarto/
+**/*.quarto_ipynb
+
+.positai
+
+*.log
+*.trees
+*history.txt
+*output/
+
+*.pdf

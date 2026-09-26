@@ -1,0 +1,415 @@
+---
+title: "Setting up morphological models in RevBayes, MrBayes, and BEAST2"
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+The models we've been simulating with `MorphSim`, Mk, MkV,
+gamma-distributed ACRV, ordered characters, and partitioned matrices,
+are exactly the models you'll want to specify when analysing real (or
+simulated) morphological data in Bayesian inference software. This page
+shows the same five models set up in three commonly used programs:
+`RevBayes`, `MrBayes`, and `BEAST2` via the `morph-models` (MM) package.
+Comparing them side by side is also a good way to see that "the same
+model" can look quite different depending on the software's design
+philosophy, RevBayes and BEAST2 build the model graphically from named
+pieces, while MrBayes configures it through a more compact command
+interface. Of the three, RevBayes is generally the most flexible:
+because its models are assembled explicitly from interchangeable pieces
+(a Q-matrix, a rate-variation distribution, a tree prior, and so on),
+you can combine them in ways that weren't specifically anticipated by
+the software's developers. MrBayes and BEAST2 instead offer a curated
+set of pre-built model combinations, which covers most standard analyses
+well and is often quicker to set up, but doesn't extend as readily to a
+model outside that set.
+
+::: callout-note
+These are template snippets, not copy-paste-ready scripts, variable
+names, taxon counts, and file paths need to match your own data. Syntax
+can also shift slightly between software versions, so it's worth
+checking your installed version's documentation if something doesn't run
+as expected.
+:::
+
+## How each program is actually used
+
+Before getting into the model syntax, it's worth being explicit about
+the overall workflow for each program, since they differ quite a bit.
+
+**RevBayes** is scripted. You write a `.Rev` script (plain text, run
+from the command line or an interactive console) that reads in your
+data, builds the model piece by piece as a graph of named variables,
+sets up moves and monitors, and launches the MCMC all in one file,
+executed top to bottom. There's no separate GUI step: the script is
+the analysis. See example script for the MkVP+G model.
+
+**MrBayes** blends the two: your data (as a NEXUS file) and your
+analysis commands typically live together, either as a `mrbayes` block
+appended directly to the bottom of the NEXUS data file, or as a separate
+command file read in from an interactive MrBayes session. Commands are
+issued sequentially (`lset`, `prset`, `mcmc`, etc.) rather than built up
+as an explicit model graph. See example script for the MkVP+G model.
+
+**BEAST2** is normally set up graphically, through **BEAUti**: you
+import your alignment(s), configure site models, clock models, and
+priors through a series of GUI panels, and BEAUti writes out the actual
+XML file that BEAST2 runs. You *can* hand-edit that XML directly (which
+is what the snippets on this page show), but the intended workflow is
+BEAUti first, with manual XML editing reserved for tweaks BEAUti's
+interface doesn't expose. BEAUTi reqquires you to load packages (like in R) depending on the analyses you are intending to run. For morphological data we need to install the pacakge `morph-models`. See example XML for the MkVP+G model (note: BEAST2 does not allow for unconstrained analyses, so this script includes a clock model.
+
+This is also part of why RevBayes tends to be the most flexible of the
+three (as mentioned above): since the model is assembled explicitly in
+script from named, swappable pieces, there's no GUI or fixed
+command set constraining which combinations are possible in the first
+place. 
+
+
+## The Mk model
+
+The baseline model: `k` states, one shared rate, no direction favoured
+over any other (Lewis 2001).
+
+::: panel-tabset
+## RevBayes
+
+```         
+Q_morpho <- fnJC(3)   # equal-rates Mk with 3 states
+
+moves = VectorMoves()
+monitors = VectorMonitors()
+
+phylogeny ~ dnUniformTopology(taxa)
+moves.append(mvNNI(phylogeny, weight=n_taxa))
+
+seq ~ dnPhyloCTMC(tree=phylogeny, Q=Q_morpho, type="Standard")
+seq.clamp(morpho)
+
+mymodel = model(phylogeny)
+```
+
+## MrBayes
+
+The Mk model is applied automatically to any partition with
+`datatype = standard`. With constant characters included, use
+`coding = all`:
+
+```         
+lset applyto = (1) coding = all
+```
+
+## BEAST2 (MM)
+
+Each block of characters sharing the same number of states gets its own
+`LewisMK` substitution model, referencing a `StandardData` datatype with
+that many states:
+
+``` xml
+<data id="morph1" spec="FilteredAlignment" data="@morphAlignment" filter="1-10">
+    <userDataType id="morphDataType.morph1" spec="StandardData" nrOfStates="3"/>
+</data>
+
+<siteModel id="morphSiteModel.s:morph1" spec="SiteModel">
+    <substModel id="LewisMK.s:morph1" spec="LewisMK"
+                datatype="@morphDataType.morph1"/>
+</siteModel>
+```
+
+In BEAUti, this is what "Add MK Morphological Data" sets up
+automatically. It partitions the matrix by state count and assigns one
+`LewisMK` model per partition.
+:::
+
+## MkV: conditioning on variable characters
+
+Tells the model that all traits are expected to have at least one
+character varing. It also excludes invariant characters from the
+likelihood, since empirical matrices are curated to only include
+variable traits.
+
+::: panel-tabset
+## RevBayes
+
+Add `coding="variable"` to the CTMC:
+
+```         
+seq ~ dnPhyloCTMC(tree=phylogeny, Q=Q_morpho, type="Standard", coding="variable")
+seq.clamp(morpho)
+```
+
+Constant characters will be removed automatically before the inference
+starts.
+
+## MrBayes
+
+```         
+lset applyto = (1) coding = variable rates = gamma
+```
+
+Constant characters are excluded automatically once `coding = variable`
+is set, but MrBayes will not remove them from the matrix for you — if
+your input file still contains constant characters, either let
+`coding = variable` handle it during likelihood calculation, or
+explicitly exclude them from the matrix first:
+
+```         
+exclude 7 31 61 83 107
+```
+
+## BEAST2 (MM)
+
+MkV support is provided by the same `LewisMK` substitution model as
+plain Mk — the difference lives in the **alignment**, not the
+substitution model. BEAST2 implements the ascertainment correction by
+setting `ascertained="true"` on the alignment and telling it which
+columns represent the "all constant states" categories to correct for
+(via `excludefrom`/`excludeto`), rather than removing invariant
+characters from the matrix directly:
+
+``` xml
+<data id="morph1" spec="FilteredAlignment" data="@morphAlignment"
+      filter="1-10" ascertained="true" excludefrom="10" excludeto="12">
+    <userDataType id="morphDataType.morph1" spec="StandardData" nrOfStates="3"/>
+</data>
+
+<siteModel id="morphSiteModel.s:morph1" spec="SiteModel">
+    <substModel id="LewisMK.s:morph1" spec="LewisMK"
+                datatype="@morphDataType.morph1"/>
+</siteModel>
+```
+
+In BEAUti, this is what "condition on coding only variable characters"
+sets up for you when adding morphological data, you don't need to
+hand-edit `excludefrom`/`excludeto` yourself in the normal workflow, but
+it's worth knowing what's actually happening underneath, since a
+mismatched `excludefrom`/`excludeto` range relative to your actual
+matrix is a known source of `NaN` likelihoods and initialization
+failures if you ever do end up editing this block by hand.
+:::
+
+## Gamma-distributed rate variation across characters (ACRV)
+
+Each character draws its own rate multiplier from a discretized gamma
+distribution, the same idea as among-site rate variation for molecular
+data.
+
+::: panel-tabset
+## RevBayes
+
+```         
+alpha_morpho ~ dnUniform(0, 1E6)
+moves.append(mvScale(alpha_morpho, weight=2.0))
+rates_morpho := fnDiscretizeGamma(alpha_morpho, alpha_morpho, 4)
+
+seq ~ dnPhyloCTMC(tree=phylogeny, Q=Q_morpho, siteRates=rates_morpho,
+                   type="Standard", coding="variable")
+seq.clamp(morpho)
+```
+
+## MrBayes
+
+```         
+lset applyto = (1) coding = variable rates = gamma
+prset applyto = (1) shapepr = exponential(1.0)
+```
+
+The `rates = gamma` flag is the same one used above for MkV — in
+MrBayes, gamma rate variation is just another `lset` option layered on
+top of whichever coding scheme you've chosen, rather than a separate
+model.
+
+## BEAST2 (MM)
+
+Gamma category count and shape are set on the `SiteModel` wrapping the
+`LewisMK` substitution model:
+
+``` xml
+<siteModel id="morphSiteModel.s:morph1" spec="SiteModel" gammaCategoryCount="4">
+    <parameter id="gammaShape.s:morph1" name="shape" value="1.0" estimate="true"/>
+    <substModel id="LewisMK.s:morph1" spec="LewisMK"
+                datatype="@morphDataType.morph1"/>
+</siteModel>
+```
+
+In BEAUti's Site Model panel, this is the "Gamma Category Count" field
+plus the "estimate" checkbox on Shape — leave "Proportion Invariant"
+fixed to zero, since that parameter isn't meaningful once you're using
+MkV-style conditioning.
+:::
+
+## Ordered characters
+
+Transitions only occur between adjacent states (0↔1↔2, not 0↔2
+directly).
+
+::: panel-tabset
+## RevBayes
+
+```         
+q_01 <- 1
+q_12 <- 1
+Q_ordered := fnFreeK(v(0, q_01, 0,
+                        q_01, 0, q_12,
+                        0, q_12, 0),
+                      rescaled=false)
+
+seq ~ dnPhyloCTMC(tree=phylogeny, Q=Q_ordered, siteRates=rates_morpho,
+                   type="Standard", coding="variable")
+seq.clamp(morpho)
+```
+
+## MrBayes
+
+Ordering is set per-character with `ctype`, independent of the `lset`
+options above — a matrix can mix ordered and unordered characters
+freely:
+
+```         
+ctype ordered: 20 23 27 30 36 41 42 44 46 48
+```
+
+Characters not listed remain unordered by default. If different
+characters need different orderings, `ctype` must be called once per
+group.
+
+## BEAST2 (MM)
+
+The `morph-models` package does not readily implement ordered characters
+in BEAST2. We recommend using one of the other two software if you
+require this option or editing the XML manually.
+:::
+
+## Partitioned matrices
+
+There are two different reasons to partition a matrix, and it's worth
+keeping them distinct:
+
+1. **By state count**: a technical requirement in some software, since a
+   single Q-matrix has fixed dimensions. Characters with different numbers
+   of observed states can't share one Q-matrix, purely as a matter of
+   linear algebra.
+2. **By custom character groups**: a modelling choice, motivated by
+   biology (different anatomical regions, different evolutionary
+   processes) rather than by how many states a character happens to have.
+
+Whether a given program needs (1) at all differs between the three: RevBayes needs
+an explicit loop, MrBayes does it automatically and invisibly, and BEAST2
+does it automatically via BEAUti but offers nothing further for (2)
+without hand-editing XML.
+
+::: {.panel-tabset}
+## RevBayes
+
+RevBayes doesn't have a single "partition" function — each partition is
+its own `dnPhyloCTMC` node, clamped to its own subset of the data, all
+sharing the same `phylogeny`. Because each `dnPhyloCTMC` needs one
+fixed-size Q-matrix, **splitting by state count is required** whenever
+your matrix mixes characters with different numbers of states. A loop like
+this is the common way to do that automatically:
+
+```
+n_max_states <- 4                                              # 4 being the max state
+idx = 1
+morpho_bystate[1] <- morpho
+for (i in 2:n_max_states) {
+    morpho_bystate[i] <- morpho                                # local tmp copy of data
+    morpho_bystate[i].setNumStatesPartition(i)                 # keep only characters with i states
+    nc = morpho_bystate[i].nchar()
+
+    if (nc > 0) {
+        q[idx] <- fnJC(i)
+        m_morph[idx] ~ dnPhyloCTMC(tree=phylogeny, Q=q[idx], nSites=nc,
+                                    siteRates=rates_morpho, type="Standard",
+                                    coding="variable")
+        m_morph[idx].clamp(morpho_bystate[i])
+        idx = idx + 1
+    }
+}
+```
+
+**Custom character groups** work the same way structurally, but you assign
+each subset yourself rather than looping over state counts, useful when
+your partitions are motivated by biology rather than by `k`:
+
+```
+# partition 1: characters 1-10, ordered
+seq_1 ~ dnPhyloCTMC(tree=phylogeny, Q=Q_ordered, type="Standard", coding="variable")
+seq_1.clamp(morpho_partition1)
+
+# partition 2: characters 11-20, unordered, with gamma ACRV
+seq_2 ~ dnPhyloCTMC(tree=phylogeny, Q=Q_morpho_binary, siteRates=rates_morpho,
+                     type="Standard", coding="variable")
+seq_2.clamp(morpho_partition2)
+
+mymodel = model(phylogeny)
+```
+
+Because both stochastic nodes are clamped under the same model graph,
+their likelihoods are combined automatically during MCMC. The two
+approaches above can also be combined (e.g. loop by state count *within*
+one biologically-motivated group).
+
+## MrBayes
+
+MrBayes automatically bins characters by their maximum number of observed
+states internally, you don't need to write anything to split characters
+by state count the way RevBayes's loop does explicitly. MrBayes just
+handles it as part of reading in `datatype = standard` data.
+
+**Custom character groups**, by contrast, still need to be defined
+explicitly with `charset`/`partition`, since that's a modelling choice
+MrBayes has no way to infer from the data itself:
+
+```
+charset morph_ordered   = 1-10
+charset morph_unordered = 11-20
+
+partition morph = 2: morph_ordered, morph_unordered
+set partition = morph
+
+lset applyto = (1,2) coding = variable
+lset applyto = (2)   rates = gamma
+
+ctype ordered: 1 2 3 4 5 6 7 8 9 10
+
+unlink shape = (all)
+prset applyto = (all) ratepr = variable
+```
+
+`unlink` and `ratepr = variable` let each partition have its own rate
+multiplier and shape parameter rather than forcing them to be shared.
+
+
+## BEAST2 (MM)
+
+`LewisMK` needs one fixed number of states per morphological model, so
+BEAUti partitions by state count automatically. Each resulting group gets 
+its own `FilteredAlignment`, `StandardData` datatype, and `LewisMK` model, 
+as shown in the Mk section above.
+
+For **custom character groups** a partition motivated by biology rather
+than state count BEAUti offers nothing and the XML must be edited manually 
+giving each group its own `substModel` block:
+
+```xml
+<data id="morph_regionA" spec="FilteredAlignment" data="@morphAlignment" filter="1-10">
+    <userDataType id="morphDataType.regionA" spec="StandardData" nrOfStates="3"/>
+</data>
+<data id="morph_regionB" spec="FilteredAlignment" data="@morphAlignment" filter="11-20">
+    <userDataType id="morphDataType.regionB" spec="StandardData" nrOfStates="3"/>
+</data>
+
+<siteModel id="morphSiteModel.s:regionA" spec="SiteModel">
+    <substModel id="LewisMK.s:regionA" spec="LewisMK" datatype="@morphDataType.regionA"/>
+</siteModel>
+<siteModel id="morphSiteModel.s:regionB" spec="SiteModel">
+    <substModel id="LewisMK.s:regionB" spec="LewisMK" datatype="@morphDataType.regionB"/>
+</siteModel>
+```
+
+::: {.callout-warning}
+So for BEAST2, "partitioning" through BEAUti alone only ever means
+"grouped by state count." Any partition structure motivated by biology requires this kind of manual XML hacking.
+:::
+:::
