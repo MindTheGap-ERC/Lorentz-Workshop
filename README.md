@@ -12,19 +12,19 @@
 
 ### Software 
 
-We recommend installing the following software before the workshop:
+We recommend installing the following software before the workshop. Please find installation instructions in our [open book](https://mindthegap-erc.github.io/Lorentz-Workshop/#installation-instructions).
 
 - [Git](https://git-scm.com/install/) (for windows users we recommend installing [Git BASH](https://gitforwindows.org/))
 - [Julia](https://julialang.org/downloads/) (version >= 1.10)
 - [R](https://www.r-project.org) (version >=4.6)
-- [RStudio](https://posit.co/downloads)
+- [R Studio](https://posit.co/downloads)
 - [BEAST2](https://www.beast2.org) (version >= 2.7)
 - [RevBayes](https://revbayes.github.io/download) (version >=1.4.1) 
 - [Tracer](https://github.com/beast-dev/tracer/releases)
 - [FigTree](https://github.com/rambaut/figtree/releases)
 - A code editor of your choice, such as [Visual Studio Code](https://code.visualstudio.com)
 
-Program specific packages can be installed during the workshop.
+Program-specific packages can be installed during the workshop.
 
 ### Program
 
