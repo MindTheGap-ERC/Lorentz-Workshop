@@ -195,10 +195,10 @@ install.packages("devtools")
 install.packages("TreeSim")
 
 # MorphSim - used for simulating discrete morphology
-pak::pak("https://github.com/cran/StratPal")("https://github.com/fossilsim/morphsim")
+pak::pak("https://github.com/fossilsim/morphsim")
 
 # FossilSim - used for simulating fossils
-pak::pak("https://github.com/cran/StratPal")("https://github.com/fossilsim/fossilsim")
+pak::pak("https://github.com/fossilsim/fossilsim")
 
 # StratPal - used for simulating biostratigraphy
 pak::pak("https://github.com/cran/StratPal")
