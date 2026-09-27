@@ -19,13 +19,13 @@ interface. Of the three, RevBayes is generally the most flexible:
 because its models are assembled explicitly from interchangeable pieces
 (a Q-matrix, a rate-variation distribution, a tree prior, and so on),
 you can combine them in ways that weren't specifically anticipated by
-the software's developers. MrBayes and BEAST2 instead offer a curated
+the software's developers. MrBayes and BEAST2 instead offer a more curated
 set of pre-built model combinations, which covers most standard analyses
 well and is often quicker to set up, but doesn't extend as readily to a
 model outside that set.
 
 ::: callout-note
-These are template snippets, not copy-paste-ready scripts, variable
+These are template snippets, not copy-paste-ready scripts - variable
 names, taxon counts, and file paths need to match your own data. Syntax
 can also shift slightly between software versions, so it's worth
 checking your installed version's documentation if something doesn't run
@@ -57,10 +57,10 @@ priors through a series of GUI panels, and BEAUti writes out the actual
 XML file that BEAST2 runs. You *can* hand-edit that XML directly (which
 is what the snippets on this page show), but the intended workflow is
 BEAUti first, with manual XML editing reserved for tweaks BEAUti's
-interface doesn't expose. BEAUTi reqquires you to load packages (like in R) depending on the analyses you are intending to run. For morphological data we need to install the pacakge `morph-models`. See example XML for the MkVP+G model (note: BEAST2 does not allow for unconstrained analyses, so this script includes a clock model.
+interface doesn't expose. BEAUTi reqquires you to load packages (like in R) depending on the analyses you are intending to run. For morphological data we need to install the pacakge `morph-models`. See example XML for the MkVP+G model (note: BEAST2 does not allow for unconstrained analyses, so this script includes a clock model).
 
 This is also part of why RevBayes tends to be the most flexible of the
-three (as mentioned above): since the model is assembled explicitly in
+three (as mentioned above): since the model is assembled explicitly in the
 script from named, swappable pieces, there's no GUI or fixed
 command set constraining which combinations are possible in the first
 place. 
@@ -116,7 +116,7 @@ that many states:
 </siteModel>
 ```
 
-In BEAUti, this is what "Add MK Morphological Data" sets up
+In BEAUti, this is what "Add Morphological Data" sets up
 automatically. It partitions the matrix by state count and assigns one
 `LewisMK` model per partition.
 :::
@@ -124,7 +124,7 @@ automatically. It partitions the matrix by state count and assigns one
 ## MkV: conditioning on variable characters
 
 Tells the model that all traits are expected to have at least one
-character varing. It also excludes invariant characters from the
+character varying. It also excludes invariant characters from the
 likelihood, since empirical matrices are curated to only include
 variable traits.
 
@@ -162,7 +162,7 @@ exclude 7 31 61 83 107
 MkV support is provided by the same `LewisMK` substitution model as
 plain Mk — the difference lives in the **alignment**, not the
 substitution model. BEAST2 implements the ascertainment correction by
-setting `ascertained="true"` on the alignment and telling it which
+setting `ascertained="true"` in the alignment block and telling it which
 columns represent the "all constant states" categories to correct for
 (via `excludefrom`/`excludeto`), rather than removing invariant
 characters from the matrix directly:
