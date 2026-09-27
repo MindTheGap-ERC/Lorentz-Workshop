@@ -601,5 +601,38 @@
       "Day 3: Tree inference",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Inference</span>"
     ]
+  },
+  {
+    "objectID": "instructions.html",
+    "href": "instructions.html",
+    "title": "2  How to use this book?",
+    "section": "",
+    "text": "3 Variant “User”\nI don’t want to contribute to the book files, I just want to run the code on my computer.",
+    "crumbs": [
+      "How to use this book",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>How to use this book?</span>"
+    ]
+  },
+  {
+    "objectID": "instructions.html#option-1-no-git",
+    "href": "instructions.html#option-1-no-git",
+    "title": "2  How to use this book?",
+    "section": "3.1 Option 1 (no git)",
+    "text": "3.1 Option 1 (no git)\nYou can copy & paste the code from the webpage into new files on your computer; note there is a discrete clipboard icon in the topright corner that copies the entire code block.",
+    "crumbs": [
+      "How to use this book",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>How to use this book?</span>"
+    ]
+  },
+  {
+    "objectID": "instructions.html#option-2-minimum-git",
+    "href": "instructions.html#option-2-minimum-git",
+    "title": "2  How to use this book?",
+    "section": "3.2 Option 2 (minimum git)",
+    "text": "3.2 Option 2 (minimum git)\nClone the repository using the link on its landing page. If you are using GitHub Desktop, https://github.com/MindTheGap-ERC/Lorentz-Workshop should suffice.\nOpen the repository folder in your file system. Most code chunks will run directly when opened in .qmd files, e.g. in R Studio or VS Code - this will feel like using a notebook. Alternatively, you can render the entire book or individual .qmd files, but this executes all code chunks at once, which is less interactive.",
+    "crumbs": [
+      "How to use this book",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>How to use this book?</span>"
+    ]
   }
 ]
