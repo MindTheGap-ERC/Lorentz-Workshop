@@ -10,6 +10,10 @@
 4.  Rachel Warnock, Friedrich-Alexander-Universität Erlangen-Nürnberg
 5.  Niklas Hohmann, Utrecht University
 
+### The workshop book
+
+Our [joint open book](https://mindthegap-erc.github.io/Lorentz-Workshop/) where you can find the detailed instructions, tutorials and (in the course of the workshop) everyone's contributions. Please refer to the book for [installation instructions](https://mindthegap-erc.github.io/Lorentz-Workshop/#installation-instructions).
+
 ### Software 
 
 We recommend installing the following software before the workshop:
