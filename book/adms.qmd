@@ -246,7 +246,7 @@ StratPal::p3(rate = 10,
 
 Note here the gaps in fossil abundance are due to the gaps in the fossil record - no fossil ages will be reconstructed during the gap. If you want to explore the interaction between sediment accumulation, age-depth models, and fossil abundance more interactively, check out the [Shellbed condensator](https://utrecht-university.shinyapps.io/ShellbedCondensator/), a shiny app that runs in your browser.
 
-Last, we show off a classic example of stratigraphic paleobiology: The generation of artefactual clusters of last occurrences at hiatal surfaces from a regular extinction rate. This example quietly assumes that for each taxon, the fossil abundance is high enough for the Signor-Lipps effect to be negligible (Why is this assumption needed, and where is it expressed in the code?)
+Last, we show off a classic example of stratigraphic paleobiology: The generation of artifactual clusters of last occurrences at hiatal surfaces from a regular extinction rate. This example quietly assumes that for each taxon, the fossil abundance is high enough for the Signor-Lipps effect to be negligible (Why is this assumption needed, and where is it expressed in the code?)
 
 For the extinction rate, we assume it doubles over the timescale of observation. To reduce the effects of noise, we simulate a (unrealistically) large number of last occurrences:
 

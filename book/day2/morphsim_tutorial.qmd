@@ -6,7 +6,7 @@ title: "MorphSim Tutorial"
 
 Before we can simulate morphological data we need a phylogenetic tree along which to simulate our data. In R, trees can be simulated using a number of different packages, most commonly `ape` and `TreeSim`. Here we explain how to generate a birth-death time tree using `TreeSim`.
 
-`TreeSim` (Stadler 2011) simulates trees under a constant-rate birth-death process, where new lineages are added at rate `lambda` (speciation) and removed at rate `mu` (extinction). The function we'll use, `sim.bd.taxa()`, simulates a tree conditioned on reaching a fixed number of extant tips.
+`TreeSim` (Stadler 2011) simulates trees under a range of birth-death processes, where new lineages are added at rate `lambda` (speciation) and removed at rate `mu` (extinction). The function we'll use, `sim.bd.taxa()`, simulates a tree conditioned on reaching a fixed number of extant tips.
 
 `TreeSim` provides several related functions depending on what you want to condition the simulation on:
 
@@ -29,7 +29,7 @@ set.seed(12)
 
 ### Generating the tree
 
-We simulate a single tree with 10 tips, a speciation rate of 1 and an extinction rate of 0.5. Note that `mu` must be less than `lambda`; if extinction is too close to (or exceeds) speciation, the process may need many attempts to reach the target number of tips, and simulation will be slow or may not converge in reasonable time.
+We simulate a single tree with 10 tips, speciation rate of 1 and an extinction rate of 0.5. Note that `mu` must be less than `lambda`; if extinction is too close to (or exceeds) speciation, the process may need many attempts to reach the target number of tips, and simulation will be slow or may not converge in reasonable time.
 
 ```{r}
 tree_list <- sim.bd.taxa(
@@ -37,7 +37,7 @@ tree_list <- sim.bd.taxa(
   numbsim  = 1,    # number of trees to simulate
   lambda   = 1,    # speciation rate
   mu       = 0.5,  # extinction rate
-  complete = TRUE # drop extinct/non-sampled lineages; keep only extant tips
+  complete = TRUE # if set to false drop all extinct lineages and keep only extant tips
 )
 
 tree <- tree_list[[1]]
@@ -45,14 +45,14 @@ tree <- tree_list[[1]]
 
 Note that `sim.bd.taxa()` always returns a **list** of trees, with length equal to `numbsim`. Even when simulating a single tree, we still need to index into the list (`[[1]]`) to extract the `phylo` object itself. This trips a lot of people up the first time, so it's worth calling out explicitly.
 
-We set `complete = TRUE` so we want the whole tree, including lineages that went extinct before the present, rather than one pruned down to extant taxa only. It's important to understand what `n` controls here: `sim.bd.taxa()` only lets you specify the number of extant tips, not the total number of tips in the tree. So with `n = 10` and `complete = TRUE`, the simulation keeps adding and removing lineages until it reaches exactly 10 tips at the present, but every lineage that went extinct along the way is also retained in the output. That means the final tree will generally have more than 10 tips in total once extinct lineages are counted. If you instead want a tree with exactly 10 tips and no fossils at all, set `complete = FALSE`, which drops the extinct lineages and returns only the extant-tip tree.
+We set `complete = TRUE` so we want the whole tree, including lineages that went extinct before the present, rather than one pruned down to extant taxa only. It's important to understand what `n` controls here: `sim.bd.taxa()` only lets you specify the number of extant tips, not the total number of tips in the tree. So with `n = 10` and `complete = TRUE`, the simulation keeps adding and removing lineages until it reaches exactly 10 tips at the present, but every lineage that went extinct along the way is also retained in the output. That means the final tree will generally have more than 10 tips in total once extinct lineages are counted. If you instead want a tree with exactly 10 tips and no extinct lineages at all, set `complete = FALSE`, which drops the extinct lineages and returns only the extant-tip tree.
 
 ### Checking the tree
 
 Before moving on to simulating morphology, it's good practice to confirm the tree looks the way we expect. A few quick checks:
 
 ```{r}
-# total tip count, including BOTH extant and fossil lineages
+# total tip count, including BOTH extant and extinct lineages
 # (this will be > 10, since n only controls extant tips)
 Ntip(tree)
 ```
@@ -68,7 +68,7 @@ sum(abs(tip_depths - max(tip_depths)) < 1e-8)
 
 ```{r}
 # with complete = TRUE, the tree should generally NOT be ultrametric,
-# since fossil tips end before the present
+# since extinct tips end before the present
 is.ultrametric(tree)
 ```
 
@@ -80,7 +80,7 @@ is.binary(tree)
 
 ### Visualizing the tree
 
-A quick plot lets us see the fossil tips (branches ending before the present) alongside the extant ones:
+A quick plot lets us see the extinct tips (branches ending before the present) alongside the extant ones:
 
 ```{r}
 
@@ -88,11 +88,11 @@ plot(tree, cex = 0.8, no.margin = TRUE)
 
 ```
 
-With a validated `phylo` object, extant and fossil tips both retained,we're ready to simulate morphological character data along its branches using `MorphSim`.
+With a validated `phylo` object, extant and extinct tips both retained, we're ready to simulate morphological character data along its branches using `MorphSim`.
 
 ## Simulating Morphological Data
 
-Now that we have a validated tree (extant tips plus fossils, from `TreeSim`. We will simulate fossil sampling using the FBD model tomorrow!), we can simulate morphological character data along it using `MorphSim`. We'll build up the model one assumption at a time, starting from the simplest possible case and progressively relaxing it, the same tree is used throughout, so any differences in the resulting data are purely down to the model, not the tree.
+Now that we have a validated tree (extant tips plus extinct lineages, from `TreeSim`. We will simulate fossil sampling using the FBD model tomorrow!), we can simulate morphological character data along it using `MorphSim`. We'll build up the model one assumption at a time, starting from the simplest possible case and progressively relaxing it, the same tree is used throughout, so any differences in the resulting data are purely down to the model of morphological evolution, not the tree.
 
 ```{r}
 library(MorphSim)
@@ -100,7 +100,7 @@ library(MorphSim)
 
 ### The baseline: Mk
 
-The simplest model for discrete morphological data is the **Mk model** (Lewis 2001), a direct extension of the Jukes-Cantor idea to morphology: `k` possible states per character, one shared substitution rate, and no direction favoured over any other. It's a strong assumption. Unlike a nucleotide, state "1" in one character has no inherent relationship to state "1" in another, but it's the natural starting point,.
+The simplest model for discrete morphological data is the **Mk model** (Lewis 2001), a direct extension of the Jukes-Cantor idea to morphology: `k` possible states per character, one shared substitution rate, and no direction favoured over any other. It's a strong assumption. Unlike a nucleotide, state "1" in one character has no inherent relationship to state "1" in another, but it's the natural starting point.
 
 ```{r}
 morpho_mk <- sim.morpho(k = 3, time.tree = tree, br.rates = 0.1, trait.num = 15)
@@ -111,7 +111,7 @@ Take a look at the grid, you'll likely spot at least one invariant column (a cha
 
 ### MkV: conditioning on variability
 
-Empirical matrices are curated by systematists, and nobody writes down a character that doesn't vary, invariant characters simply aren't scored in the first place. If we simulated data and then deleted invariant columns after the fact, we'd bias our branch length and rate estimates, since we'd have thrown away information about how rare change actually is. MkV builds the exclusion directly into the model, so the simulation (and the corresponding likelihood, if you're fitting a model back to this data) correctly accounts for the fact that we conditioned on variability from the start.
+Empirical matrices are curated by systematists, and a character that doesn't vary across the study group is rarely recorded, invariant characters simply aren't often scored in the first place. If we simulated data and then deleted invariant columns after the fact, we'd bias our branch length and rate estimates, since we'd have thrown away information about how rare change actually is. MkV builds the exclusion directly into the model, so the simulation (and the corresponding likelihood, if you're fitting a model back to this data) correctly accounts for the fact that we conditioned on variability from the start.
 
 ```{r}
 morpho_mkv <- sim.morpho(k = 3, time.tree = tree, br.rates = 0.1,
@@ -151,7 +151,7 @@ Both `full.states` and `parsimony` work by rejection sampling: generate, check, 
 
 ### Among-character rate variation (ACRV)
 
-So far every character has shared a single rate, which is biologically implausible: some traits are under tight functional or developmental constraint and barely change, while others are close to neutral and drift quickly. Among-character rate variation lets each character draw its own rate multiplier, typically from a discretized gamma distribution, the same approach used for among-site rate variation in molecular models.
+So far every character has shared a single rate, which is biologically unlikely: some traits are under tight functional or developmental constraint and barely change, while others are close to neutral and drift quickly. Among-character rate variation lets each character draw its own rate multiplier, typically from a discretized gamma distribution, the same approach used for among-site rate variation in molecular models.
 
 ```{r}
 
@@ -205,7 +205,7 @@ part_data$model$Specified
 Here, the first 10 traits are binary (`k = 2`), the next 5 have three states, and the last 5 have four states. The values in `partition` must sum to `trait.num`, or `sim.morpho()` will throw an error.
 
 ::: callout-note
-`partition` only lets you vary the number of states (`k`) across groups of characters within a single call. If you want different partitions to use *different models entirely* for example, some ordered with a custom `Q`, others unordered with gamma rate variation you can't do that in one call. Instead, simulate each partition separately with its own `sim.morpho()` call, then merge them with `combine.morpho()`. Both objects must share the same tree, branch lengths, and (if used) fossil object.
+`partition` only lets you vary the number of states (`k`) across groups of characters within a single call. If you want different partitions to use *different models entirely* for example, some ordered with a custom `Q`, others unordered with gamma rate variation you can't do that in one call. Instead, simulate each partition separately with its own `sim.morpho()` call, then merge them with `combine.morpho()`. Both objects must share the same tree, branch lengths, and (if available) fossil object.
 :::
 
 ```{r}
