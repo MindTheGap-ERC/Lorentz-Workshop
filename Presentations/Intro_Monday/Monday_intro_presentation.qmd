@@ -37,9 +37,6 @@ format: revealjs
 
 GitHub repository: [https://github.com/MindTheGap-ERC/Lorentz-Workshop](https://github.com/MindTheGap-ERC/Lorentz-Workshop)
 
-`[screenshot of the program - to be added in the last moment?]`
-
-
 ## Program today {.smaller}
 
 | Time | Activity | Coordinator |
