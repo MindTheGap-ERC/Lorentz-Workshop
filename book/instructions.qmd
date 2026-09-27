@@ -25,23 +25,34 @@ Open the repository folder in your file system. Most code chunks will run direct
 
 2. Clone the repository onto your computer.
 
+```bash
+git clone https://github.com/MindTheGap-ERC/Lorentz-Workshop.git
+```
+
 3. Let's take Day 1 as an example. You're looking at the [CarboKitten](https://mindthegap-erc.github.io/Lorentz-Workshop/CarboKitten_tutorial.html) tutorial and you want to run and modify it. Navigate into the folder with the repository on your computer, for example:
 
 ```bash
 cd Lorentz-Workshop
+git switch day1
+cd book
+julia
 ```
-
 Initiate the Julia project (it only needs to be done the first time you open this project):
 
-```bash
-julia
-]
-activate .
-instantiate
-add CarboKitten
-add Unitful
+```julia
+using Pkg
+Pkg.activate(".")
+Pkg.instantiate()
+Pkg.add("CarboKitten")
+Pkg.add("Unitful")
 ```
-
 The above operations read the `Manifest.toml` file and set up the environment, so it is the same as the one we set up: the versions match etc. Then you install two packages: CarboKitten and Unitful. The first time you do it, it may take a lot of time: they need to be downloaded and precompiled. Once this has happened, Quarto will be able to use these precompiled files on your computers and will run faster.
 
+If you want to make your own (your group's) variant of the code or text, save the file with the name as it had before, plus your initials at the end. Inside the file, add the names of people in your group or anyone who has contributed. If you want, you can render the file into `.html` using the instructions in the README, but if not, we can do it for you. Most important is that you keep your contributions and push them into the respective branch (in this example, `day1`).
+
+```bash
+git add CarboKitten_tutorial-ej.qmd
+git commit -m "added a different sea level curve"
+git push
+```
 
