@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>8&nbsp; Setting up morphological models in RevBayes, MrBayes, and BEAST2 – Bridging Stratigraphic Palaeobiology and Phylogenetics</title>
+<title>9&nbsp; Setting up morphological models in RevBayes, MrBayes, and BEAST2 – Bridging Stratigraphic Palaeobiology and Phylogenetics</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -123,7 +123,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../day2/Intro_morpho.html">Day 2: Fossils</a></li><li class="breadcrumb-item"><a href="../day2/Model-RevBayes.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Setting up morphological models in RevBayes, MrBayes, and BEAST2</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../day2/Intro_morpho.html">Day 2: Fossils</a></li><li class="breadcrumb-item"><a href="../day2/Model-RevBayes.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Setting up morphological models in RevBayes, MrBayes, and BEAST2</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -151,13 +151,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Index</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Day 1: Stratigraphy</span></a>
+ <span class="menu-text">How to use this book</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -165,20 +165,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../stratigraphic_paleobiology.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Stratigraphic paleobiology</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../CarboKitten_tutorial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Simulating the stratigraphic record</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../adms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Time in rocks</span></span></a>
+  <a href="../instructions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How to use this book?</span></span></a>
   </div>
 </li>
       </ul>
@@ -186,7 +174,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Day 2: Fossils</span></a>
+ <span class="menu-text">Day 1: Stratigraphy</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -194,26 +182,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../day2/Intro_morpho.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction to morphological data</span></span></a>
+  <a href="../stratigraphic_paleobiology.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Stratigraphic paleobiology</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../day2/morphsim_tutorial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">MorphSim Tutorial</span></span></a>
+  <a href="../CarboKitten_tutorial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Simulating the stratigraphic record</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../day2/complex_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Morphological model extensions</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../day2/Model-RevBayes.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Setting up morphological models in RevBayes, MrBayes, and BEAST2</span></span></a>
+  <a href="../adms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Time in rocks</span></span></a>
   </div>
 </li>
       </ul>
@@ -221,7 +203,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Day 3: Tree inference</span></a>
+ <span class="menu-text">Day 2: Fossils</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -229,32 +211,67 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../day2/Intro_morpho.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to morphological data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../day2/morphsim_tutorial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">MorphSim Tutorial</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../day2/complex_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Morphological model extensions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../day2/Model-RevBayes.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Setting up morphological models in RevBayes, MrBayes, and BEAST2</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Day 3: Tree inference</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../day3/FBD_sim.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Simulating trees under the FBD model</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Simulating trees under the FBD model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../day3/StratPal_fossils.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Stratigraphic paleobiology and fossil occurrences</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Stratigraphic paleobiology and fossil occurrences</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../day3/StratPal_phylo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Phylogeny and stratigraphy</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Phylogeny and stratigraphy</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../day3/FBD_strat_inference.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Stratigraphic information in phylogenetic inference</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Stratigraphic information in phylogenetic inference</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../day3/inference_helpers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Inference</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Inference</span></span></a>
   </div>
 </li>
       </ul>
@@ -270,7 +287,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
     </ul>
@@ -283,21 +300,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#how-each-program-is-actually-used" id="toc-how-each-program-is-actually-used" class="nav-link active" data-scroll-target="#how-each-program-is-actually-used"><span class="header-section-number">8.1</span> How each program is actually used</a></li>
-  <li><a href="#the-mk-model" id="toc-the-mk-model" class="nav-link" data-scroll-target="#the-mk-model"><span class="header-section-number">8.2</span> The Mk model</a></li>
-  <li><a href="#mkv-conditioning-on-variable-characters" id="toc-mkv-conditioning-on-variable-characters" class="nav-link" data-scroll-target="#mkv-conditioning-on-variable-characters"><span class="header-section-number">8.3</span> MkV: conditioning on variable characters</a></li>
-  <li><a href="#gamma-distributed-rate-variation-across-characters-acrv" id="toc-gamma-distributed-rate-variation-across-characters-acrv" class="nav-link" data-scroll-target="#gamma-distributed-rate-variation-across-characters-acrv"><span class="header-section-number">8.4</span> Gamma-distributed rate variation across characters (ACRV)</a></li>
-  <li><a href="#ordered-characters" id="toc-ordered-characters" class="nav-link" data-scroll-target="#ordered-characters"><span class="header-section-number">8.5</span> Ordered characters</a></li>
-  <li><a href="#partitioned-matrices" id="toc-partitioned-matrices" class="nav-link" data-scroll-target="#partitioned-matrices"><span class="header-section-number">8.6</span> Partitioned matrices</a></li>
+  <li><a href="#how-each-program-is-actually-used" id="toc-how-each-program-is-actually-used" class="nav-link active" data-scroll-target="#how-each-program-is-actually-used"><span class="header-section-number">9.1</span> How each program is actually used</a></li>
+  <li><a href="#the-mk-model" id="toc-the-mk-model" class="nav-link" data-scroll-target="#the-mk-model"><span class="header-section-number">9.2</span> The Mk model</a></li>
+  <li><a href="#mkv-conditioning-on-variable-characters" id="toc-mkv-conditioning-on-variable-characters" class="nav-link" data-scroll-target="#mkv-conditioning-on-variable-characters"><span class="header-section-number">9.3</span> MkV: conditioning on variable characters</a></li>
+  <li><a href="#gamma-distributed-rate-variation-across-characters-acrv" id="toc-gamma-distributed-rate-variation-across-characters-acrv" class="nav-link" data-scroll-target="#gamma-distributed-rate-variation-across-characters-acrv"><span class="header-section-number">9.4</span> Gamma-distributed rate variation across characters (ACRV)</a></li>
+  <li><a href="#ordered-characters" id="toc-ordered-characters" class="nav-link" data-scroll-target="#ordered-characters"><span class="header-section-number">9.5</span> Ordered characters</a></li>
+  <li><a href="#partitioned-matrices" id="toc-partitioned-matrices" class="nav-link" data-scroll-target="#partitioned-matrices"><span class="header-section-number">9.6</span> Partitioned matrices</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../day2/Intro_morpho.html">Day 2: Fossils</a></li><li class="breadcrumb-item"><a href="../day2/Model-RevBayes.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Setting up morphological models in RevBayes, MrBayes, and BEAST2</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../day2/Intro_morpho.html">Day 2: Fossils</a></li><li class="breadcrumb-item"><a href="../day2/Model-RevBayes.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Setting up morphological models in RevBayes, MrBayes, and BEAST2</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Setting up morphological models in RevBayes, MrBayes, and BEAST2</span></h1>
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Setting up morphological models in RevBayes, MrBayes, and BEAST2</span></h1>
 </div>
 
 
@@ -328,16 +345,16 @@ Note
 <p>These are template snippets, not copy-paste-ready scripts, variable names, taxon counts, and file paths need to match your own data. Syntax can also shift slightly between software versions, so it’s worth checking your installed version’s documentation if something doesn’t run as expected.</p>
 </div>
 </div>
-<section id="how-each-program-is-actually-used" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="how-each-program-is-actually-used"><span class="header-section-number">8.1</span> How each program is actually used</h2>
+<section id="how-each-program-is-actually-used" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="how-each-program-is-actually-used"><span class="header-section-number">9.1</span> How each program is actually used</h2>
 <p>Before getting into the model syntax, it’s worth being explicit about the overall workflow for each program, since they differ quite a bit.</p>
 <p><strong>RevBayes</strong> is scripted. You write a <code>.Rev</code> script (plain text, run from the command line or an interactive console) that reads in your data, builds the model piece by piece as a graph of named variables, sets up moves and monitors, and launches the MCMC all in one file, executed top to bottom. There’s no separate GUI step: the script is the analysis. See example script for the MkVP+G model.</p>
 <p><strong>MrBayes</strong> blends the two: your data (as a NEXUS file) and your analysis commands typically live together, either as a <code>mrbayes</code> block appended directly to the bottom of the NEXUS data file, or as a separate command file read in from an interactive MrBayes session. Commands are issued sequentially (<code>lset</code>, <code>prset</code>, <code>mcmc</code>, etc.) rather than built up as an explicit model graph. See example script for the MkVP+G model.</p>
 <p><strong>BEAST2</strong> is normally set up graphically, through <strong>BEAUti</strong>: you import your alignment(s), configure site models, clock models, and priors through a series of GUI panels, and BEAUti writes out the actual XML file that BEAST2 runs. You <em>can</em> hand-edit that XML directly (which is what the snippets on this page show), but the intended workflow is BEAUti first, with manual XML editing reserved for tweaks BEAUti’s interface doesn’t expose. BEAUTi reqquires you to load packages (like in R) depending on the analyses you are intending to run. For morphological data we need to install the pacakge <code>morph-models</code>. See example XML for the MkVP+G model (note: BEAST2 does not allow for unconstrained analyses, so this script includes a clock model.</p>
 <p>This is also part of why RevBayes tends to be the most flexible of the three (as mentioned above): since the model is assembled explicitly in script from named, swappable pieces, there’s no GUI or fixed command set constraining which combinations are possible in the first place.</p>
 </section>
-<section id="the-mk-model" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="the-mk-model"><span class="header-section-number">8.2</span> The Mk model</h2>
+<section id="the-mk-model" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="the-mk-model"><span class="header-section-number">9.2</span> The Mk model</h2>
 <p>The baseline model: <code>k</code> states, one shared rate, no direction favoured over any other (Lewis 2001).</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">RevBayes</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">MrBayes</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">BEAST2 (MM)</a></li></ul>
@@ -375,8 +392,8 @@ mymodel = model(phylogeny)</code></pre>
 </div>
 </div>
 </section>
-<section id="mkv-conditioning-on-variable-characters" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="mkv-conditioning-on-variable-characters"><span class="header-section-number">8.3</span> MkV: conditioning on variable characters</h2>
+<section id="mkv-conditioning-on-variable-characters" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="mkv-conditioning-on-variable-characters"><span class="header-section-number">9.3</span> MkV: conditioning on variable characters</h2>
 <p>Tells the model that all traits are expected to have at least one character varing. It also excludes invariant characters from the likelihood, since empirical matrices are curated to only include variable traits.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">RevBayes</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">MrBayes</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false" href="">BEAST2 (MM)</a></li></ul>
@@ -408,8 +425,8 @@ seq.clamp(morpho)</code></pre>
 </div>
 </div>
 </section>
-<section id="gamma-distributed-rate-variation-across-characters-acrv" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="gamma-distributed-rate-variation-across-characters-acrv"><span class="header-section-number">8.4</span> Gamma-distributed rate variation across characters (ACRV)</h2>
+<section id="gamma-distributed-rate-variation-across-characters-acrv" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="gamma-distributed-rate-variation-across-characters-acrv"><span class="header-section-number">9.4</span> Gamma-distributed rate variation across characters (ACRV)</h2>
 <p>Each character draws its own rate multiplier from a discretized gamma distribution, the same idea as among-site rate variation for molecular data.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">RevBayes</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">MrBayes</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-3" role="tab" aria-controls="tabset-3-3" aria-selected="false" href="">BEAST2 (MM)</a></li></ul>
@@ -440,8 +457,8 @@ prset applyto = (1) shapepr = exponential(1.0)</code></pre>
 </div>
 </div>
 </section>
-<section id="ordered-characters" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="ordered-characters"><span class="header-section-number">8.5</span> Ordered characters</h2>
+<section id="ordered-characters" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="ordered-characters"><span class="header-section-number">9.5</span> Ordered characters</h2>
 <p>Transitions only occur between adjacent states (0↔︎1↔︎2, not 0↔︎2 directly).</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">RevBayes</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href="">MrBayes</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-3" role="tab" aria-controls="tabset-4-3" aria-selected="false" href="">BEAST2 (MM)</a></li></ul>
@@ -469,8 +486,8 @@ seq.clamp(morpho)</code></pre>
 </div>
 </div>
 </section>
-<section id="partitioned-matrices" class="level2" data-number="8.6">
-<h2 data-number="8.6" class="anchored" data-anchor-id="partitioned-matrices"><span class="header-section-number">8.6</span> Partitioned matrices</h2>
+<section id="partitioned-matrices" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="partitioned-matrices"><span class="header-section-number">9.6</span> Partitioned matrices</h2>
 <p>There are two different reasons to partition a matrix, and it’s worth keeping them distinct:</p>
 <ol type="1">
 <li><strong>By state count</strong>: a technical requirement in some software, since a single Q-matrix has fixed dimensions. Characters with different numbers of observed states can’t share one Q-matrix, purely as a matter of linear algebra.</li>
@@ -970,12 +987,12 @@ Warning
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../day2/complex_models.html" class="pagination-link" aria-label="Morphological model extensions">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Morphological model extensions</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Morphological model extensions</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../day3/FBD_sim.html" class="pagination-link" aria-label="Simulating trees under the FBD model">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Simulating trees under the FBD model</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Simulating trees under the FBD model</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
