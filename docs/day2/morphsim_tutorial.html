@@ -82,7 +82,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-631496449bf32ff9b0bb69a6bfd9195d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-d3f7f8e73c8d287b30bcf59c2b563615.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -632,7 +632,7 @@ Note
 <span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">seq =</span> <span class="st">"tips"</span>, <span class="at">probability =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.7</span>)</span>
 <span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><strong>Extinct taxa only</strong>: leaves extant tips fully observed and only introduces missing data in fossil taxa, reflecting the common (and very real) asymmetry that living specimens can be studied completely while fossils cannot.</p>
+<p><strong>Extinct taxa only</strong>: leaves extant tips fully observed and only introduces missing data in extinct taxa, reflecting the common (and very real) asymmetry that living specimens can be studied completely while fossils cannot.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>missing_extinct <span class="ot">&lt;-</span> <span class="fu">sim.missing.data</span>(</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> combined , <span class="at">method =</span> <span class="st">"extinct"</span>,</span>
@@ -643,7 +643,7 @@ Note
 </section>
 <section id="exporting-matrices-trees-and-fossil-ages" class="level3" data-number="6.2.9">
 <h3 data-number="6.2.9" class="anchored" data-anchor-id="exporting-matrices-trees-and-fossil-ages"><span class="header-section-number">6.2.9</span> Exporting matrices, trees, and fossil ages</h3>
-<p>Once you’re happy with a simulated dataset, <code>write.morpho()</code> provides a single interface for exporting everything you need to move into downstream phylogenetic software (RevBayes, BEAST2, or similar): the tree, the character matrix, and fossil occurrence ages. The <code>type</code> argument controls what gets written, and <code>reconstructed</code> controls whether you export the full simulated tree/matrix or only the reconstructed version (i.e., only the sampled lineages, relevant once fossils are involved, see day 3).</p>
+<p>Once you’re happy with a simulated dataset, <code>write.morpho()</code> provides a single interface for exporting everything you need to move into downstream phylogenetic software (RevBayes, BEAST2, or similar): the tree, the character matrix, and fossil occurrence ages. Note we haven’t simulated the process of incomplete sampling or fossilization yet to, used to generate fossil ages - we’ll do that tomorrow. The <code>type</code> argument controls what gets written, and <code>reconstructed</code> controls whether you export the full simulated tree/matrix or only the reconstructed version (i.e., only the sampled lineages, relevant once fossils are involved, see day 3).</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># full tree</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.morpho</span>(missing_part, <span class="at">file =</span> <span class="st">"tree.tre"</span>, <span class="at">type =</span> <span class="st">"tree"</span>,</span>
