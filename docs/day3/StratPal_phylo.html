@@ -284,17 +284,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">11.1</span> Introduction</a></li>
-  <li><a href="#preliminaries" id="toc-preliminaries" class="nav-link" data-scroll-target="#preliminaries"><span class="header-section-number">11.2</span> Preliminaries</a>
+  <li><a href="#tasks-and-discussion-points" id="toc-tasks-and-discussion-points" class="nav-link" data-scroll-target="#tasks-and-discussion-points"><span class="header-section-number">11.2</span> Tasks and discussion points</a></li>
+  <li><a href="#preliminaries" id="toc-preliminaries" class="nav-link" data-scroll-target="#preliminaries"><span class="header-section-number">11.3</span> Preliminaries</a>
   <ul class="collapse">
-  <li><a href="#stratigraphic-data" id="toc-stratigraphic-data" class="nav-link" data-scroll-target="#stratigraphic-data"><span class="header-section-number">11.2.1</span> Stratigraphic data</a></li>
-  <li><a href="#fbd-tree" id="toc-fbd-tree" class="nav-link" data-scroll-target="#fbd-tree"><span class="header-section-number">11.2.2</span> FBD tree</a></li>
+  <li><a href="#stratigraphic-data" id="toc-stratigraphic-data" class="nav-link" data-scroll-target="#stratigraphic-data"><span class="header-section-number">11.3.1</span> Stratigraphic data</a></li>
+  <li><a href="#fbd-tree" id="toc-fbd-tree" class="nav-link" data-scroll-target="#fbd-tree"><span class="header-section-number">11.3.2</span> FBD tree</a></li>
   </ul></li>
-  <li><a href="#taphonomy-and-ecology" id="toc-taphonomy-and-ecology" class="nav-link" data-scroll-target="#taphonomy-and-ecology"><span class="header-section-number">11.3</span> Taphonomy and ecology</a></li>
-  <li><a href="#add-extant-samples" id="toc-add-extant-samples" class="nav-link" data-scroll-target="#add-extant-samples"><span class="header-section-number">11.4</span> Add extant samples</a></li>
-  <li><a href="#simulate-morphological-characters" id="toc-simulate-morphological-characters" class="nav-link" data-scroll-target="#simulate-morphological-characters"><span class="header-section-number">11.5</span> Simulate morphological characters</a></li>
-  <li><a href="#age-misassignment" id="toc-age-misassignment" class="nav-link" data-scroll-target="#age-misassignment"><span class="header-section-number">11.6</span> Age-misassignment</a></li>
-  <li><a href="#export-data" id="toc-export-data" class="nav-link" data-scroll-target="#export-data"><span class="header-section-number">11.7</span> Export data</a></li>
-  <li><a href="#tasks-and-discussion-points" id="toc-tasks-and-discussion-points" class="nav-link" data-scroll-target="#tasks-and-discussion-points"><span class="header-section-number">11.8</span> Tasks and discussion points</a></li>
+  <li><a href="#taphonomy-and-ecology" id="toc-taphonomy-and-ecology" class="nav-link" data-scroll-target="#taphonomy-and-ecology"><span class="header-section-number">11.4</span> Taphonomy and ecology</a></li>
+  <li><a href="#add-extant-samples" id="toc-add-extant-samples" class="nav-link" data-scroll-target="#add-extant-samples"><span class="header-section-number">11.5</span> Add extant samples</a></li>
+  <li><a href="#simulate-morphological-characters" id="toc-simulate-morphological-characters" class="nav-link" data-scroll-target="#simulate-morphological-characters"><span class="header-section-number">11.6</span> Simulate morphological characters</a></li>
+  <li><a href="#age-misassignment" id="toc-age-misassignment" class="nav-link" data-scroll-target="#age-misassignment"><span class="header-section-number">11.7</span> Age-misassignment</a></li>
+  <li><a href="#export-data" id="toc-export-data" class="nav-link" data-scroll-target="#export-data"><span class="header-section-number">11.8</span> Export data</a></li>
   </ul>
 </nav>
     </div>
@@ -335,12 +335,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>When we run inference on the simulated data (fossil ages, character matrices), can we recover the “true” evolutionary history (e.g., tree topology, model parameters)? More speculatively, can we potentially recover stratigraphic information such as sediment accumulation rates and gap duration from phylogenetic inference?</li>
 <li>Having build the forward simulation pipeline, can we use our knowledge of stratigraphy and the sampling process as sources of information in the inference? And if yes, does it improve the inference?</li>
 </ol>
-<p>Your <strong>task</strong> for this chapter is to modify the provided pipeline according to your work in the last 3 days and simulate your very own fossil record. At the end you should have two components: (1) simulated biased data that you would usually use for inference, specifically a character matrix and fossil ages and (2) the biological and stratigraphic “truth” to compare inference results to. Specifically, this should contain the true sampled tree, age-depth relationship, clock rate, and model of morphological evolution.</p>
 </section>
-<section id="preliminaries" class="level2" data-number="11.2">
-<h2 data-number="11.2" class="anchored" data-anchor-id="preliminaries"><span class="header-section-number">11.2</span> Preliminaries</h2>
-<section id="stratigraphic-data" class="level3" data-number="11.2.1">
-<h3 data-number="11.2.1" class="anchored" data-anchor-id="stratigraphic-data"><span class="header-section-number">11.2.1</span> Stratigraphic data</h3>
+<section id="tasks-and-discussion-points" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="tasks-and-discussion-points"><span class="header-section-number">11.2</span> Tasks and discussion points</h2>
+<ul>
+<li><p>Modify the provided pipeline according to your work in the last 3 days and simulate your very own fossil record. At the end you should have two components: (1) simulated biased data that you would usually use for inference, specifically a character matrix and fossil ages and (2) the biological and stratigraphic “truth” (age-depth model and gap timing) to compare inference results to. Specifically, this should contain the true sampled tree, age-depth relationship, clock rate, and model of morphological evolution.</p></li>
+<li><p>You now know many different effects that go into the sampled tree, character data, and ages. For your study system, which do you think are most relevant?</p></li>
+<li><p>We have focused on forward simulation so far. If you had perfect knowledge of all these effects, how would you incorporate them in phylogenetic inference?</p></li>
+<li><p>Looking back, which effects have you investigated? Compare with other groups which stratigraphic bias had the biggest impact and what aspects of the analysis have been affected the most.</p></li>
+</ul>
+</section>
+<section id="preliminaries" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="preliminaries"><span class="header-section-number">11.3</span> Preliminaries</h2>
+<section id="stratigraphic-data" class="level3" data-number="11.3.1">
+<h3 data-number="11.3.1" class="anchored" data-anchor-id="stratigraphic-data"><span class="header-section-number">11.3.1</span> Stratigraphic data</h3>
 <p>Let’s begin by loading the stratigraphic information (age-depth model and water depth data).</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>adm_location <span class="ot">=</span> <span class="st">"../data/output/columns_adm.csv"</span> </span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>wd_location <span class="ot">=</span> <span class="st">"../data/output/columns_wd.csv"</span> <span class="co"># adjust if you have a different output location</span></span>
@@ -386,8 +394,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="fbd-tree" class="level3" data-number="11.2.2">
-<h3 data-number="11.2.2" class="anchored" data-anchor-id="fbd-tree"><span class="header-section-number">11.2.2</span> FBD tree</h3>
+<section id="fbd-tree" class="level3" data-number="11.3.2">
+<h3 data-number="11.3.2" class="anchored" data-anchor-id="fbd-tree"><span class="header-section-number">11.3.2</span> FBD tree</h3>
 <p>Next, simulate the tree and the fossils along it:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>seed <span class="ot">=</span> <span class="dv">42</span></span>
@@ -419,8 +427,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="taphonomy-and-ecology" class="level2" data-number="11.3">
-<h2 data-number="11.3" class="anchored" data-anchor-id="taphonomy-and-ecology"><span class="header-section-number">11.3</span> Taphonomy and ecology</h2>
+<section id="taphonomy-and-ecology" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="taphonomy-and-ecology"><span class="header-section-number">11.4</span> Taphonomy and ecology</h2>
 <p>As first part of the pipeline, let’s introduce ecological and taphonomic effects. As before, we use water depth as ecological gradient:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>wd_opt <span class="ot">=</span> <span class="dv">5</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>wd_tol <span class="ot">=</span> <span class="dv">10</span></span>
@@ -460,7 +468,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> t,</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">y =</span> t <span class="sc">|&gt;</span> <span class="fu">gradient</span>() <span class="sc">|&gt;</span> <span class="fu">niche_def</span>(),</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"l"</span>,</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Time"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Time [Myr]"</span>,</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Sampling probability"</span>,</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Sampling probability of fossils</span><span class="sc">\n</span><span class="st">due to ecology"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -471,7 +479,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>For the taphonomic effects, we again remove all fossils coinciding with gaps:</p>
+<p>As one taphonomic effect, we again remove all fossils coinciding with gaps:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>gap_remove <span class="ot">=</span> StratPal<span class="sc">::</span><span class="fu">strat_filter</span>(adm)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(t, <span class="fu">gap_remove</span>(t),</span>
@@ -552,8 +560,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="add-extant-samples" class="level2" data-number="11.4">
-<h2 data-number="11.4" class="anchored" data-anchor-id="add-extant-samples"><span class="header-section-number">11.4</span> Add extant samples</h2>
+<section id="add-extant-samples" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="add-extant-samples"><span class="header-section-number">11.5</span> Add extant samples</h2>
 <p>Now we add the extant samples to the fossil object. This yields the sampled tree after after taphonomic and ecological effects.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>rho <span class="ot">=</span> <span class="fl">0.5</span> <span class="co"># proportion of extant tips that are sampled</span></span>
@@ -576,8 +584,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="simulate-morphological-characters" class="level2" data-number="11.5">
-<h2 data-number="11.5" class="anchored" data-anchor-id="simulate-morphological-characters"><span class="header-section-number">11.5</span> Simulate morphological characters</h2>
+<section id="simulate-morphological-characters" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="simulate-morphological-characters"><span class="header-section-number">11.6</span> Simulate morphological characters</h2>
 <p>Now we can simulate morphological characters along the tree and the preserved fossils. We focus on the simple Mk2 model here, insert your own if you like.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>n_states <span class="ot">=</span> <span class="dv">2</span></span>
@@ -591,9 +599,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>                        <span class="at">fossil =</span> fossils_used)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="age-misassignment" class="level2" data-number="11.6">
-<h2 data-number="11.6" class="anchored" data-anchor-id="age-misassignment"><span class="header-section-number">11.6</span> Age-misassignment</h2>
-<p>Now we introduce age-misassignment of the fossils. Again, we assume a simplified age-depth model based on the assumption of constant and uninterrupted sedimentation:</p>
+<section id="age-misassignment" class="level2" data-number="11.7">
+<h2 data-number="11.7" class="anchored" data-anchor-id="age-misassignment"><span class="header-section-number">11.7</span> Age-misassignment</h2>
+<p>Now we introduce age-misassignment of the fossils. Again, we assume a simplified age-depth model based on the assumption of constant and uninterrupted sediment accumulation:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>adm_assumed <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">tp_to_adm</span>(<span class="at">t =</span> <span class="fu">c</span>(t_min, t_max),</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">h =</span> <span class="fu">c</span>(h_min, h_max),</span>
@@ -615,8 +623,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Do you know why this is only done now and not in one of the earlier steps that modify the fossils?</p>
 </section>
-<section id="export-data" class="level2" data-number="11.7">
-<h2 data-number="11.7" class="anchored" data-anchor-id="export-data"><span class="header-section-number">11.7</span> Export data</h2>
+<section id="export-data" class="level2" data-number="11.8">
+<h2 data-number="11.8" class="anchored" data-anchor-id="export-data"><span class="header-section-number">11.8</span> Export data</h2>
 <p>Finally, we can export the tree, character matrix, and fossil ages:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>MorphSim<span class="sc">::</span><span class="fu">write.morpho</span>(<span class="at">data =</span> morpho_mk,</span>
@@ -637,13 +645,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>                       <span class="at">all =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>                       <span class="at">reconstructed =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</section>
-<section id="tasks-and-discussion-points" class="level2" data-number="11.8">
-<h2 data-number="11.8" class="anchored" data-anchor-id="tasks-and-discussion-points"><span class="header-section-number">11.8</span> Tasks and discussion points</h2>
-<ul>
-<li><p>You now know many different effects that go into the sampled tree, character data, and ages. For your study system, which do you think are most relevant?</p></li>
-<li><p>We have focused on forward simulation so far. If you had perfect knowledge of all these effects, how would you incorporate them in phylogenetic inference?</p></li>
-</ul>
 
 
 </section>

@@ -13,6 +13,16 @@ In this chapter we will explore some advanced topics in stratigraphic paleobiolo
 
 To slowly approach this, we use two data types: event data as introduced on the first day (e.g., fossil ages/locations and last occurrences) and the `fossil` objects simulated by `FossilSim` that are associated with a phylogenetic tree.
 
+## Tasks and discussion points
+
+-   Work through the code, potentially modifying it according to your simulated stratigraphy from day 1 and the simulated tree from last chapter. What major differences do you see?
+
+-   Explore how results change at different locations in your simulated stratigraphy. Are there locations where age misassignment is especially large/small or ecological effects are especially strong/weak?
+
+-   For your study system and spatiotemporal scale of interest, what are the major ecological and taphonomic processes that determine fossil abundance? Could you quantify and formalize them? How is it for other members of your group?
+
+-   Do you have any intuition how much age misassignment is a problem on the timescale you are working on? Is there a timescale where you think it is most/least relevant (e.g., section vs basin vs global)? From day 1 you know that the age-depth models are shaped by external drivers of stratigraphic architectures (here the eustatic sea level curve). Discuss the relationship between the timescale of observation, timescale of external drivers, and age-misassignment.
+
 ## Preliminaries
 
 Let's get up to speed by loading the age-depth model we simulated. Feel free to replace it by an age-depth model of your own choice.
@@ -42,9 +52,9 @@ For the fossil object, we use a compact simulation based on the contents of last
 
 ```{r generate-fbd-tree-and-fossils}
 seed = 42
-lambda = 2
-mu = 0.3
-psi = 70
+lambda = 2 # origination rate [Myr^-1]
+mu = 0.3 # extinction rate [Myr^-1]
+psi = 70 # fossil sampling rate [fossils per Myr per lineage]
 set.seed(seed)
 # timescale of observation - depends on duration of your forward simulation
 t_max = admtools::max_time(adm)
@@ -76,7 +86,7 @@ h_min = admtools::min_height(adm)
 
 Ecology and taphonomy act identically on fossil occurrences:
 
--   Niche preferences determine whether a taxon will be observed at a specific location/time: If some environmental gradient matches the preferred environment of the taxon it is more likely to be observed. The more the environmental cline deviates from the optimum, the less likely an observation is
+-   Niche preferences determine whether a taxon will be sampled at a specific location/time: If some environmental gradient matches the preferred environment of the taxon it is more likely to be observed. The more the environmental cline deviates from the optimum, the less likely an observation is
 
 -   Taphonomic conditions determine whether a fossil is preserved or not. Again, this is a joint expression of an environmental gradient (e.g., water depth, grain size, burial velocity) and an intrinsic property, meaning the preservation probability under the specified taphonomic conditions.
 
@@ -352,13 +362,3 @@ plot(fossils_misassigned_age,
 Here you can immediately see the contradiction between the timing of the underlying biological truth (the tree) and the (wrongly) reconstructed ages of the fossils. At multiple locations, fossils associated with a lineage extend beyond the duration of the lineage, and fossils of an ancestoral lineage are present long after a branching event.
 
 Using these fossil ages for tree inference will clearly lead to wrong results.
-
-## Tasks and discussion points
-
--   Modify the code according to your simulated stratigraphy from day 1 and the simulated tree from last chapter. What major differences do you see?
-
--   Explore how results change at different locations in your simulated stratigraphy. Are there locations where age misassignment is especially large/small or ecological effects are especially strong/weak?
-
--   For your study system and spatiotemporal scale of interest, what are the major ecological and taphonomic processes that determine fossil abundance? Could you quantify and formalize them? How is it for other members of your group?
-
--   Do you have any intuition how much age misassignment is a problem on the timescale you are working on? Is there a timescale where you think it is most/least relevant (e.g., section vs basin vs global)? From day 1 you know that the age-depth models are shaped by external drivers of stratigraphic architectures (here the eustatic sea level curve). Discuss the relationship between the timescale of observation, timescale of external drivers, and age-misassignment.
