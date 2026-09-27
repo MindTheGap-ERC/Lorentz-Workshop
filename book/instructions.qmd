@@ -1,0 +1,47 @@
+---
+title: "How to use this book?"
+format: html
+---
+
+# Variant "User"
+
+*I don't want to contribute to the book files, I just want to run the code on my computer.*
+
+## Option 1 (no git) 
+
+You can copy & paste the code from the webpage into new files on your computer; note there is a discrete clipboard icon in the topright corner that copies the entire code block.
+
+## Option 2 (minimum git)
+
+Clone the repository using the link on its landing page. If you are using GitHub Desktop, https://github.com/MindTheGap-ERC/Lorentz-Workshop should suffice. 
+
+Open the repository folder in your file system. Most code chunks will run directly when opened in `.qmd` files, e.g. in R Studio or VS Code - this will feel like using a notebook. Alternatively, you can render the entire book or individual `.qmd` files, but this executes all code chunks at once, which is less interactive.
+
+# Variant "Contributor"
+
+*I want to modify the text or scripts and make my own variants of the analysis.* 
+
+1. Give us (organizers) your GitHub name so we can add you to the repository. As an alternative, you could fork it and contribute, but we will not cover this here lest we have end up with a very long instruction.
+
+2. Clone the repository onto your computer.
+
+3. Let's take Day 1 as an example. You're looking at the [CarboKitten](https://mindthegap-erc.github.io/Lorentz-Workshop/CarboKitten_tutorial.html) tutorial and you want to run and modify it. Navigate into the folder with the repository on your computer, for example:
+
+```bash
+cd Lorentz-Workshop
+```
+
+Initiate the Julia project (it only needs to be done the first time you open this project):
+
+```bash
+julia
+]
+activate .
+instantiate
+add CarboKitten
+add Unitful
+```
+
+The above operations read the `Manifest.toml` file and set up the environment, so it is the same as the one we set up: the versions match etc. Then you install two packages: CarboKitten and Unitful. The first time you do it, it may take a lot of time: they need to be downloaded and precompiled. Once this has happened, Quarto will be able to use these precompiled files on your computers and will run faster.
+
+

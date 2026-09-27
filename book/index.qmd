@@ -1,8 +1,6 @@
 ---
-title: "Index"
+title: "Introduction"
 ---
-
-## Introduction
 
 Welcome to the online materials for the workshop "Bridging Stratigraphic Paleobiology and Phylogenetics". This page collects all contents (code, text, references, and notes) used during the workshop.
 
@@ -81,3 +79,4 @@ remotes::install_github("MindTheGap-ERC/admtools")
 remotes::install_github("MindTheGap-ERC/StratPal")
 install.packages("TreeSim")
 ```
+
