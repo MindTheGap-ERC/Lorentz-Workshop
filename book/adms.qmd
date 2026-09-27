@@ -23,6 +23,12 @@ Of course you can replace the example data provided by the data you generated us
 
 For your own study system (studied group and temporal and spatial scale of observation), where do your age-depth models come from? Are you aware of them, or do you use them implicitly?
 
+## What are age-depth models
+
+Age-depth models are formalizations of geochronological and stratigraphic knowledge: For a given stratigraphic position, they allow us to determine the age/time of deposition, and for any age/time, they determine the stratigraphic position formed at that point in time. They are models in the sense that we usually don't know them perfectly, but have to estimate them from data such as from radioisotope data and biostratigraphic information.
+
+Broadly, everything that translates data between the *time domain* (time dimension, SI units seconds and derived units such as Myr) and the *stratigraphic domain* (length/position dimension, SI units m and derived units) is an age model. So if you find a fossil somewhere in an outcrop and say "This fossil is approx. 37 Ma old" you have applied an age-depth model, even only implicitly and using many mental shortcuts. Conversely, if you run a stratigraphic model and say "after 2 Myr elapsed model time, the model has accumulated 73 m of sediment", you are also using an age-depth model. Notably, the age-depth models we will be using are usually **not parametric** in the sense that they can be easily described by a small number of parameters, but are quite messy as they are results of complex physical and biological processes such as sediment transport and spatial dispersal and competition of organisms.
+
 ## Loading data and constructing age-depth models
 
 First let's load the data from your stratigraphic forward model:
@@ -32,7 +38,7 @@ adm_name = "data/output/columns_adm.csv" # adjust if you have a different output
 data_adm = read.csv(adm_name) # read age-depth model data
 ```
 
-For the time being, we focus on one specific location in the simulated platform, namely the proximal section. We start by extracting the time steps and the height data at the examined location:
+For the time being, we focus on one specific location in the simulated platform, namely the proximal section. We start by extracting the time steps and the height data at the examined location. Here we use the section that we named the "proximal" in the CarboKitten example. Of course you can always change which section you examine by changing the key or by importing a specific column from the data frame.
 
 ```{r select-heights-and-times}
 key = "proximal"
@@ -73,7 +79,7 @@ Here, gaps in the record are highlighted in blue.
 
 ## Extracting data from age-depth models
 
-Internally, age-depth model objects are just a list of times and associated times plus information about which intervals are erosive (meaning, they remove data). However, they are incredibly convenient to quickly extract basic stratigrahpic information from.
+Internally, age-depth model objects are just a list of times and associated heights plus information about which intervals are erosive (meaning, they remove data). However, they are incredibly convenient to quickly extract basic stratigraphic information from.
 
 For example, you can easily determine the number of hiatuses, time span covered, sediment accumulated, and stratigraphic (in)completeness:
 
@@ -85,7 +91,7 @@ admtools::get_total_duration(adm)
 # total thickness of sediment accumulated
 admtools::get_total_thickness(adm)
 # stratigraphic (in)completeness
-# note this is incompleteness on the timescale of the temporal tie points
+# note this is incompleteness on the timescale of the time steps of your forward simulation
 # here on the scale of your forward simulation
 admtools::get_incompleteness(adm)
 admtools::get_completeness(adm)
@@ -144,8 +150,8 @@ Both with sediment accumulation and condensation, keep in mind that both are ext
 
 The real power of age-depth models is that they can transform data from the time domain to the stratigraphic domain and vice versa. In the `admtools` package, this is performed by two functions:
 
-* `time_to_strat` transforms data from the time domain to the stratigraphic domain by replacing entries that reflect time by stratigraphic positions. It takes an optional argument `destructive` that specifies whether gaps act destructively (i.e., to remove data) or not
-* `strat_to_time` transforms data from the stratigraphic domain to the time domain by replacing entries that reflect stratigraphic position by times.
+* `time_to_strat` uses an age-depth model to transform data from the time domain to the stratigraphic domain by replacing entries that reflect time by stratigraphic positions. It takes an optional argument `destructive` that specifies whether gaps act destructively (i.e., to remove data) or not
+* `strat_to_time` used an age-depth model to transform data from the stratigraphic domain to the time domain by replacing entries that reflect stratigraphic position by times.
 
 ### Base case
 
@@ -170,7 +176,7 @@ h_example = admtools::time_to_strat(t_example,
 # display
 h_example
 ```
-returns two numeric values, where `r h_example[2] |> format(digits = 3)` m is the stratigraphic position associated with the gap.
+returns two numeric values, where `r h_example[2] |> format(digits = 3)` m is the stratigraphic position of the hiatal surface associated with the gap.
 
 The transformation of data from the stratigraphic domain to the time domain works identically:
 
@@ -246,7 +252,11 @@ StratPal::p3(rate = 10,
 
 Note here the gaps in fossil abundance are due to the gaps in the fossil record - no fossil ages will be reconstructed during the gap. If you want to explore the interaction between sediment accumulation, age-depth models, and fossil abundance more interactively, check out the [Shellbed condensator](https://utrecht-university.shinyapps.io/ShellbedCondensator/), a shiny app that runs in your browser.
 
+<<<<<<< HEAD
 Last, we show off a classic example of stratigraphic paleobiology: The generation of artifactual clusters of last occurrences at hiatal surfaces from a regular extinction rate. This example quietly assumes that for each taxon, the fossil abundance is high enough for the Signor-Lipps effect to be negligible (Why is this assumption needed, and where is it expressed in the code?)
+=======
+Last, we show off a classic example of stratigraphic paleobiology: The generation of artifactual clusters of last occurrences at hiatal surfaces from fossil taxa simulated under a scenario where extinction rate increases gradually through time. This example quietly assumes that for each taxon, the fossil abundance is high enough for the Signor-Lipps effect to be negligible (Why is this assumption needed, and where is it expressed in the code?)
+>>>>>>> 137cc4de59b6724bd0e02ad7dd62178f3187df5b
 
 For the extinction rate, we assume it doubles over the timescale of observation. To reduce the effects of noise, we simulate a (unrealistically) large number of last occurrences:
 
@@ -278,11 +288,12 @@ hist(last_occ,
 
 ```
 
-Now let's transfor this into the stratigraphic domain to see where the last occurrences cluster. We use the option `destructive = TRUE` to make sure the last occurrences during a gap appear directly at the stratigraphic position of the associated hiatus surface.
+Now let's transfor this into the stratigraphic domain to see where the last occurrences cluster. We use the option `destructive = FALSE` to make sure the last occurrences during a gap appear directly at the stratigraphic position of the associated hiatus surface.
 
 ```{r last-occurrences-stratigraphic-domain}
 last_occ |>
-  admtools::time_to_strat(x = adm) |>
+  admtools::time_to_strat(x = adm,
+                          destructiv = FALSE) |>
   hist(breaks = seq(h_min, h_max, length.out = 30),
        xlab = "Stratigraphic position [m]",
        main = "Last occurrences in the stratigraphic domain")
