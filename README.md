@@ -148,7 +148,6 @@ Big files cannot be stored in a GitHub repo. How to store?
 
 The CarboKitten chapter contains code that produces a 48 MB HDF5 (binary) file that is too large for GitHub and takes a few minutes to run, so it is archived on Zenodo ([https://doi.org/10.5281/zenodo.](https://doi.org/10.5281/zenodo.22083206){.uri}[22893028](https://doi.org/10.5281/zenodo.22893028)) and `book/data/output/` is git-ignored. Both the model run and the download are shown in the chapter but the code chunks have the parameter `eval: false`
 
-::: callout-note
 When you clone the repo, the data will not be downloaded and the code will not run by default. You have to either download it by running the `fetch-data` chunk of `CarboKitten_tutorial.qmd` in a Julia session started in `book/`, or equivalently run:
 
 ``` bash
@@ -157,7 +156,6 @@ julia -e 'using Downloads; mkpath("data/output"); Downloads.download("https://ze
 ```
 
 You can also download the file by hand from <https://doi.org/10.5281/zenodo.22083206> if you prefer.
-:::
 
 ### Publishing to GitHub Pages
 
