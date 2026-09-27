@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
-<head>
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
 
-<meta charset="utf-8" />
-<meta name="generator" content="quarto-1.10.18" />
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>9  Simulating trees under the FBD model – Bridging Stratigraphic Palaeobiology and Phylogenetics</title>
+<title>9&nbsp; Simulating trees under the FBD model – Bridging Stratigraphic Palaeobiology and Phylogenetics</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -65,7 +63,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
-<!-- htmldependencies:E3FAD763 -->
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../day3/StratPal_fossils.html" rel="next">
+<link href="../day2/Model-RevBayes.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-631496449bf32ff9b0bb69a6bfd9195d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -97,22 +114,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body>
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn"
-      data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" 
-      aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation"
-      onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <h1 class="quarto-secondary-nav-title no-breadcrumbs"></h1>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" role="link"
-        aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation"
-        onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../day3/FBD_sim.html">Day 3: Tree inference</a></li><li class="breadcrumb-item"><a href="../day3/FBD_sim.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Simulating trees under the FBD model</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
@@ -126,9 +138,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="/">
-      Bridging Stratigraphic Palaeobiology and Phylogenetics
-      </a> 
+      <a href="../">Bridging Stratigraphic Palaeobiology and Phylogenetics</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -140,13 +150,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>1</span>  <span class='chapter-title'>Index</span></span></a>
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Index</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1"  role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
  <span class="menu-text">Day 1: Stratigraphy</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -155,27 +165,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/stratigraphic_paleobiology.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>2</span>  <span class='chapter-title'>Stratigraphic paleobiology</span></span></a>
+  <a href="../stratigraphic_paleobiology.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Stratigraphic paleobiology</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/CarboKitten_tutorial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>3</span>  <span class='chapter-title'>Simulating the stratigraphic record</span></span></a>
+  <a href="../CarboKitten_tutorial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Simulating the stratigraphic record</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/adms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>4</span>  <span class='chapter-title'>Time in rocks</span></span></a>
+  <a href="../adms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Time in rocks</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2"  role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">Day 2: Fossils</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -184,33 +194,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/day2/Intro_morpho.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>5</span>  <span class='chapter-title'>Introduction to morphological data</span></span></a>
+  <a href="../day2/Intro_morpho.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction to morphological data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/day2/morphsim_tutorial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>6</span>  <span class='chapter-title'>MorphSim Tutorial</span></span></a>
+  <a href="../day2/morphsim_tutorial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">MorphSim Tutorial</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/day2/complex_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>7</span>  <span class='chapter-title'>Morphological model extensions</span></span></a>
+  <a href="../day2/complex_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Morphological model extensions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/day2/Model-RevBayes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>8</span>  <span class='chapter-title'>Setting up morphological models in RevBayes, MrBayes, and BEAST2</span></span></a>
+  <a href="../day2/Model-RevBayes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Setting up morphological models in RevBayes, MrBayes, and BEAST2</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3"  role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
  <span class="menu-text">Day 3: Tree inference</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -219,32 +229,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/day3/FBD_sim.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class='chapter-number'>9</span>  <span class='chapter-title'>Simulating trees under the FBD model</span></span></a>
+  <a href="../day3/FBD_sim.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Simulating trees under the FBD model</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/day3/StratPal_fossils.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>10</span>  <span class='chapter-title'>Stratigraphic paleobiology and fossil occurrences</span></span></a>
+  <a href="../day3/StratPal_fossils.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Stratigraphic paleobiology and fossil occurrences</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/day3/StratPal_phylo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>11</span>  <span class='chapter-title'>Phylogeny and stratigraphy</span></span></a>
+  <a href="../day3/StratPal_phylo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Phylogeny and stratigraphy</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/day3/FBD_strat_inference.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>12</span>  <span class='chapter-title'>Stratigraphic information in phylogenetic inference</span></span></a>
+  <a href="../day3/FBD_strat_inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Stratigraphic information in phylogenetic inference</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/day3/inference_helpers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>13</span>  <span class='chapter-title'>Inference</span></span></a>
+  <a href="../day3/inference_helpers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Inference</span></span></a>
   </div>
 </li>
       </ul>
@@ -259,24 +269,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="/references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class='chapter-number'>14</span>  <span class='chapter-title'>References</span></span></a>
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" ></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <div id="quarto-toc-target"></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">9.1</span> Introduction</a></li>
+  <li><a href="#simulating-the-complete-bd-tree" id="toc-simulating-the-complete-bd-tree" class="nav-link" data-scroll-target="#simulating-the-complete-bd-tree"><span class="header-section-number">9.2</span> Simulating the complete BD tree</a></li>
+  <li><a href="#simulating-fossils-along-the-tree" id="toc-simulating-fossils-along-the-tree" class="nav-link" data-scroll-target="#simulating-fossils-along-the-tree"><span class="header-section-number">9.3</span> Simulating fossils along the tree</a></li>
+  <li><a href="#tasks-and-discussion-points" id="toc-tasks-and-discussion-points" class="nav-link" data-scroll-target="#tasks-and-discussion-points"><span class="header-section-number">9.4</span> Tasks and discussion points</a></li>
+  <li><a href="#advanced-topics" id="toc-advanced-topics" class="nav-link" data-scroll-target="#advanced-topics"><span class="header-section-number">9.5</span> Advanced topics</a></li>
+  <li><a href="#exporting-trees-with-sampled-ancestors" id="toc-exporting-trees-with-sampled-ancestors" class="nav-link" data-scroll-target="#exporting-trees-with-sampled-ancestors"><span class="header-section-number">9.6</span> Exporting trees with sampled ancestors</a>
+  <ul class="collapse">
+  <li><a href="#simulating-morphological-data-along-an-fbd-tree" id="toc-simulating-morphological-data-along-an-fbd-tree" class="nav-link" data-scroll-target="#simulating-morphological-data-along-an-fbd-tree"><span class="header-section-number">9.6.1</span> Simulating morphological data along an FBD tree</a></li>
+  <li><a href="#inference" id="toc-inference" class="nav-link" data-scroll-target="#inference"><span class="header-section-number">9.6.2</span> Inference</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../day3/FBD_sim.html">Day 3: Tree inference</a></li><li class="breadcrumb-item"><a href="../day3/FBD_sim.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Simulating trees under the FBD model</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">9</span>  <span class="chapter-title">Simulating trees under the FBD model</span></h1>
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Simulating trees under the FBD model</span></h1>
 </div>
 
 
@@ -292,31 +317,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<nav id="TOC" role="doc-toc">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#introduction" id="toc-introduction"><span class="header-section-number">9.1</span> Introduction</a></li>
-  <li><a href="#simulating-the-complete-bd-tree" id="toc-simulating-the-complete-bd-tree"><span class="header-section-number">9.2</span> Simulating the complete BD tree</a></li>
-  <li><a href="#simulating-fossils-along-the-tree" id="toc-simulating-fossils-along-the-tree"><span class="header-section-number">9.3</span> Simulating fossils along the tree</a></li>
-  <li><a href="#tasks-and-discussion-points" id="toc-tasks-and-discussion-points"><span class="header-section-number">9.4</span> Tasks and discussion points</a></li>
-  <li><a href="#advanced-topics" id="toc-advanced-topics"><span class="header-section-number">9.5</span> Advanced topics</a></li>
-  <li><a href="#exporting-trees-with-sampled-ancestors" id="toc-exporting-trees-with-sampled-ancestors"><span class="header-section-number">9.6</span> Exporting trees with sampled ancestors</a>
-  <ul>
-  <li><a href="#simulating-morphological-data-along-an-fbd-tree" id="toc-simulating-morphological-data-along-an-fbd-tree"><span class="header-section-number">9.6.1</span> Simulating morphological data along an FBD tree</a></li>
-  <li><a href="#inference" id="toc-inference"><span class="header-section-number">9.6.2</span> Inference</a></li>
-  </ul></li>
-  </ul>
-</nav>
+
 <section id="introduction" class="level2" data-number="9.1">
-<h2 data-number="9.1"><span class="header-section-number">9.1</span> Introduction</h2>
+<h2 data-number="9.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">9.1</span> Introduction</h2>
 <p>This chapter introduces the Fossilized Birth-Death (FBD) process using forward simulations.</p>
 </section>
 <section id="simulating-the-complete-bd-tree" class="level2" data-number="9.2">
-<h2 data-number="9.2"><span class="header-section-number">9.2</span> Simulating the complete BD tree</h2>
+<h2 data-number="9.2" class="anchored" data-anchor-id="simulating-the-complete-bd-tree"><span class="header-section-number">9.2</span> Simulating the complete BD tree</h2>
 <p>We start by simulating a tree using the TreeSim package. This package simulates trees conditioned on age, number of tips, or both. In stratigraphic paleobiology, the timescale of observation is often prescribed (e.g., lifespan of a basin, time interval covered by a section), which is why we focus on simulating conditioned on age.</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fix random seed for reproducibility</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fix random seed for reproducibility</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>seed <span class="ot">=</span> <span class="dv">42</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(seed)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># model parameters, modify as you see fit</span></span>
@@ -330,7 +340,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                           <span class="at">mrca =</span> <span class="cn">FALSE</span>, <span class="co"># age is time since origin, tree has a rood edge</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                           <span class="at">complete =</span> <span class="cn">TRUE</span>)[[<span class="dv">1</span>]] <span class="co"># get the complete tree</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect the tree</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>tree</span></code></pre></div>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>tree</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Phylogenetic tree with 7 tips and 6 internal nodes.
@@ -343,46 +353,46 @@ Rooted; includes branch length(s).</code></pre>
 </div>
 <p>This produces a phylo object, which we can plot:</p>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(tree,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(tree,</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">root.edge =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Birth-death tree&quot;</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Birth-death tree"</span>)</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">&quot;Time since origin [Myr]&quot;</span>, <span class="at">side =</span> <span class="dv">1</span>, <span class="at">line =</span> <span class="dv">2</span>)</span></code></pre></div>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">"Time since origin [Myr]"</span>, <span class="at">side =</span> <span class="dv">1</span>, <span class="at">line =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
-<figure>
-<p><img src="FBD_sim_files/figure-html/simple-bd-tree-plot-1.png" class="img-fluid" width="672" /></p>
+<figure class="figure">
+<p><img src="FBD_sim_files/figure-html/simple-bd-tree-plot-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Note that this is a complete tree, meaning it contains extinct lineages. For comparison, let’s plot the reconstructed tree, which prunes all extinct lineages:</p>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>reconstructed_tree <span class="ot">=</span> tree <span class="sc">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>reconstructed_tree <span class="ot">=</span> tree <span class="sc">|&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  geiger<span class="sc">::</span><span class="fu">drop.extinct</span>(<span class="at">tol =</span> <span class="dv">10</span><span class="sc">^-</span><span class="dv">8</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(reconstructed_tree,</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">root.edge =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Reconstructed tree&quot;</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Reconstructed tree"</span>)</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">&quot;Time since origin [Myr]&quot;</span>, <span class="at">side =</span> <span class="dv">1</span>, <span class="at">line =</span> <span class="dv">2</span>)</span></code></pre></div>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mtext</span>(<span class="st">"Time since origin [Myr]"</span>, <span class="at">side =</span> <span class="dv">1</span>, <span class="at">line =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
-<figure>
-<p><img src="FBD_sim_files/figure-html/plot_reconstructed-tree-1.png" class="img-fluid" width="672" /></p>
+<figure class="figure">
+<p><img src="FBD_sim_files/figure-html/plot_reconstructed-tree-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
 <section id="simulating-fossils-along-the-tree" class="level2" data-number="9.3">
-<h2 data-number="9.3"><span class="header-section-number">9.3</span> Simulating fossils along the tree</h2>
+<h2 data-number="9.3" class="anchored" data-anchor-id="simulating-fossils-along-the-tree"><span class="header-section-number">9.3</span> Simulating fossils along the tree</h2>
 <p>Now, let’s sample some fossil occurrences along the tree according to a specified sampling rate:</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>psi <span class="ot">=</span> <span class="dv">5</span> <span class="co"># fossil sampling rate</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>psi <span class="ot">=</span> <span class="dv">5</span> <span class="co"># fossil sampling rate</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>fossils <span class="ot">=</span> FossilSim<span class="sc">::</span><span class="fu">sim.fossils.poisson</span>(<span class="at">rate =</span> psi,</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">tree =</span> tree)</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect the fossils</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>fossils</span></code></pre></div>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>fossils</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   sp edge       hmin       hmax
 1   2    2 0.65280066 0.65280066
@@ -403,118 +413,118 @@ Fossil record not simulated using taxonomy: all speciation events are assumed to
 <p>Here you can inspect the generated fossil object, which contains information about species, the corresponding edge in the tree and age in the hmin and hmax column. Be aware that the entries in hmin and hmax are ages, even though the naming implicitly suggests that they might be heights (which is doubly confusing).</p>
 <p>Now, let’s plot these fossils along the tree</p>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fossils,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fossils,</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">tree =</span> tree,</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">show.tip.label =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">rho =</span> <span class="dv">0</span>) <span class="co"># suppress highlighting of extant tips</span></span></code></pre></div>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">rho =</span> <span class="dv">0</span>) <span class="co"># suppress highlighting of extant tips</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
-<figure>
-<p><img src="FBD_sim_files/figure-html/plot-fossils-along-tree-basic-1.png" class="img-fluid" width="672" /></p>
+<figure class="figure">
+<p><img src="FBD_sim_files/figure-html/plot-fossils-along-tree-basic-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>There are plenty of plotting options available in FossilSim, e.g., you can plot the stratigraphic ranges (sic):</p>
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fossils,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fossils,</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">tree =</span> tree, </span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">show.ranges =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">rho =</span> <span class="dv">0</span>)</span></code></pre></div>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">rho =</span> <span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
-<figure>
-<p><img src="FBD_sim_files/figure-html/plot-fossils-along-tree-ranges-1.png" class="img-fluid" width="672" /></p>
+<figure class="figure">
+<p><img src="FBD_sim_files/figure-html/plot-fossils-along-tree-ranges-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>So far, we have focused on simulating fossils only. Now let’s sample some of the extant tips too by adding them to the fossil object. Here the parameter <code>rho</code> specifies what portion of the extant tips are sampled.</p>
 <div class="cell">
-<div class="sourceCode" id="cb9"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>rho <span class="ot">=</span> <span class="fl">0.5</span> <span class="co"># proportion of extant tips that are sampled</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>rho <span class="ot">=</span> <span class="fl">0.5</span> <span class="co"># proportion of extant tips that are sampled</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>fossils2 <span class="ot">=</span> FossilSim<span class="sc">::</span><span class="fu">sim.extant.samples</span>(<span class="at">fossils =</span> fossils,</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">tree =</span> tree,</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">rho =</span> rho)</span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the output</span></span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fossils2,</span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">tree =</span> tree,</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">extant.col =</span> <span class="st">&quot;red&quot;</span>,</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">show.tip.label =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">extant.col =</span> <span class="st">"red"</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">show.tip.label =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
-<figure>
-<p><img src="FBD_sim_files/figure-html/simulate-and-plot-fossils-and-extant-1.png" class="img-fluid" width="672" /></p>
+<figure class="figure">
+<p><img src="FBD_sim_files/figure-html/simulate-and-plot-fossils-and-extant-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>If you inspect the newly generated fossil object, you can see the new fossils of age 0 added.</p>
 <p>This gives us the option to introduce the concept of the sampled tree:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fossils2,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fossils2,</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">tree =</span> tree,</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">extant.col =</span> <span class="st">&quot;red&quot;</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">extant.col =</span> <span class="st">"red"</span>,</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">reconstructed =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Simulated tree and fossils&quot;</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Simulated tree and fossils"</span>)</span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fossils2,</span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">tree =</span> tree,</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">extant.col =</span> <span class="st">&quot;red&quot;</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">extant.col =</span> <span class="st">"red"</span>,</span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">reconstructed =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Sampled tree&quot;</span>)</span></code></pre></div>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Sampled tree"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="FBD_sim_files/figure-html/compare-sampled-tree-with-base-tree-1.png" class="img-fluid" width="672" /></p>
+<p><img src="FBD_sim_files/figure-html/compare-sampled-tree-with-base-tree-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="FBD_sim_files/figure-html/compare-sampled-tree-with-base-tree-2.png" class="img-fluid" width="672" /></p>
+<p><img src="FBD_sim_files/figure-html/compare-sampled-tree-with-base-tree-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
 <p>The sampled tree is the tree with all unsampled lineages (extant and extinct) removed. The sampled tree is the best we can hope to recover from our available data, as we will never recover unsampled lineages.</p>
 </section>
 <section id="tasks-and-discussion-points" class="level2" data-number="9.4">
-<h2 data-number="9.4"><span class="header-section-number">9.4</span> Tasks and discussion points</h2>
+<h2 data-number="9.4" class="anchored" data-anchor-id="tasks-and-discussion-points"><span class="header-section-number">9.4</span> Tasks and discussion points</h2>
 <ol type="1">
 <li><p>Explore the simulation pipeline by modifying the parameters and the random seed. How large is the intrinsic variation in the trees when parameters are fixed? Are there parameters where the true tree, reconstructed tree, and sampled tree differ most/least?</p></li>
 <li><p>Think of the timescale you are usually on. What parameters work well on this scale?</p></li>
-<li><p>Sampling rate: What determines the sampling rate on your timescale? Does the sampling rate depend on different drivers on different spatial and temporal scales (e.g., section vs. basin. vs. global scale)? If you put in more effort, could you increase it?</p></li>
+<li><p>Sampling rate: What determines the sampling rate on your timescale? Does the sampling rate depend on different drivers on different spatial and temporal scales (e.g., section vs.&nbsp;basin. vs.&nbsp;global scale)? If you put in more effort, could you increase it?</p></li>
 <li><p>Sampling in the present, fully extinct trees, and <code>rho</code>: <code>rho</code> states that the extant tips undergo a different sampling regime. If you are working on fully extinct phyla, what is an appropriate choice of <code>rho</code> and what counts as the present? What about the case where you observe a fixed time-interval in the past, but taxa potentially survive longer than the observed time interval? How would work in the inference?</p></li>
 </ol>
 </section>
 <section id="advanced-topics" class="level2" data-number="9.5">
-<h2 data-number="9.5"><span class="header-section-number">9.5</span> Advanced topics</h2>
+<h2 data-number="9.5" class="anchored" data-anchor-id="advanced-topics"><span class="header-section-number">9.5</span> Advanced topics</h2>
 <p>These topics are not necessary for the workshop, but if you’re interested and have time you can work through them and potentially already start your first inference.</p>
 </section>
 <section id="exporting-trees-with-sampled-ancestors" class="level2" data-number="9.6">
-<h2 data-number="9.6"><span class="header-section-number">9.6</span> Exporting trees with sampled ancestors</h2>
+<h2 data-number="9.6" class="anchored" data-anchor-id="exporting-trees-with-sampled-ancestors"><span class="header-section-number">9.6</span> Exporting trees with sampled ancestors</h2>
 <p>For comparability with other software packages, fossil objects have to be “baked in” the phylo object as tips at the end of an edge of length 0. We show this for the curious:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># generate sampled ancestor tree</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># generate sampled ancestor tree</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>SAt <span class="ot">=</span> FossilSim<span class="sc">::</span><span class="fu">SAtree.from.fossils</span>(<span class="at">tree =</span> tree,</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">fossils =</span> fossils2)</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(SAt<span class="sc">$</span>tree,</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Sampled ancestor tree</span><span class="sc">\n</span><span class="st"> simulated&quot;</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Sampled ancestor tree</span><span class="sc">\n</span><span class="st"> simulated"</span>)</span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># select extant tips based on the fossil object</span></span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>sampled_extant_tips <span class="ot">=</span> SAt<span class="sc">$</span>fossils<span class="sc">$</span>tip.label[SAt<span class="sc">$</span>fossils<span class="sc">$</span>hmin <span class="sc">==</span> <span class="dv">0</span>]</span>
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># generate sampled tree from SAtree</span></span>
 <span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>SAt_sampled <span class="ot">=</span> FossilSim<span class="sc">::</span><span class="fu">sampled.tree.from.combined</span>(<span class="at">tree =</span> SAt<span class="sc">$</span>tree,</span>
 <span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>                                                    <span class="at">sampled_tips =</span> sampled_extant_tips)</span>
 <span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(SAt_sampled,</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Sampled ancestor tree, sampled&quot;</span>)</span></code></pre></div>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Sampled ancestor tree, sampled"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="FBD_sim_files/figure-html/bake-fossils-into-tree-1.png" class="img-fluid" width="672" /></p>
+<p><img src="FBD_sim_files/figure-html/bake-fossils-into-tree-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="FBD_sim_files/figure-html/bake-fossils-into-tree-2.png" class="img-fluid" width="672" /></p>
+<p><img src="FBD_sim_files/figure-html/bake-fossils-into-tree-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
 <p>If you compare these trees to the ones above you will see that they correspond the the tree with the fossils plotted along the edges (with the exception of a change in tip labels).</p>
 <section id="simulating-morphological-data-along-an-fbd-tree" class="level3" data-number="9.6.1">
-<h3 data-number="9.6.1"><span class="header-section-number">9.6.1</span> Simulating morphological data along an FBD tree</h3>
+<h3 data-number="9.6.1" class="anchored" data-anchor-id="simulating-morphological-data-along-an-fbd-tree"><span class="header-section-number">9.6.1</span> Simulating morphological data along an FBD tree</h3>
 <p>Simulation of morphological data along an FBD tree works as before by handing the fossil object to sim.morpho:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simple Mk2 model</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simple Mk2 model</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>n_states <span class="ot">=</span> <span class="dv">2</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>br_rate <span class="ot">=</span> <span class="fl">0.5</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>trait_num <span class="ot">=</span> <span class="dv">10</span></span>
@@ -528,77 +538,44 @@ Fossil record not simulated using taxonomy: all speciation events are assumed to
 <span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>MorphSim<span class="sc">::</span><span class="fu">plotMorphoGrid</span>(morpho_mk)</span>
 <span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(morpho_mk,</span>
 <span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">trait =</span> trait_to_display)</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">&quot;Trait no. &quot;</span>, trait_to_display))</span></code></pre></div>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">"Trait no. "</span>, trait_to_display))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="FBD_sim_files/figure-html/simulate-mk-along-fbd-tree-1.png" class="img-fluid" width="672" /></p>
+<p><img src="FBD_sim_files/figure-html/simulate-mk-along-fbd-tree-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img src="FBD_sim_files/figure-html/simulate-mk-along-fbd-tree-2.png" class="img-fluid" width="672" /></p>
+<p><img src="FBD_sim_files/figure-html/simulate-mk-along-fbd-tree-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
 <p>Note that <code>plotMorphoGrid</code> shows the traits at the (potentially unsampled) extant and extinct tips.</p>
 </section>
 <section id="inference" class="level3" data-number="9.6.2">
-<h3 data-number="9.6.2"><span class="header-section-number">9.6.2</span> Inference</h3>
+<h3 data-number="9.6.2" class="anchored" data-anchor-id="inference"><span class="header-section-number">9.6.2</span> Inference</h3>
 <p>With the morphological data simulated, you can then export the simulated data:</p>
 <div class="cell">
-<div class="sourceCode" id="cb13"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># export character matrix</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># export character matrix</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>MorphSim<span class="sc">::</span><span class="fu">write.morpho</span>(<span class="at">data =</span> morpho_mk,</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">file =</span> <span class="st">&quot;char_mat_temp.nex&quot;</span>,</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">type =</span> <span class="st">&quot;matrix&quot;</span>,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">file =</span> <span class="st">"char_mat_temp.nex"</span>,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">type =</span> <span class="st">"matrix"</span>,</span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">all =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">reconstructed =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># export taxon ages</span></span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>MorphSim<span class="sc">::</span><span class="fu">write.morpho</span>(<span class="at">data =</span> morpho_mk,</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">file =</span> <span class="st">&quot;ages_temp.tsv&quot;</span>,</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">type =</span> <span class="st">&quot;ages&quot;</span>,</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">file =</span> <span class="st">"ages_temp.tsv"</span>,</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">type =</span> <span class="st">"ages"</span>,</span>
 <span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>                       <span class="at">all =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>                       <span class="at">reconstructed =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>                       <span class="at">reconstructed =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>With this data at hand, you can now try to recover your simulation setup parameters using the Bayesian tree inference tool of your choice. Example scripts for this are available under “Inference helpers” (chapter 13).</p>
-<div id="quarto-navigation-envelope" class="hidden">
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyLXRpdGxl">Bridging Stratigraphic Palaeobiology and Phylogenetics</span></p>
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uYXZiYXItdGl0bGU=">Bridging Stratigraphic Palaeobiology and Phylogenetics</span></p>
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1uZXh0"><span class="chapter-number">10</span>  <span class="chapter-title">Stratigraphic paleobiology and fossil occurrences</span></span></p>
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1wcmV2"><span class="chapter-number">8</span>  <span class="chapter-title">Setting up morphological models in RevBayes, MrBayes, and BEAST2</span></span></p>
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9pbmRleC5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4xPC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPkluZGV4PC9zcGFuPg=="><span class="chapter-number">1</span>  <span class="chapter-title">Index</span></span></p>
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOnF1YXJ0by1zaWRlYmFyLXNlY3Rpb24tMQ==">Day 1: Stratigraphy</span></p>
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9zdHJhdGlncmFwaGljX3BhbGVvYmlvbG9neS5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4yPC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPlN0cmF0aWdyYXBoaWMtcGFsZW9iaW9sb2d5PC9zcGFuPg=="><span class="chapter-number">2</span>  <span class="chapter-title">Stratigraphic paleobiology</span></span></p>
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9DYXJib0tpdHRlbl90dXRvcmlhbC5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz4zPC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPlNpbXVsYXRpbmctdGhlLXN0cmF0aWdyYXBoaWMtcmVjb3JkPC9zcGFuPg=="><span class="chapter-number">3</span>  <span class="chapter-title">Simulating the stratigraphic record</span></span></p>
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9hZG1zLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjQ8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+VGltZS1pbi1yb2Nrczwvc3Bhbj4="><span class="chapter-number">4</span>  <span class="chapter-title">Time in rocks</span></span></p>
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOnF1YXJ0by1zaWRlYmFyLXNlY3Rpb24tMg==">Day 2: Fossils</span></p>
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9kYXkyL0ludHJvX21vcnBoby5odG1sPHNwYW4tY2xhc3M9J2NoYXB0ZXItbnVtYmVyJz41PC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPkludHJvZHVjdGlvbi10by1tb3JwaG9sb2dpY2FsLWRhdGE8L3NwYW4+"><span class="chapter-number">5</span>  <span class="chapter-title">Introduction to morphological data</span></span></p>
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9kYXkyL21vcnBoc2ltX3R1dG9yaWFsLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjY8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+TW9ycGhTaW0tVHV0b3JpYWw8L3NwYW4+"><span class="chapter-number">6</span>  <span class="chapter-title">MorphSim Tutorial</span></span></p>
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9kYXkyL2NvbXBsZXhfbW9kZWxzLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjc8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+TW9ycGhvbG9naWNhbC1tb2RlbC1leHRlbnNpb25zPC9zcGFuPg=="><span class="chapter-number">7</span>  <span class="chapter-title">Morphological model extensions</span></span></p>
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9kYXkyL01vZGVsLVJldkJheWVzLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjg8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+U2V0dGluZy11cC1tb3JwaG9sb2dpY2FsLW1vZGVscy1pbi1SZXZCYXllcywtTXJCYXllcywtYW5kLUJFQVNUMjwvc3Bhbj4="><span class="chapter-number">8</span>  <span class="chapter-title">Setting up morphological models in RevBayes, MrBayes, and BEAST2</span></span></p>
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOnF1YXJ0by1zaWRlYmFyLXNlY3Rpb24tMw==">Day 3: Tree inference</span></p>
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9kYXkzL0ZCRF9zaW0uaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+OTwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5TaW11bGF0aW5nLXRyZWVzLXVuZGVyLXRoZS1GQkQtbW9kZWw8L3NwYW4+"><span class="chapter-number">9</span>  <span class="chapter-title">Simulating trees under the FBD model</span></span></p>
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9kYXkzL1N0cmF0UGFsX2Zvc3NpbHMuaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+MTA8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+U3RyYXRpZ3JhcGhpYy1wYWxlb2Jpb2xvZ3ktYW5kLWZvc3NpbC1vY2N1cnJlbmNlczwvc3Bhbj4="><span class="chapter-number">10</span>  <span class="chapter-title">Stratigraphic paleobiology and fossil occurrences</span></span></p>
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9kYXkzL1N0cmF0UGFsX3BoeWxvLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjExPC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPlBoeWxvZ2VueS1hbmQtc3RyYXRpZ3JhcGh5PC9zcGFuPg=="><span class="chapter-number">11</span>  <span class="chapter-title">Phylogeny and stratigraphy</span></span></p>
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9kYXkzL0ZCRF9zdHJhdF9pbmZlcmVuY2UuaHRtbDxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+MTI8L3NwYW4+LS08c3Bhbi1jbGFzcz0nY2hhcHRlci10aXRsZSc+U3RyYXRpZ3JhcGhpYy1pbmZvcm1hdGlvbi1pbi1waHlsb2dlbmV0aWMtaW5mZXJlbmNlPC9zcGFuPg=="><span class="chapter-number">12</span>  <span class="chapter-title">Stratigraphic information in phylogenetic inference</span></span></p>
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9kYXkzL2luZmVyZW5jZV9oZWxwZXJzLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjEzPC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPkluZmVyZW5jZTwvc3Bhbj4="><span class="chapter-number">13</span>  <span class="chapter-title">Inference</span></span></p>
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOnF1YXJ0by1zaWRlYmFyLXNlY3Rpb24tNA==">Day 4: Analysis and software</span></p>
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOnF1YXJ0by1zaWRlYmFyLXNlY3Rpb24tNQ==">Day 5: Results</span></p>
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWludC1zaWRlYmFyOi9yZWZlcmVuY2VzLmh0bWw8c3Bhbi1jbGFzcz0nY2hhcHRlci1udW1iZXInPjE0PC9zcGFuPi0tPHNwYW4tY2xhc3M9J2NoYXB0ZXItdGl0bGUnPlJlZmVyZW5jZXM8L3NwYW4+"><span class="chapter-number">14</span>  <span class="chapter-title">References</span></span></p>
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWJyZWFkY3J1bWJzLURheS0zOi1UcmVlLWluZmVyZW5jZQ==">Day 3: Tree inference</span></p>
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLWJyZWFkY3J1bWJzLTxzcGFuLWNsYXNzPSdjaGFwdGVyLW51bWJlcic+OTwvc3Bhbj4tLTxzcGFuLWNsYXNzPSdjaGFwdGVyLXRpdGxlJz5TaW11bGF0aW5nLXRyZWVzLXVuZGVyLXRoZS1GQkQtbW9kZWw8L3NwYW4+"><span class="chapter-number">9</span>  <span class="chapter-title">Simulating trees under the FBD model</span></span></p>
-</div>
-<div id="quarto-meta-markdown" class="hidden">
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLW1ldGF0aXRsZQ=="><span class="chapter-number">9</span>  <span class="chapter-title">Simulating trees under the FBD model</span> – Bridging Stratigraphic Palaeobiology and Phylogenetics</span></p>
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLXR3aXR0ZXJjYXJkdGl0bGU="><span class="chapter-number">9</span>  <span class="chapter-title">Simulating trees under the FBD model</span> – Bridging Stratigraphic Palaeobiology and Phylogenetics</span></p>
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLW9nY2FyZHRpdGxl"><span class="chapter-number">9</span>  <span class="chapter-title">Simulating trees under the FBD model</span> – Bridging Stratigraphic Palaeobiology and Phylogenetics</span></p>
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLW1ldGFzaXRlbmFtZQ==">Bridging Stratigraphic Palaeobiology and Phylogenetics</span></p>
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLXR3aXR0ZXJjYXJkZGVzYw=="></span></p>
-<p><span class="hidden quarto-markdown-envelope-contents" data-render-id="cXVhcnRvLW9nY2FyZGRkZXNj"></span></p>
-</div>
+
+
 </section>
 </section>
 
 </main> <!-- /main -->
-<script id = "quarto-html-after-body" type="application/javascript">
+<script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();
@@ -1000,18 +977,19 @@ Fossil record not simulated using taxonomy: all speciation events are assumed to
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a  href="/day2/Model-RevBayes.html" class="pagination-link" aria-label="Setting up morphological models in RevBayes, MrBayes, and BEAST2">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class='chapter-number'>8</span>  <span class='chapter-title'>Setting up morphological models in RevBayes, MrBayes, and BEAST2</span></span>
+      <a href="../day2/Model-RevBayes.html" class="pagination-link" aria-label="Setting up morphological models in RevBayes, MrBayes, and BEAST2">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Setting up morphological models in RevBayes, MrBayes, and BEAST2</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a  href="/day3/StratPal_fossils.html" class="pagination-link" aria-label="Stratigraphic paleobiology and fossil occurrences">
-        <span class="nav-page-text"><span class='chapter-number'>10</span>  <span class='chapter-title'>Stratigraphic paleobiology and fossil occurrences</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../day3/StratPal_fossils.html" class="pagination-link" aria-label="Stratigraphic paleobiology and fossil occurrences">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Stratigraphic paleobiology and fossil occurrences</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
 
-</body>
 
-</html>
+
+
+</body></html>
