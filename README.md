@@ -84,15 +84,15 @@ Program specific packages can be installed during the workshop.
 | 13:30         | Breakout group activity: coding, writing, or brainstorming                                                                                                                                                                                                           |                                         |
 | 14:40         | Plenary discussion and conclusions, planning next steps                                                                                                                                                                                              |                                         |
 
-## Workshop book - instructions for *editors*
+## Workshop book - instructions for *editors* (Quarto management)
+
+For instructions on [how to contribute contents without dealing with the Quarto backend, please refer to instructions in the book](https://mindthegap-erc.github.io/Lorentz-Workshop/instructions.html).
 
 The teaching materials in this repository are a [Quarto](https://quarto.org) book. Quarto is a publishing system based on markdown which integrates text, media and code. The source files (`.qmd` files) live in `book/`; rendering writes the finished website (`.html`) into `docs/`. The book webpage is displayed from files in `docs/`, but it may take a few minutes before pushed changes become visible (try refreshing the page several times).
 
-::: {.callout-tip}
-You don't need to be an editor to contribute to the book. Editors should be able to engage with `git` and `quarto`, so if these tools are new to you and too much distraction on top of the science, you can skip this part and take the opportunity to collaborate with others. However, if you'd like to learn how to do this, let us know. 
+**You don't need to be an editor to contribute to the book. Editors should be able to engage with `git` and `quarto`, so if these tools are new to you and too much distraction on top of the science, you can skip this part and take the opportunity to collaborate with others. However, if you'd like to learn how to do this, let us know.**
 
 When you want to work on your own research questions, we recommend working in a group (can be as small as a pair) and make sure you assign a *GitHub editor* - this person should be responsible for adding the group's contributions to the book. You can also be a *secretary* or ask someone to be one: this person can just take notes from your discussions in a text file and collaborate with the GitHub editor to add them to the book. 
-:::
 
 ### Installation
 
@@ -120,7 +120,7 @@ All Quarto commands are run from the `book/` directory:
 cd book
 ```
 
-To render a sinlge chapter (here: `adm.qmd`):
+To render a single chapter (here: `adm.qmd`):
 
 ``` bash
 quarto render adms.qmd
@@ -132,7 +132,7 @@ The Big Render (render the whole book) - may take some time and will only work i
 quarto render
 ```
 
-In RStudio, the **Build \> Render Book** button only appears when `_quarto.yml` sits in the RStudio project root, which is not the case with the sources in `book/`. Use the Terminal pane instead (`cd book`, then the commands above), or the **Render** button on an individual open `.qmd`.
+It is possible to render using a button in R Studio using **Build \> Render Book** button which you can use on an individual open `.qmd` or the whole book too. We only describe the command line here because it is more universal.
 
 `docs/` is the generated output, please do not edit anything in it by hand, it won't be saved.
 
