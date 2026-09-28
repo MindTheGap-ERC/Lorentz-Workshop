@@ -1,3 +1,40 @@
 ---
 title: "Introduction to morphological data"
 ---
+
+```{r}
+#| echo: false
+#| label: wordstats
+#| warning: false
+#| message: false
+wordcount <- wordcountaddin::text_stats('intro_morpho.qmd')
+words <- substr(wordcount[3], start=19, stop=30)
+```   
+
+
+# What Are Phylogenetic Data
+
+# A Brief History of the Use of Morphology in Phylogenetics
+
+
+# How Can We Model Discrete Morphology
+
+
+# How Can We model Continuous Traits
+
+
+# A Reintegrated Vision of Morphology in the 21st Century
+
+While morphological characters were the initial source of phylogenetic data, much of the prior 50 years has been characterized by an atomization of phylogenetic workers. Particularly in the 1980s through the 2000s, morphological phylogenetics has taken a backseat to work on molecular phylogenetics. Because of the volume of data, and the shared properties of nucleotides, model development in particular proliferated for likelihood and Bayesian methods that were able to make use of molecular datasets. 
+
+Paleobiology is not the only area of science in which this was observed. In fact, in the late 2010s, the US National Science Foundation launched an initiative called Reintegrating Biology to imagine what a national, interdisciplinary biological science research program might look like. Special issues of journals were spawned. Workshops were held. Even independent of any top-down efforts, the 2010s can be characterized as investing in a massive re-integration of the biological sciences and the geological sciences. 
+
+A number of factors converged in the early half of the 2010s. Tanja Stadler published a paper describing a  model of diversification and sampling through time that would be adapted in 2014 to accommodate fossil sampling (samples not in the present). Graham Slater published a manuscript detailing how comparative methods can be mislead without accounting for paleobiological data. Shortly thereafter, a number of papers demonstrated that the Mk model worked pretty well for morphological data. All the pieces were in place to make truly integrative stratigraphic trees with morphological data.
+
+The final thing that was missing in the ecosystem was democratized software platforms to do this work. Over the prior 30 years, most phylogenetic software has relied upon a preset slate of options, decided upon by the developer, in advance of software publication. RevBayes and BEAST2 have changed the model, in favor of offering a sandbox of endlessly combinable model options. In RevBayes and BEAST2, the model is simply a graph of interlocking pieces to which new nodes can be added as your data types and model complexity change. As discussed in the section "How Can We model Continuous Traits", a user who wants to work with continuous data simply specifies a model that works with continuous traits (in theory, any way). 
+
+The latter half of the 2010s was spent asking a wider range of questions than anyone thought possible using these models. How much morphological data can swamp the signal in a molecular dataset? Can we model known differential diversification processes over time, or across branches? How do we integrate continuous traits in Bayesian analyses? What confident can we be in our model-based assumptions? Even cultural and linguistic artifact data can be played with in the same complexity as biological data.
+
+For someone who started a PhD in 2009, the past two decades have been an incredibly wild ride. While the siloes still exist, I've been privileged to publish with mathematicians, computer scientists, biologists and geologists. So far, we've achieved an incredible synthesis of theory from across the sciences. Here's to the next twenty. 
+
+
