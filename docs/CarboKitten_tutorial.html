@@ -2,23 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>4&nbsp; Simulating the stratigraphic record – Bridging Stratigraphic Palaeobiology and Phylogenetics</title>
 <style>
-/* Default styles provided by pandoc.
-** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
-*/
+code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: 1.5em;}
-div.column{flex: auto;}
-@media screen {
-div.columns{gap: min(4vw, 1.5em);}
-div.column{overflow-x: auto;}
-}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -75,14 +69,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="./stratigraphic_paleobiology.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-631496449bf32ff9b0bb69a6bfd9195d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-0dd2bd5de344125cf763a379ddc3eb04.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -115,7 +110,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -168,7 +163,9 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Bridging Stratigraphic Palaeobiology and Phylogenetics</a> 
     </div>
@@ -332,19 +329,20 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#set-up-your-julia-environment" id="toc-set-up-your-julia-environment" class="nav-link active" data-scroll-target="#set-up-your-julia-environment"><span class="header-section-number">4.1</span> 1. Set up your Julia environment</a></li>
-  <li><a href="#building-a-platform-with-a-gappy-stratigraphic-record" id="toc-building-a-platform-with-a-gappy-stratigraphic-record" class="nav-link" data-scroll-target="#building-a-platform-with-a-gappy-stratigraphic-record"><span class="header-section-number">4.2</span> 2. Building a platform with a gappy stratigraphic record</a>
+  <li><a href="#clone-the-repository-and-set-up-the-project-folder" id="toc-clone-the-repository-and-set-up-the-project-folder" class="nav-link active" data-scroll-target="#clone-the-repository-and-set-up-the-project-folder"><span class="header-section-number">4.1</span> Clone the repository and set up the project folder</a></li>
+  <li><a href="#set-up-your-julia-environment" id="toc-set-up-your-julia-environment" class="nav-link" data-scroll-target="#set-up-your-julia-environment"><span class="header-section-number">4.2</span> Set up your Julia environment</a></li>
+  <li><a href="#building-a-platform-with-a-gappy-stratigraphic-record" id="toc-building-a-platform-with-a-gappy-stratigraphic-record" class="nav-link" data-scroll-target="#building-a-platform-with-a-gappy-stratigraphic-record"><span class="header-section-number">4.3</span> Building a platform with a gappy stratigraphic record</a>
   <ul class="collapse">
-  <li><a href="#facies" id="toc-facies" class="nav-link" data-scroll-target="#facies"><span class="header-section-number">4.2.1</span> Facies</a></li>
-  <li><a href="#geometry-timing-and-the-four-core-locations" id="toc-geometry-timing-and-the-four-core-locations" class="nav-link" data-scroll-target="#geometry-timing-and-the-four-core-locations"><span class="header-section-number">4.2.2</span> Geometry, timing, and the four core locations</a></li>
-  <li><a href="#an-icehouse-type-sea-level-history-leads-to-large-gaps" id="toc-an-icehouse-type-sea-level-history-leads-to-large-gaps" class="nav-link" data-scroll-target="#an-icehouse-type-sea-level-history-leads-to-large-gaps"><span class="header-section-number">4.2.3</span> An “icehouse”-type sea-level history leads to large gaps</a></li>
+  <li><a href="#facies" id="toc-facies" class="nav-link" data-scroll-target="#facies"><span class="header-section-number">4.3.1</span> Facies</a></li>
+  <li><a href="#geometry-timing-and-the-four-core-locations" id="toc-geometry-timing-and-the-four-core-locations" class="nav-link" data-scroll-target="#geometry-timing-and-the-four-core-locations"><span class="header-section-number">4.3.2</span> Geometry, timing, and the four core locations</a></li>
+  <li><a href="#an-icehouse-type-sea-level-history-leads-to-large-gaps" id="toc-an-icehouse-type-sea-level-history-leads-to-large-gaps" class="nav-link" data-scroll-target="#an-icehouse-type-sea-level-history-leads-to-large-gaps"><span class="header-section-number">4.3.3</span> An “icehouse”-type sea-level history leads to large gaps</a></li>
   </ul></li>
-  <li><a href="#running-the-model-and-where-the-output-comes-from" id="toc-running-the-model-and-where-the-output-comes-from" class="nav-link" data-scroll-target="#running-the-model-and-where-the-output-comes-from"><span class="header-section-number">4.3</span> 3. Running the model, and where the output comes from</a></li>
-  <li><a href="#the-stratigraphic-architecture-of-the-platform" id="toc-the-stratigraphic-architecture-of-the-platform" class="nav-link" data-scroll-target="#the-stratigraphic-architecture-of-the-platform"><span class="header-section-number">4.4</span> 4. The stratigraphic architecture of the platform</a></li>
-  <li><a href="#four-stratigraphic-columns" id="toc-four-stratigraphic-columns" class="nav-link" data-scroll-target="#four-stratigraphic-columns"><span class="header-section-number">4.5</span> 5. Four stratigraphic columns</a></li>
-  <li><a href="#age-depth-models-where-did-the-time-go" id="toc-age-depth-models-where-did-the-time-go" class="nav-link" data-scroll-target="#age-depth-models-where-did-the-time-go"><span class="header-section-number">4.6</span> 6. Age-depth models: where did the time go?</a></li>
-  <li><a href="#optional-exporting-the-columns-for-further-analysis" id="toc-optional-exporting-the-columns-for-further-analysis" class="nav-link" data-scroll-target="#optional-exporting-the-columns-for-further-analysis"><span class="header-section-number">4.7</span> 7. Optional: exporting the columns for further analysis</a></li>
-  <li><a href="#wrap-up" id="toc-wrap-up" class="nav-link" data-scroll-target="#wrap-up"><span class="header-section-number">4.8</span> Wrap-up</a></li>
+  <li><a href="#running-the-model-and-where-the-output-comes-from" id="toc-running-the-model-and-where-the-output-comes-from" class="nav-link" data-scroll-target="#running-the-model-and-where-the-output-comes-from"><span class="header-section-number">4.4</span> Running the model, and where the output comes from</a></li>
+  <li><a href="#the-stratigraphic-architecture-of-the-platform" id="toc-the-stratigraphic-architecture-of-the-platform" class="nav-link" data-scroll-target="#the-stratigraphic-architecture-of-the-platform"><span class="header-section-number">4.5</span> 4. The stratigraphic architecture of the platform</a></li>
+  <li><a href="#four-stratigraphic-columns" id="toc-four-stratigraphic-columns" class="nav-link" data-scroll-target="#four-stratigraphic-columns"><span class="header-section-number">4.6</span> 5. Four stratigraphic columns</a></li>
+  <li><a href="#age-depth-models-where-did-the-time-go" id="toc-age-depth-models-where-did-the-time-go" class="nav-link" data-scroll-target="#age-depth-models-where-did-the-time-go"><span class="header-section-number">4.7</span> 6. Age-depth models: where did the time go?</a></li>
+  <li><a href="#optional-exporting-the-columns-for-further-analysis" id="toc-optional-exporting-the-columns-for-further-analysis" class="nav-link" data-scroll-target="#optional-exporting-the-columns-for-further-analysis"><span class="header-section-number">4.8</span> 7. Optional: exporting the columns for further analysis</a></li>
+  <li><a href="#wrap-up" id="toc-wrap-up" class="nav-link" data-scroll-target="#wrap-up"><span class="header-section-number">4.9</span> Wrap-up</a></li>
   </ul>
 </nav>
     </div>
@@ -377,24 +375,27 @@ window.Quarto = {
 <li>look at the resulting architecture, and</li>
 <li>drill four virtual cores at different positions on the platform, turning each one into a stratigraphic column and an <strong>age-depth model</strong> (ADM) — the curve that tells us how much of geological time is actually recorded as rock at that location, and how much is missing.</li>
 </ol>
-<section id="set-up-your-julia-environment" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="set-up-your-julia-environment"><span class="header-section-number">4.1</span> 1. Set up your Julia environment</h2>
-<p>CarboKitten requires Julia 1.10 or later (installable via <a href="https://github.com/JuliaLang/juliaup">juliaup</a>). Create a project and add the packages we need: <code>CarboKitten</code> itself, <code>Unitful</code> for physical units, and <code>CairoMakie</code> for plotting (CarboKitten’s visualisation functions are a package extension that only activates once a Makie backend is loaded). If you have cloned this repository onto your computer, you have the <code>Manifest.toml</code> file, which contains information on Julia packages that are needed to run the code below. In order to install packages listed in there, run the commands below in your Julia interpreter:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>julia<span class="op">&gt;</span> ]                    <span class="co"># enter Julia's package mode</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>(<span class="pp">@v1</span><span class="fl">.11</span>) pkg<span class="op">&gt;</span> activate .</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>(carbokitten<span class="op">-</span>tutorial) pkg<span class="op">&gt;</span> instantiate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Everything below is meant to be run as a sequence of Julia cells in this notebook.</p>
+<section id="clone-the-repository-and-set-up-the-project-folder" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="clone-the-repository-and-set-up-the-project-folder"><span class="header-section-number">4.1</span> Clone the repository and set up the project folder</h2>
+<p>For the workflow in this workshop, the latest Julia version, 1.13, is needed (installable via <a href="https://github.com/JuliaLang/juliaup">juliaup</a>). We assume you have Julia and a git client installed; if not - please refer to the <a href="https://mindthegap-erc.github.io/Lorentz-Workshop/#installation-instructions">installation instructions</a>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> Lorentz-Workshop</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch day1</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> book</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">julia</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="set-up-your-julia-environment" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="set-up-your-julia-environment"><span class="header-section-number">4.2</span> Set up your Julia environment</h2>
+<p>Create a project and add the packages we need: <code>CarboKitten</code> itself, <code>Unitful</code> for physical units, and <code>CairoMakie</code> for plotting (CarboKitten’s visualisation functions are a package extension that only activates once a Makie backend is loaded). If you have cloned this repository (i.e.&nbsp;<a href="https://github.com/MindTheGap-ERC/Lorentz-Workshop/">MindTheGap-ERC/Lorentz-Workshop</a>) onto your computer, you have the <code>Manifest.toml</code> file, which contains information on Julia packages that are needed to run the code below. In order to install packages listed in there, run the commands below in your Julia interpreter.</p>
 <div id="packages" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Unitful</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CarboKitten</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CarboKitten.Production</span>: BenthicProduction</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CairoMakie</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CairoMakie</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="building-a-platform-with-a-gappy-stratigraphic-record" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="building-a-platform-with-a-gappy-stratigraphic-record"><span class="header-section-number">4.2</span> 2. Building a platform with a gappy stratigraphic record</h2>
-<section id="facies" class="level3" data-number="4.2.1">
-<h3 data-number="4.2.1" class="anchored" data-anchor-id="facies"><span class="header-section-number">4.2.1</span> Facies</h3>
+<section id="building-a-platform-with-a-gappy-stratigraphic-record" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="building-a-platform-with-a-gappy-stratigraphic-record"><span class="header-section-number">4.3</span> Building a platform with a gappy stratigraphic record</h2>
+<section id="facies" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="facies"><span class="header-section-number">4.3.1</span> Facies</h3>
 <p>We use three benthic carbonate-producing facies, from fast-growing and shallow-tolerant (“euphotic”) to slow-growing and shade-tolerant (“aphotic”), each with its own maximum growth rate, light-extinction coefficient, and transport coefficient (how easily its sediment is moved downslope once produced):</p>
 <div id="cell-facies" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>facies <span class="op">=</span> [</span>
@@ -431,8 +432,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="geometry-timing-and-the-four-core-locations" class="level3" data-number="4.2.2">
-<h3 data-number="4.2.2" class="anchored" data-anchor-id="geometry-timing-and-the-four-core-locations"><span class="header-section-number">4.2.2</span> Geometry, timing, and the four core locations</h3>
+<section id="geometry-timing-and-the-four-core-locations" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="geometry-timing-and-the-four-core-locations"><span class="header-section-number">4.3.2</span> Geometry, timing, and the four core locations</h3>
 <p>The platform is a 100 x 50 grid of 150 m cells (15 km x 7.5 km), with a gentle ramp topography sloping away from the coast, and runs for 1 Myr in steps of 0.0002 Myr (5000 steps). Alongside the full-grid <code>:topography</code> output (big file!) and a 2D <code>:profile</code> slice, we save four <strong>single-pixel columns</strong> along that same profile (<code>y = 25</code>), from the shallow, proximal part of the ramp to the deep, distal slope. A single-pixel <code>OutputSpec</code> (an <code>(Int, Int)</code> slice) reflects that we often have access only to small spatial snapshots of a bigger sedimentary basin:</p>
 <div id="geometry" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>box <span class="op">=</span> CarboKitten.<span class="fu">Box</span><span class="dt">{Coast}</span>(grid_size<span class="op">=</span>(<span class="fl">100</span>, <span class="fl">50</span>), phys_scale<span class="op">=</span><span class="fl">150.0</span>u<span class="st">"m"</span>)</span>
@@ -456,8 +457,8 @@ window.Quarto = {
 <span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="cf">end</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="an-icehouse-type-sea-level-history-leads-to-large-gaps" class="level3" data-number="4.2.3">
-<h3 data-number="4.2.3" class="anchored" data-anchor-id="an-icehouse-type-sea-level-history-leads-to-large-gaps"><span class="header-section-number">4.2.3</span> An “icehouse”-type sea-level history leads to large gaps</h3>
+<section id="an-icehouse-type-sea-level-history-leads-to-large-gaps" class="level3" data-number="4.3.3">
+<h3 data-number="4.3.3" class="anchored" data-anchor-id="an-icehouse-type-sea-level-history-leads-to-large-gaps"><span class="header-section-number">4.3.3</span> An “icehouse”-type sea-level history leads to large gaps</h3>
 <p>Stratigraphic gaps form whenever relative sea level falls faster than subsidence can create new accommodation space: the platform top is exposed, carbonate production stops, and previously deposited sediment can be eroded away (<code>disintegration_rate</code>). To get relatively large gaps, we use a sea-level curve that oscillates with a high amplitude and short period compared to the subsidence rate, combined with a high disintegration rate:</p>
 <div id="sea-level" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sea_level <span class="op">=</span> t <span class="op">-&gt;</span> <span class="fl">5.5</span>u<span class="st">"m"</span> <span class="op">*</span> <span class="fu">sin</span>(<span class="fl">2</span>π <span class="op">*</span> t <span class="op">/</span> <span class="fl">0.18</span>u<span class="st">"Myr"</span>)</span>
@@ -488,8 +489,8 @@ window.Quarto = {
 </div>
 </section>
 </section>
-<section id="running-the-model-and-where-the-output-comes-from" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="running-the-model-and-where-the-output-comes-from"><span class="header-section-number">4.3</span> 3. Running the model, and where the output comes from</h2>
+<section id="running-the-model-and-where-the-output-comes-from" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="running-the-model-and-where-the-output-comes-from"><span class="header-section-number">4.4</span> Running the model, and where the output comes from</h2>
 <p>A full run takes several minutes and writes an HDF5 file of about 48 MB — too large to keep in a Git repository. The output has therefore been archived on Zenodo, and everything from here on reads that archived file:</p>
 <blockquote class="blockquote">
 <p><em>Datasets for the Lorentz Workshop “Bridging Stratigraphic Palaeobiology and Phylogenetics”</em>, <a href="https://doi.org/10.5281/zenodo.22083205" class="uri">https://doi.org/10.5281/zenodo.22083205</a> (all versions).</p>
@@ -516,8 +517,8 @@ window.Quarto = {
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">run_model</span>(Model{ALCAP}, input, FILENAME)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="the-stratigraphic-architecture-of-the-platform" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="the-stratigraphic-architecture-of-the-platform"><span class="header-section-number">4.4</span> 4. The stratigraphic architecture of the platform</h2>
+<section id="the-stratigraphic-architecture-of-the-platform" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="the-stratigraphic-architecture-of-the-platform"><span class="header-section-number">4.5</span> 4. The stratigraphic architecture of the platform</h2>
 <p>CarboKitten’s <code>sediment_profile</code> plots the <code>:profile</code> slice we saved above, colouring each parcel of sediment by its dominant facies and marking unconformities (subaerial-exposure surfaces) with dashed white lines:</p>
 <div id="cell-fig-profile" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CarboKitten.Export</span>: read_slice</span>
@@ -538,8 +539,8 @@ Figure&nbsp;4.1: Sediment profile along the platform, y = 25. Dashed white lines
 </div>
 <p>The white dashed lines are erosional/non-depositional surfaces that turn into the gaps we will quantify below. Notice how they cluster in the shallow, proximal part of the ramp (left) — this is the part of the platform that spends most time within reach of the oscillating sea level.</p>
 </section>
-<section id="four-stratigraphic-columns" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="four-stratigraphic-columns"><span class="header-section-number">4.5</span> 5. Four stratigraphic columns</h2>
+<section id="four-stratigraphic-columns" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="four-stratigraphic-columns"><span class="header-section-number">4.6</span> 5. Four stratigraphic columns</h2>
 <p>We now read back each of the four stratigraphic columns we saved earlier, and turn each one into a small “core log”: a vertical bar coloured by whichever facies contributed most sediment at each preserved interval. We use CarboKitten’s own stratigraphic-column algorithm (<code>CarboKitten.Output.Abstract.stratigraphic_column</code>), which corrects for sediment that was deposited and later disintegrated.</p>
 <div id="cell-fig-columns" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CarboKitten.Export</span>: read_column, extract_sac, extract_sc, age_depth_model</span>
@@ -587,8 +588,8 @@ Figure&nbsp;4.2: Stratigraphic columns (virtual cores) at four positions across 
 </div>
 </div>
 </section>
-<section id="age-depth-models-where-did-the-time-go" class="level2" data-number="4.6">
-<h2 data-number="4.6" class="anchored" data-anchor-id="age-depth-models-where-did-the-time-go"><span class="header-section-number">4.6</span> 6. Age-depth models: where did the time go?</h2>
+<section id="age-depth-models-where-did-the-time-go" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="age-depth-models-where-did-the-time-go"><span class="header-section-number">4.7</span> 6. Age-depth models: where did the time go?</h2>
 <p>The stratigraphic height each column reaches is cumulative: it only goes up when sediment is actually preserved. Plotting that cumulative height against time — the age-depth model — represents every interval of non-deposition or erosion into a flat, horizontal plateau: time passes, but the column does not grow. Long plateaus are large stratigraphic gaps.</p>
 <div id="cell-fig-adm" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>fig_adm <span class="op">=</span> <span class="fu">Figure</span>(size<span class="op">=</span>(<span class="fl">700</span>, <span class="fl">450</span>))</span>
@@ -618,8 +619,8 @@ Figure&nbsp;4.3: Age-depth models for the four columns. Flat segments are strati
 </div>
 <p>Compare the four curves: the proximal column (repeatedly exposed by the oscillating sea level) should show the longest flat plateaus, while columns further down the ramp - spending more time below wave base - tend to accumulate more continuously, at least until subsidence carries them out of the photic zone and production itself shuts down.</p>
 </section>
-<section id="optional-exporting-the-columns-for-further-analysis" class="level2" data-number="4.7">
-<h2 data-number="4.7" class="anchored" data-anchor-id="optional-exporting-the-columns-for-further-analysis"><span class="header-section-number">4.7</span> 7. Optional: exporting the columns for further analysis</h2>
+<section id="optional-exporting-the-columns-for-further-analysis" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="optional-exporting-the-columns-for-further-analysis"><span class="header-section-number">4.8</span> 7. Optional: exporting the columns for further analysis</h2>
 <p>If you want to work with these curves outside Julia (R, Python, a spreadsheet…), CarboKitten can export the sediment-accumulation curve, age-depth model, per-facies stratigraphic column, and water depth for a set of columns straight to CSV, plus a TOML file with the metadata (coordinates, subsidence rate, etc.) of each location:</p>
 <div id="export-csv" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">CarboKitten.Export</span>: CSV, data_export</span>
@@ -637,8 +638,8 @@ Figure&nbsp;4.3: Age-depth models for the four columns. Flat segments are strati
 <span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="fu">data_export</span>(spec, header, cols)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="wrap-up" class="level2" data-number="4.8">
-<h2 data-number="4.8" class="anchored" data-anchor-id="wrap-up"><span class="header-section-number">4.8</span> Wrap-up</h2>
+<section id="wrap-up" class="level2" data-number="4.9">
+<h2 data-number="4.9" class="anchored" data-anchor-id="wrap-up"><span class="header-section-number">4.9</span> Wrap-up</h2>
 <ul>
 <li>A single sea-level curve, applied uniformly across a platform, produces a spatially heterogeneous stratigraphic record: gap size and frequency depend strongly on where a section sits relative to sea level and the photic zone.</li>
 <li>The age-depth model is the key object that translates rock thickness into time.</li>
