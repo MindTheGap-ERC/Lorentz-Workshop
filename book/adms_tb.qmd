@@ -1,6 +1,6 @@
 ---
 title: "Time in rocks"
-group: "April, Joel, William, Johannes, Tim"
+group: "April, Joël, William, Johannes, Tim"
 ---
 
 ## Introduction
