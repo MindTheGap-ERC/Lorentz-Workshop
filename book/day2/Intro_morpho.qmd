@@ -14,6 +14,299 @@ words <- substr(wordcount[3], start=19, stop=30)
 
 # What Are Phylogenetic Data
 
+\section{Data, Morphology, and Data Models}
+
+In a 2024 paper, Aja Watkins poses the question "When is a fossil data?" In the manuscript, Watkins provides a philosophical discussion of what data are, and when an object becomes data \citep{Watkins2024}.
+Watkins dives into this in the case of fossil data, as the fossil record as observed by humans is the end point of many environmental filters, and what may be considered data from the fossil record is heavily interpreted by humans.
+In this piece, I will examine the concept of phylogenetic data, data models, and the philosophy of data, and explore these concepts through the lens of coding a phylogenetic data for use in tree estimation.
+
+So, what are phylogenetic data? 
+This is a question that may seem simple for systematists: phylogenetic data are a matrix of phylogenetic characters on your hard drive.
+They are something you share when you publish your article.
+You keep a directory for the ``raw" data inside the directory for your project, and you keep it separate from data that have been ``processed", or manipulated in some way. 
+When we define what data are, we might describe the attributes of data - each column in a matrix is a character or trait, and that trait is, for the purpose of evolutionary analysis, homologous and reflective of shared evolutionary history. 
+Each state for a character is represented by a letter or number. 
+
+Philosophically, this question is not so simple.
+All of the above considerations describe what an individual dataset might be or entail.
+\cite{Leonelli2019} argued that data are potential evidence for one or more phenomena, and are transcribed in some way as to be shareable. 
+This is a fairly reasonable definition. 
+However, when we consider phylogenetic character data, it quickly becomes more complicated, in particular due to the idea of being ``potential" evidence. 
+Working mostly in phylogenetic paleobiology, my examples will draw mostly from that world, though I will address molecular data at various points, as well. 
+
+It is widely acknowledged in the philosophy of data that data are  \textit{representational}: they are meant to stand in for some aspect of the true phenomenon (a facet of the organism).
+We cannot put a rock into our disk drive and use it with RevBayes \citep{Hoehna2016}.
+Writing about the issue of plant phenotyping using automated image processing, \cite*{Leonelli2019} points out two critical issues of data: the first is that epistemic value of the data is not fixed and may change depending on the stage of inquiry at which the researcher finds themselves.
+What is useful data for one step of the analysis may be unfit to be data for a different part of the work.
+The second is that data do not have fixed representational value. 
+Our ability to obtain data with fidelity to the true object may change with technology, our understanding of the system, or downstream analytical models. 
+
+Morphological characters are generally coded from specimens. 
+A researcher will generally examine a collection of specimens available to them, and select characters that they believe are homologous among the taxonomic sample available they have observed. 
+For each trait, the researcher will decide what are the states of that trait.
+The researcher then scores the traits for every operational taxonomic unit (OTU) in their analysis, scores it as missing, or scores it as inapplicable (not present, possibly due to loss over evolutionary time).
+Researchers may do this for single specimens, if that is all that is available, or they may decide characters from multiple observations of the same OTU.
+Their evidence for choosing and scoring traits can vary widely: there may be prior literature on the group describing evolutionary transitions and suggesting that some character or set of characters is evolutionarily important. 
+They may have observed organismal function and determined that some traits are interesting.
+They may be using analogies to understand about the function of extinct organisms by observing extant ones, and collecting character data on the basis of traits that are important in the Recent \citep{hesse1965models, bokulich2025models}. 
+The point of this manuscript is not to recapitulate character theory - for more thorough treatments of character coding, see \cite{stevens1984homology}, \cite{budd2006origin}, and all the entries in the character theory magnum opus of \cite{wagner2000character}.
+Whatever the evidence may be, the researcher chooses traits of the organism that they believe to contain information about the evolutionary history of their focal clade.
+The researcher then decides what states a phylogenetic character may take, and records them.
+I would refer to the final output of the process of character assessment as potential evidence for a specific phenomenon.
+That phenomenon being evolutionary change in a group: the data are collected for the purpose of understanding evolutionary relationships in that clade of interest.
+Prior to the assessment of homology and establishment of character states that can describe an evolutionary trajectory, the trait is meaningless in a phylogenetic context.
+Note that this does not mean it is epistemically worthless in other contexts - the mere presence or absence of a fossil may be useful data in  occupancy or abundance models.
+
+
+To derive a representation of an object that can be potentially informative is imprinted by theory.
+We sample the organisms that we sample because we think there are interesting evolutionary questions present in that clade. 
+We sample the formations we sample because theory or prior observation predicts that fossils will be present in them.
+The characters we perceive to vary will depend on the taxonomic breadth of our sample: if we only examine hominids, we would think every organism has four limbs. 
+Our homology statement and character states will also depend on that sample as well as on our mental model of evolutionary transition. 
+Do we believe this is an unordered character, an ordered one, Dollo?
+How many states do we think the trait has? 
+How the researcher writes down the character and its states is dependent on the underlying model.
+A character that we think evolves through intermediates is recorded differently than one that is binary.
+\cite{Pimentcl1987}, for example, argued characters ought to be ordered; this assumes a model of evolution in which some states cannot move directly to another.
+A researcher may intend to test their underlying model using software, but how the character is written down determines what tests can even be performed \citep{khakurel2024fundamental, mulvey2025assessing}
+Many traits do not, in fact, vary discretely but are discretized for analysis.
+This happens because most phylogenetic software uses discrete data and implements models that rely on discrete character states \citep{Felsenstein1988, Stevens1991}.
+Thus, researchers must modify their data collection in order to fit their analytical intent, which is itself entirely dependent on theory and model. 
+The collection of data is a human endeavor, and imprinted with theory with which the mind of the researcher has been educated.
+This interplay between theory, models, and data has been referred to as  ``model-data synthesis" \citep{Parker2020}.
+
+At what point do observations become evidence for a phenomenon? 
+If the observations have been through layers of interpretation before they are ever typed into a matrix on your computer screen, when do they become data?
+In her manuscript, Watkins assesses several options for when an object becomes data: when the object can be shown to serve an epistemic function, when it is observed or measured, or both: when it has been collected in such a way as to be able to have an epistemic function.
+Under the Leonelli definition, any collected information cannot be potential evidence in a phylogenetic analysis until homology is assessed because any data used with a phylogenetic model must be homologous.
+Tangential to this definition is the fact that two humans may assess homology differently, come to different conclusions about character states, or what characters are interesting to collect.
+In this way, a matrix is not raw data as it is often referred to in common parlance - it is a living object subject to interpretation and re-interpretation. 
+\cite{Bokulich2021} brings a concept from the philosophy of science to the discussion of fossil data - \textit{the data model}.
+\cite{suppes1966models} argued that `theory` and `data' are not two separate things:
+that the way in which data are collected and processed for scientific use is embedded with theory. 
+This idea was not new at the time - \cite*{hanson1979patterns} and \cite*{popper1959logic} referred to data as being "theory laden" .
+Therefore the data can be thought of as a model itself. 
+Suppe was a philosopher predominantly interested in physics, and described described data models to understand climate data. 
+"Raw`` climate data will be ridden with artifacts - issues with gravity, noise, gaps - and these artifacts can obscure signal of natural phenomenon.
+These data, therefore, need to be processed from a raw state to be of any actual use in science. 
+Using theory from physics, artefactual signal can be removed.
+What is of interest to the scientist, in Suppe's view, is not raw measurements being spat out by a machine. 
+It is the model of the data, built for purpose, that is interesting to scientists, and that can fulfill Leonelli's definition of potential evidence for one or more phenomena.
+
+This model of the data is one that has been shaped for some purpose. 
+\cite{Bokulich2021} describe this shaping for purpose as \textit{fidelity for purpose}, and argues that data must be evaluated for their fidelity to a particular purpose before being used for that purpose in a pragmatic representational view of data.
+In her work applying the theory of data models to our understanding of paleontological data, \cite{bokulich2021using} uses the example of Sepkoski diversity curves.
+Sepkoski, in the late 1970's and early 1980's, compiled a massive database of fossil marine groups \citep{sepkoski1982compendium}. 
+He used these to construct curves of paleodiversity, and in so doing discovered what are colloquially now known as the Big Five mass extinctions.
+But Sepkoski and others recognized at the time that the data were noisy. 
+Much like climate data, fossils are subject to a host of artifacts and biases that shape the fossils record that the written data will eventually represent before they ever reach a human observer.
+Work by \cite{raup1975taxonomic}, \cite{alroy2008}, and others \citep{collins2009rarefaction} introduced a variety of methods (such as rarefaction methods) to correct for noise in the data to extract more faithfully the actual dynamics of paleodiversity. 
+Bokulich and Parker (2021) argue for a  pragmatic-representational view of data models, in which data represent some facet of reality but are evaluated pragmatically.
+"Pragmatic``, in this case, takes on the philosophical definition, meaning evaluated in the context of their utility for a defined purpose. 
+In this pragmatic-representational view, the data produced by correction methods may be considered more faithful to the purpose of modeling ancient biodiversity, even though they are farther from their raw state.
+This is similar to Suppe's work with climate data, in which denoising is required to use the data. 
+
+What, then, is a discrete character matrix? 
+A discrete character matrix is the end point of a process by which a researcher interacts with the natural world to collect data that they believe represent an object that exists.
+In that process, researchers use a combination of theory and aesthetic preference to determine what focal clade they believe has an interesting evolutionary story to tell.
+Researchers use prior information and theory to determine where to locate fossils.
+Researchers then prepare the fossils, and used a mix of theory, prior information, and current observation to determine the set of characters to be collected, and what should be the discrete states to collect.
+Researchers then collect the data and transcribe it to computer-readable files for downstream analyses, keeping in mind any computational limits to phylogenetic analyses (i.e., 10 character states, if the program can handle polymorphism, etc). 
+Prior to researchers locating those fossils, the fossils had been subject to many geological and possibly anthropogenic forces that may have created artifacts in the preservation of those data that need to be corrected. 
+This end point would be data, fit for phylogenetic usage.
+Under a pragmatic-representational data model, these would be a model of the data, having been collected and interpreted via theory and cognition, and these data have high fidelity to their purpose (phylogenetic analysis)
+The data, as Nelson and Platnick wrote in 1981, "are thus a theory": they are laden with our assumptions, which may be demonstrated to be a poor fit, may be assumed differently by others, or updated in the face of new evidence. 
+
+My argument is that the pragmatic-representational view of a data model is the correct one for thinking about phylogenetic data. 
+If there is a possibility that choices other than the ones made by the research could lead to different data being written down, then to treat the data as a model as opposed to a fixed set of observations more accurately reflects the relationship researchers have with their data. 
+
+
+\section{An Empirical Example}
+
+To illustrate these points, I would like to discuss a group fond to many paleobiologists: the trilobites. 
+Trilobites were an arthopod group that originated in the lower Cambrian. They are abundant in the fossil record, reflecting their abundance on Earth for 250 million years.
+At various geological time periods, particularly in the Cambrian, over two dozen families were present on the Earth at once. 
+Trilobites are commonly collected, with thousands of obervations uploaded to the Paleobiological Database \citep{uhen2023paleobiology}. 
+
+Despite their ubiquity in collections, the tree of trilobites is still uncertain in many clades and particularly deep within the tree. 
+Most trilobite work has focused on family-level or smaller taxonomic units for a variety of reasons. 
+Researchers also tend to specialize in particular time periods in trilobite evolution, leading to further segmentation of the community.
+The result of this is that trilobite character matrices are somewhat fractured and may not interoperate well.
+This poses challenges for combining matrices to address deeper taxonomic questions.
+
+In a review of character coding practices and challenges, \cite{Hopkins2026} provide evidence that the number of autapomorphic characters included in phylogenetic analyses of trilobites is increasing.
+The driving reason for this is that Bayesian methods can make use of autapomorphies.
+Parsimony cannot make use of autapomorphic, as an autapomorphy will always have a length of one on a tree. 
+Because most matrices were assembled for use with parsimony, these characters where then excluded from matrix construction.
+In a Bayesian analysis, these characters are useful. 
+An autapomorphic character is not able to favor one topology over another (i.e., cannot discriminate among topological hypotheses).
+But in a Bayesian method, tree topologies are jointly estimated with branch lengths (and rates of change in a dated analysis).
+The autapomorphic character provides information on this: if the character is the same in all OTUs except one, that tells us this may be a low rate of evolution character. 
+When developing a phylogenetic character matrix for use with a maximum likelihood or Bayesian analysis, therefore, the autapomorphy \textit{should} be coded and included with the matrix as it is contributing signal that the model is able to use to estimate phylogeenetic trees.
+Prior work indicates that including autapomorphies improves estimation of timetrees \citep{matzke2018including}, even if the model corrects for their absence, though work on undated trees generally indicates corrections work fine \citep{Wright2014}.
+
+This is a fascinating test of how we describe data. 
+As a result in changing the analytical method, the underlying data collection practices have been changed as well.
+The fossils themselves have not changed.
+The autapomorphies were always present.
+What has changed is the analytical framework available to workers, and those workers have responded by changing their practices. 
+
+Under the Leonelli definition of data, is an autapomorphic character phylogenetic data? 
+It cannot provide evidence to distinguish between two hypothetical trees under parsimony, and thus contains no information about the underlying phenomenon, evolutionary history and relationships.
+If parsimony is your tool for interpreting evolutionary history, then an autapomorphy has no epistemic value. 
+It isn't phylogenetic data.
+For this reason, autaopomorphies are typically not even collected by parsimony practitioners, as they cannot be used. 
+In the pragmatic-representational perspective, data models are representations that are the product of a process of inquiry, and they should be evaluated in terms of their adequacy or fitness for particular purposes. 
+Under parsimony, the autapomorphic character could be data, but it would be evaluated as having poor adequacy for process, and likely excluded from the analysis.
+The data model, as constructed by a parsimony worker, would be an incomplete representation of the true organismal phenotype but it would have good fit to purpose for a parsimony analysis. 
+Under a Bayesian framework, the autapomorphy can be included in the data model and it is fit for purpose, as it can be used by the character evolution model. 
+
+In the case of an autapomorphy, it is possible that future work will render that character not an autapomorphy at all. 
+The size of phylogenetic trees and matrices has grown wildly over the past two decades \citep{palacios2021treedata}.
+If a trait is autapomorphic in one group, that doesn't guarantee that the trait does not vary more extensively in another group. 
+If we are to consider a whole-class analysis of Trilobita, it is entirely possible that characters once considered autapomorphic inside a family or order will indeed vary among other families.
+If that sounds unbelievable, remember that there are different numbers of legs present within the class Squamata. 
+All traits exhibit variation over long enough time scales. 
+In this case, to have a model of data implies to have a phylogeny of data. 
+That the data containing autapomorphies is fit for one purpose (Bayesian phylogenetic estimation) and not another (parsimony) does not mean the version without autapomorphies becomes useless; the purpose of parsimony analysis continues to exist.
+Someone may still use those data in the future for that purpose or a similar one. 
+Bokulich and Parker suggest a tree model in which tracking modifications to the data such that anyone who may reuse the data can easily detect changes would be useful. 
+This closely resembles a call for data versioning from Hopkins et al. (2026), who note that vague character descriptions hinder data reuse in trilobites. 
+To accept data as a modifiable object demands a way to track modification. 
+Without tracking these modifications, it is possible that the data object will experience epistemic drift and become unfit for purpose. 
+
+\section{Is This a Discrete Morphology Problem?}
+
+From my focus on paleobiological data, you might think that the issue of how to think about data models is solely the provenance of discrete morphological data. 
+It is not. 
+The idea of data models has been applied across many fields in the philosophy of science following its origins in the philosophy of physics. 
+While discussed lightly in systematics compared to character theory, the idea of assessing data via their fitness to purpose, and treating data as a product of human interface with the natural world, will be beneficial to other areas of phylogentic biology.
+
+The homology statement in molecular phylogenetics is as important as in morphological phylogenetics. 
+The manner in which molecular homology statements are assessed has traditionally been multiple sequence alignment, though in recent years, this has become a more elaborate process as a result of the advent of pooled sequencing protocols.
+The fundamental goal of a multiple sequence aligner is to assess homology by using a model of evolution to determine what types of changes (point mutations, deletions, insertions) can explain how the two or more sequences in your matrix came to be.
+Different combinations of the above mutational factors are then evaluated according to some sort of scoring algorithm.
+The exact scoring algorithm will depend on your software.
+The end result of a multiple sequence aligner is a data matrix with columns that represent homologous molecular residues.
+This alignment will be longer than the original data set due to the insertion of spaces representing either evolutionary deletions of insertions.
+Pooled and high-throughput sequence reads do not make this less complicated. 
+Pipelines for these types of data include multiple steps that involve mathematical models \citep{catchen2013stacks, eaton2020ipyrad}, all of which come with finnicky sets of parameters that can great impact the resultant phylogenetic matrix. 
+It has long been recognized that the quality of the alignment (i.e., the validity of the homology statements) has a large impact on phylogenetic analysis.
+The theory embedded within the data model is not just present, but important. 
+
+This should sound familiar to anyone who read the section \textbf{Data, Morphology, and Data Models}. 
+Molecular data are deeply theory-laden. 
+The estimation of a phylogeny does not start generally from raw sequence reads (though methods that include homology assessment in the pipeline do exist. These also use models, and are thus embedding theory in the process of data collection \citep{redelings2021bali}).
+The phylogenetic data, as most practitioners recognize it, is laden with theory from molecular evolution about how sequences mutate and evolve. 
+The difference from morphological data is how explicit the processing is. 
+It is typical for morphologists, when describing a new specimen, to publish an extensive record of the characters they've coded.
+These may be written descriptions, images, or increasingly commonly 3-D models and scans. 
+These descriptions are often, however, somewhat light on what the theory was that lead to the collection of specific traits as characters. 
+A researcher may note that some trait varied in some proportion of the sample, or there was literature in another group indicating this trait was important for the fossil's lifestyle.
+In other words, the \textit{what} of data provenance is often well-recorded, but not always the \textit{why}. 
+
+For molecular data, the descriptions of how theory was applied are often verbatim.
+The researchers may provide descriptions of settings used in software in the case of graphical user interfaces, or they may even control scripts for pipelines such that someone could replicate the application of theory (This is of course optimistic. 
+As documented by \cite{magee2014dawn}, phylogenetic code and pipelines are often lost to time. Code availability is now often enforced by journals, though not always directly evaluated for compliance). 
+Thus the what and the distal why are often provided in depth. 
+However, the proximal why - why this specific model other than that it was in a pipeline that is easy to use, why this specific setting, do you truly believe deletions are that common - is often not recorded either in the paper or in code comments. 
+Someone else could open the file of raw sequence reads, or pick up your fossil, and assuming a different process of evolution, come to a different dataset.
+A molecular character is exactly as much a theory as a morphological character, and is subjective in the same way a morphological character can be considered subjective.
+The fact that the scoring is carried out by a machine does not mitigate this.
+Therefore, a data model remains a better descriptor for a phylogenetic character matrix than a static object, regardless of what is the data source.
+
+\section{AI, Data Models and Hidden Homology Statements}
+
+Over the past decade, the use of machine learning to extract and collect morphological traits, particularly continuous traits has received considerable attention. 
+These methods are still young, and actively being developed. 
+Computer vision (CV) is commonly applied to this task \citep{Lrig2021}.
+It is the branch of machine learning that deals with extracting, processing, and logging data from images. 
+As high-quality images and 2- and 3-D morphometric data have become ubiquitous, and more museum collections digitize specimen images, there is an enormous wealth of image files upon which these algorithms can be run. 
+CV approaches typically involve a process called segmentation, in which objects to be measured are separated from the background.
+In a second step, traits are measured from these non-background objects \citep{Weaver2020}.
+Corrections may or may not be applied to manage known artifacts, caused by preparation or by the manner in which images were collected \citep{Lrig2021}.
+In this way, these measurements are somewhat analogous to climate data, in the sense that they may need to be denoised before use. 
+These phenotypes can then be logged as continuously-valued measurements and included in a matrix of phenotypic characters. 
+It is not typical to collect discrete morphological data by automation or CV \citep{Marques2025}.
+Most published applications collect measurements, ratios, or geometric morphometric landmarks.
+
+Current approaches to collect traits using CV typically do not consider the homology statement in choosing which continuous traits to collect.
+While CV-derived traits can often be shown to co-vary with phylogeny, and to identify cladistic affinity groups, a cogent theory of trait evolution is not baked into the collection of the traits.
+This calls into question the fit of the data to purpose: all character evolution models, whether for discrete or continuous traits, rely on homology. 
+
+We, therefore, have two questions:
+\begin{itemize}
+\item What theory is embedded in a CV-derived trait?
+\item What is the fitness to purpose of a CV-derived trait for phylogenetic estimation?
+\end{itemize}
+
+Current applications of deep learning to collection of morphological data focus on metric methods, which quantify similarity or dissimilarity of morphological features in a sample, or on measurements, such as length or surface area. 
+These methods are generally trained on a sample of images, and deployed on the sample from which data are to be collected. 
+Machine learning methods can be deeply influenced by biases in the training set, so it is important for researchers to think carefully about how to construct a training set.
+This should be familiar to readers of section \textbf{Data, Morphology, and Data Models} - machine-collected data, like human-collected data, are sensitive to the underlying sample. 
+However, unlike how data are typically collected for a phylogenetic analysis, the data are collected without regard for the evolutionary relationship dimension - that is, homology. 
+Two features extracted from different organisms may be very similar despite having been derived from different origins.
+This is likely a larger problem in high homoplasy groups, such as insects and turtles.
+Note that this is different in many machine learning approaches to phylogenetic estimation post-data collection.
+For example,  Mo et al. discuss the use of machine learning in the inference of the tree \citep{Kiel2021, Mo2024}.
+In this case, the data are already collected and have homology assigned via sequence alignment or other methods for high-throughput sequencing reads. 
+The issue explored here is not with machine learning, it is with the fidelity of the data for the purpose of reconstructing evolutionary relationships.
+
+I have written quite a bit about the homology statement in the context of discrete traits both molecular and morphological thus far. 
+Whether homology is assessed by human cognition (morphology), or by computer (molecular), this step takes place before the character matrix is used for phylogenetic estimation. 
+Continuous traits need to be homologous to be useful in phylogenetic estimation.
+The incorporation of continuous traits in Bayesian phylogenetic estimation, as opposed to \textit{post-hoc} comparative methods, is still an area of active research, but the assumption of homology is nonetheless the same.
+At the present in a Bayesian context, continuous traits have been incorporated into phylogenetic analysis via Brownian Motion \citep{Parins-Fukuchi2017, wang2026implementation, wynd2026incorporating}, a very simple model in which the evolution of a trait away from its starting state is governed by one parameter, a rate at which the trait is evolving away from its starting value.
+It is expected that, on average, a trait that has been evolving longer will move further from its baseline value, but this is not guaranteed, as the trait can move back and forth in trait space. 
+If the trait states/measurements coded for a given trait for all the different OTUs cannot be traced back to a starting state from which they all diversified, then you cannot model that process because that process did not happen.
+Other models, such as early burst models (assuming rapid trait evolution early in a clade) and Ornstein Uhlenbeck models (assuming a trait optimum), are used in comparative methods but not yet for inference. 
+Parsimony methods for working with continuous traits also exist.
+But the assumption of all of these methods, while different from discrete state methods, is that each trait measurement for a particular trait each operational taxonomic unit (OTU) in the analysis is a representation of a homologous trait.
+If this isn't true, then there is no evolutionary diversification process to describe using a model.
+The trait contains no relevant information to phylogenetic estimation because it does not describe or represent an evolutionary history. 
+Note that early applications of deep learning to phenotypic evolution problems notably did not treat this as a phylogenetic question \citep{HoyalCuthill2019}.
+
+In this case, we have a dilemma: are these machine-collected traits phylogenetic data? 
+To harken back to Leonelli's definition, the traits cannot be used to understand the target phenomenon (evolutionary relationships).
+The collected traits are not collected with respect to homology and may not be homologous at all. 
+They may be data for some other process, but they are not phylogenetic data.
+If we operate under a definition that data are part the end product of a scientific process, these collected traits certainly fulfill this criterion.
+They can be written down (i.e., are representational) and shared, per the Leonelli criterion.
+In the pragmatic-representational data model view, we can evaluate them their fit for purpose.
+We would assess them as a poor fit for the purpose of phylogenetic systematics due to the lack of homology.
+For the purposes of the evolutionary phenomenon (Brownian Motion) we are trying to model, these cannot provide potential evidence because they do not conform to the assumptions of the model.
+If we were attempting to perform phenetic clustering, then these would be data that can provide potential evidence of clusters in trait space. 
+Future development of ontology-informed trait collection may result in traits that are homologous.
+Such ontologies exist for large and highly-homoplastic groups, including several in insects. 
+These would data that would have reasonable fit for phylogeentic purpose. 
+
+Some readers may note a problem with what I've laid out above:  we do indeed use non-homologous data in phylogenetics.
+As an example, in a fossilized birth-death analysis (FBD) \citep{stadler2010sampling, Heath2014}, stratigraphic data are used in such a way that modifies a phylogenetic tree search.
+In the 1990s and early 2000s, this was a principle objection to so-called stratocladistic methods: that they incorporated non-homologous data, which is not allowable under cladistics. 
+The way in which this happens is thus:  If the geological range in which an OTU existed is older or younger than the phylogenetic tree implies, then either the range or the tree must change. 
+Typically it will be the tree topology that changes as these ranges are almost always implemented as hard boundaries (though in Bayesian implementations, there will be a posterior distribution of ages per range at the end of the analysis because the ranges are both data and parameter in the model). 
+One might fairly ask then that if stratigraphic ranges can be incorporated in phylogenetic estimation, why cannot CV-derived traits?
+
+The difference between incorporating stratigraphic range data and non-homologous trait data, lies in the models to do so and the purpose of incorporation.
+An FBD analysis is typically implemented via a tripartite joint model \citep{warnockWright2020} in which one model describes the character data (may be discrete or continuous), a clock model to describe the distribution of evolutionary rates across the tree, and a tree model, which describes the diversification process that generated the tree itself. 
+The character evolution models for an FBD analysis, which are used to estimate the evolutionary relationships (tree topology), assume homology of the characters.
+This is the model that would be used to incorporate machine-generated traits. 
+The FBD model itself does not incorporate the concept of homology at all, instead modeling a diversification process that includes stratigraphic sampling. 
+The stratigraphic range data are incorporated under the FBD model.
+Thus, stratigraphic ranges are fit for purpose under the FBD model while non-homologous traits are unfit for purpose under a character model.
+There could be some other way of incorporating CV-derived traits, such as human-in-the-loop verification of homology, or using the non-homologous traits to generate clustering analyses that could be used to set priors on clades or guide the actual tree search.
+But from the point of view of a model that assumes homology, they are unfit for purpose.
+In this case, a clear accounting of what data are and are not may guide development of new methods to leverage these features.
+
+\section{Conclusion and Prospectus}
+
+The goal of this paper was to introduce several concepts from the philosophy of science to think about data, and to use those concepts to think productively about different kinds of data matrices in phylogenetics. 
+In particular, I wanted to introduce the idea that data are actually models, deeply embedded with our theoretical expectations about evolution as a process.
+An implication of this is that researchers should always be evaluating and re-evaluating the fit-for-purpose of the data in light of what processes they are attempting to understand, the theory that informs their research, and the analytical tools available to illuminate their questions. 
+When we incorporate new sources of data, we need to carefully consider what those data mean in light of the work we are attempting to perform lest we use data that are unfit for our purposes. 
+The concept of data as a model that needs to be continually re-evaluated also has policy implications: revision management to track different modifications to data in order to improve fidelity to purpose is an important future development under this framework. 
+
+
 # A Brief History of the Use of Morphology in Phylogenetics
 
 
@@ -36,5 +329,7 @@ The final thing that was missing in the ecosystem was democratized software plat
 The latter half of the 2010s was spent asking a wider range of questions than anyone thought possible using these models. How much morphological data can swamp the signal in a molecular dataset? Can we model known differential diversification processes over time, or across branches? How do we integrate continuous traits in Bayesian analyses? What confident can we be in our model-based assumptions? Even cultural and linguistic artifact data can be played with in the same complexity as biological data.
 
 For someone who started a PhD in 2009, the past two decades have been an incredibly wild ride. While the siloes still exist, I've been privileged to publish with mathematicians, computer scientists, biologists and geologists. So far, we've achieved an incredible synthesis of theory from across the sciences. Here's to the next twenty. 
+
+# References
 
 
