@@ -8,6 +8,7 @@ editor: visual
 ## Day 3
 
 Running FBD analysis:
+
 ```{r}
 library("admtools")
 library("StratPal")
@@ -36,7 +37,9 @@ T_axis_lab()
 L_axis_lab()
 
 ```
+
 Simulate FBD tree:
+
 ```{r}
 set.seed(4)
 t_max = 2
@@ -53,6 +56,7 @@ axis(1)
 ```
 
 Simulate fossils along tree
+
 ```{r}
 
 f = FossilSim::sim.fossils.poisson(rate = 2.5, tree = tree, root.edge = FALSE)
@@ -66,6 +70,7 @@ plot(f_extant, tree, reconstructed = FALSE)
 ```
 
 simulate morphology along tree
+
 ```{r}
 
 d <- sim.morpho(time.tree = tree, k = 2, trait.num = 100,
@@ -83,4 +88,3 @@ write.morpho(d, file = "ages.tsv", type = "ages", reconstructed = TRUE)
 
 
 ```
-

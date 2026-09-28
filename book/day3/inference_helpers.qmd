@@ -1,0 +1,281 @@
+---
+title: "Inference"
+format: html
+editor: visual
+---
+
+## Bayesian inference
+
+This chapter contains code to help set up phylogenetic inference pipelines.
+
+## Revbayes
+
+All revbayes scripts can also be downloaded: [fbd_inference_base.rev](fbd_inference_base.rev){download="bd_inference_base.rev"} [model_clock.rev](model_clock.rev){download="model_clock.rev"} [model_morpho.rev](model_morpho.rev){download="model_morpho.rev"} [model_fbd_base.rev](model_fbd_base.rev){download="model_fbd_base.rev"}
+[model_fbd_skyline_sampling.rev](model_fbd_skyline_sampling.rev){download="model_fbd_skyline_sampling.rev"} [fbd_inference_skyline.rev](fbd_inference_skyline.rev){download="fbd_inference_skyline.rev"}
+
+### Standard FBD inference
+
+This as a simple setup for a constant rate FBD inference. For more complex cases (e.g., age uncertainty, total evidence etc.) see [this tutorial](https://revbayes.github.io/tutorials/fbd/fbd_specimen.html).
+
+We use this basic setup, available in the file `fbd_inference_base.rev`:
+
+```{r}
+#| eval: false
+char_mat <- "char_mat.nex"
+taxon_ages <- "ages.tsv"
+#init_tree_name <- "INSERT_HERE" - not used, if you want to initialize the starting tree
+outfile <- "trace"
+treefile <- "trees"
+outfile_name <- outfile + ".log"
+treefile_name <- treefile + ".log"
+
+# import data
+morph <- readDiscreteCharacterData(char_mat)
+taxa <- readTaxonData(taxon_ages)
+
+# true model parameters to specify initial state & priors if needed
+rho <- 1.0
+true_origination_rate <- 2
+true_extinction_rate <- 0.3
+true_sampling_rate <- 10
+true_origin_time <- 2
+true_clock_rate = 0.5
+
+# initialize moves
+moves = VectorMoves()
+
+# load tree model
+source("model_fbd_const.rev")
+# load clock model
+source("model_clock.rev")
+# load model of morphological evolution
+source("model_morpho.rev")
+
+phy_morpho ~ dnPhyloCTMC(tree = fbd_tree, branchRates = branch_rates_morpho, Q = Q_morpho, type = "Standard", coding = "all")
+phy_morpho.clamp(morph)
+
+my_model = model(phy_morpho)
+#my_model.graph("fbd_base.dot") generate model graph
+
+
+# initialize monitors
+monitors = VectorMonitors()
+# write state to tracefile
+monitors.append( mnModel(filename=outfile_name, printgen=10) )
+# write tree to tree file
+monitors.append(mnFile(filename = treefile_name, printgen = 10, fbd_tree))
+# output to the screen
+monitors.append(mnScreen(printgen=100, origin_time, speciation_rate, extinction_rate) )
+
+# initialize mcmc
+mymcmc = mcmc(my_model, monitors, moves, nruns = 2, ntries = 10000)
+mymcmc.burnin(generations=2000,tuningInterval=1500, verbose = TRUE)
+mymcmc.operatorSummary()
+mymcmc.run(generations = 10000)
+mymcmc.operatorSummary()
+
+q()
+```
+
+Note that the "true" model parameters are provided. This is to accelerate convergence by defining appropriate priors and set the initial state of the analysis. Empirically, this is would never be the case.
+
+The base analysis calls the three key model components: clock, morphological model, and tree model.
+
+The clock model is specified in `model_clock.rev`:
+
+```{r}
+#| eval: false
+# strict morphological clock
+branch_rates_morpho ~ dnExponential(lambda = 1/true_clock_rate) 
+branch_rates_morpho.setValue(true_clock_rate)
+moves.append( mvScale(branch_rates_morpho, weight = 5.0, lambda = 0.1))
+moves.append( mvScale(branch_rates_morpho, weight = 5.0, lambda = 1.0))
+moves.append( mvScale(branch_rates_morpho, weight = 5.0, lambda = 10.0))
+```
+
+The morphological model is specified in `model_morpho.rev`:
+
+```{r}
+#| eval: false
+# model of morphological evolution
+# Mk2 model  - no ascertaintment correction
+Q_morpho := fnJC(2)
+```
+
+And last, the tree model is specified in `model_fbd_tree.rev`:
+
+```{r}
+#| eval: false
+speciation_rate ~ dnExponential(lambda = 1/true_origination_rate) # set to true mean
+moves.append( mvScale(speciation_rate, weight=5.0, lambda = 0.1) )
+moves.append( mvScale(speciation_rate, weight=5.0, lambda = 1.0) )
+moves.append( mvScale(speciation_rate, weight=5.0, lambda = 5.0) )
+speciation_rate.setValue(true_origination_rate)
+
+extinction_rate ~ dnExponential(lambda = 1/true_extinction_rate) # set to true mean
+moves.append( mvScale(extinction_rate, weight=5.0, lambda = 0.1) )
+moves.append( mvScale(extinction_rate, weight=5.0, lambda = 1.0) )
+moves.append( mvScale(extinction_rate, weight=5.0, lambda = 5.0) )
+extinction_rate.setValue(true_extinction_rate)
+
+origin_time ~ dnExponential(lambda = 1.0)
+moves.append( mvScale(origin_time, weight=5.0, lambda = 0.1) )
+moves.append( mvScale(origin_time, weight=5.0, lambda = 1.0) )
+moves.append( mvScale(origin_time, weight=5.0, lambda = 5.0) )
+origin_time.setValue(true_origin_time)
+
+psi ~ dnExponential(lambda = 1/true_sampling_rate)
+psi.setValue(true_sampling_rate)
+moves.append( mvScale( psi, weight = 5.0, lambda = 0.1) )
+moves.append( mvScale( psi, weight = 5.0, lambda = 1.0) )
+moves.append( mvScale( psi, weight = 5.0, lambda = 10.0) )
+
+
+fbd_tree ~ dnFBDP(origin=origin_time, lambda=speciation_rate, mu=extinction_rate, psi=psi, rho=rho, taxa=taxa)
+
+moves.append( mvFNPR(fbd_tree, weight=20.0) )
+moves.append( mvGPR(fbd_tree, weight = 10.0))
+moves.append( mvCollapseExpandFossilBranch(fbd_tree, origin_time, weight=50.0) )
+moves.append( mvNodeTimeSlideUniform(fbd_tree, weight=10.0) )
+moves.append( mvNodeTimeScale(fbd_tree, weight = 20.0))
+moves.append( mvRootTimeSlideUniform(fbd_tree, origin_time, weight=50.0) )
+moves.append( mvSubtreeScale(fbd_tree, weight = 10.0))
+moves.append( mvTreeScale(fbd_tree, origin_time, weight = 10.0))
+```
+
+With all these parts in place, you can run the analysis
+
+```{r}
+#| eval: false
+rb fbd_inference.rev
+```
+
+in your terminal. This might take a while, and there are useful tools such as `nohup` (for Linux) that allow you to run these analyses in the background:
+
+```{r}
+#| eval: false
+nohup rb fbd_inference.rev > out.log 2>&1 &
+```
+
+
+### Skyline FBD analysis
+
+For the FBD skyline sampling analysis that formalizes stratigraphic knowledge as priors we use a very similar base setup, available in `fbd_inference_skyline.rev`:
+
+```{r}
+#| eval: false
+char_mat <- "char_mat.nex"
+taxon_ages <- "ages.tsv"
+#init_tree_name <- "INSERT_HERE" - not used, if you want to initialize the starting tree
+outfile <- "trace_skyline"
+treefile <- "trees_skyline"
+outfile_name <- outfile + ".log"
+treefile_name <- treefile + ".log"
+
+# import data
+morph <- readDiscreteCharacterData(char_mat)
+taxa <- readTaxonData(taxon_ages)
+
+# true model parameters to specify initial state & priors if needed
+rho <- 1.0
+true_origination_rate <- 2
+true_extinction_rate <- 0.3
+true_origin_time <- 2
+true_clock_rate = 0.5
+
+# initialize moves
+moves = VectorMoves()
+
+# load tree model
+source("model_fbd_skyline_sampling.rev")
+# load clock model
+source("model_clock.rev")
+# load model of morphological evolution
+source("model_morpho.rev")
+
+phy_morpho ~ dnPhyloCTMC(tree = fbd_tree, branchRates = branch_rates_morpho, Q = Q_morpho, type = "Standard", coding = "all")
+phy_morpho.clamp(morph)
+
+my_model = model(phy_morpho)
+#my_model.graph("fbd_base.dot") generate model graph
+
+
+# initialize monitors
+monitors = VectorMonitors()
+# write state to tracefile
+monitors.append( mnModel(filename=outfile_name, printgen=10) )
+# write tree to tree file
+monitors.append(mnFile(filename = treefile_name, printgen = 10, fbd_tree))
+# output to the screen
+monitors.append(mnScreen(printgen=100, origin_time, speciation_rate, extinction_rate, psi) )
+
+# initialize mcmc
+mymcmc = mcmc(my_model, monitors, moves, nruns = 2, ntries = 10000)
+mymcmc.burnin(generations=2000,tuningInterval=1500, verbose = TRUE)
+mymcmc.operatorSummary()
+mymcmc.run(generations = 10000)
+mymcmc.operatorSummary()
+
+q()
+```
+
+The tree model is slightly different because of the skyline analysis. The contents of `model_fbd_skyline_sampling.rev` are
+
+```{r}
+#| eval: false
+speciation_rate ~ dnExponential(lambda = 1/true_origination_rate) # set to true mean
+moves.append( mvScale(speciation_rate, weight=5.0, lambda = 0.1) )
+moves.append( mvScale(speciation_rate, weight=5.0, lambda = 1.0) )
+moves.append( mvScale(speciation_rate, weight=5.0, lambda = 5.0) )
+speciation_rate.setValue(true_origination_rate)
+
+extinction_rate ~ dnExponential(lambda = 1/true_extinction_rate) # set to true mean
+moves.append( mvScale(extinction_rate, weight=5.0, lambda = 0.1) )
+moves.append( mvScale(extinction_rate, weight=5.0, lambda = 1.0) )
+moves.append( mvScale(extinction_rate, weight=5.0, lambda = 5.0) )
+extinction_rate.setValue(true_extinction_rate)
+
+origin_time ~ dnExponential(lambda = 1.0)
+moves.append( mvScale(origin_time, weight=5.0, lambda = 0.1) )
+moves.append( mvScale(origin_time, weight=5.0, lambda = 1.0) )
+moves.append( mvScale(origin_time, weight=5.0, lambda = 5.0) )
+origin_time.setValue(true_origin_time)
+
+# skyline breakpoints from the example age-depth model
+# focusing on gaps longer than 0.1 Myr
+timeline <- v(0.0978, 0.2250, 0.2772, 0.4090, 0.4622, 0.5702)
+
+psi[1] ~ dnExponential(lambda = 0.2)
+psi[2] <- 0.00001 # fix to small numeric value to formalize that no fossils are sampled in the gap
+psi[3] ~ dnExponential(lambda = 0.2)
+psi[4] <- 0.00001
+psi[5] ~ dnExponential(lambda = 0.2)
+psi[6] <- 0.00001
+psi[7] ~ dnExponential(lambda = 0.2)
+
+moves.append( mvScale( psi[1], weight = 5.0, lambda = 0.1) )
+moves.append( mvScale( psi[1], weight = 5.0, lambda = 1.0) )
+moves.append( mvScale( psi[1], weight = 5.0, lambda = 10.0) )
+moves.append( mvScale( psi[3], weight = 5.0, lambda = 0.1) )
+moves.append( mvScale( psi[3], weight = 5.0, lambda = 1.0) )
+moves.append( mvScale( psi[3], weight = 5.0, lambda = 10.0) )
+moves.append( mvScale( psi[5], weight = 5.0, lambda = 0.1) )
+moves.append( mvScale( psi[5], weight = 5.0, lambda = 1.0) )
+moves.append( mvScale( psi[5], weight = 5.0, lambda = 10.0) )
+moves.append( mvScale( psi[7], weight = 5.0, lambda = 0.1) )
+moves.append( mvScale( psi[7], weight = 5.0, lambda = 1.0) )
+moves.append( mvScale( psi[7], weight = 5.0, lambda = 10.0) )
+
+fbd_tree ~ dnFBDP(origin=origin_time, lambda=speciation_rate, mu=extinction_rate, psi=psi, rho=rho, taxa=taxa, timeline = timeline)
+
+#fbd_tree.setValue(init_tree)
+moves.append( mvFNPR(fbd_tree, weight=20.0) )
+moves.append( mvGPR(fbd_tree, weight = 10.0))
+moves.append( mvCollapseExpandFossilBranch(fbd_tree, origin_time, weight=500.0) )
+moves.append( mvNodeTimeSlideUniform(fbd_tree, weight=10.0) )
+moves.append( mvNodeTimeScale(fbd_tree, weight = 20.0))
+moves.append( mvRootTimeSlideUniform(fbd_tree, origin_time, weight=0.0) )
+moves.append( mvSubtreeScale(fbd_tree, weight = 100.0))
+moves.append( mvTreeScale(fbd_tree, origin_time, weight = 100.0))
+```
+
