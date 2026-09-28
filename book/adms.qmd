@@ -1,6 +1,5 @@
 ---
 title: "Time in rocks"
-embed-resources: true
 ---
 
 ## Introduction

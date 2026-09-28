@@ -1,7 +1,6 @@
 ---
 title: "Simulating the stratigraphic record"
 engine: julia
-embed-resources: true
 ---
 
 In this tutorial we build a small three-dimensional carbonate platform with [CarboKitten.jl](https://github.com/MindTheGap-ERC/CarboKitten.jl), a Julia package that simulates carbonate platform stratigraphy (a reimplementation of Peter Burgess' CarboCAT). We will:
