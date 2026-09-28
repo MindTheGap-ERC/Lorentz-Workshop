@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,13 +12,10 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
+code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: 1.5em;}
-div.column{flex: auto;}
-@media screen {
-div.columns{gap: min(4vw, 1.5em);}
-div.column{overflow-x: auto;}
-}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -44,10 +41,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-631496449bf32ff9b0bb69a6bfd9195d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-5ccb035bea26c1e21f80f44cf7c27909.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -260,8 +257,22 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#what-are-phylogenetic-data" id="toc-what-are-phylogenetic-data" class="nav-link active" data-scroll-target="#what-are-phylogenetic-data"><span class="header-section-number">7</span> What Are Phylogenetic Data</a>
+  <ul class="collapse">
+  <li><a href="#data-morphology-and-data-models" id="toc-data-morphology-and-data-models" class="nav-link" data-scroll-target="#data-morphology-and-data-models"><span class="header-section-number">7.1</span> Data, Morphology, and Data Models</a></li>
+  </ul></li>
+  <li><a href="#a-brief-history-of-the-use-of-morphology-in-phylogenetics" id="toc-a-brief-history-of-the-use-of-morphology-in-phylogenetics" class="nav-link" data-scroll-target="#a-brief-history-of-the-use-of-morphology-in-phylogenetics"><span class="header-section-number">8</span> A Brief History of the Use of Morphology in Phylogenetics</a></li>
+  <li><a href="#how-can-we-model-discrete-morphology" id="toc-how-can-we-model-discrete-morphology" class="nav-link" data-scroll-target="#how-can-we-model-discrete-morphology"><span class="header-section-number">9</span> How Can We Model Discrete Morphology</a></li>
+  <li><a href="#how-can-we-model-continuous-traits" id="toc-how-can-we-model-continuous-traits" class="nav-link" data-scroll-target="#how-can-we-model-continuous-traits"><span class="header-section-number">10</span> How Can We model Continuous Traits</a></li>
+  <li><a href="#a-reintegrated-vision-of-morphology-in-the-21st-century" id="toc-a-reintegrated-vision-of-morphology-in-the-21st-century" class="nav-link" data-scroll-target="#a-reintegrated-vision-of-morphology-in-the-21st-century"><span class="header-section-number">11</span> A Reintegrated Vision of Morphology in the 21st Century</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">12</span> References</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -285,8 +296,42 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="what-are-phylogenetic-data" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> What Are Phylogenetic Data</h1>
+<section id="data-morphology-and-data-models" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="data-morphology-and-data-models"><span class="header-section-number">7.1</span> Data, Morphology, and Data Models</h2>
+<p>THe idea of what data are has been refined over the history of philosophy. Data are typically accepted to be <em>representational</em>, that is, to be written down in some way so as to be shareable. Generally, we do not expect to be able to put a whole fossil into our disk drive or to have CarboKitten read our sedimentary cores and simulate histories based upon it. Data are also typically considered to be evidence of one or more phenomenon <span class="citation" data-cites="Leonelli2019">(<a href="#ref-Leonelli2019" role="doc-biblioref"><strong>Leonelli2019?</strong></a>)</span>. That an object has epistemic value for a particular purpose implies that it has been processed for that purpose. This has lead philosophers <span class="citation" data-cites="suppes1966models">(<a href="#ref-suppes1966models" role="doc-biblioref"><strong>suppes1966models?</strong></a>)</span> to conclude that researchers are often not interested in <em>data</em>, but in <em>data models</em>, or data that have been processed in some way and can be evaluated for their fit to that particular purpose <span class="citation" data-cites="Bokulich2021">(<a href="#ref-Bokulich2021" role="doc-biblioref"><strong>Bokulich2021?</strong></a>)</span>. Today, we will examine the idea of how phylogenetic data fit into this picture, and what the process of writing down phylogenetic data means for our models of evolution.</p>
+<p>When we discuss phylogenetic data, we may be talking about morphological characters or we may be discussing molecular ones. For now, we will focus on morphological ones. In this case, the phylogenetic character data will be coded from a specimen, or several. <em>A priori,</em> we already have a bias. Generally we are collecting characters from these specimens because we think something is interesting in this group - perhaps the evolution, a novel morphology, something else. Researchers examine a sample of taxa. In cases with rich sampling, a researcher may be able to look across multiple specimens of the same operational taxonomic unit (OTU) and confirm their character, whether it has polymorphism in the sample, or whether it is constant. In the case of a poorly-sampled clade, it may be that the researcher is able to look at one sample per OTU, and may not know if a trait is plastic in any way. In very poorly-sampled clades, which many vertebrates are, you may lose resolution on things like morphological modularity. Traits may be collected for a variety of reasons. These can include having observed trait function in the case of extant organisms, or close relatives, or analogizing from more distantly-related relatives <span class="citation" data-cites="hesse1965models">(<a href="#ref-hesse1965models" role="doc-biblioref"><strong>hesse1965models?</strong></a>)</span>. I will not be giving an exhaustive look at character coding schemes. If you’d like more to read on character theory, please see <span class="citation" data-cites="stevens1984homology budd2006origin wagner2000character">(<a href="#ref-stevens1984homology" role="doc-biblioref"><strong>stevens1984homology?</strong></a>; <a href="#ref-budd2006origin" role="doc-biblioref"><strong>budd2006origin?</strong></a>; <a href="#ref-wagner2000character" role="doc-biblioref"><strong>wagner2000character?</strong></a>)</span>.</p>
+<p>What distinguishes phylogenetic character data from mere data? Homology. A phylogenetic character must be homologous. It must, in all its observations (i.e., across OTUs), it must reflect common ancestry. This is because a phylogenetic character is considered to be the end point of a history of life that generated it - i.e., a process of evolution that proceeded through a process of diversification through time. If the trait is not the end point of this process, then you cannot model a phylogeny from it. If the trait does not reflect a shared evolutionary history, it cannot be evidence for that shared history. Thus, no matter what other evidence is used, a human must assess homology for these traits. A trait that is not homologous may be data for some other purpose - presence/absence modeling, phenetic clustering - but it is not phylogenetic data.</p>
+<p>I’d like to make an argument that the process of collecting morphological data is imprinted by theory. As we’ve highlighted before, we choose clades based on something we think is happening in them. Interesting organisms or traits, perhaps we have data sucggesting a rock outcrop may be fruitful. From the word go, we are imprinting theory. As we learned from Mark yesterday, not all areas of the Earth are equally good for sampling - we are likely learning something about the median fossil and not peripheral ones. When we code characters, we are choosing ones we think matter. The homology statement that we use to then write down that character constrains the downstream models that we can use. If we write down a trait as ordered, we are saying something about how that trait evolved: that we believe you must go through an intermediate in order to transit from one state to another. If we write a character down as binary or multistate, this can have downstream implications for trees explored and tree lengths [<span class="citation" data-cites="khakurel2024fundamental">(<a href="#ref-khakurel2024fundamental" role="doc-biblioref"><strong>khakurel2024fundamental?</strong></a>)</span>; mulvey2025assessing]. We won’t deal much with continuous traits in this workshop, but many traits that are collected as continuous traits are then discretized for phylogenetic analysis. We don’t discretize traits because discrettraits are “better” in any real way. But we have developed methods and significantly matured them for use with DNA, which are discrete. Thus, even the way we use the vocabulary of traits is imprinted by theory, including theory from other fields (molecular biology). This relationship between theory and data collection has been termed ``model-data synthesis” .</p>
+<p>Bokulich and Parker (2021) make the argument that data must be evalutate for <em>fidelity for purpose.</em> That is, how well can the data be used for the science we’d like to conduct. For example, autapomorphies. Historically, these have not been collected at all. This is because, under parsimony, they cannot be used to distinguish between two trees. An autapomorphy has a length of one no matter what the tree for a given set of taxa. Thus, it was not data for a parsimony analysis - it cannot generate evidence for one tree over another. An autapomorphy has poor fit to the purpose of parsimony. It may be data for some question but in the parsimony worldview, it was not phylogenetic data. However, under a Bayesian modeling framework, an autapomorphy is phylogenetic data. Because we co-estimate a tree and branch lengths in the world of Bayesian phylogenetics, an autapomrophy can inform branch rates. Thus, it is phylogenetic data. It doesn’t contain direct tree-building information, and might be considered lower <em>fidelity of purpose</em> than a character that has tree-building information. But it’s nonetheless data. And accordingly, as Bayesian phylogenetics has become more common, we see more workers collecting these characters <span class="citation" data-cites="Hopkins2026">(<a href="#ref-Hopkins2026" role="doc-biblioref"><strong>Hopkins2026?</strong></a>)</span>.</p>
+<p>I’d like to highlight that this is not an issue of discrete morphology, despite us focusing on this. When we assess morphology for discrete molecular traits, we do this using software. But the software implments models for how likely different molecular changes are. A multiple sequence alignment is just as imprinted by throey as a morphological character matrix. And many people never even think of it - they click buttons in an interface and raw reads become phylogenetic data. Likewise, if you use continuous traits inferentially, you are doing so assuming some model of evolution that describes an evolutionary history. The trait must be homologous to describe this history, and that homology is typically assessed by a human.</p>
+<p>Now that we know a little about the loading of theory and expectation onto morphological traits, let’s talk about how they’ve been used historically and how they are modeled.</p>
+</section>
+</section>
+<section id="a-brief-history-of-the-use-of-morphology-in-phylogenetics" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> A Brief History of the Use of Morphology in Phylogenetics</h1>
+</section>
+<section id="how-can-we-model-discrete-morphology" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> How Can We Model Discrete Morphology</h1>
+</section>
+<section id="how-can-we-model-continuous-traits" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> How Can We model Continuous Traits</h1>
+</section>
+<section id="a-reintegrated-vision-of-morphology-in-the-21st-century" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> A Reintegrated Vision of Morphology in the 21st Century</h1>
+<p>While morphological characters were the initial source of phylogenetic data, much of the prior 50 years has been characterized by an atomization of phylogenetic workers. Particularly in the 1980s through the 2000s, morphological phylogenetics has taken a backseat to work on molecular phylogenetics. Because of the volume of data, and the shared properties of nucleotides, model development in particular proliferated for likelihood and Bayesian methods that were able to make use of molecular datasets.</p>
+<p>Paleobiology is not the only area of science in which this was observed. In fact, in the late 2010s, the US National Science Foundation launched an initiative called Reintegrating Biology to imagine what a national, interdisciplinary biological science research program might look like. Special issues of journals were spawned. Workshops were held. Even independent of any top-down efforts, the 2010s can be characterized as investing in a massive re-integration of the biological sciences and the geological sciences.</p>
+<p>A number of factors converged in the early half of the 2010s. Tanja Stadler published a paper describing a model of diversification and sampling through time that would be adapted in 2014 to accommodate fossil sampling (samples not in the present). Graham Slater published a manuscript detailing how comparative methods can be mislead without accounting for paleobiological data. Shortly thereafter, a number of papers demonstrated that the Mk model worked pretty well for morphological data. All the pieces were in place to make truly integrative stratigraphic trees with morphological data.</p>
+<p>The final thing that was missing in the ecosystem was democratized software platforms to do this work. Over the prior 30 years, most phylogenetic software has relied upon a preset slate of options, decided upon by the developer, in advance of software publication. RevBayes and BEAST2 have changed the model, in favor of offering a sandbox of endlessly combinable model options. In RevBayes and BEAST2, the model is simply a graph of interlocking pieces to which new nodes can be added as your data types and model complexity change. As discussed in the section “How Can We model Continuous Traits”, a user who wants to work with continuous data simply specifies a model that works with continuous traits (in theory, any way).</p>
+<p>The latter half of the 2010s was spent asking a wider range of questions than anyone thought possible using these models. How much morphological data can swamp the signal in a molecular dataset? Can we model known differential diversification processes over time, or across branches? How do we integrate continuous traits in Bayesian analyses? What confident can we be in our model-based assumptions? Even cultural and linguistic artifact data can be played with in the same complexity as biological data.</p>
+<p>For someone who started a PhD in 2009, the past two decades have been an incredibly wild ride. While the siloes still exist, I’ve been privileged to publish with mathematicians, computer scientists, biologists and geologists. So far, we’ve achieved an incredible synthesis of theory from across the sciences. Here’s to the next twenty.</p>
+</section>
+<section id="references" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> References</h1>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
