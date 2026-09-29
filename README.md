@@ -196,6 +196,12 @@ If you are used to R Markdown, you will hardly notice any differences:
 
 ## Troubleshooting
 
+### Broken website layout
+
+**Manual solution**
+
+After rendering anything, do `git add docs/site_libs` and include it in the commit.
+
 ### Julia
 
 If a render of the Julia chapter fails with `ERROR: Read invalid transport file that did not end with a newline` (or `No transport file was found after the timeout`), run the same command again. Quarto waits only about 10 seconds for its Julia server to start up, which is not always enough on a cold start, but the failed attempt leaves that server running, so the second attempt connects immediately. The server shuts down after five minutes idle, so a long pause can bring the message back. This is bizarre, but harmless.
