@@ -82,7 +82,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-631496449bf32ff9b0bb69a6bfd9195d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-d3f7f8e73c8d287b30bcf59c2b563615.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -342,7 +342,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction" class="level2" data-number="11.1">
 <h2 data-number="11.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">11.1</span> Introduction</h2>
-<p>In this chapter we will explore some advanced topics in stratigraphic paleobiology, specifically</p>
+<p>In this chapter we will explore some advanced topics in stratigraphic paleobiology, specifically:</p>
 <ol type="1">
 <li>How taphonomic and ecological effects shape the stratigraphic distribution of fossils</li>
 <li>How the misidentification of age-depth relationships changes the inference of temporal dynamics.</li>
@@ -355,7 +355,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Work through the code, potentially modifying it according to your simulated stratigraphy from day 1 and the simulated tree from last chapter. What major differences do you see?</p></li>
 <li><p>Explore how results change at different locations in your simulated stratigraphy. Are there locations where age misassignment is especially large/small or ecological effects are especially strong/weak?</p></li>
 <li><p>For your study system and spatiotemporal scale of interest, what are the major ecological and taphonomic processes that determine fossil abundance? Could you quantify and formalize them? How is it for other members of your group?</p></li>
-<li><p>Do you have any intuition how much age misassignment is a problem on the timescale you are working on? Is there a timescale where you think it is most/least relevant (e.g., section vs basin vs global)? From day 1 you know that the age-depth models are shaped by external drivers of stratigraphic architectures (here the eustatic sea level curve). Discuss the relationship between the timescale of observation, timescale of external drivers, and age-misassignment.</p></li>
+<li><p>Do you have any intuition how much age misassignment is a problem on the timescale you are working on? Is there a timescale where you think it is most/least relevant (e.g., section vs.&nbsp;basin vs.&nbsp;global)? From day 1 you know that the age-depth models are shaped by external drivers of stratigraphic architectures (here the eustatic sea level curve). Discuss the relationship between the timescale of observation, timescale of external drivers, and age-misassignment.</p></li>
 </ul>
 </section>
 <section id="preliminaries" class="level2" data-number="11.3">
@@ -429,7 +429,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="11.4" class="anchored" data-anchor-id="ecological-and-taphonomic-effects"><span class="header-section-number">11.4</span> Ecological and taphonomic effects</h2>
 <p>Ecology and taphonomy act identically on fossil occurrences:</p>
 <ul>
-<li><p>Niche preferences determine whether a taxon will be sampled at a specific location/time: If some environmental gradient matches the preferred environment of the taxon it is more likely to be observed. The more the environmental cline deviates from the optimum, the less likely an observation is</p></li>
+<li><p>Niche preferences determine whether a taxon will be sampled at a specific location/time: If some environmental gradient matches the preferred environment of the taxon it is more likely to be observed. The more the environmental cline deviates from the optimum, the less likely an observation is.</p></li>
 <li><p>Taphonomic conditions determine whether a fossil is preserved or not. Again, this is a joint expression of an environmental gradient (e.g., water depth, grain size, burial velocity) and an intrinsic property, meaning the preservation probability under the specified taphonomic conditions.</p></li>
 </ul>
 <p>For this example, we focus on water depth as an ecological gradient for simplicity. Generally, any gradient/model output can be used.</p>
@@ -478,7 +478,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>This specifies that the taxa preferrably live in shallow water, with a moderate tolerance to water depth fluctuations, and are strictly marine.</p>
+<p>This specifies that the taxa preferably live in shallow water, with a moderate tolerance to water depth fluctuations, and are strictly marine.</p>
 <p>The next piece of information we need is to encode the environmental gradient as a function of time:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define function that specifies water depth as a function of time</span></span>
@@ -593,7 +593,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="application-to-fossil-objects-associated-with-phylogenetic-trees" class="level3" data-number="11.4.2">
 <h3 data-number="11.4.2" class="anchored" data-anchor-id="application-to-fossil-objects-associated-with-phylogenetic-trees"><span class="header-section-number">11.4.2</span> Application to fossil objects associated with phylogenetic trees</h3>
-<p>Everything said above applies identical to fossil objects simulated along a tree: Define a niche (valid for all taxa recorded in the tree) and a gradient, and use <code>apply_niche</code>. There is one major caveat though: age-depth models count time <strong><em>forward</em></strong> as the simulation evolved, while fossil objects record <strong>age</strong>. This requires flipping the time axis to make everything work out correctly:</p>
+<p>Everything said above applies to fossil objects simulated along a tree: Define a niche (valid for all taxa recorded in the tree) and a gradient, and use <code>apply_niche</code>. There is one major caveat though: age-depth models count time <strong><em>forward</em></strong> as the simulation evolves, while fossil objects record absolute <strong>age</strong>. This requires flipping the time axis to make everything work out correctly:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># As baseline</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fossils, </span>
@@ -630,7 +630,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="taphonomic-effects" class="level3" data-number="11.4.3">
 <h3 data-number="11.4.3" class="anchored" data-anchor-id="taphonomic-effects"><span class="header-section-number">11.4.3</span> Taphonomic effects</h3>
-<p>Taphonomic effects are modeled identical to ecological effects, with the taphonomic gradient (e.g., burial velocity) taking the role of the ecological gradient, and the preservation potential taking the role of the niche definition.</p>
+<p>Taphonomic effects are modeled identically to ecological effects, with the taphonomic gradient (e.g., burial velocity) taking on the role of the ecological gradient, and the preservation potential taking on the role of the niche definition.</p>
 <p>As a simple example, we define a taphonomic gradient that filters all occurrences that fall in a gap:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># defines taphonomic filter that removes all fossils coinciding with gaps</span></span>
@@ -654,13 +654,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="extensions-and-limitations" class="level3" data-number="11.4.4">
 <h3 data-number="11.4.4" class="anchored" data-anchor-id="extensions-and-limitations"><span class="header-section-number">11.4.4</span> Extensions and limitations</h3>
-<p>Both ecological and taphonomic effects work out of the box for multivariate gradients and high-dimensional niches due to the magic of function composition. However, this modeling approach does currently not allow to model state-dependent effects (e.g., evolution of niches, variations in preservation between branches). In addition, this does not yet integrate with <code>MorphoSim</code> to selectively remove characters.</p>
+<p>Both ecological and taphonomic effects work out of the box for multivariate gradients and high-dimensional niches due to the magic of function composition. However, this modeling approach does not currently allow us to model state-dependent effects (e.g., evolution of niches, variations in preservation between branches). In addition, this approach does not yet integrate with <code>MorphoSim</code> to selectively remove characters (although you can use MorphSim to simulate characters after you’ve simulated fossil occurrences).</p>
 </section>
 </section>
 <section id="age-misidentification" class="level2" data-number="11.5">
 <h2 data-number="11.5" class="anchored" data-anchor-id="age-misidentification"><span class="header-section-number">11.5</span> Age misidentification</h2>
 <p>Up to now, we have assumed that age-depth models are fully known, which in reality is never really the case. Here we examine how this can effect interpretations of temporal dynamics.</p>
-<p>The underlying idea is that there are 2 age-depth models at play: a “true” age-depth model that is used for forward modeling to determine the stratigraphic distribution of fossils, and a “assumed” age-depth model that is in a second step used to reconstruct ages from the observed stratigraphic positions of fossils.</p>
+<p>The underlying idea is that there are 2 age-depth models at play: a “true” age-depth model that is used for forward modeling to determine the stratigraphic distribution of fossils, and an “assumed” age-depth model that is in a second step used to reconstruct ages from the observed stratigraphic positions of fossils.</p>
 <p>Let’s assume the simulated age-depth model is our true model, and our assumed model assumes naively that sediment accumulation is constant over the observed time interval:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>adm_true <span class="ot">=</span> adm <span class="co"># "truth"</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>adm_assumed <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">tp_to_adm</span>(<span class="at">t =</span> <span class="fu">c</span>(t_min, t_max),</span>
@@ -687,7 +687,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="effect-on-fossil-occurrences-and-last-occurrences" class="level3" data-number="11.5.1">
 <h3 data-number="11.5.1" class="anchored" data-anchor-id="effect-on-fossil-occurrences-and-last-occurrences"><span class="header-section-number">11.5.1</span> Effect on fossil occurrences and last occurrences</h3>
-<p>To determine the inferred age of a fossil, first determine its stratigraphic position using the correct age-depth model, and the reconstruct its age using the assumed age-depth model:</p>
+<p>To determine the inferred age of a fossil, first determine its stratigraphic position using the correct age-depth model, and then reconstruct its age using the assumed age-depth model:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>true_age <span class="ot">=</span> <span class="fl">0.75</span> <span class="co"># pick an arbitrary age</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>assumed_age <span class="ot">=</span> true_age <span class="sc">|&gt;</span></span>
@@ -698,7 +698,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] 0.8250585</code></pre>
 </div>
 </div>
-<p>If this returns <code>NA</code>, the true age coincides with a gap. This approach immediately generalizes, e.g.&nbsp;under a constant extinction rate (and assuming every taxon is abundantly sampled), the reconstructed pattern of last occurrences is</p>
+<p>If this returns <code>NA</code>, the true age coincides with a gap. This approach immediately generalizes, e.g., under a constant extinction rate (and assuming every taxon is abundantly sampled), the reconstructed pattern of last occurrences is:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>StratPal<span class="sc">::</span><span class="fu">p3</span>(<span class="at">rate =</span> <span class="dv">1</span>,</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">from =</span> t_min,</span>
@@ -719,8 +719,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Note that in constrats to the exercise on the first day, here the results are really in the time domain (check the units). Think through this to validate that the peaks in the histogram correspond to the gaps in the age-depth model.</p>
-<p>This approach allows to immediately determine how wrong our age-estimates really are due to the wrong age-depth model:</p>
+<p>Note that in contrast to the exercise on the first day, here the results are really in the time domain (check the units). Think through this to validate that the peaks in the histogram correspond to the gaps in the age-depth model.</p>
+<p>This approach allows us to immediately determine how wrong our age-estimates really are due to the wrong age-depth model:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># inferred time</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>inferred_time <span class="ot">=</span> t <span class="sc">|&gt;</span> </span>
@@ -765,7 +765,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Here you can immediately see the contradiction between the timing of the underlying biological truth (the tree) and the (wrongly) reconstructed ages of the fossils. At multiple locations, fossils associated with a lineage extend beyond the duration of the lineage, and fossils of an ancestoral lineage are present long after a branching event.</p>
+<p>Here you can immediately see the contradiction between the timing of the underlying biological truth (the tree) and the (wrongly) reconstructed ages of the fossils. At multiple locations, fossils associated with a lineage extend beyond the duration of the lineage, and fossils of an ancestral lineage are present long after a branching event.</p>
 <p>Using these fossil ages for tree inference will clearly lead to wrong results.</p>
 
 
