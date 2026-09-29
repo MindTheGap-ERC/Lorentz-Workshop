@@ -197,3 +197,21 @@ If you are used to R Markdown, you will hardly notice any differences:
 ### Julia
 
 If a render of the Julia chapter fails with `ERROR: Read invalid transport file that did not end with a newline` (or `No transport file was found after the timeout`), run the same command again. Quarto waits only about 10 seconds for its Julia server to start up, which is not always enough on a cold start, but the failed attempt leaves that server running, so the second attempt connects immediately. The server shuts down after five minutes idle, so a long pause can bring the message back. This is bizarre, but harmless.
+
+## License
+
+Scripts for the "Bridging Stratigraphic Palaeobiology and Phylogenetics" workshop
+    Copyright (C) 2026 Contributors
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
