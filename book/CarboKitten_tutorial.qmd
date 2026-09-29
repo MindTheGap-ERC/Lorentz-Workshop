@@ -22,6 +22,13 @@ julia> ]                    # enter Julia's package mode
 
 Everything below is meant to be run as a sequence of Julia cells in this notebook.
 
+```{r echo=false, include=true}
+
+install.packages("JuliaCall")
+library(JuliaCall)
+```
+Either within this notebook, or within a terminal, load the needed packages. 
+
 ```{julia}
 #| label: packages
 using Unitful
@@ -29,6 +36,10 @@ using CarboKitten
 using CarboKitten.Production: BenthicProduction
 using CairoMakie
 ```
+
+Note that you may execute the code in this lesson with the package `JuliaCall`:
+
+
 
 ## 2. Building a platform with a gappy stratigraphic record
 
