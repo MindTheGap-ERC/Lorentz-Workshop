@@ -286,7 +286,7 @@ MorphSim::write.morpho(data = morpho_mk,
                        reconstructed = TRUE)
 
 MorphSim::write.morpho(data = morpho_mk,
-                       file = "sampled_tree.nex",
+                       file = "sampled_tree.tre",
                        type = "tree",
                        all = TRUE,
                        reconstructed = TRUE)
