@@ -188,11 +188,13 @@ With the morphological data simulated, you can then export the simulated data:
 MorphSim::write.morpho(data = morpho_mk,
                        file = "char_mat_temp.nex",
                        type = "matrix",
+                       all = TRUE,
                        reconstructed = TRUE)
 # export taxon ages
 MorphSim::write.morpho(data = morpho_mk,
                        file = "ages_temp.tsv",
                        type = "ages",
+                       all = TRUE,
                        reconstructed = TRUE)
 ```
 
