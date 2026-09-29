@@ -306,6 +306,50 @@
     ]
   },
   {
+    "objectID": "day2/complex_models.html",
+    "href": "day2/complex_models.html",
+    "title": "8  Morphological model extensions ED model: tail armor",
+    "section": "",
+    "text": "8.1 1. Install the R packages\nBuild an embedded-dependency (ED) matrix in R, paste it into RevBayes, and infer a tree using the original MorphoModels datasets. No data simulation is needed.\nUse a recent R version. Install the GitHub dependencies before rphenoscate:\n# install.packages(\"remotes\")\nremotes::install_github(\"uyedaj/treeplyr\", upgrade = \"never\")\nremotes::install_github(\"phenoscape/rphenoscape\", upgrade = \"never\")\nremotes::install_github(\"uyedaj/rphenoscate\", upgrade = \"never\")\nlibrary(rphenoscape)\nrphenoscate constructs the matrices; rphenoscape and treeplyr are dependencies. These commands were tested on this Mac in a separate R library. If compilation tools are requested for treeplyr, install Xcode Command Line Tools on macOS or Rtools on Windows.\nInstall RevBayes separately. Run all commands below from the folder containing this tutorial.",
+    "crumbs": [
+      "Day 2: Fossils",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Morphological model extensions ED model: tail armor</span>"
+    ]
+  },
+  {
+    "objectID": "day2/complex_models.html#tail-armor",
+    "href": "day2/complex_models.html#tail-armor",
+    "title": "8  Morphological model extensions ED model: tail armor",
+    "section": "8.2 2. Tail armor",
+    "text": "8.2 2. Tail armor\nThe hierarchy is tail presence, armor presence, armor color. First combine armor with its color, then add the tail.\n\n\n\nTail-armor dependency diagram from the original MorphoModels vignette.\n\n\n\n8.2.1 Construct the matrix in R\n\nlibrary(rphenoscate)\n\nT &lt;- initQ(c(\"T*\", \"T\"), 1)\nA &lt;- initQ(c(\"A*\", \"A\"), 1)\nC &lt;- initQ(c(\"r\", \"b\"), 1)\n\nQarmor &lt;- amaED(A, C, type = \"ql\")\n\nUsing automatic qualitative type of intial vector phi.\nThe intial vector phi is phi=c(1,1)\n\nQta &lt;- amaED(T, Qarmor, type = \"ap\")\n\nUsing automatic a/p type of intial vector phi.\nThe intial vector phi is phi=c(1,0,0)\n\nrownames(Qta)\n\n[1] \"T*\"  \"TA*\" \"TAr\" \"TAb\"\n\ncat(as_matrixRB(Qta))\n\n[[0.00, 1.00, 0.00, 0.00],\n [1.00, 0.00, 1.00, 1.00],\n [1.00, 1.00, 0.00, 1.00],\n [1.00, 1.00, 1.00, 0.00]]\n\n\nThe state order is no tail, unarmored tail, red armor, blue armor. The supplied file uses symbols 0, 1, 2, 3, corresponding to taxa A, B, C, D.\nCopy the printed matrix into rates := [...] in tail-armor.Rev, then run:\nrb tail-armor.Rev\nThis uses the original tail-armor.nex (4 taxa, 50 columns) and the paper’s ED3 model, with no topology constraints. The example files retain the original repeated column patterns; they are designed model demonstrations, not new independent simulations.",
+    "crumbs": [
+      "Day 2: Fossils",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Morphological model extensions ED model: tail armor</span>"
+    ]
+  },
+  {
+    "objectID": "day2/complex_models.html#view-the-results",
+    "href": "day2/complex_models.html#view-the-results",
+    "title": "8  Morphological model extensions ED model: tail armor",
+    "section": "8.3 3. View the results",
+    "text": "8.3 3. View the results\nThe script runs 20,000 tuning generations and 100,000 sampling generations. Results go into output/: a parameter log, sampled trees, an MCC tree, and a consensus tree. This example uses the original variable-character correction and fixed relative rates.\nOpen output/tail-armor.consensus.tre in FigTree, or plot it in R:\n\nlibrary(ape)\nplot(read.nexus(\"output/tail-armor.consensus.tre\"))\n\nIn the previously checked 20,000-generation run, the model grouped C and D (the armored taxa), with posterior support about 0.92. It placed B next, with A outside that group.\nThese are short teaching runs. Check the logs and repeat with a different seed() before interpreting posterior support. Increase generations if needed.",
+    "crumbs": [
+      "Day 2: Fossils",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Morphological model extensions ED model: tail armor</span>"
+    ]
+  },
+  {
+    "objectID": "day2/complex_models.html#sources",
+    "href": "day2/complex_models.html#sources",
+    "title": "8  Morphological model extensions ED model: tail armor",
+    "section": "8.4 Sources",
+    "text": "8.4 Sources\nTarasov (2023), New Phylogenetic Markov Models for Inapplicable Morphological Characters. Dependency diagram from the author’s matrix-construction vignette.\nThe NEXUS file is an unchanged copy of TA-50char.nex from 1_ED_model_performance/RB_run_1/data/. The RevBayes script uses the original ED3 model, priors and root treatment, with a shorter MCMC run and no marginal-likelihood calculations. The topology is inferred freely.",
+    "crumbs": [
+      "Day 2: Fossils",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Morphological model extensions ED model: tail armor</span>"
+    ]
+  },
+  {
     "objectID": "day2/Model-RevBayes.html",
     "href": "day2/Model-RevBayes.html",
     "title": "9  Setting up morphological models in RevBayes, MrBayes, and BEAST2",

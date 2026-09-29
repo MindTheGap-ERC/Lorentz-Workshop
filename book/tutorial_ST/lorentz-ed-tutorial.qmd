@@ -1,5 +1,5 @@
 ---
-title: "Morphological model extensions ED model: tail armor"
+title: "ED model: tail armor"
 author: "Sergei Tarasov"
 format:
   html:
@@ -12,19 +12,18 @@ execute:
   message: false
 ---
 
-
 Build an embedded-dependency (ED) matrix in R, paste it into RevBayes, and infer a tree using the original [MorphoModels](https://github.com/sergeitarasov/MorphoModels) datasets. No data simulation is needed.
 
 ## 1. Install the R packages
 
 Use a recent R version. Install the GitHub dependencies **before** `rphenoscate`:
 
-```{r eval=FALSE} 
+```{r}
 # install.packages("remotes")
 remotes::install_github("uyedaj/treeplyr", upgrade = "never")
 remotes::install_github("phenoscape/rphenoscape", upgrade = "never")
 remotes::install_github("uyedaj/rphenoscate", upgrade = "never")
-library(rphenoscape)
+library(rphenoscate)
 ```
 
 `rphenoscate` constructs the matrices; `rphenoscape` and `treeplyr` are dependencies. These commands were tested on this Mac in a separate R library. If compilation tools are requested for `treeplyr`, install Xcode Command Line Tools on macOS or Rtools on Windows.
@@ -85,5 +84,3 @@ These are short teaching runs. Check the logs and repeat with a different `seed(
 Tarasov (2023), [New Phylogenetic Markov Models for Inapplicable Morphological Characters](https://doi.org/10.1093/sysbio/syad005). Dependency diagram from the author's [matrix-construction vignette](https://github.com/sergeitarasov/MorphoModels/wiki/Constructing-rate-matrices-for-ED-models).
 
 The NEXUS file is an unchanged copy of `TA-50char.nex` from `1_ED_model_performance/RB_run_1/data/`. The RevBayes script uses the original ED3 model, priors and root treatment, with a shorter MCMC run and no marginal-likelihood calculations. The topology is inferred freely.
-
-

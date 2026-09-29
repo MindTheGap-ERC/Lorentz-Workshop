@@ -50,12 +50,14 @@ Program-specific packages can be installed during the workshop.
 | 10:30         | ☕ Coffee break                                                                                                                                                                                                                                         |                                         |
 | 11:00         | Group coding practical: *Incorporating morphological data into phylogenetic analysis*                                                                                                                                                                 | Laura Mulvey                            |
 | 12:00         | 🥙 Lunch break                                                                                                                                                                                                                                          |                                         |
-| 13:30         | Talk: *Extensions to Common Morphological Models*                                                                                                                                                                                                | Sergei Tarasov                          |
+| 13:30         | Talk: *Traits on Trees: Models, Perspectives, and Challenges*                                                                                                                                                                                                | Sergei Tarasov                          |
 | 15:00         | ☕ Coffee break                                                                                                                                                                                                                                         |                                         |
 | 15:30         | Group coding practical: *Incorporating morphological data into phylogenetic analysis*                                                                                                                                                                                       | Laura Mulvey                            |
 | 16:30         | Wrap-up: collecting feedback and adding notes                                                                                                                                                                                                        |                                         |
 | **Wednesday** |                                                                                                                                                                                                                                                      | Niklas Hohmann and Rachel Warnock       |
-| 09:00         | Group coding practical: *Simulating trees under the FBD model*                                                  | Niklas Hohmann, Rachel Warnock         |                                         |
+| 09:00         | Introduction                                                  | Niklas Hohmann         |                                         |
+| 09:15         | Talk: *Introduction to the fossilised birth-death process and extensions*                                                  | Alexandra Gavryuskina          |                                         |
+| 10:00         | Group coding practical: *Simulating trees under the FBD model*                                                  | Niklas Hohmann, Rachel Warnock         |                                         |
 | 10:30         | ☕ Coffee break                                                                                                                                                                                                                                         |                                         |
 | 11:00         | Group coding practical: *Simulating stratigraphy in a phylogenetic framework*                                                                                                                                     | Niklas Hohmann       |
 | 12:00         | 🥙 Lunch break                                                                                                                                                                                                                                          |                                         |
@@ -197,3 +199,21 @@ If you are used to R Markdown, you will hardly notice any differences:
 ### Julia
 
 If a render of the Julia chapter fails with `ERROR: Read invalid transport file that did not end with a newline` (or `No transport file was found after the timeout`), run the same command again. Quarto waits only about 10 seconds for its Julia server to start up, which is not always enough on a cold start, but the failed attempt leaves that server running, so the second attempt connects immediately. The server shuts down after five minutes idle, so a long pause can bring the message back. This is bizarre, but harmless.
+
+## License
+
+Scripts for the "Bridging Stratigraphic Palaeobiology and Phylogenetics" workshop
+    Copyright (C) 2026 Contributors
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
