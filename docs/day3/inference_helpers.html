@@ -2,23 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>14&nbsp; Inference – Bridging Stratigraphic Palaeobiology and Phylogenetics</title>
 <style>
-/* Default styles provided by pandoc.
-** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
-*/
+code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: 1.5em;}
-div.column{flex: auto;}
-@media screen {
-div.columns{gap: min(4vw, 1.5em);}
-div.column{overflow-x: auto;}
-}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -75,14 +69,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../day3/FBD_strat_inference.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-d3f7f8e73c8d287b30bcf59c2b563615.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-0dd2bd5de344125cf763a379ddc3eb04.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -136,7 +131,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Bridging Stratigraphic Palaeobiology and Phylogenetics</a> 
     </div>
@@ -337,7 +334,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="revbayes" class="level2" data-number="14.2">
 <h2 data-number="14.2" class="anchored" data-anchor-id="revbayes"><span class="header-section-number">14.2</span> RevBayes</h2>
-<p>All RevBayes scripts can also be downloaded: <a href="fbd_inference_base.rev" download="bd_inference_base.rev">fbd_inference_base.rev</a> <a href="model_clock.rev" download="model_clock.rev">model_clock.rev</a> <a href="model_morpho.rev" download="model_morpho.rev">model_morpho.rev</a> <a href="model_fbd_base.rev" download="model_fbd_base.rev">model_fbd_base.rev</a> <a href="model_fbd_skyline_sampling.rev" download="model_fbd_skyline_sampling.rev">model_fbd_skyline_sampling.rev</a> <a href="fbd_inference_skyline.rev" download="fbd_inference_skyline.rev">fbd_inference_skyline.rev</a></p>
+<p>All RevBayes scripts can also be downloaded: <a href="fbd_inference_base.rev" download="fbd_inference_base.rev">fbd_inference_base.rev</a> <a href="model_clock.rev" download="model_clock.rev">model_clock.rev</a> <a href="model_morpho.rev" download="model_morpho.rev">model_morpho.rev</a> <a href="model_fbd_const.rev" download="model_fbd_const.rev">model_fbd_const.rev</a> <a href="model_fbd_skyline_sampling.rev" download="model_fbd_skyline_sampling.rev">model_fbd_skyline_sampling.rev</a> <a href="fbd_inference_skyline.rev" download="fbd_inference_skyline.rev">fbd_inference_skyline.rev</a></p>
 <section id="standard-fbd-inference" class="level3" data-number="14.2.1">
 <h3 data-number="14.2.1" class="anchored" data-anchor-id="standard-fbd-inference"><span class="header-section-number">14.2.1</span> Standard FBD inference</h3>
 <p>This is a simple setup for a constant rate FBD inference. For more complex cases (e.g., age uncertainty, total evidence etc.) see <a href="https://revbayes.github.io/tutorials/fbd/fbd_specimen.html">this tutorial</a>.</p>
