@@ -10,7 +10,7 @@ This chapter contains code to help set up phylogenetic inference pipelines.
 
 ## RevBayes
 
-All RevBayes scripts can also be downloaded: [fbd_inference_base.rev](fbd_inference_base.rev){download="bd_inference_base.rev"} [model_clock.rev](model_clock.rev){download="model_clock.rev"} [model_morpho.rev](model_morpho.rev){download="model_morpho.rev"} [model_fbd_base.rev](model_fbd_base.rev){download="model_fbd_base.rev"} [model_fbd_skyline_sampling.rev](model_fbd_skyline_sampling.rev){download="model_fbd_skyline_sampling.rev"} [fbd_inference_skyline.rev](fbd_inference_skyline.rev){download="fbd_inference_skyline.rev"}
+All RevBayes scripts can also be downloaded: [fbd_inference_base.rev](fbd_inference_base.rev){download="bd_inference_base.rev"} [model_clock.rev](model_clock.rev){download="model_clock.rev"} [model_morpho.rev](model_morpho.rev){download="model_morpho.rev"} [model_fbd_const.rev](model_fbd_const.rev){download="model_fbd_base.rev"} [model_fbd_skyline_sampling.rev](model_fbd_skyline_sampling.rev){download="model_fbd_skyline_sampling.rev"} [fbd_inference_skyline.rev](fbd_inference_skyline.rev){download="fbd_inference_skyline.rev"}
 
 ### Standard FBD inference
 
