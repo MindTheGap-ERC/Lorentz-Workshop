@@ -1,3 +1,124 @@
 ---
 title: "Introduction to morphological data"
 ---
+
+```{r}
+#| echo: false
+#| label: wordstats
+#| warning: false
+#| message: false
+#wordcount <- wordcountaddin::text_stats('intro_morpho.qmd')
+#words <- substr(wordcount[3], start=19, stop=30)
+```   
+
+
+# What Are Phylogenetic Data
+
+## Data, Morphology, and Data Models
+
+THe idea of what data are has been refined over the history of philosophy.
+Data are typically accepted to be *representational*, that is, to be written down in some way so as to be shareable. Generally, we do not expect to be able to put a whole fossil into our disk drive or to have CarboKitten read our sedimentary cores and simulate histories based upon it. 
+Data are also typically considered to be evidence of one or more phenomenon [@Leonelli2019].
+That an object has epistemic value for a particular purpose implies that it has been processed for that purpose.
+This has lead philosophers [@suppes1966models] to conclude that researchers are often not interested in *data*, but in *data models*, or data that have been processed in some way and can be evaluated for their fit to that particular purpose [@Bokulich2021].
+Today, we will examine the idea of how phylogenetic data fit into this picture, and what the process of writing down phylogenetic data means for our models of evolution. 
+
+When we discuss phylogenetic data, we may be talking about morphological characters or we may be discussing molecular ones. 
+For now, we will focus on morphological ones. 
+In this case, the phylogenetic character data will be coded from a specimen, or several.
+*A priori,* we already have a bias. Generally we are collecting characters from these specimens because we think something is interesting in this group - perhaps the evolution, a novel morphology, something else. 
+Researchers examine a sample of taxa. 
+In cases with rich sampling, a researcher may be able to look across multiple specimens of the same operational taxonomic unit (OTU) and confirm their character, whether it has polymorphism in the sample, or whether it is constant. 
+In the case of a poorly-sampled clade, it may be that the researcher is able to look at one sample per OTU, and may not know if a trait is plastic in any way.
+In very poorly-sampled clades, which many vertebrates are, you may lose resolution on things like morphological modularity. 
+Traits may be collected for a variety of reasons. 
+These can include having observed trait function in the case of extant organisms, or close relatives, or analogizing from more distantly-related relatives [@hesse1965models, bokulich2025models]. 
+I will not be giving an exhaustive look at character coding schemes. If you'd like more to read on character theory, please see [@stevens1984homology; @budd2006origin; @wagner2000character].
+
+What distinguishes phylogenetic character data from mere data? 
+Homology. 
+A phylogenetic character must be homologous. 
+It must, in all its observations (i.e., across OTUs), it must reflect common ancestry. 
+This is because a phylogenetic character is considered to be the end point of a history of life that generated it - i.e., a process of evolution that proceeded through a process of diversification through time. If the trait is not the end point of this process, then you cannot model a phylogeny from it. 
+If the trait does not reflect a shared evolutionary history, it cannot be evidence for that shared history.
+Thus, no matter what other evidence is used, a human must assess homology for these traits. 
+A trait that is not homologous may be data for some other purpose - presence/absence modeling, phenetic clustering - but it is not phylogenetic data. 
+
+I'd like to make an argument that the process of collecting morphological data is imprinted by theory. 
+As we've highlighted before, we choose clades based on something we think is happening in them. 
+Interesting organisms or traits, perhaps we have data sucggesting a rock outcrop may be fruitful. 
+From the word go, we are imprinting theory.
+As we learned from Mark yesterday, not all areas of the Earth are equally good for sampling - we are likely learning something about the median fossil and not peripheral ones.
+When we code characters, we are choosing ones we think matter. 
+The homology statement that we use to then write down that character constrains the downstream models that we can use. 
+If we write down a trait as ordered, we are saying something about how that trait evolved: that we believe you must go through an intermediate in order to transit from one state to another. 
+If we write a character down as binary or multistate, this can have downstream implications for trees explored and tree lengths [@khakurel2024fundamental; mulvey2025assessing].
+We won't deal much with continuous traits in this workshop, but many traits that are collected as continuous traits are then discretized for phylogenetic analysis.
+We don't discretize traits because discrettraits are "better" in any real way. 
+But we have developed methods and significantly matured them for use with DNA, which are discrete.
+Thus, even the way we use the vocabulary of traits is imprinted by theory, including theory from other fields (molecular biology).
+This relationship between theory and data collection has been termed ``model-data synthesis" \citep{Parker2020}.
+
+Bokulich and Parker (2021) make the argument that data must be evalutate for *fidelity for purpose.* 
+That is, how well can the data be used for the science we'd like to conduct.
+For example, autapomorphies. 
+Historically, these have not been collected at all. 
+This is because, under parsimony, they cannot be used to distinguish between two trees. 
+An autapomorphy has a length of one no matter what the tree for a given set of taxa.
+Thus, it was not data for a parsimony analysis - it cannot generate evidence for one tree over another. 
+An autapomorphy has poor fit to the purpose of parsimony.
+It may be data for some question but in the parsimony worldview, it was not phylogenetic data. 
+However, under a Bayesian modeling framework, an autapomorphy is phylogenetic data.
+Because we co-estimate a tree and branch lengths in the world of Bayesian phylogenetics, an autapomrophy can inform branch rates. 
+Thus, it is phylogenetic data. 
+It doesn't contain direct tree-building information, and might be considered lower *fidelity of purpose* than a character that has tree-building information. 
+But it's nonetheless data.
+And accordingly, as Bayesian phylogenetics has become more common, we see more workers collecting these characters [@Hopkins2026]. 
+
+I'd like to highlight that this is not an issue of discrete morphology, despite us focusing on this. 
+When we assess morphology for discrete molecular traits, we do this using software.
+But the software implments models for how likely different molecular changes are.
+A multiple sequence alignment is just as imprinted by throey as a morphological character matrix.
+And many people never even think of it - they click buttons in an interface and raw reads become phylogenetic data. 
+Likewise, if you use continuous traits inferentially, you are doing so assuming some model of evolution that describes an evolutionary history.
+The trait must be homologous to describe this history, and that homology is typically assessed by a human. 
+
+Now that we know a little about the loading of theory and expectation onto morphological traits, let's talk about how they've been used historically and how they are modeled. 
+
+
+# A Brief History of the Use of Morphology in Phylogenetics
+
+
+# How Can We Model Discrete Morphology
+
+As we covered in the prior section, the original way of inferring phylogenetic trees was by hand. The first reproducible and shareable ways of doing this were via parsimony. Parsimony is a generalization of Occam’s Razor. Under parsimony, a character is only collected if it may inform the tree - a property known as parsimony informativity. Under the maximum parsimony information criterion, each character is scored along a proposed tree to see how many changes are implied by that tree and character. A character that does not change has a score of zero, no matter the tree proposed. A character that is unique to one OTU has a length of one no matter the tree proposed. Thus, they are not collected. Characters that can favor one topology over another will be scored. The default assumptions of parsimony is that all characters contribute equally to the parsimony score, and evolve in an unordered fashion. Each character may have its own number of changes on the tree. Other parameterizations may alter these assumptions.
+
+Model-based models for use with likelihood and Bayesian methods became available in 2001 (Lewis2001?). On it’s face, the Mk model makes similar assumptions to parsimony - all characters contribute to the score, character change is unordered - but the model does not assume that the smallest number of changes is automatically the best. The Mk model also makes some likelihood-specific assumptions: the equilibrium state frequencies (the state frequencies you would see if you ran the evolutionary process out to equilibrium) are equal and that rates of change are equal. The former means no specific change is more likely than the other. Under a likelihood-based phylogenetic model, the probability of observing a change is a product of the exchangeability, or the raw rate of change between two character states, and the probability of the starting state. Both of these quantities are assumed to be equal in the Mk model. We could make a different set of assumptions (Nylander et al. 2004, Klopfstein and Ronquist 2015, Wright et al 2016) that allows state frequencies to vary. Altering either the exchangeability or the state frequency will allow different sets of characters in a character matrix to have different rates at which character states evolve into one another. Likewise, we may assume Gamma-distributed rate heterogeneity (Yang 1994)to allow characters to evolve faster or slower, relative to some norm.
+
+While it is possible to estimate a Mk model tree in RAxML and other maximum likelihood platforms, most estimation has been in the Bayesian realm. This is for a few reasons. The first is that Bayesian methods log solutions sampled during the estimation, leaving the researcher with samples of possible trees and parameters. This allows for a visualization of uncertainty. Thus, it is common in Bayesian analyses to incorporate multiple trees, cloudograms, and posterior probabilities with visualized phylogenetic trees. Uncertainty visualization is also possible in parsimony, though less common. Because datasets are quite small, representation of uncertainty is common in morphological phylogenetics. The second reason is that people who were interested in morphology tended to be Bayesians.
+
+So what is a Bayesian method? This is not an exhaustive course; I will simply provide you a very brief background.
+
+The above is the equation for Bayes’ Theorem. The pipe character is read as “given”. What this means is that we are computing the probability of the model given the data. We calculate this probability by computing the phylogenetic character likelihood (the probability of the data given a model), the prior (the probability of the model before you see any data), divided by the marginal probability of the data (the probability of the data without considering any model parameters).
+
+
+# How Can We model Continuous Traits
+
+
+# A Reintegrated Vision of Morphology in the 21st Century
+
+While morphological characters were the initial source of phylogenetic data, much of the prior 50 years has been characterized by an atomization of phylogenetic workers. Particularly in the 1980s through the 2000s, morphological phylogenetics has taken a backseat to work on molecular phylogenetics. Because of the volume of data, and the shared properties of nucleotides, model development in particular proliferated for likelihood and Bayesian methods that were able to make use of molecular datasets. 
+
+Paleobiology is not the only area of science in which this was observed. In fact, in the late 2010s, the US National Science Foundation launched an initiative called Reintegrating Biology to imagine what a national, interdisciplinary biological science research program might look like. Special issues of journals were spawned. Workshops were held. Even independent of any top-down efforts, the 2010s can be characterized as investing in a massive re-integration of the biological sciences and the geological sciences. 
+
+A number of factors converged in the early half of the 2010s. Tanja Stadler published a paper describing a  model of diversification and sampling through time that would be adapted in 2014 to accommodate fossil sampling (samples not in the present). Graham Slater published a manuscript detailing how comparative methods can be mislead without accounting for paleobiological data. Shortly thereafter, a number of papers demonstrated that the Mk model worked pretty well for morphological data. All the pieces were in place to make truly integrative stratigraphic trees with morphological data.
+
+The final thing that was missing in the ecosystem was democratized software platforms to do this work. Over the prior 30 years, most phylogenetic software has relied upon a preset slate of options, decided upon by the developer, in advance of software publication. RevBayes and BEAST2 have changed the model, in favor of offering a sandbox of endlessly combinable model options. In RevBayes and BEAST2, the model is simply a graph of interlocking pieces to which new nodes can be added as your data types and model complexity change. As discussed in the section "How Can We model Continuous Traits", a user who wants to work with continuous data simply specifies a model that works with continuous traits (in theory, any way). 
+
+The latter half of the 2010s was spent asking a wider range of questions than anyone thought possible using these models. How much morphological data can swamp the signal in a molecular dataset? Can we model known differential diversification processes over time, or across branches? How do we integrate continuous traits in Bayesian analyses? What confident can we be in our model-based assumptions? Even cultural and linguistic artifact data can be played with in the same complexity as biological data.
+
+For someone who started a PhD in 2009, the past two decades have been an incredibly wild ride. While the siloes still exist, I've been privileged to publish with mathematicians, computer scientists, biologists and geologists. So far, we've achieved an incredible synthesis of theory from across the sciences. Here's to the next twenty. 
+
+# References
+
+
