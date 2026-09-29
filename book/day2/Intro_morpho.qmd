@@ -7,8 +7,8 @@ title: "Introduction to morphological data"
 #| label: wordstats
 #| warning: false
 #| message: false
-wordcount <- wordcountaddin::text_stats('intro_morpho.qmd')
-words <- substr(wordcount[3], start=19, stop=30)
+#wordcount <- wordcountaddin::text_stats('intro_morpho.qmd')
+#words <- substr(wordcount[3], start=19, stop=30)
 ```   
 
 
