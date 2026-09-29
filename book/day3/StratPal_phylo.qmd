@@ -225,11 +225,11 @@ plot(fossils_used,
 
 ## Simulate morphological characters
 
-Now we can simulate morphological characters along the tree and the preserved fossils. We focus on the simple Mk2 model here, insert your own if you like.
+Now we can simulate morphological characters along the tree and the preserved fossils. We focus on the simple Mk2 and strict clock models here, insert your own if you like.
 
 ```{r simulate-morphological-characters}
 n_states = 2
-br_rate = 0.5
+br_rate = 0.5 # rate of change per trait per time unit
 trait_num = 100
 morpho_mk = MorphSim::sim.morpho(k = n_states,
                         time.tree = tree,

@@ -82,7 +82,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-631496449bf32ff9b0bb69a6bfd9195d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-d3f7f8e73c8d287b30bcf59c2b563615.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -302,7 +302,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">13.1</span> Introduction</a></li>
   <li><a href="#inference-using-biased-data" id="toc-inference-using-biased-data" class="nav-link" data-scroll-target="#inference-using-biased-data"><span class="header-section-number">13.2</span> Inference using biased data</a></li>
-  <li><a href="#providing-stratigraphic-data-into-phylogenetic-inference" id="toc-providing-stratigraphic-data-into-phylogenetic-inference" class="nav-link" data-scroll-target="#providing-stratigraphic-data-into-phylogenetic-inference"><span class="header-section-number">13.3</span> Providing stratigraphic data into phylogenetic inference</a></li>
+  <li><a href="#providing-stratigraphic-data-to-phylogenetic-inference" id="toc-providing-stratigraphic-data-to-phylogenetic-inference" class="nav-link" data-scroll-target="#providing-stratigraphic-data-to-phylogenetic-inference"><span class="header-section-number">13.3</span> Providing stratigraphic data to phylogenetic inference</a></li>
   </ul>
 </nav>
     </div>
@@ -339,11 +339,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="inference-using-biased-data" class="level2" data-number="13.2">
 <h2 data-number="13.2" class="anchored" data-anchor-id="inference-using-biased-data"><span class="header-section-number">13.2</span> Inference using biased data</h2>
-<p>Run phylogenetic inference using your preferred software (BEAST, revbayes), where the setup matches the biological truth you simulated, but provide the stratigraphically biased data as input.</p>
+<p>Run phylogenetic inference using your preferred software (BEAST, RevBayes), where the setup matches the biological truth you simulated, but provide the stratigraphically biased data as input. The next chapter provides template scripts you can use.</p>
 </section>
-<section id="providing-stratigraphic-data-into-phylogenetic-inference" class="level2" data-number="13.3">
-<h2 data-number="13.3" class="anchored" data-anchor-id="providing-stratigraphic-data-into-phylogenetic-inference"><span class="header-section-number">13.3</span> Providing stratigraphic data into phylogenetic inference</h2>
-<p>Add stratigraphic information to the inference by using the FBD skyline model. Use the skyline for the sampling rate to distinguish between intervals where (1) you know nothing can be sampled due to gaps in the fossil record, (2) intervals where fossils are sampled and you have an estimate of the sampling rate available and (3) intervals where fossils are sampled but you have no estimate of the sampling rate.</p>
+<section id="providing-stratigraphic-data-to-phylogenetic-inference" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="providing-stratigraphic-data-to-phylogenetic-inference"><span class="header-section-number">13.3</span> Providing stratigraphic data to phylogenetic inference</h2>
+<p>Add stratigraphic information to the inference by using the FBD skyline model. Use the skyline to model variation in the sampling rate by distinguishing between intervals where (1) you know nothing can be sampled due to gaps in the fossil record, (2) intervals where fossils are sampled and you have an estimate of the sampling rate available (or alternatively strong prior information), and (3) intervals where fossils are sampled but you have no estimate of the sampling rate.</p>
 <!--- [Download the dataset](ages.tsv){download="ages.tsv"} --->
 <p>You can use the following code to determine the breakpoints of your skyline model more easily:</p>
 <div class="cell">
@@ -355,8 +355,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#' @param min_gap_duration positive number, minimum gap duration to filter by</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#' </span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">#' @description</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">#' does return breakpoints in age!</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">#' </span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">#' does return breakpoints in age!</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">#' </span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  t_max <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">max_time</span>(adm)</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  hiat_mat <span class="ot">=</span>  <span class="fu">do.call</span>(rbind, admtools<span class="sc">::</span><span class="fu">get_hiat_list</span>(adm))</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  long_enough <span class="ot">=</span> (hiat_mat[, <span class="st">"end"</span>] <span class="sc">-</span> hiat_mat[, <span class="st">"start"</span>]) <span class="sc">&gt;</span> min_gap_duration</span>

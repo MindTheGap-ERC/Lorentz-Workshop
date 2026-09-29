@@ -618,7 +618,7 @@
     "href": "day3/StratPal_phylo.html#simulate-morphological-characters",
     "title": "12  Phylogeny and stratigraphy",
     "section": "12.6 Simulate morphological characters",
-    "text": "12.6 Simulate morphological characters\nNow we can simulate morphological characters along the tree and the preserved fossils. We focus on the simple Mk2 model here, insert your own if you like.\n\nn_states = 2\nbr_rate = 0.5\ntrait_num = 100\nmorpho_mk = MorphSim::sim.morpho(k = n_states,\n                        time.tree = tree,\n                        br.rates = br_rate,\n                        trait.num = trait_num, \n                        variable = FALSE,\n                        fossil = fossils_used)",
+    "text": "12.6 Simulate morphological characters\nNow we can simulate morphological characters along the tree and the preserved fossils. We focus on the simple Mk2 and strict clock models here, insert your own if you like.\n\nn_states = 2\nbr_rate = 0.5 # rate of change per trait per time unit\ntrait_num = 100\nmorpho_mk = MorphSim::sim.morpho(k = n_states,\n                        time.tree = tree,\n                        br.rates = br_rate,\n                        trait.num = trait_num, \n                        variable = FALSE,\n                        fossil = fossils_used)",
     "crumbs": [
       "Day 3: Tree inference",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Phylogeny and stratigraphy</span>"
@@ -673,7 +673,7 @@
     "href": "day3/FBD_strat_inference.html#inference-using-biased-data",
     "title": "13  Stratigraphic information in phylogenetic inference",
     "section": "13.2 Inference using biased data",
-    "text": "13.2 Inference using biased data\nRun phylogenetic inference using your preferred software (BEAST, revbayes), where the setup matches the biological truth you simulated, but provide the stratigraphically biased data as input.",
+    "text": "13.2 Inference using biased data\nRun phylogenetic inference using your preferred software (BEAST, RevBayes), where the setup matches the biological truth you simulated, but provide the stratigraphically biased data as input. The next chapter provides template scripts you can use.",
     "crumbs": [
       "Day 3: Tree inference",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Stratigraphic information in phylogenetic inference</span>"
@@ -710,6 +710,17 @@
     "crumbs": [
       "Day 3: Tree inference",
       "<span class='chapter-number'>14</span>  <span class='chapter-title'>Inference</span>"
+    ]
+  },
+  {
+    "objectID": "day3/FBD_strat_inference.html#providing-stratigraphic-data-to-phylogenetic-inference",
+    "href": "day3/FBD_strat_inference.html#providing-stratigraphic-data-to-phylogenetic-inference",
+    "title": "13  Stratigraphic information in phylogenetic inference",
+    "section": "13.3 Providing stratigraphic data to phylogenetic inference",
+    "text": "13.3 Providing stratigraphic data to phylogenetic inference\nAdd stratigraphic information to the inference by using the FBD skyline model. Use the skyline to model variation in the sampling rate by distinguishing between intervals where (1) you know nothing can be sampled due to gaps in the fossil record, (2) intervals where fossils are sampled and you have an estimate of the sampling rate available (or alternatively strong prior information), and (3) intervals where fossils are sampled but you have no estimate of the sampling rate.\n\nYou can use the following code to determine the breakpoints of your skyline model more easily:\n\nget_skyline_breakpoints = function(adm,\n                                   min_gap_duration){\n  #' determines skyline breakpoints (in age)\n  #' for gaps above a minimum gap duration\n  #' @param adm an age-depth model\n  #' @param min_gap_duration positive number, minimum gap duration to filter by\n  #' \n  #' @description\n  #' does return breakpoints in age!\n  #' \n  t_max = admtools::max_time(adm)\n  hiat_mat =  do.call(rbind, admtools::get_hiat_list(adm))\n  long_enough = (hiat_mat[, \"end\"] - hiat_mat[, \"start\"]) &gt; min_gap_duration\n  long_hiat = hiat_mat[long_enough,2:3] |&gt; \n    t() |&gt;\n    as.vector()\n  # convert to age\n  breakpoints = rev(t_max - long_hiat)\n  return(breakpoints)\n}\n\nAnother useful helper function to construct priors is to determine the average effective sampling rate over an age interval:\n\navg_sampling_age = function(adm,\n                            niche_def,\n                            gradient,\n                            gap_remove,\n                            age_1,\n                            age_2,\n                            psi){\n  #' determines average effective sampling rate\n  #' @param adm age-depth model\n  #' @param nich_def niche definition\n  #' @param gradient ecological gradient\n  #' @param gap_remove stratigraphic filter as defined in previous chapter\n  #' @param age_1 first age\n  #' @param age_2 second age\n  #' @param psi fossil sampling parameter from the FBD model\n  #' \n  #' @description\n  #' determines the average effective sampling rate for the interval between\n  #' age_1 and age_2\n  #' \n  total_sampling_rate = function(x){\n    y = psi * niche_def(gradient(x)) * gap_remove(x)\n    return(y)\n  }\n  t_max = admtools::get_max_time(adm)\n  t_1 = t_max - age_1\n  t_2 = t_max - age_2\n  t_lower = min(c(t_1, t_2))\n  t_upper = max(c(t_1, t_2))\n  integral = integrate(f = total_sampling_rate,\n                       lower = t_lower,\n                       upper = t_upper,\n                       subdivisions = 1000)[[1]]\n  avg_sampling = integral/(t_upper - t_lower)\n  return(avg_sampling)\n}\n\nNote that if you have subsampled your fossils to reduce sample size, this will not match the effective sample size on the FBD tree.",
+    "crumbs": [
+      "Day 3: Tree inference",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Stratigraphic information in phylogenetic inference</span>"
     ]
   }
 ]
