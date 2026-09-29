@@ -19,10 +19,10 @@ interface. Of the three, RevBayes is generally the most flexible:
 because its models are assembled explicitly from interchangeable pieces
 (a Q-matrix, a rate-variation distribution, a tree prior, and so on),
 you can combine them in ways that weren't specifically anticipated by
-the software's developers. MrBayes and BEAST2 instead offer a more curated
-set of pre-built model combinations, which covers most standard analyses
-well and is often quicker to set up, but doesn't extend as readily to a
-model outside that set.
+the software's developers. MrBayes and BEAST2 instead offer a more
+curated set of pre-built model combinations, which covers most standard
+analyses well and is often quicker to set up, but doesn't extend as
+readily to a model outside that set.
 
 ::: callout-note
 These are template snippets, not copy-paste-ready scripts - variable
@@ -41,15 +41,18 @@ the overall workflow for each program, since they differ quite a bit.
 from the command line or an interactive console) that reads in your
 data, builds the model piece by piece as a graph of named variables,
 sets up moves and monitors, and launches the MCMC all in one file,
-executed top to bottom. There's no separate GUI step: the script is
-the analysis. See example script for the MkVP+G model.
+executed top to bottom. There's no separate GUI step: the script is the
+analysis. See example script for
+[RevBayes.rev](RevBayes.rev){download="RevBayes.rev"} and
+[bears_morphology.nex](bears_morphology.nex){download="bears_morphology.nex"}.
 
 **MrBayes** blends the two: your data (as a NEXUS file) and your
 analysis commands typically live together, either as a `mrbayes` block
 appended directly to the bottom of the NEXUS data file, or as a separate
 command file read in from an interactive MrBayes session. Commands are
 issued sequentially (`lset`, `prset`, `mcmc`, etc.) rather than built up
-as an explicit model graph. See example script for the MkVP+G model.
+as an explicit model graph. See example script for
+[MrBayes.nex](MrBayes.nex){download="MrBayes.nex"}.
 
 **BEAST2** is normally set up graphically, through **BEAUti**: you
 import your alignment(s), configure site models, clock models, and
@@ -57,14 +60,17 @@ priors through a series of GUI panels, and BEAUti writes out the actual
 XML file that BEAST2 runs. You *can* hand-edit that XML directly (which
 is what the snippets on this page show), but the intended workflow is
 BEAUti first, with manual XML editing reserved for tweaks BEAUti's
-interface doesn't expose. BEAUTi reqquires you to load packages (like in R) depending on the analyses you are intending to run. For morphological data we need to install the pacakge `morph-models`. See example XML for the MkVP+G model (note: BEAST2 does not allow for unconstrained analyses, so this script includes a clock model).
+interface doesn't expose. BEAUTi reqquires you to load packages (like in
+R) depending on the analyses you are intending to run. For morphological
+data we need to install the pacakge `morph-models`. See example XML for
+the MkVP+G model [BEAST.xml](BEAST.xml){download="BEAST.xml"} (note:
+BEAST2 does not allow for unconstrained analyses, so this script
+includes a clock model).
 
 This is also part of why RevBayes tends to be the most flexible of the
-three (as mentioned above): since the model is assembled explicitly in the
-script from named, swappable pieces, there's no GUI or fixed
-command set constraining which combinations are possible in the first
-place. 
-
+three (as mentioned above): since the model is assembled explicitly in
+the script from named, swappable pieces, there's no GUI or fixed command
+set constraining which combinations are possible in the first place.
 
 ## The Mk model
 
@@ -116,9 +122,9 @@ that many states:
 </siteModel>
 ```
 
-In BEAUti, this is what "Add Morphological Data" sets up
-automatically. It partitions the matrix by state count and assigns one
-`LewisMK` model per partition.
+In BEAUti, this is what "Add Morphological Data" sets up automatically.
+It partitions the matrix by state count and assigns one `LewisMK` model
+per partition.
 :::
 
 ## MkV: conditioning on variable characters
@@ -285,30 +291,31 @@ require this option or editing the XML manually.
 There are two different reasons to partition a matrix, and it's worth
 keeping them distinct:
 
-1. **By state count**: a technical requirement in some software, since a
-   single Q-matrix has fixed dimensions. Characters with different numbers
-   of observed states can't share one Q-matrix, purely as a matter of
-   linear algebra.
-2. **By custom character groups**: a modelling choice, motivated by
-   biology (different anatomical regions, different evolutionary
-   processes) rather than by how many states a character happens to have.
+1.  **By state count**: a technical requirement in some software, since
+    a single Q-matrix has fixed dimensions. Characters with different
+    numbers of observed states can't share one Q-matrix, purely as a
+    matter of linear algebra.
+2.  **By custom character groups**: a modelling choice, motivated by
+    biology (different anatomical regions, different evolutionary
+    processes) rather than by how many states a character happens to
+    have.
 
-Whether a given program needs (1) at all differs between the three: RevBayes needs
-an explicit loop, MrBayes does it automatically and invisibly, and BEAST2
-does it automatically via BEAUti but offers nothing further for (2)
-without hand-editing XML.
+Whether a given program needs (1) at all differs between the three:
+RevBayes needs an explicit loop, MrBayes does it automatically and
+invisibly, and BEAST2 does it automatically via BEAUti but offers
+nothing further for (2) without hand-editing XML.
 
-::: {.panel-tabset}
+:::: panel-tabset
 ## RevBayes
 
 RevBayes doesn't have a single "partition" function — each partition is
 its own `dnPhyloCTMC` node, clamped to its own subset of the data, all
 sharing the same `phylogeny`. Because each `dnPhyloCTMC` needs one
 fixed-size Q-matrix, **splitting by state count is required** whenever
-your matrix mixes characters with different numbers of states. A loop like
-this is the common way to do that automatically:
+your matrix mixes characters with different numbers of states. A loop
+like this is the common way to do that automatically:
 
-```
+```         
 n_max_states <- 4                                              # 4 being the max state
 idx = 1
 morpho_bystate[1] <- morpho
@@ -328,11 +335,11 @@ for (i in 2:n_max_states) {
 }
 ```
 
-**Custom character groups** work the same way structurally, but you assign
-each subset yourself rather than looping over state counts, useful when
-your partitions are motivated by biology rather than by `k`:
+**Custom character groups** work the same way structurally, but you
+assign each subset yourself rather than looping over state counts,
+useful when your partitions are motivated by biology rather than by `k`:
 
-```
+```         
 # partition 1: characters 1-10, ordered
 seq_1 ~ dnPhyloCTMC(tree=phylogeny, Q=Q_ordered, type="Standard", coding="variable")
 seq_1.clamp(morpho_partition1)
@@ -352,16 +359,17 @@ one biologically-motivated group).
 
 ## MrBayes
 
-MrBayes automatically bins characters by their maximum number of observed
-states internally, you don't need to write anything to split characters
-by state count the way RevBayes's loop does explicitly. MrBayes just
-handles it as part of reading in `datatype = standard` data.
+MrBayes automatically bins characters by their maximum number of
+observed states internally, you don't need to write anything to split
+characters by state count the way RevBayes's loop does explicitly.
+MrBayes just handles it as part of reading in `datatype = standard`
+data.
 
 **Custom character groups**, by contrast, still need to be defined
 explicitly with `charset`/`partition`, since that's a modelling choice
 MrBayes has no way to infer from the data itself:
 
-```
+```         
 charset morph_ordered   = 1-10
 charset morph_unordered = 11-20
 
@@ -380,19 +388,18 @@ prset applyto = (all) ratepr = variable
 `unlink` and `ratepr = variable` let each partition have its own rate
 multiplier and shape parameter rather than forcing them to be shared.
 
-
 ## BEAST2 (MM)
 
 `LewisMK` needs one fixed number of states per morphological model, so
-BEAUti partitions by state count automatically. Each resulting group gets 
-its own `FilteredAlignment`, `StandardData` datatype, and `LewisMK` model, 
-as shown in the Mk section above.
+BEAUti partitions by state count automatically. Each resulting group
+gets its own `FilteredAlignment`, `StandardData` datatype, and `LewisMK`
+model, as shown in the Mk section above.
 
 For **custom character groups** a partition motivated by biology rather
-than state count BEAUti offers nothing and the XML must be edited manually 
-giving each group its own `substModel` block:
+than state count BEAUti offers nothing and the XML must be edited
+manually giving each group its own `substModel` block:
 
-```xml
+``` xml
 <data id="morph_regionA" spec="FilteredAlignment" data="@morphAlignment" filter="1-10">
     <userDataType id="morphDataType.regionA" spec="StandardData" nrOfStates="3"/>
 </data>
@@ -408,8 +415,9 @@ giving each group its own `substModel` block:
 </siteModel>
 ```
 
-::: {.callout-warning}
+::: callout-warning
 So for BEAST2, "partitioning" through BEAUti alone only ever means
-"grouped by state count." Any partition structure motivated by biology requires this kind of manual XML hacking.
+"grouped by state count." Any partition structure motivated by biology
+requires this kind of manual XML hacking.
 :::
-:::
+::::

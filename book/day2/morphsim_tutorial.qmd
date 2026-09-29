@@ -29,7 +29,7 @@ set.seed(12)
 
 ### Generating the tree
 
-We simulate a single tree with 10 tips, speciation rate of 1 and an extinction rate of 0.5. Note that `mu` must be less than `lambda`; if extinction is too close to (or exceeds) speciation, the process may need many attempts to reach the target number of tips, and simulation will be slow or may not converge in reasonable time.
+We simulate a single tree with 10 tips, speciation rate of 1 and an extinction rate of 0.5. Note that `mu` must be less than `lambda`; if extinction is too close to (or exceeds) speciation, the process may need many attempts to reach the target number of tips, and simulation will be slow or may not converge in reasonable time. Note that the values chosen. for `mu` and `lambda` are arbitrary here should be chosen carefully. Most empirical b/d rates are much lower than this.
 
 ```{r}
 tree_list <- sim.bd.taxa(
@@ -107,7 +107,7 @@ morpho_mk <- sim.morpho(k = 3, time.tree = tree, br.rates = 0.1, trait.num = 15)
 plotMorphoGrid(morpho_mk)
 ```
 
-Take a look at the grid, you'll likely spot at least one invariant column (a character that never changes across any tip). Real morphological datasets essentially never look like this, for a specific reason we'll get to next.
+Take a look at the grid, you'll likely spot at least one invariant column (a character that never changes across any tip). Real morphological datasets essentially never look like this, for a specific reason we'll get to next. Note that by setting `k = 3` we are simulating traits 0,1,2.
 
 ### MkV: conditioning on variability
 
@@ -122,7 +122,7 @@ morpho_mkv <- sim.morpho(k = 3, time.tree = tree, br.rates = 0.1,
 
 ### Making sure the state space is fully sampled
 
-Even with `k = 3` allowed, a finite simulation on a finite tree might just never sample one of those states, especially with a small tree, low rates, or few characters. If you're using simulated data to test a 3-state model but only two states ever show up at the tips, you've unintentionally built a test case for a simpler model than you think you have. `full.states` forces the simulation to keep resampling until every state you specified actually appears somewhere in the matrix.
+Even with `k = 3` allowed, a finite simulation on a finite tree might just never sample one of those states, especially with a small tree, low rates, or few characters. If you're using simulated data to test a 3-state model but only two states ever show up at the tips, you've unintentionally built a test case for a different model than you think you have. `full.states` forces the simulation to keep resampling until every state you specified actually for each character trait.
 
 ```{r}
 morpho_full <- sim.morpho(k = 3, time.tree = tree, br.rates = 0.1,
