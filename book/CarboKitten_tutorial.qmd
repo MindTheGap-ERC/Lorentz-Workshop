@@ -10,27 +10,29 @@ In this tutorial we build a small three-dimensional carbonate platform with [Car
 3.  look at the resulting architecture, and
 4.  drill four virtual cores at different positions on the platform, turning each one into a stratigraphic column and an **age-depth model** (ADM) — the curve that tells us how much of geological time is actually recorded as rock at that location, and how much is missing.
 
-## 1. Set up your Julia environment
+## Clone the repository and set up the project folder
 
-CarboKitten requires Julia 1.10 or later (installable via [juliaup](https://github.com/JuliaLang/juliaup)). Create a project and add the packages we need: `CarboKitten` itself, `Unitful` for physical units, and `CairoMakie` for plotting (CarboKitten's visualisation functions are a package extension that only activates once a Makie backend is loaded). If you have cloned this repository onto your computer, you have the `Manifest.toml` file, which contains information on Julia packages that are needed to run the code below. In order to install packages listed in there, run the commands below in your Julia interpreter:
+For the workflow in this workshop, the latest Julia version, 1.13, is needed (installable via [juliaup](https://github.com/JuliaLang/juliaup)). We assume you have Julia and a git client installed; if not - please refer to the [installation instructions](https://mindthegap-erc.github.io/Lorentz-Workshop/#installation-instructions).
 
-``` julia
-julia> ]                    # enter Julia's package mode
-(@v1.11) pkg> activate .
-(carbokitten-tutorial) pkg> instantiate
+```bash
+cd Lorentz-Workshop
+git switch day1
+cd book
+julia
 ```
 
-Everything below is meant to be run as a sequence of Julia cells in this notebook.
+## Set up your Julia environment
+
+Create a project and add the packages we need: `CarboKitten` itself, `Unitful` for physical units, and `CairoMakie` for plotting (CarboKitten's visualisation functions are a package extension that only activates once a Makie backend is loaded). If you have cloned this repository (i.e. [MindTheGap-ERC/Lorentz-Workshop](https://github.com/MindTheGap-ERC/Lorentz-Workshop/)) onto your computer, you have the `Manifest.toml` file, which contains information on Julia packages that are needed to run the code below. In order to install packages listed in there, run the commands below in your Julia interpreter.
 
 ```{julia}
 #| label: packages
 using Unitful
 using CarboKitten
-using CarboKitten.Production: BenthicProduction
 using CairoMakie
 ```
 
-## 2. Building a platform with a gappy stratigraphic record
+## Building a platform with a gappy stratigraphic record
 
 ### Facies
 
@@ -130,7 +132,7 @@ input = ALCAP.Input(
 )
 ```
 
-## 3. Running the model, and where the output comes from
+## Running the model, and where the output comes from
 
 A full run takes several minutes and writes an HDF5 file of about 48 MB — too large to keep in a Git repository. The output has therefore been archived on Zenodo, and everything from here on reads that archived file:
 
@@ -272,5 +274,5 @@ data_export(spec, header, cols)
 ## Wrap-up
 
 -   A single sea-level curve, applied uniformly across a platform, produces a spatially heterogeneous stratigraphic record: gap size and frequency depend strongly on where a section sits relative to sea level and the photic zone.
--   The age-depth model is the key object that translatesrock thickness into time.
+-   The age-depth model is the key object that translates rock thickness into time.
 -   Try changing `sea_level`, `subsidence_rate`, or `disintegration_rate` above and re-running from Section 3 onward: how do the four age-depth models respond? Can you find a parameter combination where the deepest column has the biggest gaps instead of the shallowest one?
