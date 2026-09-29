@@ -15,11 +15,11 @@ We provide some templates for the inference in the next chapter, so you will not
 
 ## Inference using biased data
 
-Run phylogenetic inference using your preferred software (BEAST, revbayes), where the setup matches the biological truth you simulated, but provide the stratigraphically biased data as input.
+Run phylogenetic inference using your preferred software (BEAST, RevBayes), where the setup matches the biological truth you simulated, but provide the stratigraphically biased data as input. The next chapter provides template scripts you can use.
 
-## Providing stratigraphic data into phylogenetic inference
+## Providing stratigraphic data to phylogenetic inference
 
-Add stratigraphic information to the inference by using the FBD skyline model. Use the skyline for the sampling rate to distinguish between intervals where (1) you know nothing can be sampled due to gaps in the fossil record, (2) intervals where fossils are sampled and you have an estimate of the sampling rate available and (3) intervals where fossils are sampled but you have no estimate of the sampling rate.
+Add stratigraphic information to the inference by using the FBD skyline model. Use the skyline to model variation in the sampling rate by distinguishing between intervals where (1) you know nothing can be sampled due to gaps in the fossil record, (2) intervals where fossils are sampled and you have an estimate of the sampling rate available (or alternatively strong prior information), and (3) intervals where fossils are sampled but you have no estimate of the sampling rate.
 
 <!--- [Download the dataset](ages.tsv){download="ages.tsv"} --->
 
@@ -35,8 +35,8 @@ get_skyline_breakpoints = function(adm,
   #' @param min_gap_duration positive number, minimum gap duration to filter by
   #' 
   #' @description
-    #' does return breakpoints in age!
-    #' 
+  #' does return breakpoints in age!
+  #' 
   t_max = admtools::max_time(adm)
   hiat_mat =  do.call(rbind, admtools::get_hiat_list(adm))
   long_enough = (hiat_mat[, "end"] - hiat_mat[, "start"]) > min_gap_duration

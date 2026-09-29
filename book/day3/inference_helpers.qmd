@@ -8,14 +8,13 @@ editor: visual
 
 This chapter contains code to help set up phylogenetic inference pipelines.
 
-## Revbayes
+## RevBayes
 
-All revbayes scripts can also be downloaded: [fbd_inference_base.rev](fbd_inference_base.rev){download="bd_inference_base.rev"} [model_clock.rev](model_clock.rev){download="model_clock.rev"} [model_morpho.rev](model_morpho.rev){download="model_morpho.rev"} [model_fbd_base.rev](model_fbd_base.rev){download="model_fbd_base.rev"}
-[model_fbd_skyline_sampling.rev](model_fbd_skyline_sampling.rev){download="model_fbd_skyline_sampling.rev"} [fbd_inference_skyline.rev](fbd_inference_skyline.rev){download="fbd_inference_skyline.rev"}
+All RevBayes scripts can also be downloaded: [fbd_inference_base.rev](fbd_inference_base.rev){download="bd_inference_base.rev"} [model_clock.rev](model_clock.rev){download="model_clock.rev"} [model_morpho.rev](model_morpho.rev){download="model_morpho.rev"} [model_fbd_const.rev](model_fbd_const.rev){download="model_fbd_base.rev"} [model_fbd_skyline_sampling.rev](model_fbd_skyline_sampling.rev){download="model_fbd_skyline_sampling.rev"} [fbd_inference_skyline.rev](fbd_inference_skyline.rev){download="fbd_inference_skyline.rev"}
 
 ### Standard FBD inference
 
-This as a simple setup for a constant rate FBD inference. For more complex cases (e.g., age uncertainty, total evidence etc.) see [this tutorial](https://revbayes.github.io/tutorials/fbd/fbd_specimen.html).
+This is a simple setup for a constant rate FBD inference. For more complex cases (e.g., age uncertainty, total evidence etc.) see [this tutorial](https://revbayes.github.io/tutorials/fbd/fbd_specimen.html).
 
 We use this basic setup, available in the file `fbd_inference_base.rev`:
 
@@ -39,7 +38,7 @@ true_origination_rate <- 2
 true_extinction_rate <- 0.3
 true_sampling_rate <- 10
 true_origin_time <- 2
-true_clock_rate = 0.5
+true_clock_rate <- 0.5
 
 # initialize moves
 moves = VectorMoves()
@@ -61,11 +60,11 @@ my_model = model(phy_morpho)
 # initialize monitors
 monitors = VectorMonitors()
 # write state to tracefile
-monitors.append( mnModel(filename=outfile_name, printgen=10) )
+monitors.append( mnModel(filename = outfile_name, printgen = 10) )
 # write tree to tree file
 monitors.append(mnFile(filename = treefile_name, printgen = 10, fbd_tree))
 # output to the screen
-monitors.append(mnScreen(printgen=100, origin_time, speciation_rate, extinction_rate) )
+monitors.append(mnScreen(printgen = 100, origin_time, speciation_rate, extinction_rate) )
 
 # initialize mcmc
 mymcmc = mcmc(my_model, monitors, moves, nruns = 2, ntries = 10000)
@@ -77,7 +76,7 @@ mymcmc.operatorSummary()
 q()
 ```
 
-Note that the "true" model parameters are provided. This is to accelerate convergence by defining appropriate priors and set the initial state of the analysis. Empirically, this is would never be the case.
+Note that the "true" model parameters are provided. This is to accelerate convergence by defining reasonable starting values. Empirically, you would never know the true values but you could still use estimates from previous studies.
 
 The base analysis calls the three key model components: clock, morphological model, and tree model.
 
@@ -143,20 +142,19 @@ moves.append( mvSubtreeScale(fbd_tree, weight = 10.0))
 moves.append( mvTreeScale(fbd_tree, origin_time, weight = 10.0))
 ```
 
-With all these parts in place, you can run the analysis
+With all these parts in place, you can run the analysis in your terminal:
 
-```{r}
+```{bash}
 #| eval: false
 rb fbd_inference.rev
 ```
 
-in your terminal. This might take a while, and there are useful tools such as `nohup` (for Linux) that allow you to run these analyses in the background:
+This might take a while, and there are useful tools such as `nohup` (for Linux) that allow you to run these analyses in the background:
 
-```{r}
+```{bash}
 #| eval: false
 nohup rb fbd_inference.rev > out.log 2>&1 &
 ```
-
 
 ### Skyline FBD analysis
 
@@ -181,7 +179,7 @@ rho <- 1.0
 true_origination_rate <- 2
 true_extinction_rate <- 0.3
 true_origin_time <- 2
-true_clock_rate = 0.5
+true_clock_rate <- 0.5
 
 # initialize moves
 moves = VectorMoves()
@@ -211,7 +209,7 @@ monitors.append(mnScreen(printgen=100, origin_time, speciation_rate, extinction_
 
 # initialize mcmc
 mymcmc = mcmc(my_model, monitors, moves, nruns = 2, ntries = 10000)
-mymcmc.burnin(generations=2000,tuningInterval=1500, verbose = TRUE)
+mymcmc.burnin(generations = 2000,tuningInterval = 1500, verbose = TRUE)
 mymcmc.operatorSummary()
 mymcmc.run(generations = 10000)
 mymcmc.operatorSummary()
@@ -224,21 +222,21 @@ The tree model is slightly different because of the skyline analysis. The conten
 ```{r}
 #| eval: false
 speciation_rate ~ dnExponential(lambda = 1/true_origination_rate) # set to true mean
-moves.append( mvScale(speciation_rate, weight=5.0, lambda = 0.1) )
-moves.append( mvScale(speciation_rate, weight=5.0, lambda = 1.0) )
-moves.append( mvScale(speciation_rate, weight=5.0, lambda = 5.0) )
+moves.append( mvScale(speciation_rate, weight = 5.0, lambda = 0.1) )
+moves.append( mvScale(speciation_rate, weight = 5.0, lambda = 1.0) )
+moves.append( mvScale(speciation_rate, weight = 5.0, lambda = 5.0) )
 speciation_rate.setValue(true_origination_rate)
 
 extinction_rate ~ dnExponential(lambda = 1/true_extinction_rate) # set to true mean
-moves.append( mvScale(extinction_rate, weight=5.0, lambda = 0.1) )
-moves.append( mvScale(extinction_rate, weight=5.0, lambda = 1.0) )
-moves.append( mvScale(extinction_rate, weight=5.0, lambda = 5.0) )
+moves.append( mvScale(extinction_rate, weight = 5.0, lambda = 0.1) )
+moves.append( mvScale(extinction_rate, weight = 5.0, lambda = 1.0) )
+moves.append( mvScale(extinction_rate, weight = 5.0, lambda = 5.0) )
 extinction_rate.setValue(true_extinction_rate)
 
 origin_time ~ dnExponential(lambda = 1.0)
-moves.append( mvScale(origin_time, weight=5.0, lambda = 0.1) )
-moves.append( mvScale(origin_time, weight=5.0, lambda = 1.0) )
-moves.append( mvScale(origin_time, weight=5.0, lambda = 5.0) )
+moves.append( mvScale(origin_time, weight = 5.0, lambda = 0.1) )
+moves.append( mvScale(origin_time, weight = 5.0, lambda = 1.0) )
+moves.append( mvScale(origin_time, weight = 5.0, lambda = 5.0) )
 origin_time.setValue(true_origin_time)
 
 # skyline breakpoints from the example age-depth model
@@ -266,16 +264,15 @@ moves.append( mvScale( psi[7], weight = 5.0, lambda = 0.1) )
 moves.append( mvScale( psi[7], weight = 5.0, lambda = 1.0) )
 moves.append( mvScale( psi[7], weight = 5.0, lambda = 10.0) )
 
-fbd_tree ~ dnFBDP(origin=origin_time, lambda=speciation_rate, mu=extinction_rate, psi=psi, rho=rho, taxa=taxa, timeline = timeline)
+fbd_tree ~ dnFBDP(origin = origin_time, lambda = speciation_rate, mu = extinction_rate, psi = psi, rho = rho, taxa = taxa, timeline = timeline)
 
 #fbd_tree.setValue(init_tree)
-moves.append( mvFNPR(fbd_tree, weight=20.0) )
+moves.append( mvFNPR(fbd_tree, weight = 20.0) )
 moves.append( mvGPR(fbd_tree, weight = 10.0))
-moves.append( mvCollapseExpandFossilBranch(fbd_tree, origin_time, weight=500.0) )
-moves.append( mvNodeTimeSlideUniform(fbd_tree, weight=10.0) )
+moves.append( mvCollapseExpandFossilBranch(fbd_tree, origin_time, weight = 500.0) )
+moves.append( mvNodeTimeSlideUniform(fbd_tree, weight = 10.0) )
 moves.append( mvNodeTimeScale(fbd_tree, weight = 20.0))
-moves.append( mvRootTimeSlideUniform(fbd_tree, origin_time, weight=0.0) )
+moves.append( mvRootTimeSlideUniform(fbd_tree, origin_time, weight = 0.0) )
 moves.append( mvSubtreeScale(fbd_tree, weight = 100.0))
 moves.append( mvTreeScale(fbd_tree, origin_time, weight = 100.0))
 ```
-

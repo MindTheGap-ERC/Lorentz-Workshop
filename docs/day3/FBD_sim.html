@@ -82,7 +82,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-631496449bf32ff9b0bb69a6bfd9195d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-d3f7f8e73c8d287b30bcf59c2b563615.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -341,7 +341,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="simulating-the-complete-bd-tree" class="level2" data-number="10.2">
 <h2 data-number="10.2" class="anchored" data-anchor-id="simulating-the-complete-bd-tree"><span class="header-section-number">10.2</span> Simulating the complete BD tree</h2>
-<p>We start by simulating a tree using the TreeSim package. This package simulates trees conditioned on age, number of tips, or both. In stratigraphic paleobiology, the timescale of observation is often prescribed (e.g., lifespan of a basin, time interval covered by a section), which is why we focus on simulating conditioned on age.</p>
+<p>We start by simulating a tree using the TreeSim package. This package can simulate trees conditioned on age or number of tips. In stratigraphic paleobiology, the timescale of observation is often prescribed (e.g., lifespan of a basin, time interval covered by a section), which is why we focus on simulating conditioned on age.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fix random seed for reproducibility</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>seed <span class="ot">=</span> <span class="dv">42</span></span>
@@ -354,7 +354,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                           <span class="at">numbsim =</span> <span class="dv">1</span>, <span class="co"># only simulate one tree</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                           <span class="at">lambda =</span> lambda,</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                           <span class="at">mu =</span> mu,</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                           <span class="at">mrca =</span> <span class="cn">FALSE</span>, <span class="co"># age is time since origin, tree has a rood edge</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                           <span class="at">mrca =</span> <span class="cn">FALSE</span>, <span class="co"># age is time since origin, tree has a root edge</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                           <span class="at">complete =</span> <span class="cn">TRUE</span>)[[<span class="dv">1</span>]] <span class="co"># get the complete tree</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect the tree</span></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>tree</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -383,7 +383,7 @@ Rooted; includes branch length(s).</code></pre>
 </div>
 </div>
 </div>
-<p>Note that this is a complete tree, meaning it contains extinct lineages. For comparison, let’s plot the reconstructed tree, which prunes all extinct lineages:</p>
+<p>Note that this is a complete tree, meaning it contains extinct lineages. For comparison, let’s plot the reconstructed tree, after pruning all non-sampled extinct lineages, assuming we sample all extant tips:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>reconstructed_tree <span class="ot">=</span> tree <span class="sc">|&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  geiger<span class="sc">::</span><span class="fu">drop.extinct</span>(<span class="at">tol =</span> <span class="dv">10</span><span class="sc">^-</span><span class="dv">8</span>)</span>
@@ -427,8 +427,8 @@ Fossil record with 18 occurrences representing 7 species
 Fossil record not simulated using taxonomy: all speciation events are assumed to be symmetric </code></pre>
 </div>
 </div>
-<p>Here you can inspect the generated fossil object, which contains information about species, the corresponding edge in the tree and age in the hmin and hmax column. Be aware that the entries in hmin and hmax are ages, even though the naming implicitly suggests that they might be heights (which is doubly confusing).</p>
-<p>Now, let’s plot these fossils along the tree</p>
+<p>Here you can inspect the generated fossil object, which contains information about species, the corresponding edge in the tree and age in the hmin and hmax column. Be aware that the entries in ‘hmin’ and ‘hmax’ are ages, even though the naming suggests that they might correspond to heights (which is confusing).</p>
+<p>Now, let’s plot these fossils along the tree:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fossils,</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">tree =</span> tree,</span>
@@ -442,7 +442,7 @@ Fossil record not simulated using taxonomy: all speciation events are assumed to
 </div>
 </div>
 </div>
-<p>There are plenty of plotting options available in FossilSim, e.g., you can plot the stratigraphic ranges (sic):</p>
+<p>There are plenty of plotting options available in FossilSim, e.g., you can plot the stratigraphic ranges (in the time domain):</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fossils,</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">tree =</span> tree, </span>
@@ -475,8 +475,8 @@ Fossil record not simulated using taxonomy: all speciation events are assumed to
 </div>
 </div>
 </div>
-<p>If you inspect the newly generated fossil object, you can see the new fossils of age 0 added.</p>
-<p>This gives us the option to introduce the concept of the sampled tree:</p>
+<p>If you inspect the newly generated fossil object, you can see the new samples with an of age 0 have been added.</p>
+<p>This gives us the option to introduce the concept of the reconstructed or sampled tree:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fossils2,</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">tree =</span> tree,</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">extant.col =</span> <span class="st">"red"</span>,</span>
@@ -497,15 +497,15 @@ Fossil record not simulated using taxonomy: all speciation events are assumed to
 </div>
 </div>
 </div>
-<p>The sampled tree is the tree with all unsampled lineages (extant and extinct) removed. The sampled tree is the best we can hope to recover from our available data, as we will never recover unsampled lineages.</p>
+<p>The sampled tree is the tree with all unsampled lineages (extant and extinct) removed, i.e., it represents the tree that we can reconstruct from our observed samples. The sampled tree is the best we can hope to recover from our available data, as we can never recover unsampled lineages as part of a standard phylogenetic inference.</p>
 </section>
 <section id="tasks-and-discussion-points" class="level2" data-number="10.4">
 <h2 data-number="10.4" class="anchored" data-anchor-id="tasks-and-discussion-points"><span class="header-section-number">10.4</span> Tasks and discussion points</h2>
 <ol type="1">
-<li><p>Explore the simulation pipeline by modifying the parameters and the random seed. How large is the intrinsic variation in the trees when parameters are fixed? Are there parameters where the true tree, reconstructed tree, and sampled tree differ most/least?</p></li>
+<li><p>Explore the simulation pipeline by modifying the parameters and the random seed. How large is the intrinsic variation in the trees when parameters are fixed? Are there parameters where the true tree, reconstructed/sampled tree differ most/least?</p></li>
 <li><p>Think of the timescale you are usually on. What parameters work well on this scale?</p></li>
 <li><p>Sampling rate: What determines the sampling rate on your timescale? Does the sampling rate depend on different drivers on different spatial and temporal scales (e.g., section vs.&nbsp;basin. vs.&nbsp;global scale)? If you put in more effort, could you increase it?</p></li>
-<li><p>Sampling in the present, fully extinct trees, and <code>rho</code>: <code>rho</code> states that the extant tips undergo a different sampling regime. If you are working on fully extinct phyla, what is an appropriate choice of <code>rho</code> and what counts as the present? What about the case where you observe a fixed time-interval in the past, but taxa potentially survive longer than the observed time interval? How would work in the inference?</p></li>
+<li><p>Sampling in the present, fully extinct trees, and <code>rho</code>: <code>rho</code> states that the extant tips undergo a different sampling regime. If you are working on fully extinct taxa, what is an appropriate choice of <code>rho</code> and what counts as the present? What about the case where you observe a fixed time-interval in the past, but taxa potentially survive longer than the observed time interval? How would that work in the inference?</p></li>
 </ol>
 </section>
 <section id="advanced-topics" class="level2" data-number="10.5">
@@ -514,7 +514,7 @@ Fossil record not simulated using taxonomy: all speciation events are assumed to
 </section>
 <section id="exporting-trees-with-sampled-ancestors" class="level2" data-number="10.6">
 <h2 data-number="10.6" class="anchored" data-anchor-id="exporting-trees-with-sampled-ancestors"><span class="header-section-number">10.6</span> Exporting trees with sampled ancestors</h2>
-<p>For comparability with other software packages, fossil objects have to be “baked in” the phylo object as tips at the end of an edge of length 0. We show this for the curious:</p>
+<p>For comparability with other software packages, fossil objects have to be “baked into” the phylo object as tips at the end of an edge of length 0. We show this for the curious:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># generate sampled ancestor tree</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>SAt <span class="ot">=</span> FossilSim<span class="sc">::</span><span class="fu">SAtree.from.fossils</span>(<span class="at">tree =</span> tree,</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">fossils =</span> fossils2)</span>

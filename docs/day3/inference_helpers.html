@@ -82,7 +82,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-631496449bf32ff9b0bb69a6bfd9195d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-d3f7f8e73c8d287b30bcf59c2b563615.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -301,7 +301,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#bayesian-inference" id="toc-bayesian-inference" class="nav-link active" data-scroll-target="#bayesian-inference"><span class="header-section-number">14.1</span> Bayesian inference</a></li>
-  <li><a href="#revbayes" id="toc-revbayes" class="nav-link" data-scroll-target="#revbayes"><span class="header-section-number">14.2</span> Revbayes</a>
+  <li><a href="#revbayes" id="toc-revbayes" class="nav-link" data-scroll-target="#revbayes"><span class="header-section-number">14.2</span> RevBayes</a>
   <ul class="collapse">
   <li><a href="#standard-fbd-inference" id="toc-standard-fbd-inference" class="nav-link" data-scroll-target="#standard-fbd-inference"><span class="header-section-number">14.2.1</span> Standard FBD inference</a></li>
   <li><a href="#skyline-fbd-analysis" id="toc-skyline-fbd-analysis" class="nav-link" data-scroll-target="#skyline-fbd-analysis"><span class="header-section-number">14.2.2</span> Skyline FBD analysis</a></li>
@@ -336,11 +336,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This chapter contains code to help set up phylogenetic inference pipelines.</p>
 </section>
 <section id="revbayes" class="level2" data-number="14.2">
-<h2 data-number="14.2" class="anchored" data-anchor-id="revbayes"><span class="header-section-number">14.2</span> Revbayes</h2>
-<p>All revbayes scripts can also be downloaded: <a href="fbd_inference_base.rev" download="bd_inference_base.rev">fbd_inference_base.rev</a> <a href="model_clock.rev" download="model_clock.rev">model_clock.rev</a> <a href="model_morpho.rev" download="model_morpho.rev">model_morpho.rev</a> <a href="model_fbd_base.rev" download="model_fbd_base.rev">model_fbd_base.rev</a> <a href="model_fbd_skyline_sampling.rev" download="model_fbd_skyline_sampling.rev">model_fbd_skyline_sampling.rev</a> <a href="fbd_inference_skyline.rev" download="fbd_inference_skyline.rev">fbd_inference_skyline.rev</a></p>
+<h2 data-number="14.2" class="anchored" data-anchor-id="revbayes"><span class="header-section-number">14.2</span> RevBayes</h2>
+<p>All RevBayes scripts can also be downloaded: <a href="fbd_inference_base.rev" download="bd_inference_base.rev">fbd_inference_base.rev</a> <a href="model_clock.rev" download="model_clock.rev">model_clock.rev</a> <a href="model_morpho.rev" download="model_morpho.rev">model_morpho.rev</a> <a href="model_fbd_base.rev" download="model_fbd_base.rev">model_fbd_base.rev</a> <a href="model_fbd_skyline_sampling.rev" download="model_fbd_skyline_sampling.rev">model_fbd_skyline_sampling.rev</a> <a href="fbd_inference_skyline.rev" download="fbd_inference_skyline.rev">fbd_inference_skyline.rev</a></p>
 <section id="standard-fbd-inference" class="level3" data-number="14.2.1">
 <h3 data-number="14.2.1" class="anchored" data-anchor-id="standard-fbd-inference"><span class="header-section-number">14.2.1</span> Standard FBD inference</h3>
-<p>This as a simple setup for a constant rate FBD inference. For more complex cases (e.g., age uncertainty, total evidence etc.) see <a href="https://revbayes.github.io/tutorials/fbd/fbd_specimen.html">this tutorial</a>.</p>
+<p>This is a simple setup for a constant rate FBD inference. For more complex cases (e.g., age uncertainty, total evidence etc.) see <a href="https://revbayes.github.io/tutorials/fbd/fbd_specimen.html">this tutorial</a>.</p>
 <p>We use this basic setup, available in the file <code>fbd_inference_base.rev</code>:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>char_mat <span class="ot">&lt;-</span> <span class="st">"char_mat.nex"</span></span>
@@ -361,7 +361,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>true_extinction_rate <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>true_sampling_rate <span class="ot">&lt;-</span> <span class="dv">10</span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>true_origin_time <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>true_clock_rate <span class="ot">=</span> <span class="fl">0.5</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>true_clock_rate <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># initialize moves</span></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>moves <span class="ot">=</span> <span class="fu">VectorMoves</span>()</span>
@@ -383,11 +383,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="co"># initialize monitors</span></span>
 <span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>monitors <span class="ot">=</span> <span class="fu">VectorMonitors</span>()</span>
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="co"># write state to tracefile</span></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="fu">monitors.append</span>( <span class="fu">mnModel</span>(<span class="at">filename=</span>outfile_name, <span class="at">printgen=</span><span class="dv">10</span>) )</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="fu">monitors.append</span>( <span class="fu">mnModel</span>(<span class="at">filename =</span> outfile_name, <span class="at">printgen =</span> <span class="dv">10</span>) )</span>
 <span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="co"># write tree to tree file</span></span>
 <span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="fu">monitors.append</span>(<span class="fu">mnFile</span>(<span class="at">filename =</span> treefile_name, <span class="at">printgen =</span> <span class="dv">10</span>, fbd_tree))</span>
 <span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="co"># output to the screen</span></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="fu">monitors.append</span>(<span class="fu">mnScreen</span>(<span class="at">printgen=</span><span class="dv">100</span>, origin_time, speciation_rate, extinction_rate) )</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="fu">monitors.append</span>(<span class="fu">mnScreen</span>(<span class="at">printgen =</span> <span class="dv">100</span>, origin_time, speciation_rate, extinction_rate) )</span>
 <span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="co"># initialize mcmc</span></span>
 <span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>mymcmc <span class="ot">=</span> <span class="fu">mcmc</span>(my_model, monitors, moves, <span class="at">nruns =</span> <span class="dv">2</span>, <span class="at">ntries =</span> <span class="dv">10000</span>)</span>
@@ -398,7 +398,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="fu">q</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Note that the “true” model parameters are provided. This is to accelerate convergence by defining appropriate priors and set the initial state of the analysis. Empirically, this is would never be the case.</p>
+<p>Note that the “true” model parameters are provided. This is to accelerate convergence by defining reasonable starting values. Empirically, you would never know the true values but you could still use estimates from previous studies.</p>
 <p>The base analysis calls the three key model components: clock, morphological model, and tree model.</p>
 <p>The clock model is specified in <code>model_clock.rev</code>:</p>
 <div class="cell">
@@ -453,13 +453,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvSubtreeScale</span>(fbd_tree, <span class="at">weight =</span> <span class="fl">10.0</span>))</span>
 <span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvTreeScale</span>(fbd_tree, origin_time, <span class="at">weight =</span> <span class="fl">10.0</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>With all these parts in place, you can run the analysis</p>
+<p>With all these parts in place, you can run the analysis in your terminal:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>rb fbd_inference.rev</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">rb</span> fbd_inference.rev</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>in your terminal. This might take a while, and there are useful tools such as <code>nohup</code> (for Linux) that allow you to run these analyses in the background:</p>
+<p>This might take a while, and there are useful tools such as <code>nohup</code> (for Linux) that allow you to run these analyses in the background:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>nohup rb fbd_inference.rev <span class="sc">&gt;</span> out.log <span class="dv">2</span><span class="sc">&gt;</span><span class="er">&amp;</span><span class="dv">1</span> <span class="sc">&amp;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nohup</span> rb fbd_inference.rev <span class="op">&gt;</span> out.log <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">&amp;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="skyline-fbd-analysis" class="level3" data-number="14.2.2">
@@ -483,7 +483,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>true_origination_rate <span class="ot">&lt;-</span> <span class="dv">2</span></span>
 <span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>true_extinction_rate <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
 <span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>true_origin_time <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>true_clock_rate <span class="ot">=</span> <span class="fl">0.5</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>true_clock_rate <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
 <span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="co"># initialize moves</span></span>
 <span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>moves <span class="ot">=</span> <span class="fu">VectorMoves</span>()</span>
@@ -513,7 +513,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a><span class="co"># initialize mcmc</span></span>
 <span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>mymcmc <span class="ot">=</span> <span class="fu">mcmc</span>(my_model, monitors, moves, <span class="at">nruns =</span> <span class="dv">2</span>, <span class="at">ntries =</span> <span class="dv">10000</span>)</span>
-<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a><span class="fu">mymcmc.burnin</span>(<span class="at">generations=</span><span class="dv">2000</span>,<span class="at">tuningInterval=</span><span class="dv">1500</span>, <span class="at">verbose =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a><span class="fu">mymcmc.burnin</span>(<span class="at">generations =</span> <span class="dv">2000</span>,<span class="at">tuningInterval =</span> <span class="dv">1500</span>, <span class="at">verbose =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a><span class="fu">mymcmc.operatorSummary</span>()</span>
 <span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a><span class="fu">mymcmc.run</span>(<span class="at">generations =</span> <span class="dv">10000</span>)</span>
 <span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a><span class="fu">mymcmc.operatorSummary</span>()</span>
@@ -523,21 +523,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The tree model is slightly different because of the skyline analysis. The contents of <code>model_fbd_skyline_sampling.rev</code> are</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>speciation_rate <span class="sc">~</span> <span class="fu">dnExponential</span>(<span class="at">lambda =</span> <span class="dv">1</span><span class="sc">/</span>true_origination_rate) <span class="co"># set to true mean</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(speciation_rate, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">0.1</span>) )</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(speciation_rate, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">1.0</span>) )</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(speciation_rate, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">5.0</span>) )</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(speciation_rate, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">0.1</span>) )</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(speciation_rate, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">1.0</span>) )</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(speciation_rate, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">5.0</span>) )</span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">speciation_rate.setValue</span>(true_origination_rate)</span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>extinction_rate <span class="sc">~</span> <span class="fu">dnExponential</span>(<span class="at">lambda =</span> <span class="dv">1</span><span class="sc">/</span>true_extinction_rate) <span class="co"># set to true mean</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(extinction_rate, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">0.1</span>) )</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(extinction_rate, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">1.0</span>) )</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(extinction_rate, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">5.0</span>) )</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(extinction_rate, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">0.1</span>) )</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(extinction_rate, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">1.0</span>) )</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(extinction_rate, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">5.0</span>) )</span>
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">extinction_rate.setValue</span>(true_extinction_rate)</span>
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>origin_time <span class="sc">~</span> <span class="fu">dnExponential</span>(<span class="at">lambda =</span> <span class="fl">1.0</span>)</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(origin_time, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">0.1</span>) )</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(origin_time, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">1.0</span>) )</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(origin_time, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">5.0</span>) )</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(origin_time, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">0.1</span>) )</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(origin_time, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">1.0</span>) )</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(origin_time, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">5.0</span>) )</span>
 <span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="fu">origin_time.setValue</span>(true_origin_time)</span>
 <span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co"># skyline breakpoints from the example age-depth model</span></span>
@@ -565,15 +565,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>( psi[<span class="dv">7</span>], <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">1.0</span>) )</span>
 <span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>( psi[<span class="dv">7</span>], <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">10.0</span>) )</span>
 <span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>fbd_tree <span class="sc">~</span> <span class="fu">dnFBDP</span>(<span class="at">origin=</span>origin_time, <span class="at">lambda=</span>speciation_rate, <span class="at">mu=</span>extinction_rate, <span class="at">psi=</span>psi, <span class="at">rho=</span>rho, <span class="at">taxa=</span>taxa, <span class="at">timeline =</span> timeline)</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>fbd_tree <span class="sc">~</span> <span class="fu">dnFBDP</span>(<span class="at">origin =</span> origin_time, <span class="at">lambda =</span> speciation_rate, <span class="at">mu =</span> extinction_rate, <span class="at">psi =</span> psi, <span class="at">rho =</span> rho, <span class="at">taxa =</span> taxa, <span class="at">timeline =</span> timeline)</span>
 <span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a><span class="co">#fbd_tree.setValue(init_tree)</span></span>
-<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvFNPR</span>(fbd_tree, <span class="at">weight=</span><span class="fl">20.0</span>) )</span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvFNPR</span>(fbd_tree, <span class="at">weight =</span> <span class="fl">20.0</span>) )</span>
 <span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvGPR</span>(fbd_tree, <span class="at">weight =</span> <span class="fl">10.0</span>))</span>
-<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvCollapseExpandFossilBranch</span>(fbd_tree, origin_time, <span class="at">weight=</span><span class="fl">500.0</span>) )</span>
-<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvNodeTimeSlideUniform</span>(fbd_tree, <span class="at">weight=</span><span class="fl">10.0</span>) )</span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvCollapseExpandFossilBranch</span>(fbd_tree, origin_time, <span class="at">weight =</span> <span class="fl">500.0</span>) )</span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvNodeTimeSlideUniform</span>(fbd_tree, <span class="at">weight =</span> <span class="fl">10.0</span>) )</span>
 <span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvNodeTimeScale</span>(fbd_tree, <span class="at">weight =</span> <span class="fl">20.0</span>))</span>
-<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvRootTimeSlideUniform</span>(fbd_tree, origin_time, <span class="at">weight=</span><span class="fl">0.0</span>) )</span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvRootTimeSlideUniform</span>(fbd_tree, origin_time, <span class="at">weight =</span> <span class="fl">0.0</span>) )</span>
 <span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvSubtreeScale</span>(fbd_tree, <span class="at">weight =</span> <span class="fl">100.0</span>))</span>
 <span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvTreeScale</span>(fbd_tree, origin_time, <span class="at">weight =</span> <span class="fl">100.0</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>

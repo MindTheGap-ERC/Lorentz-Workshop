@@ -82,7 +82,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-631496449bf32ff9b0bb69a6bfd9195d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-d3f7f8e73c8d287b30bcf59c2b563615.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -339,27 +339,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction" class="level2" data-number="12.1">
 <h2 data-number="12.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">12.1</span> Introduction</h2>
-<p>This chapter combines everything we have learned so far by combining stratigraphic paleobiology and phylogenetics into one forward simulation. At the end of this chapter, you will have built a complete simulation pipeline consisting of</p>
+<p>This chapter combines everything we have learned so far by combining stratigraphic paleobiology and phylogenetics into one forward simulation. At the end of this chapter, you will have built a complete simulation pipeline consisting of:</p>
 <ul>
 <li><p>A stratigraphic forward model (CarboKitten) that simulates age-depth models and environmental gradients such as water depth and facies</p></li>
 <li><p>A FBD tree that describes the evolutionary relationship between taxa</p></li>
 <li><p>Fossils sampled along the tree according to an originally constant sampling rate, which is modified by gaps in the stratigraphic record and ecological as well as taphonomic effects</p></li>
 <li><p>A character matrix for the fossils evolving according to a specified model of evolution and potentially missing characters due to differential preservation</p></li>
-<li><p>Fossil ages that are potentially offset due to age misassignment or uncertainy</p></li>
+<li><p>Fossil ages that are potentially offset due to age misassignment or uncertainty</p></li>
 </ul>
 <p>With all these pieces in place, we can then address two key questions in the next chapter:</p>
 <ol type="1">
-<li>When we run inference on the simulated data (fossil ages, character matrices), can we recover the “true” evolutionary history (e.g., tree topology, model parameters)? More speculatively, can we potentially recover stratigraphic information such as sediment accumulation rates and gap duration from phylogenetic inference?</li>
+<li>When we run inference on the simulated data (fossil ages, character matrices), can we recover the “true” evolutionary history (e.g., tree topology, model parameters)? More speculatively, can we potentially recover stratigraphic information, such as sediment accumulation rates and gap duration from phylogenetic inference?</li>
 <li>Having build the forward simulation pipeline, can we use our knowledge of stratigraphy and the sampling process as sources of information in the inference? And if yes, does it improve the inference?</li>
 </ol>
 </section>
 <section id="tasks-and-discussion-points" class="level2" data-number="12.2">
 <h2 data-number="12.2" class="anchored" data-anchor-id="tasks-and-discussion-points"><span class="header-section-number">12.2</span> Tasks and discussion points</h2>
 <ul>
-<li><p>Modify the provided pipeline according to your work in the last 3 days and simulate your very own fossil record. At the end you should have two components: (1) simulated biased data that you would usually use for inference, specifically a character matrix and fossil ages and (2) the biological and stratigraphic “truth” (age-depth model and gap timing) to compare inference results to. Specifically, this should contain the true sampled tree, age-depth relationship, clock rate, and model of morphological evolution.</p></li>
-<li><p>You now know many different effects that go into the sampled tree, character data, and ages. For your study system, which do you think are most relevant?</p></li>
-<li><p>We have focused on forward simulation so far. If you had perfect knowledge of all these effects, how would you incorporate them in phylogenetic inference?</p></li>
-<li><p>Looking back, which effects have you investigated? Compare with other groups which stratigraphic bias had the biggest impact and what aspects of the analysis have been affected the most.</p></li>
+<li><p>Modify the provided pipeline according to your work in the last 3 days and simulate your very own fossil record. At the end you should have two components: (1) simulated biased data that you would usually use for inference, specifically a character matrix and fossil ages, and (2) the biological and stratigraphic “truth” (age-depth model and gap timing) to compare inference results to. Specifically, this should contain the true sampled tree, age-depth relationship, clock rate, and model of morphological evolution.</p></li>
+<li><p>You now know many of the different components that go into generating the sampled tree, character data, and ages. For your study system, which do you think are most relevant?</p></li>
+<li><p>We have focused on forward simulation so far. If you had perfect knowledge of all these processes, how would you incorporate them in phylogenetic inference?</p></li>
+<li><p>Looking back, which effects have you investigated? Compare with other groups which stratigraphic or taphonomic bias had the biggest impact and what aspects of the analysis have been affected the most.</p></li>
 </ul>
 </section>
 <section id="preliminaries" class="level2" data-number="12.3">
@@ -446,7 +446,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="taphonomy-and-ecology" class="level2" data-number="12.4">
 <h2 data-number="12.4" class="anchored" data-anchor-id="taphonomy-and-ecology"><span class="header-section-number">12.4</span> Taphonomy and ecology</h2>
-<p>As first part of the pipeline, let’s introduce ecological and taphonomic effects. As before, we use water depth as ecological gradient:</p>
+<p>Next, let’s introduce ecological and taphonomic effects. As before, we use water depth as ecological gradient:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>wd_opt <span class="ot">=</span> <span class="dv">5</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>wd_tol <span class="ot">=</span> <span class="dv">10</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>cutoff_val <span class="ot">=</span> <span class="dv">0</span></span>
@@ -554,7 +554,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Often, the original sampling rate <code>psi</code> needs to be chosen high to make sure any fossils are preserved. If you would like to subsample your fossils to a fixed small number, you can use the following function for it. We subsample to 30 fossils to reduce runtime in the inference later.</p>
+<p>In this context, the original sampling rate <code>psi</code> should be high to make sure fossils are preserved after we add the stratigraphic filter. If you would like to subsample your fossils to a fixed small number, you can use the following function for it. Here, we subsample 30 fossils to reduce the runtime during inference later.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>n_preserved <span class="ot">=</span> <span class="dv">30</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>subsample_fossils <span class="ot">=</span> <span class="cf">function</span>(fossils, n){</span>
@@ -579,7 +579,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="add-extant-samples" class="level2" data-number="12.5">
 <h2 data-number="12.5" class="anchored" data-anchor-id="add-extant-samples"><span class="header-section-number">12.5</span> Add extant samples</h2>
-<p>Now we add the extant samples to the fossil object. This yields the sampled tree after after taphonomic and ecological effects.</p>
+<p>Now we add the extant samples to the fossil object. This yields the sampled tree including extant and extinct lineages, after after taphonomic and ecological effects.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>rho <span class="ot">=</span> <span class="fl">0.5</span> <span class="co"># proportion of extant tips that are sampled</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>fossils_used <span class="ot">=</span> FossilSim<span class="sc">::</span><span class="fu">sim.extant.samples</span>(<span class="at">fossils =</span> fossils2,</span>
@@ -603,10 +603,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="simulate-morphological-characters" class="level2" data-number="12.6">
 <h2 data-number="12.6" class="anchored" data-anchor-id="simulate-morphological-characters"><span class="header-section-number">12.6</span> Simulate morphological characters</h2>
-<p>Now we can simulate morphological characters along the tree and the preserved fossils. We focus on the simple Mk2 model here, insert your own if you like.</p>
+<p>Now we can simulate morphological characters along the tree and the preserved fossils. We focus on the simple Mk2 and strict clock models here, insert your own if you like.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>n_states <span class="ot">=</span> <span class="dv">2</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>br_rate <span class="ot">=</span> <span class="fl">0.5</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>br_rate <span class="ot">=</span> <span class="fl">0.5</span> <span class="co"># rate of change per trait per time unit</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>trait_num <span class="ot">=</span> <span class="dv">100</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>morpho_mk <span class="ot">=</span> MorphSim<span class="sc">::</span><span class="fu">sim.morpho</span>(<span class="at">k =</span> n_states,</span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                        <span class="at">time.tree =</span> tree,</span>
