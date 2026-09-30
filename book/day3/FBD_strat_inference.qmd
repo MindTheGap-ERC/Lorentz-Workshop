@@ -15,7 +15,7 @@ We provide some templates for the inference in the next chapter, so you will not
 
 ## Inference using biased data
 
-Run phylogenetic inference using your preferred software (BEAST, RevBayes), where the setup matches the biological truth you simulated, but provide the stratigraphically biased data as input. The next chapter provides template scripts you can use.
+Run phylogenetic inference using your preferred software (BEAST, RevBayes), where the setup matches the biological truth you simulated in terms of the models used for character evolution, but the age information is stratigraphically biased. The next chapter provides template scripts you can use.
 
 ## Providing stratigraphic data to phylogenetic inference
 

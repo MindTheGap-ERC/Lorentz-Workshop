@@ -8,15 +8,15 @@ editor: visual
 
 This chapter combines everything we have learned so far by combining stratigraphic paleobiology and phylogenetics into one forward simulation. At the end of this chapter, you will have built a complete simulation pipeline consisting of:
 
-- A stratigraphic forward model (CarboKitten) that simulates age-depth models and environmental gradients such as water depth and facies
+-   A stratigraphic forward model (CarboKitten) that simulates age-depth models and environmental gradients such as water depth and facies
 
-- A FBD tree that describes the evolutionary relationship between taxa
+-   A FBD tree that describes the evolutionary relationship between taxa
 
-- Fossils sampled along the tree according to an originally constant sampling rate, which is modified by gaps in the stratigraphic record and ecological as well as taphonomic effects
+-   Fossils sampled along the tree according to an originally constant sampling rate, which is modified by gaps in the stratigraphic record and ecological as well as taphonomic effects
 
-- A character matrix for the fossils evolving according to a specified model of evolution and potentially missing characters due to differential preservation
+-   A character matrix for the fossils evolving according to a specified model of evolution and potentially missing characters due to differential preservation
 
-- Fossil ages that are potentially offset due to age misassignment or uncertainty
+-   Fossil ages that are potentially offset due to age misassignment or uncertainty
 
 With all these pieces in place, we can then address two key questions in the next chapter:
 
@@ -25,13 +25,13 @@ With all these pieces in place, we can then address two key questions in the nex
 
 ## Tasks and discussion points
 
-- Modify the provided pipeline according to your work in the last 3 days and simulate your very own fossil record. At the end you should have two components: (1) simulated biased data that you would usually use for inference, specifically a character matrix and fossil ages, and (2) the biological and stratigraphic "truth" (age-depth model and gap timing) to compare inference results to. Specifically, this should contain the true sampled tree, age-depth relationship, clock rate, and model of morphological evolution.
+-   Modify the provided pipeline according to your work in the last 3 days and simulate your very own fossil record. At the end you should have two components: (1) simulated biased data that you would usually use for inference, specifically a character matrix and fossil ages, and (2) the biological and stratigraphic "truth" (age-depth model and gap timing) to compare inference results to. Specifically, this should contain the true sampled tree, age-depth relationship, clock rate, and model of morphological evolution.
 
-- You now know many of the different components that go into generating the sampled tree, character data, and ages. For your study system, which do you think are most relevant?
+-   You now know many of the different components that go into generating the sampled tree, character data, and ages. For your study system, which do you think are most relevant?
 
-- We have focused on forward simulation so far. If you had perfect knowledge of all these processes, how would you incorporate them in phylogenetic inference?
+-   We have focused on forward simulation so far. If you had perfect knowledge of all these processes, how would you incorporate them in phylogenetic inference?
 
-- Looking back, which effects have you investigated? Compare with other groups which stratigraphic or taphonomic bias had the biggest impact and what aspects of the analysis have been affected the most.
+-   Looking back, which effects have you investigated? Compare with other groups which stratigraphic or taphonomic bias had the biggest impact and what aspects of the analysis have been affected the most.
 
 ## Preliminaries
 
