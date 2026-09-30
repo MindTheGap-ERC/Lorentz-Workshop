@@ -15,13 +15,13 @@ To slowly approach this, we use two data types: event data as introduced on the 
 
 ## Tasks and discussion points
 
-- Work through the code, potentially modifying it according to your simulated stratigraphy from day 1 and the simulated tree from last chapter. What major differences do you see?
+-   Work through the code, potentially modifying it according to your simulated stratigraphy from day 1 and the simulated tree from last chapter. What major differences do you see?
 
-- Explore how results change at different locations in your simulated stratigraphy. Are there locations where age misassignment is especially large/small or ecological effects are especially strong/weak?
+-   Explore how results change at different locations in your simulated stratigraphy. Are there locations where age misassignment is especially large/small or ecological effects are especially strong/weak?
 
-- For your study system and spatiotemporal scale of interest, what are the major ecological and taphonomic processes that determine fossil abundance? Could you quantify and formalize them? How is it for other members of your group?
+-   For your study system and spatiotemporal scale of interest, what are the major ecological and taphonomic processes that determine fossil abundance? Could you quantify and formalize them? How is it for other members of your group?
 
-- Do you have any intuition how much age misassignment is a problem on the timescale you are working on? Is there a timescale where you think it is most/least relevant (e.g., section vs. basin vs. global)? From day 1 you know that the age-depth models are shaped by external drivers of stratigraphic architectures (here the eustatic sea level curve). Discuss the relationship between the timescale of observation, timescale of external drivers, and age-misassignment.
+-   Do you have any intuition how much age misassignment is a problem on the timescale you are working on? Is there a timescale where you think it is most/least relevant (e.g., section vs. basin vs. global)? From day 1 you know that the age-depth models are shaped by external drivers of stratigraphic architectures (here the eustatic sea level curve). Discuss the relationship between the timescale of observation, timescale of external drivers, and age-misassignment.
 
 ## Preliminaries
 
@@ -66,7 +66,8 @@ tree = TreeSim::sim.bd.age(age = t_max,
                               mrca = FALSE,
                               complete = TRUE)[[1]]
 fossils = FossilSim::sim.fossils.poisson(rate = psi,
-                                         tree = tree)
+                                         tree = tree,
+                                         root.edge = FALSE)
 plot(fossils, 
      tree = tree,
      main = "FBD tree")
@@ -86,9 +87,9 @@ h_min = admtools::min_height(adm)
 
 Ecology and taphonomy act identically on fossil occurrences:
 
-- Niche preferences determine whether a taxon will be sampled at a specific location/time: If some environmental gradient matches the preferred environment of the taxon it is more likely to be observed. The more the environmental cline deviates from the optimum, the less likely an observation is.
+-   Niche preferences determine whether a taxon will be sampled at a specific location/time: If some environmental gradient matches the preferred environment of the taxon it is more likely to be observed. The more the environmental cline deviates from the optimum, the less likely an observation is.
 
-- Taphonomic conditions determine whether a fossil is preserved or not. Again, this is a joint expression of an environmental gradient (e.g., water depth, grain size, burial velocity) and an intrinsic property, meaning the preservation probability under the specified taphonomic conditions.
+-   Taphonomic conditions determine whether a fossil is preserved or not. Again, this is a joint expression of an environmental gradient (e.g., water depth, grain size, burial velocity) and an intrinsic property, meaning the preservation probability under the specified taphonomic conditions.
 
 For this example, we focus on water depth as an ecological gradient for simplicity. Generally, any gradient/model output can be used.
 
@@ -149,12 +150,23 @@ Combining the two gives the sampling probability with time:
 plot(x = t,
      y = t |> gradient() |> niche_def(),
      type = "l",
-     xlab = "Time",
+     xlab = "Time [Myr]",
      ylab = "Sampling probability",
-     main = "Sampling probability of taxa")
+     main = "Sampling probability of taxa, time domain")
 ```
 
-Note that here the sampling probability drops to 0 not because of erosion or a hiatus, but because the simulated taxon is strictly marine.
+Note that here the sampling probability drops to 0 not because of erosion or a hiatus, but because the simulated taxon is strictly marine. Can you explain why the sampling probability is low initially?
+
+For the curious: With the transformation between time and stratigraphic domain provided by the age-depth model, you can then immediately construct the sampling probability in the stratigraphic domain:
+
+```{r sampling-probability-strat-domain-ecology}
+ plot(x = t |> gradient() |> niche_def(),
+      y = t |> admtools::time_to_strat(adm),
+     type = "l",
+     xlab = "Sampling probability",
+     ylab = "Stratigrapic position [m]",
+     main = "Sampling probability of taxa, stratigraphic domain")
+```
 
 ### Effect on fossil occurrences
 
@@ -216,7 +228,7 @@ StratPal::p3_var_rate(x = c(0,1),
        ylab = "Fossil occurrences")
 ```
 
-That's how easy this is! Here you can still see the initial low fossil abundance due to the high water depth at the beginning of the simulation. However, the drops to 0 miss as the here mostly match with subaerial exposure.
+That's how easy this is! Here you can still see the initial low fossil abundance due to the high water depth at the beginning of the simulation. However, the drops to 0 here mostly match with subaerial exposure.
 
 ### Application to fossil objects associated with phylogenetic trees
 
@@ -264,7 +276,7 @@ plot(fossils_filtered,
      main = "Fossils during gaps removed")
 ```
 
-Of course this pipeline can be extended to include stratigraphic effects and multiple ecological and taphonomic gradients.
+Of course this pipeline can be extended to include stratigraphic effects introduced by age-depth models and multiple ecological and taphonomic gradients.
 
 ### Extensions and limitations
 
@@ -359,6 +371,6 @@ plot(fossils_misassigned_age,
      main = "Tree with wrong reconstructed fossil ages")
 ```
 
-Here you can immediately see the contradiction between the timing of the underlying biological truth (the tree) and the (wrongly) reconstructed ages of the fossils. At multiple locations, fossils associated with a lineage extend beyond the duration of the lineage, and fossils of an ancestral lineage are present long after a branching event.
+This plot shows the contradiction between the timing of the underlying biological truth (the tree) and the (wrongly) reconstructed ages of the fossils. At multiple locations, fossils associated with a lineage extend beyond the duration of the lineage, and fossils of an ancestral lineage are present long after a branching event.
 
 Using these fossil ages for tree inference will clearly lead to wrong results.

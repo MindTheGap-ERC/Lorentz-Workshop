@@ -1,5 +1,5 @@
 #NEXUS
-[Data written by write.nexus.data.R, Tue Sep 29 17:47:32 2026]
+[Data written by write.nexus.data.R, Wed Sep 30 05:28:36 2026]
 BEGIN DATA;
   DIMENSIONS NTAX=35 NCHAR=100;
   FORMAT DATATYPE=STANDARD MISSING=? GAP=- INTERLEAVE=YES symbols="0123456789";
