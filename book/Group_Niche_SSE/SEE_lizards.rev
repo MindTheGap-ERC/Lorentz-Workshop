@@ -1,1 +1,85 @@
-observed_phylogeny <- readTrees("day3/Group_Niche_SSE/canidae_tree.nex")[1]
+observed_phylogeny <- readTrees("LizardTree.nex")[1]
+data <- readCharacterData("LizardTree-Ecology.nex")
+num_states <- 2
+root <- observed_phylogeny.rootAge()
+moves    = VectorMoves()
+monitors = VectorMonitors()
+
+for (i in 1:num_states) {
+
+      # loguniform prior on speciation
+      speciation[i] ~ dnLoguniform( 1E-6, 1E2)
+      moves.append( mvSlice(speciation[i], window = 0.1, weight = 1.0, search_method = "stepping_out") )
+
+      # and on extinction
+      extinction[i] ~ dnLoguniform( 1E-6, 1E2)
+      moves.append( mvSlice(extinction[i], window = 0.1, weight = 1.0, search_method = "stepping_out") )
+
+      # exponential prior on fossil sampling
+      fossil_sampling[i] ~ dnExp(5)
+      moves.append( mvSlice(fossil_sampling[i], window = 0.1, weight = 1.0, search_method = "stepping_out") )
+
+      # set a variable to monitor diversification rates
+      diversification[i] := speciation[i] - extinction[i]
+    }
+
+rate_pr := observed_phylogeny.treeLength() / 10
+
+    # loop through number of transition rates (3 * 2 = 6 in this case)
+    for ( i in 1:(num_states * (num_states - 1)) ) {
+
+         # set it to an exponential prior
+         q[i] ~ dnExp(rate_pr)
+         moves.append( mvSlice(q[i], window = 0.1, weight = 1.0, search_method = "stepping_out") )
+    }
+
+rate_matrix := fnFreeK( q, rescaled = false)
+
+root_frequencies ~ dnDirichlet( rep(1, num_states) )
+
+moves.append( mvDirichletSimplex(root_frequencies, weight = 2) )
+
+extant_sampling <- 38/1036
+
+timetree ~ dnCDBDP( rootAge           = root,
+                        lambda            = speciation,
+                        mu                = extinction,
+                        psi               = fossil_sampling,
+                        Q                 = rate_matrix,
+                        pi                = root_frequencies,
+                        rho               = extant_sampling)
+
+timetree.clamp( observed_phylogeny )
+
+timetree.clampCharData( data )
+
+mymodel = model(timetree)
+
+monitors.append( mnModel(filename="output/lizards_ecology_bisse.log", printgen = 1000) )
+
+monitors.append( mnJointConditionalAncestralState(tree            = timetree,
+                                                      cdbdp           = timetree,
+                                                      type            = "Standard",
+                                                      withStartStates = false,
+                                                      printgen        = 100,
+                                                      filename        = "output/lizards_ecology_anc_states.log") )
+
+monitors.append( mnScreen(printgen = 10000) )
+
+mymcmc = mcmc(mymodel, monitors, moves)
+
+stopping_rules[1] = srMinESS(250, file = "output/lizards_ecology_bisse.log", freq = 10000)
+
+mymcmc.run(rules = stopping_rules, checkpointInterval = 1000, checkpointFile = "output/lizards_ecology_bisse.state")
+
+mymcmc.initializeFromCheckpoint("output/lizards_ecology_bisse.state")
+
+anc_states = readAncestralStateTrace("output/lizards_ecology_anc_states.log")
+
+anc_tree = ancestralStateTree(tree                         = observed_phylogeny,
+                                  ancestral_state_trace_vector = anc_states,
+                                  include_start_states         = false,
+                                  file                         = "output/lizards_ecology_anc_states_results.tree",
+                                  burnin                       = 0.1,
+                                  summary_statistic            = "MAP",
+                                  site                         = 1)
