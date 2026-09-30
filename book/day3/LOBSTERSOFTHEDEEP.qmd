@@ -1,0 +1,303 @@
+---
+title: "Lobsters of the deep"
+format: html
+editor: visual
+---
+
+We found a few bugs - towards the bottom to do with reading in a tree with real data in including tip labels and branch lengths
+
+Polychelidans are deep sea lobsters. In the Mesozoic they lived in shallow water. We are going to try and simulate a dataset where the taxa we are recovering originally live in shallow water and then move into deep water. Can we recover the original tree?
+
+QUESTION: We would ideally like to be able to moderate different niches for different parts of the tree **Libraries**
+
+```{r}
+setwd("C:/Users/deardenr/OneDrive - University of Birmingham/Documents/Lobsters_of_the_deep")
+library(TreeSim)
+library(ape)
+library(MorphSim)
+```
+
+**Environment** We are reusing the enviroment we originally created in Julia because we don't want ot run Julia again.
+
+```{r}
+  adm_location = "C:/Users/deardenr/stratworkshop/Lorentz-Workshop/book/data/output/columns_adm.csv" # adjust if you have a different output location
+data_adm = read.csv(adm_location) # read age-depth model data
+key = "mid"
+t =  data_adm[,which(grepl("Myr",names(data_adm)))] # time step
+h = data_adm[,which(grepl(key,names(data_adm)))] # heights at the location with key in the name
+# define age-depth model
+adm = admtools::tp_to_adm(t = t,
+                          h = h,
+                          T_unit = "Myr",
+                          L_unit = "m")
+
+plot(adm,
+     lwd_destr = 1, # line width destructive interval (hiatus)
+     lwd_acc = 2, # line width accumulative interval
+     col_destr = NULL,
+     col_acc = "black")
+admtools::T_axis_lab()
+admtools::L_axis_lab()
+title(main = "Age-depth model")
+```
+
+**Tree** We are using Myrthe's Polychelid consensus tree and treating this as the "true" tree.
+
+```{r}
+tree <- read.nexus("TheTrueTree.tree")
+tree$edge.length<-
+   tree$edge.length/max(nodeHeights(tree)[,2])*1
+plot(tree)
+```
+
+**Sampling fossils on the tree**
+```{r}
+seed = 42
+lambda = 3 # origination rate [Myr^-1]
+mu = 0.7 # extinction rate [Myr^-1]
+psi = 20 # fossil sampling rate [fossils per Myr per lineage]
+set.seed(seed)
+# timescale of observation - depends on duration of your forward simulation
+t_max = admtools::max_time(adm)
+
+fossils = FossilSim::sim.fossils.poisson(rate = psi,
+                                         tree = tree,
+                                         root.edge = FALSE)
+
+
+plot(fossils, 
+     tree = tree,
+     show.ranges=TRUE,
+     main = "FBD tree")
+```
+**Ecological and taphonomic effects**
+```{r}
+wd_location = "C:/Users/deardenr/stratworkshop/Lorentz-Workshop/book/data/output/columns_wd.csv" # adjust if you have a different output location
+data_wd = read.csv(wd_location) # read age-depth model data
+# select water depth column that contains the key
+wd = data_wd[,which(grepl(key,names(data_wd)))]
+plot(x = t,
+     y = wd,
+     type = "l",
+     xlab = "Time [Myr]",
+     ylab = "Water depth [m]",
+     main = "Water depth")
+```
+
+LOBSTERS OF THE SHALLOWS
+These lobsters like living in shallow water
+```{r}
+wd_opt = 5 # pref. water depth 5 m
+wd_tolerance = 5 # water depth tolerance 10 m (sd)
+cutoff_val = 0  # does not live above water 
+niche_def_s = StratPal::snd_niche(opt = wd_opt, 
+                                tol = wd_tolerance, 
+                                cutoff_val = cutoff_val) 
+wd_vals_s = seq(from = min(wd),
+              to = max(wd),
+              length.out = 100)
+plot(x = wd_vals_s,
+     y = niche_def_s(wd_vals_s),
+     type = "l",
+     xlab = "Water depth [m]",
+     ylab = "Sampling probability",
+     main = "Niche definition")
+```
+
+LOBSTERS OF THE DEEP
+```{r}
+wd_opt = 17 # pref. water depth 5 m
+wd_tolerance = 3 # water depth tolerance 10 m (sd)
+cutoff_val = 0  # does not live above water 
+niche_def_d = StratPal::snd_niche(opt = wd_opt, 
+                                tol = wd_tolerance, 
+                                cutoff_val = cutoff_val) 
+wd_vals_d = seq(from = min(wd),
+              to = max(wd),
+              length.out = 100)
+plot(x = wd_vals_d,
+     y = niche_def_d(wd_vals_d),
+     type = "l",
+     xlab = "Water depth [m]",
+     ylab = "Sampling probability",
+     main = "Niche definition")
+```
+
+Define the gradient function
+```{r}
+# define function that specifies water depth as a function of time
+gradient = approxfun(x = t,
+                     y = wd)
+plot(x = t,
+     y = gradient(t),
+     type = "l",
+     xlab = "Time [Myr]",
+     ylab = "Water depth [m]",
+     main = "Water depth as gradient")
+```
+**Sampling compared**
+Shallow lobs
+```{r}
+plot(x = t,
+     y = t |> gradient() |> niche_def_s(),
+     type = "l",
+     xlab = "Time [Myr]",
+     ylab = "Sampling probability",
+     main = "Sampling probability of shallow lobs, time domain")
+```
+Deep lobs
+```{r}
+plot(x = t,
+     y = t |> gradient() |> niche_def_d(),
+     type = "l",
+     xlab = "Time [Myr]",
+     ylab = "Sampling probability",
+     main = "Sampling probability of deep lobs, time domain")
+```
+**plotting tree baseline**
+```{r}
+# Baseline plot
+plot(fossils, 
+     tree = tree,
+     main = "Full fossil record without ecological effects",
+     rho = 0)
+```
+**plotting tree shallow**
+```{r}
+fossils_after_ecol_s = fossils |>
+  admtools::rev_dir(ref = t_max) |>
+  StratPal::apply_niche(niche_def = niche_def_s, gc = gradient) |>
+  admtools::rev_dir(ref = t_max)
+
+rho=1
+fossils_after_ecol_s_ext = FossilSim::sim.extant.samples(fossils = fossils_after_ecol_s,
+                                         tree = tree,
+                                         rho = rho)
+
+
+plot(fossils_after_ecol_s_ext, 
+     tree = tree,
+     main = "FBD tree after ecological effects shallow",
+     show.tip.label = TRUE,
+     cex=0.5)
+```
+```{r}
+fossils_after_ecol_d = fossils |>
+  admtools::rev_dir(ref = t_max) |>
+  StratPal::apply_niche(niche_def = niche_def_d, gc = gradient) |>
+  admtools::rev_dir(ref = t_max)
+
+
+
+rho=1
+fossils_after_ecol_d_ext = FossilSim::sim.extant.samples(fossils = fossils_after_ecol_d,
+                                         tree = tree,
+                                         rho = rho)
+
+
+plot(fossils_after_ecol_d_ext, 
+     tree = tree,
+     main = "FBD tree after ecological effects deep",
+     show.tip.label = TRUE,
+     cex=0.5)
+```
+**BUG**
+**Sampled trees**
+```{r}
+plot(fossils_after_ecol_s_ext,
+     tree = tree,
+     extant.col = "red",
+     reconstructed = FALSE,
+     main = "Sampled tree shallow")
+
+plot(fossils_after_ecol_d_ext,
+     tree = tree,
+     extant.col = "red",
+     reconstructed = TRUE,
+     main = "Sampled tree deep")
+
+library(MorphSim)
+plot(data = fossils_after_ecol_s_ext, trait = 1, timetree = T)
+```
+**Shallow lob matrix**
+```{r}
+# simple Mk2 model
+n_states = 2
+br_rate = 0.5
+trait_num = 10
+trait_to_display = 2
+morpho_mk_s = MorphSim::sim.morpho(k = n_states,
+                        time.tree = tree,
+                        br.rates = br_rate,
+                        trait.num = trait_num, 
+                        variable = FALSE,
+                        fossil = fossils_after_ecol_s_ext)
+MorphSim::plotMorphoGrid(morpho_mk_s)
+#Bug here when plotting?
+plot(morpho_mk_s,
+     trait = trait_to_display)
+title(main = paste0("Trait no. ", trait_to_display))
+```
+
+**Deep lob matrix**
+```{r}
+# simple Mk2 model
+n_states = 2
+br_rate = 0.5
+trait_num = 10
+trait_to_display = 2
+morpho_mk_d = MorphSim::sim.morpho(k = n_states,
+                        time.tree = tree,
+                        br.rates = br_rate,
+                        trait.num = trait_num, 
+                        variable = FALSE,
+                        fossil = fossils_after_ecol_d_ext)
+MorphSim::plotMorphoGrid(morpho_mk_d)
+#Bug here when plotting?
+plot(morpho_mk_d,
+     trait = trait_to_display)
+title(main = paste0("Trait no. ", trait_to_display))
+```
+```{r}
+# export character matrix
+MorphSim::write.morpho(data = morpho_mk_d,
+                       file = "char_mat_temp.nex",
+                       type = "matrix",
+                       all = FALSE,
+                       reconstructed = TRUE)
+# export taxon ages
+MorphSim::write.morpho(data = morpho_mk,
+                       file = "ages_temp.tsv",
+                       type = "ages",
+                       all = TRUE,
+                       reconstructed = TRUE)
+
+# export the true tree 
+MorphSim::write.morpho(data = morpho_mk,
+                       file = "true_tree.tre",
+                       type = "tree",
+                       all = TRUE,
+                       reconstructed = TRUE)
+```
+
+Nothign is working and we can't wxport the matrix so we're going to make some specialised deep sea lobster datasets
+
+**Deep sea lobster**
+```{r}
+# simple Mk2 model
+n_states = 2
+br_rate = 0.5
+trait_num = 10
+trait_to_display = 2
+morpho_mk_d = MorphSim::sim.morpho(k = n_states,
+                        time.tree = tree,
+                        br.rates = br_rate,
+                        trait.num = trait_num, 
+                        variable = FALSE,
+                        fossil = fossils_after_ecol_d_ext)
+MorphSim::plotMorphoGrid(morpho_mk_d)
+#Bug here when plotting?
+plot(morpho_mk_d,
+     trait = trait_to_display)
+title(main = paste0("Trait no. ", trait_to_display))
+```
