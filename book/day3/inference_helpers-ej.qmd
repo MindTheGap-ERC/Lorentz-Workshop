@@ -1,0 +1,18 @@
+---
+title: "Inference"
+format: html
+---
+
+Group: Lena Cole, Mark Patzkowsky, Joel Koelewijn, Stephan Spiekman, Charlotte Summers, Emilia Jarochowska
+
+Goal:
+
+Infer tree and evolutionary rates across mass extinction events associated with niche shifts, taking into account availability of the niche space changing across time.
+Specific case studies:
+
+1. Reptiles across the P/T boundary: did the shift from marine to terrestrial occur once or twice (Sauropterygians and Ichthyosaurs or their common ancestor) and when?
+
+2. Crinoids across the end-Ordovician mass extinction: what was the timing of the post-extinction radiation and is its appearance only after the extinction event an artefact of the rock-record bias?
+
+Tools: https://revbayes.github.io/tutorials/sse/fossils
+
