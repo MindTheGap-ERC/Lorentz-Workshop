@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><beast beautitemplate='Standard' beautistatus='' namespace="beast.core:beast.evolution.alignment:beast.evolution.tree.coalescent:beast.core.util:beast.evolution.nuc:beast.evolution.operators:beast.evolution.sitemodel:beast.evolution.substitutionmodel:beast.base.evolution.alignment:beast.pkgmgmt:beast.base.core:beast.base.inference:beast.base.evolution.tree.coalescent:beast.pkgmgmt:beast.base.core:beast.base.inference.util:beast.evolution.nuc:beast.base.evolution.operator:beast.base.inference.operator:beast.base.evolution.sitemodel:beast.base.evolution.substitutionmodel:beast.base.evolution.likelihood" required="BEAST.base v2.7.8:SA v2.1.1:MM v1.2.1" version="2.7">
+
+    <data
+id="char_mat_temp"
+spec="Alignment"
+dataType="standard">
+        %%SEQUENCES%%
+        <userDataType id="StandardData.0" spec="beast.base.evolution.datatype.StandardData" ambiguities="" nrOfStates="%%NSTATES%%"/>
+    </data>
+
+    <map name="Uniform" >beast.base.inference.distribution.Uniform</map>
+    <map name="Exponential" >beast.base.inference.distribution.Exponential</map>
+    <map name="LogNormal" >beast.base.inference.distribution.LogNormalDistributionModel</map>
+    <map name="Normal" >beast.base.inference.distribution.Normal</map>
+    <map name="Beta" >beast.base.inference.distribution.Beta</map>
+    <map name="Gamma" >beast.base.inference.distribution.Gamma</map>
+    <map name="LaplaceDistribution" >beast.base.inference.distribution.LaplaceDistribution</map>
+    <map name="prior" >beast.base.inference.distribution.Prior</map>
+    <map name="InverseGamma" >beast.base.inference.distribution.InverseGamma</map>
+    <map name="OneOnX" >beast.base.inference.distribution.OneOnX</map>
+
+    <run id="mcmc" spec="MCMC" chainLength="1000000">
+        <state id="state" spec="State" storeEvery="5000">
+            <tree id="Tree.t:FBD_tree" spec="beast.base.evolution.tree.Tree" name="stateNode">
+                <trait id="dateTrait.t:char_mat_temp" spec="beast.base.evolution.tree.TraitSet" traitname="date-backward" value="%%AGES%%">
+                    <taxa id="TaxonSet.char_mat_temp2" spec="TaxonSet">
+                        <alignment id="char_mat_temp2" spec="FilteredAlignment" filter="1-10">
+                            <data idref="char_mat_temp"/>
+                            <userDataType id="morphDataType.char_mat_temp2" spec="beast.base.evolution.datatype.StandardData" ambiguities="" nrOfStates="2"/>
+                        </alignment>
+                    </taxa>
+                </trait>
+                <taxonset idref="TaxonSet.char_mat_temp2"/>
+            </tree>
+            <parameter id="mutationRate.s:morpho" spec="parameter.RealParameter" name="stateNode">1.0</parameter>
+            <parameter id="clockRate.c:morpho" spec="parameter.RealParameter" name="stateNode">1.0</parameter>
+            <parameter id="birthRateFBD.t:FBD_tree" spec="parameter.RealParameter" lower="0.0" name="stateNode">1.0</parameter>
+            <parameter id="deathRateFBD.t:FBD_tree" spec="parameter.RealParameter" lower="0.0" name="stateNode" upper="1.0">0.5</parameter>
+            <parameter id="samplingRateFBD.t:FBD_tree" spec="parameter.RealParameter" lower="0.0" name="stateNode" upper="1.0">0.5</parameter>
+            <parameter id="originFBD.t:FBD_tree" spec="parameter.RealParameter" lower="0.0" name="stateNode">100.0</parameter>
+        </state>
+        <init id="RandomTree.t:FBD_tree" spec="RandomTree" estimate="false" initial="@Tree.t:FBD_tree" taxa="@char_mat_temp2">
+            <populationModel id="ConstantPopulation0.t:FBD_tree" spec="ConstantPopulation">
+                <parameter id="randomPopSize.t:FBD_tree" spec="parameter.RealParameter" name="popSize">1.0</parameter>
+            </populationModel>
+        </init>
+        <distribution id="posterior" spec="CompoundDistribution">
+            <distribution id="prior" spec="CompoundDistribution">
+                <distribution id="FBD.t:FBD_tree" spec="sa.evolution.speciation.SABirthDeathModel" conditionOnRhoSampling="true" birthRate="@birthRateFBD.t:FBD_tree" origin="@originFBD.t:FBD_tree" samplingRate="@samplingRateFBD.t:FBD_tree" tree="@Tree.t:FBD_tree" deathRate="@deathRateFBD.t:FBD_tree">
+                    <parameter id="rFBD.t:FBD_tree" spec="parameter.RealParameter" lower="0.0" name="removalProbability" upper="1.0">0.0</parameter>
+                    <parameter id="rhoFBD.t:FBD_tree" spec="parameter.RealParameter" estimate="false" lower="0.0" name="rho" upper="1.0">1.0</parameter>
+                </distribution>
+                <prior id="ClockPrior.c:morpho" name="distribution" x="@clockRate.c:morpho">
+                    <Exponential id="Exponential.2" name="distr">
+                        <parameter id="RealParameter.1" spec="parameter.RealParameter" estimate="false" name="mean">0.5</parameter>
+                    </Exponential>
+                </prior>
+                <prior id="birthRatePriorFBD.t:FBD_tree" name="distribution" x="@birthRateFBD.t:FBD_tree">
+                    <Exponential id="Exponential.3" name="distr">
+                        <parameter id="RealParameter.2" spec="parameter.RealParameter" estimate="false" name="mean">0.1</parameter>
+                    </Exponential>
+                </prior>
+                <prior id="originPriorFBD.t:FBD_tree" name="distribution" x="@originFBD.t:FBD_tree">
+                    <Exponential id="Exponential.1" name="distr">
+                        <parameter id="RealParameter.0" spec="parameter.RealParameter" estimate="false" name="mean">1.0</parameter>
+                    </Exponential>
+                </prior>
+                <prior id="samplingRatePriorFBD.t:FBD_tree" name="distribution" x="@samplingRateFBD.t:FBD_tree">
+                    <Exponential id="Exponential.4" name="distr">
+                        <parameter id="RealParameter.3" spec="parameter.RealParameter" estimate="false" name="mean">0.1</parameter>
+                    </Exponential>
+                </prior>
+                <prior id="deathRatePriorFBD.t:FBD_tree" name="distribution" x="@deathRateFBD.t:FBD_tree">
+                    <Exponential id="Exponential.5" name="distr">
+                        <parameter id="RealParameter.4" spec="parameter.RealParameter" estimate="false" name="mean">0.1</parameter>
+                    </Exponential>
+                </prior>
+                <distribution id="root_age.prior" spec="beast.base.evolution.tree.MRCAPrior" monophyletic="true" tree="@Tree.t:FBD_tree">
+                    <taxonset id="root_age" spec="TaxonSet">
+                        %%ROOT_TAXA%%
+                    </taxonset>
+                </distribution>
+            </distribution>
+            <distribution id="likelihood" spec="CompoundDistribution" useThreads="true">
+                <distribution id="morphTreeLikelihood.char_mat_temp2" spec="TreeLikelihood" data="@char_mat_temp2" tree="@Tree.t:FBD_tree">
+                    <siteModel id="SiteModel.s:morpho" spec="SiteModel" mutationRate="@mutationRate.s:morpho">
+                        <parameter id="gammaShape.s:morpho" spec="parameter.RealParameter" estimate="false" name="shape">1.0</parameter>
+                        <substModel id="LewisMK.s:morpho" spec="morphmodels.evolution.substitutionmodel.LewisMK" datatype="@morphDataType.char_mat_temp2"/>
+                    </siteModel>
+                    <branchRateModel id="StrictClock.c:morpho" spec="beast.base.evolution.branchratemodel.StrictClockModel" clock.rate="@clockRate.c:morpho"/>
+                </distribution>
+            </distribution>
+        </distribution>
+        <operator id="StrictClockRateScaler.c:morpho" spec="ScaleOperator" parameter="@clockRate.c:morpho" weight="3.0"/>
+        <operator id="strictClockUpDownOperator.c:morpho" spec="operator.UpDownOperator" scaleFactor="0.75" weight="3.0">
+            <up idref="clockRate.c:morpho"/>
+            <down idref="Tree.t:FBD_tree"/>
+        </operator>
+        <operator id="FixMeanMutationRatesOperator" spec="operator.kernel.BactrianDeltaExchangeOperator" delta="0.75" weight="2.0">
+            <parameter idref="mutationRate.s:morpho"/>
+            <weightvector id="weightparameter" spec="parameter.IntegerParameter" estimate="false" lower="0" upper="0">10</weightvector>
+        </operator>
+        <operator id="originScalerFBD.t:FBD_tree" spec="ScaleOperator" parameter="@originFBD.t:FBD_tree" weight="3.0"/>
+        <operator id="deathRScalerFBD.t:FBD_tree" spec="ScaleOperator" parameter="@deathRateFBD.t:FBD_tree" weight="10.0"/>
+        <operator id="birthRScalerFBD.t:FBD_tree" spec="ScaleOperator" parameter="@birthRateFBD.t:FBD_tree" weight="10.0"/>
+        <operator id="samplingRScalerFBD.t:FBD_tree" spec="ScaleOperator" parameter="@samplingRateFBD.t:FBD_tree" weight="10.0"/>
+        <operator id="LeafToSAFBD.t:FBD_tree" spec="sa.evolution.operators.LeafToSampledAncestorJump" tree="@Tree.t:FBD_tree" weight="10.0"/>
+        <operator id="SAWilsonBaldingFBD.t:FBD_tree" spec="sa.evolution.operators.SAWilsonBalding" tree="@Tree.t:FBD_tree" weight="10.0"/>
+        <operator id="SAWideFBD.t:FBD_tree" spec="sa.evolution.operators.SAExchange" isNarrow="false" tree="@Tree.t:FBD_tree" weight="10.0"/>
+        <operator id="SANarrowFBD.t:FBD_tree" spec="sa.evolution.operators.SAExchange" tree="@Tree.t:FBD_tree" weight="10.0"/>
+        <operator id="SAUniformOperatorFBD.t:FBD_tree" spec="sa.evolution.operators.SAUniform" tree="@Tree.t:FBD_tree" weight="20.0"/>
+        <operator id="SATreeRootScalerFBD.t:FBD_tree" spec="sa.evolution.operators.SAScaleOperator" rootOnly="true" scaleFactor="0.95" tree="@Tree.t:FBD_tree" weight="1.0"/>
+        <operator id="SATreeScalerFBD.t:FBD_tree" spec="sa.evolution.operators.SAScaleOperator" scaleFactor="0.95" tree="@Tree.t:FBD_tree" weight="3.0"/>
+        <logger id="tracelog" spec="Logger" fileName="$(filebase).log" logEvery="1000" model="@posterior" sanitiseHeaders="true" sort="smart">
+            <log idref="posterior"/>
+            <log idref="likelihood"/>
+            <log idref="prior"/>
+            <log id="TreeHeight.t:FBD_tree" spec="beast.base.evolution.tree.TreeHeightLogger" tree="@Tree.t:FBD_tree"/>
+            <log idref="mutationRate.s:morpho"/>
+            <log idref="morphTreeLikelihood.char_mat_temp2"/>
+            <log idref="clockRate.c:morpho"/>
+            <log idref="FBD.t:FBD_tree"/>
+            <log idref="birthRateFBD.t:FBD_tree"/>
+            <log idref="deathRateFBD.t:FBD_tree"/>
+            <log idref="samplingRateFBD.t:FBD_tree"/>
+            <log idref="originFBD.t:FBD_tree"/>
+            <log id="SACountFBD.t:FBD_tree" spec="sa.evolution.tree.SampledAncestorLogger" tree="@Tree.t:FBD_tree"/>
+            <log idref="root_age.prior"/>
+        </logger>
+        <logger id="screenlog" spec="Logger" logEvery="1000">
+            <log idref="posterior"/>
+            <log idref="likelihood"/>
+            <log idref="prior"/>
+        </logger>
+        <logger id="treelog.t:FBD_tree" spec="Logger" fileName="$(tree).trees" logEvery="1000" mode="tree">
+            <log id="TreeWithMetaDataLogger.t:FBD_tree" spec="beast.base.evolution.TreeWithMetaDataLogger" tree="@Tree.t:FBD_tree"/>
+        </logger>
+        <operatorschedule id="OperatorSchedule" spec="OperatorSchedule"/>
+    </run>
+
+</beast>

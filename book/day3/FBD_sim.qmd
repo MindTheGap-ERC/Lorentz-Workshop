@@ -49,12 +49,8 @@ Now, let's sample some fossil occurrences along the tree according to a specifie
 ```{r simulate-fossil-object}
 psi = 5 # fossil sampling rate
 fossils = FossilSim::sim.fossils.poisson(rate = psi,
-<<<<<<< HEAD
-                                         tree = tree, root.edge = FALSE)
-=======
                                          tree = tree,
                                          root.edge = FALSE)
->>>>>>> 7445b0affdf68ef539e95a9e01c27cc3cbaf4507
 # inspect the fossils
 fossils
 ```
