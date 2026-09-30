@@ -187,6 +187,13 @@ MorphSim::write.morpho(data = morpho_mk,
                        type = "ages",
                        all = TRUE,
                        reconstructed = TRUE)
+
+# export the true tree 
+MorphSim::write.morpho(data = morpho_mk,
+                       file = "true_tree.tre",
+                       type = "tree",
+                       all = TRUE,
+                       reconstructed = TRUE)
 ```
 
 With this data at hand, you can now try to recover your simulation setup parameters using the Bayesian tree inference tool of your choice. Example scripts for this are available under "Inference helpers" (chapter 13).

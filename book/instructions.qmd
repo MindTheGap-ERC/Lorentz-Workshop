@@ -56,3 +56,4 @@ git commit -m "added a different sea level curve"
 git push
 ```
 
+If you want to contribute to the book, [open a pull request](https://docs.github.com/en/pull-requests/get-started/pull-request-quickstart#open-your-pull-request) in the [book's repository](https://github.com/MindTheGap-ERC/Lorentz-Workshop/). Usually if you go to your branch on GitHub, you will see a button saying **Contribute** near the top of the page. Click it to open a pull request. You can assign someone among the book's editors to review your pull request - we will be notified that you are ready to add your contribution.
