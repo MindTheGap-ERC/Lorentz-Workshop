@@ -1,0 +1,1 @@
+observed_phylogeny <- readTrees("day3/Group_Niche_SSE/canidae_tree.nex")[1]
