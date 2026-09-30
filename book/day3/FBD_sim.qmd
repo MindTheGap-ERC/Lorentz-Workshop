@@ -10,7 +10,7 @@ This chapter introduces the Fossilized Birth-Death (FBD) process using forward s
 
 ## Simulating the complete BD tree
 
-We start by simulating a tree using the TreeSim package. This package simulates trees conditioned on age, number of tips, or both. In stratigraphic paleobiology, the timescale of observation is often prescribed (e.g., lifespan of a basin, time interval covered by a section), which is why we focus on simulating conditioned on age.
+We start by simulating a tree using the TreeSim package. This package can simulate trees conditioned on age or number of tips. In stratigraphic paleobiology, the timescale of observation is often prescribed (e.g., lifespan of a basin, time interval covered by a section), which is why we focus on simulating conditioned on age.
 
 ```{r simple-bd-tree-simulation}
 # fix random seed for reproducibility
@@ -24,7 +24,7 @@ tree = TreeSim::sim.bd.age(age = t_max,
                            numbsim = 1, # only simulate one tree
                            lambda = lambda,
                            mu = mu,
-                           mrca = FALSE, # age is time since origin, tree has a rood edge
+                           mrca = FALSE, # age is time since origin, tree has a root edge
                            complete = TRUE)[[1]] # get the complete tree
 # inspect the tree
 tree
@@ -40,17 +40,7 @@ axis(1)
 mtext("Time since origin [Myr]", side = 1, line = 2)
 ```
 
-Note that this is a complete tree, meaning it contains extinct lineages. For comparison, let's plot the reconstructed tree, which prunes all extinct lineages:
-
-```{r plot_reconstructed-tree}
-reconstructed_tree = tree |>
-  geiger::drop.extinct(tol = 10^-8)
-plot(reconstructed_tree,
-     root.edge = TRUE,
-     main = "Reconstructed tree")
-axis(1)
-mtext("Time since origin [Myr]", side = 1, line = 2)
-```
+Note that this is a complete tree, meaning it contains extinct lineages.
 
 ## Simulating fossils along the tree
 
@@ -59,14 +49,15 @@ Now, let's sample some fossil occurrences along the tree according to a specifie
 ```{r simulate-fossil-object}
 psi = 5 # fossil sampling rate
 fossils = FossilSim::sim.fossils.poisson(rate = psi,
-                                         tree = tree)
+                                         tree = tree,
+                                         root.edge = FALSE)
 # inspect the fossils
 fossils
 ```
 
-Here you can inspect the generated fossil object, which contains information about species, the corresponding edge in the tree and age in the hmin and hmax column. Be aware that the entries in hmin and hmax are ages, even though the naming implicitly suggests that they might be heights (which is doubly confusing).
+Here you can inspect the generated fossil object, which contains information about species, the corresponding edge in the tree and age in the hmin and hmax column. Be aware that the entries in 'hmin' and 'hmax' are ages, even though the naming suggests that they might correspond to heights (which is confusing).
 
-Now, let's plot these fossils along the tree
+Now, let's plot these fossils along the tree:
 
 ```{r plot-fossils-along-tree-basic}
 plot(fossils,
@@ -75,7 +66,7 @@ plot(fossils,
      rho = 0) # suppress highlighting of extant tips
 ```
 
-There are plenty of plotting options available in FossilSim, e.g., you can plot the stratigraphic ranges (sic):
+There are plenty of plotting options available in FossilSim, e.g., you can plot the stratigraphic ranges (in the time domain):
 
 ```{r plot-fossils-along-tree-ranges}
 plot(fossils,
@@ -98,9 +89,9 @@ plot(fossils2,
      show.tip.label = TRUE)
 ```
 
-If you inspect the newly generated fossil object, you can see the new fossils of age 0 added.
+If you inspect the newly generated fossil object, you can see the new samples with an of age 0 have been added.
 
-This gives us the option to introduce the concept of the sampled tree:
+This gives us the option to introduce the concept of the reconstructed or sampled tree:
 
 ```{r compare-sampled-tree-with-base-tree}
 #| layout-ncol: 2
@@ -116,17 +107,17 @@ plot(fossils2,
      main = "Sampled tree")
 ```
 
-The sampled tree is the tree with all unsampled lineages (extant and extinct) removed. The sampled tree is the best we can hope to recover from our available data, as we will never recover unsampled lineages.
+The sampled tree is the tree with all unsampled lineages (extant and extinct) removed, i.e., it represents the tree that we can reconstruct from our observed samples. The sampled tree is the best we can hope to recover from our available data, as we can never recover unsampled lineages as part of a standard phylogenetic inference.
 
 ## Tasks and discussion points
 
-1.  Explore the simulation pipeline by modifying the parameters and the random seed. How large is the intrinsic variation in the trees when parameters are fixed? Are there parameters where the true tree, reconstructed tree, and sampled tree differ most/least?
+1.  Explore the simulation pipeline by modifying the parameters and the random seed. How large is the intrinsic variation in the trees when parameters are fixed? Are there parameters where the true tree and reconstructed/sampled tree differ most/least?
 
 2.  Think of the timescale you are usually on. What parameters work well on this scale?
 
 3.  Sampling rate: What determines the sampling rate on your timescale? Does the sampling rate depend on different drivers on different spatial and temporal scales (e.g., section vs. basin. vs. global scale)? If you put in more effort, could you increase it?
 
-4.  Sampling in the present, fully extinct trees, and `rho`: `rho` states that the extant tips undergo a different sampling regime. If you are working on fully extinct phyla, what is an appropriate choice of `rho` and what counts as the present? What about the case where you observe a fixed time-interval in the past, but taxa potentially survive longer than the observed time interval? How would work in the inference?
+4.  Sampling in the present, fully extinct trees, and `rho`: `rho` states that the extant tips undergo a different sampling regime. If you are working on fully extinct taxa, what is an appropriate choice of `rho` and what counts as the present? What about the case where you observe a fixed time-interval in the past, but taxa potentially survive longer than the observed time interval? How would that work in the inference?
 
 ## Advanced topics
 
@@ -134,7 +125,7 @@ These topics are not necessary for the workshop, but if you're interested and ha
 
 ## Exporting trees with sampled ancestors
 
-For comparability with other software packages, fossil objects have to be "baked in" the phylo object as tips at the end of an edge of length 0. We show this for the curious:
+For comparability with other software packages, fossil objects have to be "baked into" the phylo object as tips at the end of an edge of length 0. We show this for the curious:
 
 ```{r bake-fossils-into-tree}
 #| layout-ncol: 2

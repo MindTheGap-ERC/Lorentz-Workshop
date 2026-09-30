@@ -1,8 +1,6 @@
 ---
-title: "Index"
+title: "Introduction"
 ---
-
-## Introduction
 
 Welcome to the online materials for the workshop "Bridging Stratigraphic Paleobiology and Phylogenetics". This page collects all contents (code, text, references, and notes) used during the workshop.
 
@@ -80,4 +78,27 @@ remotes::install_github("fossilsim/FossilSim")
 remotes::install_github("MindTheGap-ERC/admtools")
 remotes::install_github("MindTheGap-ERC/StratPal")
 install.packages("TreeSim")
+```
+
+### Installing RevBayes
+
+Go to [RevBayes download](https://revbayes.github.io/download) section to download the executable. The latest version at time of writing is 1.4.1.
+
+After installation you should be able to open RevBayes on the command-line. Try to enter `1 + 1` to see if it works!
+
+```
+$ rb
+
+RevBayes version (1.4.1)
+Build from tags/v1.4.1 (3a504e) on Fri Jul 17 08:58:20 UTC 2026
+
+Visit the website www.RevBayes.com for more information about RevBayes.
+
+RevBayes is free software released under the GPL license, version 3. Type 'license()' for details.
+
+To quit RevBayes type 'quit()' or 'q()'.
+
+
+> 1 + 1
+   2
 ```

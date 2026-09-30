@@ -1,0 +1,43 @@
+# Short workshop run. Increase generations for a longer analysis.
+seed(20260929)
+generations <- 100000
+burnin <- 20000
+moves = VectorMoves()
+monitors = VectorMonitors()
+chars <- readDiscreteCharacterData("tail-armor.nex")
+taxa <- chars.taxa()
+
+speciation_rate ~ dnExponential(10.0)
+moves.append(mvScale(speciation_rate, weight=3))
+timetree ~ dnBDP(lambda=speciation_rate, rho=1.0, rootAge=1.0,
+    samplingStrategy="uniform", condition="nTaxa", taxa=taxa)
+moves.append(mvNarrow(timetree, weight=taxa.size()))
+moves.append(mvFNPR(timetree, weight=taxa.size()/4.0))
+moves.append(mvNodeTimeSlideUniform(timetree, weight=taxa.size()))
+moves.append(mvSubtreeScale(timetree, weight=taxa.size()/5.0))
+branch_rates ~ dnExponential(10.0)
+moves.append(mvScale(branch_rates, weight=3))
+
+# Paste the tail-armor matrix printed by R here (original ED3 model).
+rates := [[0.00, 1.00, 0.00, 0.00],
+          [1.00, 0.00, 1.00, 1.00],
+          [1.00, 1.00, 0.00, 1.00],
+          [1.00, 1.00, 1.00, 0.00]]
+Q_tail := fnFreeK(transition_rates=rates, rescaled=false,
+    matrixExponentialMethod="scalingAndSquaring")
+phy_tail ~ dnPhyloCTMC(tree=timetree, Q=Q_tail, rootFrequencies=simplex(1,1,1,1),
+    branchRates=branch_rates, type="Standard", coding="variable")
+phy_tail.clamp(chars)
+
+mymodel = model(timetree)
+monitors.append(mnModel(filename="output/tail-armor.log", printgen=20))
+monitors.append(mnFile(filename="output/tail-armor.trees", printgen=20, timetree))
+monitors.append(mnScreen(printgen=1000, branch_rates))
+mymcmc = mcmc(mymodel, monitors, moves)
+mymcmc.burnin(generations=burnin, tuningInterval=200)
+mymcmc.run(generations=generations)
+trace = readTreeTrace("output/tail-armor.trees")
+trace.setBurnin(0.25)
+mccTree(trace, file="output/tail-armor.mcc.tre")
+consensusTree(trace, file="output/tail-armor.consensus.tre")
+q()

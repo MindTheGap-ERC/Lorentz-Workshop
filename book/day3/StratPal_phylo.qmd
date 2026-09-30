@@ -6,7 +6,7 @@ editor: visual
 
 ## Introduction
 
-This chapter combines everything we have learned so far by combining stratigraphic paleobiology and phylogenetics into one forward simulation. At the end of this chapter, you will have built a complete simulation pipeline consisting of
+This chapter combines everything we have learned so far by combining stratigraphic paleobiology and phylogenetics into one forward simulation. At the end of this chapter, you will have built a complete simulation pipeline consisting of:
 
 -   A stratigraphic forward model (CarboKitten) that simulates age-depth models and environmental gradients such as water depth and facies
 
@@ -16,22 +16,22 @@ This chapter combines everything we have learned so far by combining stratigraph
 
 -   A character matrix for the fossils evolving according to a specified model of evolution and potentially missing characters due to differential preservation
 
--   Fossil ages that are potentially offset due to age misassignment or uncertainy
+-   Fossil ages that are potentially offset due to age misassignment or uncertainty
 
 With all these pieces in place, we can then address two key questions in the next chapter:
 
-1.  When we run inference on the simulated data (fossil ages, character matrices), can we recover the "true" evolutionary history (e.g., tree topology, model parameters)? More speculatively, can we potentially recover stratigraphic information such as sediment accumulation rates and gap duration from phylogenetic inference?
+1.  When we run inference on the simulated data (fossil ages, character matrices), can we recover the "true" evolutionary history (e.g., tree topology, model parameters)? More speculatively, can we potentially recover stratigraphic information, such as sediment accumulation rates and gap duration from phylogenetic inference?
 2.  Having build the forward simulation pipeline, can we use our knowledge of stratigraphy and the sampling process as sources of information in the inference? And if yes, does it improve the inference?
 
 ## Tasks and discussion points
 
--   Modify the provided pipeline according to your work in the last 3 days and simulate your very own fossil record. At the end you should have two components: (1) simulated biased data that you would usually use for inference, specifically a character matrix and fossil ages and (2) the biological and stratigraphic "truth" (age-depth model and gap timing) to compare inference results to. Specifically, this should contain the true sampled tree, age-depth relationship, clock rate, and model of morphological evolution.
+-   Modify the provided pipeline according to your work in the last 3 days and simulate your very own fossil record. At the end you should have two components: (1) simulated biased data that you would usually use for inference, specifically a character matrix and fossil ages, and (2) the biological and stratigraphic "truth" (age-depth model and gap timing) to compare inference results to. Specifically, this should contain the true sampled tree, age-depth relationship, clock rate, and model of morphological evolution.
 
--   You now know many different effects that go into the sampled tree, character data, and ages. For your study system, which do you think are most relevant?
+-   You now know many of the different components that go into generating the sampled tree, character data, and ages. For your study system, which do you think are most relevant?
 
--   We have focused on forward simulation so far. If you had perfect knowledge of all these effects, how would you incorporate them in phylogenetic inference?
+-   We have focused on forward simulation so far. If you had perfect knowledge of all these processes, how would you incorporate them in phylogenetic inference?
 
--   Looking back, which effects have you investigated? Compare with other groups which stratigraphic bias had the biggest impact and what aspects of the analysis have been affected the most.
+-   Looking back, which effects have you investigated? Compare with other groups which stratigraphic or taphonomic bias had the biggest impact and what aspects of the analysis have been affected the most.
 
 ## Preliminaries
 
@@ -105,7 +105,7 @@ plot(fossils,
 
 ## Taphonomy and ecology
 
-As first part of the pipeline, let's introduce ecological and taphonomic effects. As before, we use water depth as ecological gradient:
+Next, let's introduce ecological and taphonomic effects. As before, we use water depth as ecological gradient:
 
 ```{r define-niche-and-ecological-gradient}
 #| layout-ncol: 2
@@ -188,7 +188,7 @@ plot(x = t_low_res,
      main = "Effective sampling rate")
 ```
 
-Often, the original sampling rate `psi` needs to be chosen high to make sure any fossils are preserved. If you would like to subsample your fossils to a fixed small number, you can use the following function for it. We subsample to 30 fossils to reduce runtime in the inference later.
+In this context, the original sampling rate `psi` should be high to make sure fossils are preserved after we add the stratigraphic filter. If you would like to subsample your fossils to a fixed small number, you can use the following function for it. Here, we subsample 30 fossils to reduce the runtime during inference later.
 
 ```{r subsample-fossils-to-fixed-samplesize}
 n_preserved = 30
@@ -207,7 +207,7 @@ plot(fossils2,
 
 ## Add extant samples
 
-Now we add the extant samples to the fossil object. This yields the sampled tree after after taphonomic and ecological effects.
+Now we add the extant samples to the fossil object. This yields the sampled tree including extant and extinct lineages, after after taphonomic and ecological effects.
 
 ```{r add-extant-samples}
 rho = 0.5 # proportion of extant tips that are sampled
@@ -225,11 +225,11 @@ plot(fossils_used,
 
 ## Simulate morphological characters
 
-Now we can simulate morphological characters along the tree and the preserved fossils. We focus on the simple Mk2 model here, insert your own if you like.
+Now we can simulate morphological characters along the tree and the preserved fossils. We focus on the simple Mk2 and strict clock models here, insert your own if you like.
 
 ```{r simulate-morphological-characters}
 n_states = 2
-br_rate = 0.5
+br_rate = 0.5 # rate of change per trait per time unit
 trait_num = 100
 morpho_mk = MorphSim::sim.morpho(k = n_states,
                         time.tree = tree,

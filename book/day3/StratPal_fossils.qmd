@@ -6,7 +6,7 @@ editor: visual
 
 ## Introduction
 
-In this chapter we will explore some advanced topics in stratigraphic paleobiology, specifically
+In this chapter we will explore some advanced topics in stratigraphic paleobiology, specifically:
 
 1.  How taphonomic and ecological effects shape the stratigraphic distribution of fossils
 2.  How the misidentification of age-depth relationships changes the inference of temporal dynamics.
@@ -21,7 +21,7 @@ To slowly approach this, we use two data types: event data as introduced on the 
 
 -   For your study system and spatiotemporal scale of interest, what are the major ecological and taphonomic processes that determine fossil abundance? Could you quantify and formalize them? How is it for other members of your group?
 
--   Do you have any intuition how much age misassignment is a problem on the timescale you are working on? Is there a timescale where you think it is most/least relevant (e.g., section vs basin vs global)? From day 1 you know that the age-depth models are shaped by external drivers of stratigraphic architectures (here the eustatic sea level curve). Discuss the relationship between the timescale of observation, timescale of external drivers, and age-misassignment.
+-   Do you have any intuition how much age misassignment is a problem on the timescale you are working on? Is there a timescale where you think it is most/least relevant (e.g., section vs. basin vs. global)? From day 1 you know that the age-depth models are shaped by external drivers of stratigraphic architectures (here the eustatic sea level curve). Discuss the relationship between the timescale of observation, timescale of external drivers, and age-misassignment.
 
 ## Preliminaries
 
@@ -66,7 +66,8 @@ tree = TreeSim::sim.bd.age(age = t_max,
                               mrca = FALSE,
                               complete = TRUE)[[1]]
 fossils = FossilSim::sim.fossils.poisson(rate = psi,
-                                         tree = tree)
+                                         tree = tree,
+                                         root.edge = FALSE)
 plot(fossils, 
      tree = tree,
      main = "FBD tree")
@@ -86,7 +87,7 @@ h_min = admtools::min_height(adm)
 
 Ecology and taphonomy act identically on fossil occurrences:
 
--   Niche preferences determine whether a taxon will be sampled at a specific location/time: If some environmental gradient matches the preferred environment of the taxon it is more likely to be observed. The more the environmental cline deviates from the optimum, the less likely an observation is
+-   Niche preferences determine whether a taxon will be sampled at a specific location/time: If some environmental gradient matches the preferred environment of the taxon it is more likely to be observed. The more the environmental cline deviates from the optimum, the less likely an observation is.
 
 -   Taphonomic conditions determine whether a fossil is preserved or not. Again, this is a joint expression of an environmental gradient (e.g., water depth, grain size, burial velocity) and an intrinsic property, meaning the preservation probability under the specified taphonomic conditions.
 
@@ -127,7 +128,7 @@ plot(x = wd_vals,
      main = "Niche definition")
 ```
 
-This specifies that the taxa preferrably live in shallow water, with a moderate tolerance to water depth fluctuations, and are strictly marine.
+This specifies that the taxa preferably live in shallow water, with a moderate tolerance to water depth fluctuations, and are strictly marine.
 
 The next piece of information we need is to encode the environmental gradient as a function of time:
 
@@ -149,12 +150,23 @@ Combining the two gives the sampling probability with time:
 plot(x = t,
      y = t |> gradient() |> niche_def(),
      type = "l",
-     xlab = "Time",
+     xlab = "Time [Myr]",
      ylab = "Sampling probability",
-     main = "Sampling probability of taxa")
+     main = "Sampling probability of taxa, time domain")
 ```
 
-Note that here the sampling probability drops to 0 not because of erosion or a hiatus, but because the simulated taxon is strictly marine.
+Note that here the sampling probability drops to 0 not because of erosion or a hiatus, but because the simulated taxon is strictly marine. Can you explain why the sampling probability is low initially?
+
+For the curious: With the transformation between time and stratigraphic domain provided by the age-depth model, you can then immediately construct the sampling probability in the stratigraphic domain:
+
+```{r sampling-probability-strat-domain-ecology}
+ plot(x = t |> gradient() |> niche_def(),
+      y = t |> admtools::time_to_strat(adm),
+     type = "l",
+     xlab = "Sampling probability",
+     ylab = "Stratigrapic position [m]",
+     main = "Sampling probability of taxa, stratigraphic domain")
+```
 
 ### Effect on fossil occurrences
 
@@ -216,11 +228,11 @@ StratPal::p3_var_rate(x = c(0,1),
        ylab = "Fossil occurrences")
 ```
 
-That's how easy this is! Here you can still see the initial low fossil abundance due to the high water depth at the beginning of the simulation. However, the drops to 0 miss as the here mostly match with subaerial exposure.
+That's how easy this is! Here you can still see the initial low fossil abundance due to the high water depth at the beginning of the simulation. However, the drops to 0 here mostly match with subaerial exposure.
 
 ### Application to fossil objects associated with phylogenetic trees
 
-Everything said above applies identical to fossil objects simulated along a tree: Define a niche (valid for all taxa recorded in the tree) and a gradient, and use `apply_niche`. There is one major caveat though: age-depth models count time ***forward*** as the simulation evolved, while fossil objects record **age**. This requires flipping the time axis to make everything work out correctly:
+Everything said above applies to fossil objects simulated along a tree: Define a niche (valid for all taxa recorded in the tree) and a gradient, and use `apply_niche`. There is one major caveat though: age-depth models count time ***forward*** as the simulation evolves, while fossil objects record absolute **age**. This requires flipping the time axis to make everything work out correctly:
 
 ```{r fbd-tree-as-baseline}
 # As baseline
@@ -248,7 +260,7 @@ Note the significant thinning of fossil sampling towards the top of the tree due
 
 ### Taphonomic effects
 
-Taphonomic effects are modeled identical to ecological effects, with the taphonomic gradient (e.g., burial velocity) taking the role of the ecological gradient, and the preservation potential taking the role of the niche definition.
+Taphonomic effects are modeled identically to ecological effects, with the taphonomic gradient (e.g., burial velocity) taking on the role of the ecological gradient, and the preservation potential taking on the role of the niche definition.
 
 As a simple example, we define a taphonomic gradient that filters all occurrences that fall in a gap:
 
@@ -264,17 +276,17 @@ plot(fossils_filtered,
      main = "Fossils during gaps removed")
 ```
 
-Of course this pipeline can be extended to include stratigraphic effects and multiple ecological and taphonomic gradients.
+Of course this pipeline can be extended to include stratigraphic effects introduced by age-depth models and multiple ecological and taphonomic gradients.
 
 ### Extensions and limitations
 
-Both ecological and taphonomic effects work out of the box for multivariate gradients and high-dimensional niches due to the magic of function composition. However, this modeling approach does currently not allow to model state-dependent effects (e.g., evolution of niches, variations in preservation between branches). In addition, this does not yet integrate with `MorphoSim` to selectively remove characters.
+Both ecological and taphonomic effects work out of the box for multivariate gradients and high-dimensional niches due to the magic of function composition. However, this modeling approach does not currently allow us to model state-dependent effects (e.g., evolution of niches, variations in preservation between branches). In addition, this approach does not yet integrate with `MorphoSim` to selectively remove characters (although you can use MorphSim to simulate characters after you've simulated fossil occurrences).
 
 ## Age misidentification
 
 Up to now, we have assumed that age-depth models are fully known, which in reality is never really the case. Here we examine how this can effect interpretations of temporal dynamics.
 
-The underlying idea is that there are 2 age-depth models at play: a "true" age-depth model that is used for forward modeling to determine the stratigraphic distribution of fossils, and a "assumed" age-depth model that is in a second step used to reconstruct ages from the observed stratigraphic positions of fossils.
+The underlying idea is that there are 2 age-depth models at play: a "true" age-depth model that is used for forward modeling to determine the stratigraphic distribution of fossils, and an "assumed" age-depth model that is in a second step used to reconstruct ages from the observed stratigraphic positions of fossils.
 
 Let's assume the simulated age-depth model is our true model, and our assumed model assumes naively that sediment accumulation is constant over the observed time interval:
 
@@ -297,7 +309,7 @@ title(main = "Assumed age-depth model")
 
 ### Effect on fossil occurrences and last occurrences
 
-To determine the inferred age of a fossil, first determine its stratigraphic position using the correct age-depth model, and the reconstruct its age using the assumed age-depth model:
+To determine the inferred age of a fossil, first determine its stratigraphic position using the correct age-depth model, and then reconstruct its age using the assumed age-depth model:
 
 ```{r construct-assumed-age-single-fossil}
 true_age = 0.75 # pick an arbitrary age
@@ -307,7 +319,7 @@ assumed_age = true_age |>
 assumed_age
 ```
 
-If this returns `NA`, the true age coincides with a gap. This approach immediately generalizes, e.g. under a constant extinction rate (and assuming every taxon is abundantly sampled), the reconstructed pattern of last occurrences is
+If this returns `NA`, the true age coincides with a gap. This approach immediately generalizes, e.g., under a constant extinction rate (and assuming every taxon is abundantly sampled), the reconstructed pattern of last occurrences is:
 
 ```{r reconstructed-extinction-dynamics-wrong-adm}
 StratPal::p3(rate = 1,
@@ -323,9 +335,9 @@ StratPal::p3(rate = 1,
        ylab = "Last occcurrences")
 ```
 
-Note that in constrats to the exercise on the first day, here the results are really in the time domain (check the units). Think through this to validate that the peaks in the histogram correspond to the gaps in the age-depth model.
+Note that in contrast to the exercise on the first day, here the results are really in the time domain (check the units). Think through this to validate that the peaks in the histogram correspond to the gaps in the age-depth model.
 
-This approach allows to immediately determine how wrong our age-estimates really are due to the wrong age-depth model:
+This approach allows us to immediately determine how wrong our age-estimates really are due to the wrong age-depth model:
 
 ```{r determine-age-error-wrong-adm}
 # inferred time
@@ -359,6 +371,6 @@ plot(fossils_misassigned_age,
      main = "Tree with wrong reconstructed fossil ages")
 ```
 
-Here you can immediately see the contradiction between the timing of the underlying biological truth (the tree) and the (wrongly) reconstructed ages of the fossils. At multiple locations, fossils associated with a lineage extend beyond the duration of the lineage, and fossils of an ancestoral lineage are present long after a branching event.
+This plot shows the contradiction between the timing of the underlying biological truth (the tree) and the (wrongly) reconstructed ages of the fossils. At multiple locations, fossils associated with a lineage extend beyond the duration of the lineage, and fossils of an ancestral lineage are present long after a branching event.
 
 Using these fossil ages for tree inference will clearly lead to wrong results.

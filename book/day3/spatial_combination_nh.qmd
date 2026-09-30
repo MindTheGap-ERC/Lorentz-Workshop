@@ -1,0 +1,53 @@
+---
+title: "correlating data on a joint time scale"
+author: "Niklas Hohmann"
+format: html
+editor: visual
+---
+
+## Day 3
+
+Correlate data on a joint time scale using the correct age-depth model:
+```{r}
+library(StratPal)
+library(admtools)
+adm_1 = tp_to_adm(t = scenarioA$t_myr,
+                  h = scenarioA$h_m[,"2km"])
+adm_2 = tp_to_adm(t = scenarioA$t_myr,
+                  h = scenarioA$h_m[,"12km"])
+t_max = max_time(adm_1)
+
+rate = 10000
+occ1 = p3(rate, from = 0, to = t_max) |>
+  time_to_strat(adm_1) |>
+  strat_to_time(adm_1)
+occ2 = p3(rate, from = 0, to = t_max) |>
+  time_to_strat(adm_2) |>
+  strat_to_time(adm_2)
+
+hist(c(occ1, occ2),
+     breaks = seq(0, t_max, length.out = 30),
+     xlab = "Time [Myr]")
+
+```
+same, but using the wrong age-depth model assuming uniterrupted sediment accumulation
+```{r}
+adm_assumed_1 = tp_to_adm(t = c(0, t_max),
+                          h = c(0, h_max_1))
+
+adm_assumed_2 = tp_to_adm(t = c(0, t_max),
+                          h = c(0, h_max_2))
+h_max_1 = max_height(adm_1)
+h_max_2 = max_height(adm_2)
+occ1 = p3(rate, from = 0, to = t_max) |>
+  time_to_strat(adm_1) |>
+  strat_to_time(adm_assumed_1)
+occ2 = p3(rate, from = 0, to = t_max) |>
+  time_to_strat(adm_2) |>
+  strat_to_time(adm_assumed_2)
+
+hist(c(occ1, occ2),
+     breaks = seq(0, t_max, length.out = 30),
+     xlab = "Time [Myr]")
+```
+
