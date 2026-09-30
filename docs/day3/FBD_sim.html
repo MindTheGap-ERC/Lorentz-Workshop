@@ -407,7 +407,7 @@ Rooted; includes branch length(s).</code></pre>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>psi <span class="ot">=</span> <span class="dv">5</span> <span class="co"># fossil sampling rate</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>fossils <span class="ot">=</span> FossilSim<span class="sc">::</span><span class="fu">sim.fossils.poisson</span>(<span class="at">rate =</span> psi,</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">tree =</span> tree)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">tree =</span> tree, <span class="at">root.edge =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect the fossils</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>fossils</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -423,7 +423,7 @@ Rooted; includes branch length(s).</code></pre>
 9   4    4 0.37341457 0.37341457
 10  4    4 0.27850257 0.27850257
 ...
-Fossil record with 18 occurrences representing 7 species
+Fossil record with 16 occurrences representing 6 species
 Fossil record not simulated using taxonomy: all speciation events are assumed to be symmetric </code></pre>
 </div>
 </div>
@@ -583,7 +583,14 @@ Fossil record not simulated using taxonomy: all speciation events are assumed to
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">file =</span> <span class="st">"ages_temp.tsv"</span>,</span>
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">type =</span> <span class="st">"ages"</span>,</span>
 <span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>                       <span class="at">all =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>                       <span class="at">reconstructed =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>                       <span class="at">reconstructed =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co"># export the true tree </span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>MorphSim<span class="sc">::</span><span class="fu">write.morpho</span>(<span class="at">data =</span> morpho_mk,</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>                       <span class="at">file =</span> <span class="st">"true_tree.tre"</span>,</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>                       <span class="at">type =</span> <span class="st">"tree"</span>,</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>                       <span class="at">all =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>                       <span class="at">reconstructed =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>With this data at hand, you can now try to recover your simulation setup parameters using the Bayesian tree inference tool of your choice. Example scripts for this are available under “Inference helpers” (chapter 13).</p>
 

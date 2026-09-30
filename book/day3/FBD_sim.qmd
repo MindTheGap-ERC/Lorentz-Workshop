@@ -59,7 +59,7 @@ Now, let's sample some fossil occurrences along the tree according to a specifie
 ```{r simulate-fossil-object}
 psi = 5 # fossil sampling rate
 fossils = FossilSim::sim.fossils.poisson(rate = psi,
-                                         tree = tree)
+                                         tree = tree, root.edge = FALSE)
 # inspect the fossils
 fossils
 ```
@@ -194,6 +194,13 @@ MorphSim::write.morpho(data = morpho_mk,
 MorphSim::write.morpho(data = morpho_mk,
                        file = "ages_temp.tsv",
                        type = "ages",
+                       all = TRUE,
+                       reconstructed = TRUE)
+
+# export the true tree 
+MorphSim::write.morpho(data = morpho_mk,
+                       file = "true_tree.tre",
+                       type = "tree",
                        all = TRUE,
                        reconstructed = TRUE)
 ```
