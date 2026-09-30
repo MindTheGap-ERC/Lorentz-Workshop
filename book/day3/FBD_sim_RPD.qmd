@@ -187,13 +187,159 @@ MorphSim::write.morpho(data = morpho_mk,
                        type = "ages",
                        all = TRUE,
                        reconstructed = TRUE)
-
-# export the true tree 
-MorphSim::write.morpho(data = morpho_mk,
-                       file = "true_tree.tre",
-                       type = "tree",
-                       all = TRUE,
-                       reconstructed = TRUE)
 ```
 
 With this data at hand, you can now try to recover your simulation setup parameters using the Bayesian tree inference tool of your choice. Example scripts for this are available under "Inference helpers" (chapter 13).
+
+*Below I am doing my own thing*
+
+```{r}
+setwd("C:/Users/deardenr/stratworkshop/Lorentz-Workshop/book/day3")
+
+```
+
+Simulating the complete BD tree, have raised extinction rate
+```{r}
+# fix random seed for reproducibility
+seed = 42
+set.seed(seed)
+# model parameters, modify as you see fit
+lambda = 2 # speciation rate
+mu = 0.4 # extinction rate
+t_max = 1 # duration of the simulation
+tree = TreeSim::sim.bd.age(age = t_max,
+                           numbsim = 1, # only simulate one tree
+                           lambda = lambda,
+                           mu = mu,
+                           mrca = FALSE, # age is time since origin, tree has a root edge
+                           complete = TRUE)[[1]] # get the complete tree
+# inspect the tree
+tree
+```
+###Plotting the tree
+```{r}
+png(filename="FBDsimtree_RPD.png", width=800, height=800)
+plot(tree,
+     root.edge = TRUE,
+     main = "Birth-death tree")
+axis(1)
+mtext("Time since origin [Myr]", side = 1, line = 2)
+dev.off()
+```
+Simulating fossils: raised sampling rate
+```{r}
+psi = 10 # fossil sampling rate
+fossils = FossilSim::sim.fossils.poisson(rate = psi,
+                                         tree = tree,
+                                         root.edge = FALSE)
+# inspect the fossils
+fossils
+```
+Plot fossils
+```{r}
+png(filename="FBDsimtreefoss_RPD.png", width=800, height=800)
+plot(fossils,
+     tree = tree,
+     show.tip.label = TRUE,
+     rho = 0) # suppress highlighting of extant tips
+dev.off()
+
+png(filename="FBDsimtreefossrang_RPD.png", width=800, height=800)
+plot(fossils,
+     tree = tree, 
+     show.ranges = TRUE,
+     rho = 0)
+dev.off()
+```
+Sample some extants by adding to fossil object
+```{r}
+rho = 0.45 # proportion of extant tips that are sampled
+fossils2 = FossilSim::sim.extant.samples(fossils = fossils,
+                                         tree = tree,
+                                         rho = rho)
+# plot the output
+png(filename="FBDsimtreefossrangext_RPD.png", width=800, height=800)
+plot(fossils2,
+     tree = tree,
+     extant.col = "red",
+     show.tip.label = TRUE)
+dev.off()
+
+```
+Introduce reconstructed tree
+```{r}
+png(filename="FBDsimtreefossboth1_RPD.png", width=1600, height=800)
+plot(fossils2,
+     tree = tree,
+     extant.col = "red",
+     reconstructed = FALSE,
+     main = "Simulated tree and fossils")
+dev.off()
+
+png(filename="FBDsimtreefossboth2_RPD.png", width=1600, height=800)
+plot(fossils2,
+     tree = tree,
+     extant.col = "red",
+     reconstructed = TRUE,
+     main = "Sampled tree")
+dev.off()
+```
+
+Aim to have high speciation and low extinction with a high fossil sampling rate. We are foraminiferanologists.
+```{r}
+# fix random seed for reproducibility
+seed = 8
+set.seed(seed)
+# model parameters, modify as you see fit
+lambda = 5 # speciation rate
+mu = 0.1 # extinction rate
+t_max = 1 # duration of the simulation
+ftree = TreeSim::sim.bd.age(age = t_max,
+                           numbsim = 1, # only simulate one tree
+                           lambda = lambda,
+                           mu = mu,
+                           mrca = FALSE, # age is time since origin, tree has a root edge
+                           complete = TRUE)[[1]] # get the complete tree
+# inspect the tree
+png(filename="FBD_ftree_RPD.png", width=800, height=800)
+plot(ftree,
+     root.edge = TRUE,
+     main = "Birth-death tree")
+axis(1)
+mtext("Time since origin [Myr]", side = 1, line = 2)
+dev.off()
+
+psi = 20 # fossil sampling rate
+ffossils = FossilSim::sim.fossils.poisson(rate = psi,
+                                         tree = ftree,
+                                         root.edge = FALSE)
+# inspect the fossils
+ffossils
+png(filename="FBD_ftree_fossls_RPD.png", width=800, height=800)
+plot(ffossils,
+     tree = ftree,
+     show.tip.label = TRUE,
+     rho = 0) # suppress highlighting of extant tips
+dev.off()
+
+png(filename="FBD_ftree_rang.png", width=800, height=800)
+plot(ffossils,
+     tree = ftree, 
+     show.ranges = TRUE,
+     rho = 0)
+dev.off()
+
+rho = 0.5 # proportion of extant tips that are sampled
+ffossils2 = FossilSim::sim.extant.samples(fossils = ffossils,
+                                         tree = ftree,
+                                         rho = rho)
+
+# plot the output
+png(filename="FBD_ftree_extsamp_RPD.png", width=800, height=800)
+plot(ffossils2,
+     tree = ftree,
+     extant.col = "red",
+     show.tip.label = TRUE)
+dev.off()
+
+```
