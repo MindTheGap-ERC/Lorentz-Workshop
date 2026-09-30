@@ -1,0 +1,409 @@
+#NEXUS
+[written Wed Sep 30 16:25:09 CEST 2026 by Mesquite  version 2.75 (build 564) at Laptop_Stephan/145.118.113.23]
+
+BEGIN TAXA;
+	TITLE Taxa;
+	DIMENSIONS NTAX=126;
+	TAXLABELS
+		Petrolacosaurus_kansensis Eunotosaurus_africanus Proganochelys_quenstedti Odontochelys_semitestacea Claudiosaurus_germaini Youngina_capensis Acerosodontosaurus_piveteaui Coelurosauravus_jaekeli Coelurosauravus_elivensis Hupehsuchus_nanchangensis Chaohusaurus_chaoxianensis Cartorhynchus_lenticarpus Utatsusaurus_hataii Protorosaurus_speneri Tanystropheus_longobardicus Langobardisaurus_pandolfii Macrocnemus_fuyuanensis Prolacerta_broomi Megalancosaurus_preonensis Vallesaurus_cenensis Askeptosaurus_italicus Philydrosaurus_proseilus Champsosaurus_lindoei Mesosuchus_browni Howesia_browni Teyumbaita_sulcognathus Hyperodapedon_huenei Trilophosaurus_buettneri Proterosuchus_alexanderi Proterosuchus_fergusi Euparkeria_capensis Largocephalosaurus_qianensis Sinosaurosphargis_yunguiensis Cyamodus_hildegardis Placodus_gigas Wumengosaurus_delicatomandibularis Serpianosaurus_mirigioliensis Lariosaurus_calcagnii Pistosaurus_longaevus Yunnanodraco_pani Kuehneosaurus_latus Icarosaurus_siefkeri Pamelina_polonica Diphydontosaurus_avonis Planocephalosaurus_robinsonae Clevosaurus_hudsoni Palaeopleurosaurus_posidoniae Priosphenodon_avelasi Sphenodon_punctatus Vellbergia_bartholomaei Taytalura_alcoberi Paliguana_whitei Fraxinisaura_rozynekae Marmoretta_oxoniensis Megachirella_wachtleri Sophineta_cracoviensis Gephyrosaurus_bridensis Oculudentavis_khaungraae Scandensia_ciervensis Hongshanxi_xiei Bellairsia_combined Huehuecuetzpalli_mixtecus Ardeosaurus_brevipes Eichstaettisaurus_schroederi Gobekko_cretacicus Dactylocnemis_pacificus Gekko_gecko Coleonyx_variegatus Paramacellodus_oweni Plestiodon_fasciatus Mabuya_mabouya Xantusia_vigilis Cordylus_niger Broadleysaurus_major Meyasaurus_diazromerali Tepexisaurus_tepexii Dalinghosaurus_longidigitus Globaura_venusta Slavoia_darevskii Trioceros_jacksonii Uromastyx_aegyptia Priscagama_gobiensis Pleurodontagama_aenigmatoides Igua_minuta Polrussia_mongoliensis Oplurus_cyclurus Stenocercus_scapularis Hoplocercus_spinosus Pristidactylus_scapulatus Iguana_iguana Polychrus_marmoratus Crotaphytus_collaris Liolaemus_signifer Leiocephalus_carinatus Phrynosoma_modestum Timon_lepidus Lacerta_viridis Teius_teyou Gobinatus_arenosus Gilmoreteius_chulsanensis Petracola_ventrimaculatus Xenosaurus_grandis Pseudopus_apodus Elgaria_multicarinata Heloderma_suspectum Lanthanotus_borneensis Varanus_salvator Aigialosaurus Adriosaurus_suessi Pontosaurus Najash_rionegrina Dinilysia_patagonica Pachyrhachis_problematicus Cylindrophis_ruffus Xenopeltis_unicolor Anilius_scytale Spathorhynchus_fossorium Rhineura_floridana Bipes_biporus Blanus_cinereus Dibamus_novaeguineae Eoscincus Dorsetisaurus Parviraptor_estesi_NHMUK_PV_OR_48388 Parviraptorid_NHMUK_PV_R8511 Breugnathair_elgolensis 
+	;
+
+END;
+
+
+BEGIN CHARACTERS;
+	TITLE  Character_Matrix;
+	DIMENSIONS  NCHAR=1;
+	FORMAT DATATYPE = STANDARD GAP = - MISSING = ? SYMBOLS = "  0 1 2 3 4 5 6";
+	MATRIX
+	Petrolacosaurus_kansensis             0
+	Eunotosaurus_africanus                0
+	Proganochelys_quenstedti              0
+	Odontochelys_semitestacea             0
+	Claudiosaurus_germaini                0
+	Youngina_capensis                     0
+	Acerosodontosaurus_piveteaui          0
+	Coelurosauravus_jaekeli               0
+	Coelurosauravus_elivensis             0
+	Hupehsuchus_nanchangensis             1
+	Chaohusaurus_chaoxianensis            1
+	Cartorhynchus_lenticarpus             1
+	Utatsusaurus_hataii                   1
+	Protorosaurus_speneri                 0
+	Tanystropheus_longobardicus           1
+	Langobardisaurus_pandolfii            0
+	Macrocnemus_fuyuanensis               0
+	Prolacerta_broomi                     0
+	Megalancosaurus_preonensis            0
+	Vallesaurus_cenensis                  0
+	Askeptosaurus_italicus                1
+	Philydrosaurus_proseilus              0
+	Champsosaurus_lindoei                 0
+	Mesosuchus_browni                     0
+	Howesia_browni                        0
+	Teyumbaita_sulcognathus               0
+	Hyperodapedon_huenei                  0
+	Trilophosaurus_buettneri              0
+	Proterosuchus_alexanderi              0
+	Proterosuchus_fergusi                 0
+	Euparkeria_capensis                   0
+	Largocephalosaurus_qianensis          1
+	Sinosaurosphargis_yunguiensis         1
+	Cyamodus_hildegardis                  1
+	Placodus_gigas                        1
+	Wumengosaurus_delicatomandibularis    1
+	Serpianosaurus_mirigioliensis         1
+	Lariosaurus_calcagnii                 1
+	Pistosaurus_longaevus                 1
+	Yunnanodraco_pani                     0
+	Kuehneosaurus_latus                   0
+	Icarosaurus_siefkeri                  0
+	Pamelina_polonica                     0
+	Diphydontosaurus_avonis               0
+	Planocephalosaurus_robinsonae         0
+	Clevosaurus_hudsoni                   0
+	Palaeopleurosaurus_posidoniae         1
+	Priosphenodon_avelasi                 0
+	Sphenodon_punctatus                   0
+	Vellbergia_bartholomaei               0
+	Taytalura_alcoberi                    0
+	Paliguana_whitei                      0
+	Fraxinisaura_rozynekae                0
+	Marmoretta_oxoniensis                 0
+	Megachirella_wachtleri                0
+	Sophineta_cracoviensis                0
+	Gephyrosaurus_bridensis               0
+	Oculudentavis_khaungraae              0
+	Scandensia_ciervensis                 0
+	Hongshanxi_xiei                       0
+	Bellairsia_combined                   0
+	Huehuecuetzpalli_mixtecus             0
+	Ardeosaurus_brevipes                  0
+	Eichstaettisaurus_schroederi          0
+	Gobekko_cretacicus                    0
+	Dactylocnemis_pacificus               0
+	Gekko_gecko                           0
+	Coleonyx_variegatus                   0
+	Paramacellodus_oweni                  0
+	Plestiodon_fasciatus                  0
+	Mabuya_mabouya                        0
+	Xantusia_vigilis                      0
+	Cordylus_niger                        0
+	Broadleysaurus_major                  0
+	Meyasaurus_diazromerali               0
+	Tepexisaurus_tepexii                  0
+	Dalinghosaurus_longidigitus           0
+	Globaura_venusta                      0
+	Slavoia_darevskii                     0
+	Trioceros_jacksonii                   0
+	Uromastyx_aegyptia                    0
+	Priscagama_gobiensis                  0
+	Pleurodontagama_aenigmatoides         0
+	Igua_minuta                           0
+	Polrussia_mongoliensis                0
+	Oplurus_cyclurus                      0
+	Stenocercus_scapularis                0
+	Hoplocercus_spinosus                  0
+	Pristidactylus_scapulatus             0
+	Iguana_iguana                         0
+	Polychrus_marmoratus                  0
+	Crotaphytus_collaris                  0
+	Liolaemus_signifer                    0
+	Leiocephalus_carinatus                0
+	Phrynosoma_modestum                   0
+	Timon_lepidus                         0
+	Lacerta_viridis                       0
+	Teius_teyou                           0
+	Gobinatus_arenosus                    0
+	Gilmoreteius_chulsanensis             0
+	Petracola_ventrimaculatus             0
+	Xenosaurus_grandis                    0
+	Pseudopus_apodus                      0
+	Elgaria_multicarinata                 0
+	Heloderma_suspectum                   0
+	Lanthanotus_borneensis                0
+	Varanus_salvator                      0
+	Aigialosaurus                         0
+	Adriosaurus_suessi                    0
+	Pontosaurus                           0
+	Najash_rionegrina                     0
+	Dinilysia_patagonica                  0
+	Pachyrhachis_problematicus            0
+	Cylindrophis_ruffus                   0
+	Xenopeltis_unicolor                   0
+	Anilius_scytale                       0
+	Spathorhynchus_fossorium              0
+	Rhineura_floridana                    0
+	Bipes_biporus                         0
+	Blanus_cinereus                       0
+	Dibamus_novaeguineae                  0
+	Eoscincus                             0
+	Dorsetisaurus                         0
+	Parviraptor_estesi_NHMUK_PV_OR_48388  0
+	Parviraptorid_NHMUK_PV_R8511          0
+	Breugnathair_elgolensis               0
+
+;
+
+END;
+begin mrbayes;
+log start filename = Yunnanodraco.txt;
+outgroup Petrolacosaurus_kansensis;
+constrain ingroup1 = 2 - .;
+constrain ingroup2 partial = Teius_teyou Petracola_ventrimaculatus : Trioceros_jacksonii Uromastyx_aegyptia Iguana_iguana Xenosaurus_grandis Pseudopus_apodus Heloderma_suspectum Lanthanotus_borneensis Varanus_salvator Xenopeltis_unicolor Petrolacosaurus_kansensis Sphenodon_punctatus Gekko_gecko Dibamus_novaeguineae Xantusia_vigilis Plestiodon_fasciatus Cordylus_niger Lacerta_viridis Blanus_cinereus;
+constrain ingroup3 partial = Lacerta_viridis Blanus_cinereus : Trioceros_jacksonii Uromastyx_aegyptia Iguana_iguana Xenosaurus_grandis Pseudopus_apodus Heloderma_suspectum Lanthanotus_borneensis Varanus_salvator Xenopeltis_unicolor Petrolacosaurus_kansensis Sphenodon_punctatus Gekko_gecko Dibamus_novaeguineae Xantusia_vigilis Plestiodon_fasciatus Cordylus_niger Teius_teyou Petracola_ventrimaculatus;
+constrain ingroup4 partial = Lacerta_viridis Blanus_cinereus Teius_teyou Petracola_ventrimaculatus : Trioceros_jacksonii Uromastyx_aegyptia Iguana_iguana Xenosaurus_grandis Pseudopus_apodus Heloderma_suspectum Lanthanotus_borneensis Varanus_salvator Xenopeltis_unicolor Petrolacosaurus_kansensis Sphenodon_punctatus Gekko_gecko Dibamus_novaeguineae Xantusia_vigilis Plestiodon_fasciatus Cordylus_niger;
+constrain ingroup5 partial = Trioceros_jacksonii Uromastyx_aegyptia Iguana_iguana Xenosaurus_grandis Pseudopus_apodus Heloderma_suspectum Lanthanotus_borneensis Varanus_salvator Xenopeltis_unicolor : Petrolacosaurus_kansensis Sphenodon_punctatus Gekko_gecko Dibamus_novaeguineae Xantusia_vigilis Plestiodon_fasciatus Cordylus_niger Lacerta_viridis Blanus_cinereus Teius_teyou Petracola_ventrimaculatus;
+constrain ingroup6 partial = Xantusia_vigilis Cordylus_niger : Lacerta_viridis Blanus_cinereus Teius_teyou Petracola_ventrimaculatus Trioceros_jacksonii Uromastyx_aegyptia Iguana_iguana Xenosaurus_grandis Pseudopus_apodus Heloderma_suspectum Lanthanotus_borneensis Varanus_salvator Xenopeltis_unicolor Petrolacosaurus_kansensis Sphenodon_punctatus Gekko_gecko Dibamus_novaeguineae Plestiodon_fasciatus;
+constrain ingroup7 partial = Xantusia_vigilis Plestiodon_fasciatus Cordylus_niger : Lacerta_viridis Blanus_cinereus Teius_teyou Petracola_ventrimaculatus Trioceros_jacksonii Uromastyx_aegyptia Iguana_iguana Xenosaurus_grandis Pseudopus_apodus Heloderma_suspectum Lanthanotus_borneensis Varanus_salvator Xenopeltis_unicolor Petrolacosaurus_kansensis Sphenodon_punctatus Gekko_gecko Dibamus_novaeguineae;
+constrain ingroup8 partial = Lacerta_viridis Blanus_cinereus Teius_teyou Petracola_ventrimaculatus Trioceros_jacksonii Uromastyx_aegyptia Iguana_iguana Xenosaurus_grandis Pseudopus_apodus Heloderma_suspectum Lanthanotus_borneensis Varanus_salvator Xenopeltis_unicolor : Petrolacosaurus_kansensis Sphenodon_punctatus Gekko_gecko Dibamus_novaeguineae Xantusia_vigilis Plestiodon_fasciatus Cordylus_niger;
+constrain ingroup9 partial = Xantusia_vigilis Plestiodon_fasciatus Cordylus_niger Lacerta_viridis Blanus_cinereus Teius_teyou Petracola_ventrimaculatus Trioceros_jacksonii Uromastyx_aegyptia Iguana_iguana Xenosaurus_grandis Pseudopus_apodus Heloderma_suspectum Lanthanotus_borneensis Varanus_salvator Xenopeltis_unicolor : Petrolacosaurus_kansensis Sphenodon_punctatus Gekko_gecko Dibamus_novaeguineae;
+constrain ingroup10 partial = Gekko_gecko Dibamus_novaeguineae Xantusia_vigilis Plestiodon_fasciatus Cordylus_niger Lacerta_viridis Blanus_cinereus Teius_teyou Petracola_ventrimaculatus Trioceros_jacksonii Uromastyx_aegyptia Iguana_iguana Xenosaurus_grandis Pseudopus_apodus Heloderma_suspectum Lanthanotus_borneensis Varanus_salvator Xenopeltis_unicolor : Petrolacosaurus_kansensis Sphenodon_punctatus;
+constrain ingroup11 partial = Xenosaurus_grandis Pseudopus_apodus Heloderma_suspectum Lanthanotus_borneensis Varanus_salvator : Petrolacosaurus_kansensis Sphenodon_punctatus Gekko_gecko Dibamus_novaeguineae Xantusia_vigilis Plestiodon_fasciatus Cordylus_niger Lacerta_viridis Blanus_cinereus Teius_teyou Petracola_ventrimaculatus Trioceros_jacksonii Uromastyx_aegyptia Iguana_iguana Xenopeltis_unicolor;
+constrain ingroup12 partial = Trioceros_jacksonii Uromastyx_aegyptia Iguana_iguana : Xenosaurus_grandis Pseudopus_apodus Heloderma_suspectum Lanthanotus_borneensis Varanus_salvator Petrolacosaurus_kansensis Sphenodon_punctatus Gekko_gecko Dibamus_novaeguineae Xantusia_vigilis Plestiodon_fasciatus Cordylus_niger Lacerta_viridis Blanus_cinereus Teius_teyou Petracola_ventrimaculatus Xenopeltis_unicolor;
+constrain ingroup13 partial = Trioceros_jacksonii Uromastyx_aegyptia : Xenosaurus_grandis Pseudopus_apodus Heloderma_suspectum Lanthanotus_borneensis Varanus_salvator Petrolacosaurus_kansensis Sphenodon_punctatus Gekko_gecko Dibamus_novaeguineae Xantusia_vigilis Plestiodon_fasciatus Cordylus_niger Lacerta_viridis Blanus_cinereus Teius_teyou Petracola_ventrimaculatus Xenopeltis_unicolor Iguana_iguana;
+constrain ingroup14 partial = Pseudopus_apodus Heloderma_suspectum : Petrolacosaurus_kansensis Sphenodon_punctatus Gekko_gecko Dibamus_novaeguineae Xantusia_vigilis Plestiodon_fasciatus Cordylus_niger Lacerta_viridis Blanus_cinereus Teius_teyou Petracola_ventrimaculatus Trioceros_jacksonii Uromastyx_aegyptia Iguana_iguana Xenopeltis_unicolor Xenosaurus_grandis Lanthanotus_borneensis Varanus_salvator;
+constrain ingroup15 partial = Lanthanotus_borneensis Varanus_salvator : Pseudopus_apodus Heloderma_suspectum Petrolacosaurus_kansensis Sphenodon_punctatus Gekko_gecko Dibamus_novaeguineae Xantusia_vigilis Plestiodon_fasciatus Cordylus_niger Lacerta_viridis Blanus_cinereus Teius_teyou Petracola_ventrimaculatus Trioceros_jacksonii Uromastyx_aegyptia Iguana_iguana Xenopeltis_unicolor Xenosaurus_grandis;
+lset rates = gamma coding = variable;
+CALIBRATE Eunotosaurus_africanus = uniform ( 260.4 , 265.8 );
+CALIBRATE Proganochelys_quenstedti = uniform ( 210 , 218 );
+CALIBRATE Odontochelys_semitestacea = uniform ( 232 , 237 );
+CALIBRATE Petrolacosaurus_kansensis = uniform ( 303.7 , 307 );
+CALIBRATE Claudiosaurus_germaini = uniform ( 255.2 , 257 );
+CALIBRATE Youngina_capensis = uniform ( 255.2 , 257 );
+CALIBRATE Acerosodontosaurus_piveteaui = uniform ( 255.2 , 257 );
+CALIBRATE Coelurosauravus_jaekeli = uniform ( 256 , 258 );
+CALIBRATE Coelurosauravus_elivensis = uniform ( 255.2 , 257 );
+CALIBRATE Hupehsuchus_nanchangensis = uniform ( 247.2 , 250 );
+CALIBRATE Utatsusaurus_hataii = uniform ( 247.2 , 250 );
+CALIBRATE Chaohusaurus_chaoxianensis = uniform ( 248.3 , 249.3 );
+CALIBRATE Cartorhynchus_lenticarpus = uniform ( 248 , 249 );
+CALIBRATE Prolacerta_broomi = uniform ( 246.8 , 251.9 );
+CALIBRATE Protorosaurus_speneri = uniform ( 256 , 258 );
+CALIBRATE Macrocnemus_fuyuanensis = uniform ( 237 , 239 );
+CALIBRATE Langobardisaurus_pandolfii = uniform ( 212 , 217 );
+CALIBRATE Tanystropheus_longobardicus = uniform ( 239 , 243.5 );
+CALIBRATE Megalancosaurus_preonensis = uniform ( 218 , 228 );
+CALIBRATE	Vallesaurus_cenensis = uniform ( 211 , 216 );
+CALIBRATE Askeptosaurus_italicus = uniform ( 239 , 243.5 );
+CALIBRATE Champsosaurus_lindoei = uniform ( 76 , 79 );
+CALIBRATE Philydrosaurus_proseilus = uniform ( 100.5 , 113.1 );
+CALIBRATE Trilophosaurus_buettneri = uniform ( 228.5 , 237 );
+CALIBRATE Mesosuchus_browni = uniform ( 243.5 , 246.8 );
+CALIBRATE Howesia_browni = uniform ( 243.5 , 246.8 );
+CALIBRATE Teyumbaita_sulcognathus = uniform ( 223 , 228.5 );
+CALIBRATE Hyperodapedon_huenei = uniform ( 225 , 230 );
+CALIBRATE Proterosuchus_fergusi = uniform ( 246.8 , 251.9 );
+CALIBRATE Proterosuchus_alexanderi = uniform ( 246.8 , 251.9 );
+CALIBRATE Euparkeria_capensis = uniform ( 243.5 , 246.8 );
+CALIBRATE Placodus_gigas = uniform ( 240 , 246 );
+CALIBRATE Cyamodus_hildegardis = uniform ( 239 , 243.5 );
+CALIBRATE Largocephalosaurus_qianensis = uniform ( 243.5 , 244 );
+CALIBRATE Sinosaurosphargis_yunguiensis = uniform ( 243.5 , 244 );
+CALIBRATE Serpianosaurus_mirigioliensis = uniform ( 239 , 243.5 );
+CALIBRATE Wumengosaurus_delicatomandibularis = uniform ( 243.5 , 244 );
+CALIBRATE Lariosaurus_calcagnii = uniform ( 239 , 241.5 );
+CALIBRATE Pistosaurus_longaevus = uniform ( 241.5 , 243.5 );
+CALIBRATE Taytalura_alcoberi = uniform ( 230.8 , 232.0 );
+CALIBRATE Vellbergia_bartholomaei = uniform ( 237 , 242 );
+CALIBRATE Paliguana_whitei = uniform ( 247.5 , 258 );
+CALIBRATE Yunnanodraco_pani = uniform ( 241.5 , 246.3 );
+CALIBRATE Kuehneosaurus_latus = uniform ( 201.3 , 208.5 );
+CALIBRATE Icarosaurus_siefkeri = uniform ( 228.5 , 233 );
+CALIBRATE Pamelina_polonica = uniform ( 247.5 , 248.5 );
+CALIBRATE Sophineta_cracoviensis = uniform ( 247.5 , 248.5 );
+CALIBRATE Megachirella_wachtleri = uniform ( 243.5 , 244.5 );
+CALIBRATE Marmoretta_oxoniensis = uniform ( 166.1 , 168.3 );
+CALIBRATE	Fraxinisaura_rozynekae = uniform ( 228 , 231.4 );
+CALIBRATE Gephyrosaurus_bridensis = uniform ( 199.3 , 201.3 );
+CALIBRATE Diphydontosaurus_avonis = uniform ( 201.3 , 208.5 );
+CALIBRATE Planocephalosaurus_robinsonae = uniform ( 201.3 , 208.5 );
+CALIBRATE Clevosaurus_hudsoni = uniform ( 201.3 , 208.5 );
+CALIBRATE Palaeopleurosaurus_posidoniae = uniform ( 174.2 , 183.7 );
+CALIBRATE Priosphenodon_avelasi = uniform ( 89.8 , 100.5 );
+CALIBRATE Priscagama_gobiensis = uniform ( 71 , 84.2 );
+CALIBRATE Pleurodontagama_aenigmatoides = uniform ( 72.1 , 84.2 );
+CALIBRATE Igua_minuta = uniform ( 72.1 , 84.2 );
+CALIBRATE Polrussia_mongoliensis = uniform ( 72.1 , 84.2 );
+CALIBRATE Eichstaettisaurus_schroederi = uniform ( 150 , 155 );
+CALIBRATE Ardeosaurus_brevipes = uniform ( 150 , 155 );
+CALIBRATE Paramacellodus_oweni = uniform ( 139.4 , 145 );
+CALIBRATE Huehuecuetzpalli_mixtecus = uniform ( 100 , 105 );
+CALIBRATE Tepexisaurus_tepexii = uniform ( 100 , 105 );
+CALIBRATE Gilmoreteius_chulsanensis = uniform ( 72.1 , 84.2 );
+CALIBRATE Gobinatus_arenosus = uniform ( 72.1 , 84.2 );
+CALIBRATE Gobekko_cretacicus = uniform ( 71 , 75 );
+CALIBRATE Meyasaurus_diazromerali = uniform ( 126.3 , 130.8 );
+CALIBRATE Globaura_venusta = uniform ( 71 , 84.2 );
+CALIBRATE Slavoia_darevskii = uniform ( 71 , 84.2 );
+CALIBRATE Dalinghosaurus_longidigitus = uniform ( 126.3 , 134.7 );
+CALIBRATE Spathorhynchus_fossorium = uniform ( 45 , 56 );
+CALIBRATE Aigialosaurus = uniform ( 92 , 97 );
+CALIBRATE Adriosaurus_suessi = uniform ( 90 , 97 );
+CALIBRATE Pontosaurus = uniform ( 97 , 100.5 );
+CALIBRATE Dinilysia_patagonica = uniform ( 77 , 86.3 );
+CALIBRATE Najash_rionegrina = uniform ( 89.8 , 95 );
+CALIBRATE Pachyrhachis_problematicus = uniform ( 97 , 100.5 );
+CALIBRATE Bellairsia_combined = uniform ( 166.1 , 168.3 );
+CALIBRATE Oculudentavis_khaungraae = uniform ( 98.2 , 99.4 );
+CALIBRATE Scandensia_ciervensis = uniform ( 125.5 , 130.0 );
+CALIBRATE Hongshanxi_xiei = uniform ( 157 , 164 );
+CALIBRATE Eoscincus = uniform ( 145 , 150 );
+CALIBRATE Breugnathair_elgolensis = uniform ( 166.1 , 168.3 );
+CALIBRATE Parviraptor_estesi_NHMUK_PV_OR_48388 = uniform ( 139.8 , 145 );
+CALIBRATE Parviraptorid_NHMUK_PV_R8511 = uniform ( 139.8 , 145 );
+CALIBRATE Dorsetisaurus = uniform ( 139.8 , 145 );
+PRSET nodeagepr = calibrated;
+	prset clockvarpr = igr;
+	prset igrvarpr = exp ( 10 );
+	prset clockratepr = lognorm ( -2.560061 , 1.080366 );
+prset topologypr = constraints ( ingroup1 , ingroup2 , ingroup3 , ingroup4 , ingroup5 , ingroup6 , ingroup7 , ingroup8 , ingroup9 , ingroup10 , ingroup11 , ingroup12 , ingroup13 , ingroup14 , ingroup15 );
+PRSET brlenspr = clock : fossilization;
+PRSET sampleprob = 0.0038;
+PRSET samplestrat = diversity;
+PRSET speciationpr = exponential ( 10 );
+PRSET extinctionpr = beta ( 1 , 1 );
+PRSET fossilizationpr = beta ( 1 , 1 );
+PRSET treeagepr = offsetexp ( 318 , 332.9 );
+mcmcp nrun = 2 nchain = 4 temp = 0.09 ngen = 1000000000 samplefreq = 10000 printfreq = 10000 diagnfr = 20000 savebrlens = yes relburnin = yes burninfrac = 0.5 stoprule = YES stopval = 0.01;
+mcmc;
+sumt contype = halfcompat conformat = Figtree relburnin = yes burninfrac = 0.25;
+sump relburnin = yes burninfrac = 0.50;
+
+END;
+BEGIN ASSUMPTIONS;
+	TYPESET * UNTITLED   =  unord:  1;
+
+END;
+
+BEGIN MESQUITECHARMODELS;
+	ProbModelSet * UNTITLED   =  'Mk1 (est.)':  1;
+END;
+
+Begin MESQUITE;
+		MESQUITESCRIPTVERSION 2;
+		TITLE AUTO;
+		tell ProjectCoordinator;
+		timeSaved 1790778310019;
+		getEmployee #mesquite.minimal.ManageTaxa.ManageTaxa;
+		tell It;
+			setID 0 7507837101622714028;
+		endTell;
+		getEmployee #mesquite.charMatrices.ManageCharacters.ManageCharacters;
+		tell It;
+			setID 0 8793971034330585307;
+			mqVersion 275;
+			checksumv 0 3 4149800283 null  getNumChars 1 numChars 1 getNumTaxa 126 numTaxa 126   short true   bits 3   states 3   sumSquaresStatesOnly 171.0 sumSquares 171.0 longCompressibleToShort false usingShortMatrix true   NumFiles 1 NumMatrices 1;
+			mqVersion;
+		endTell;
+		getWindow;
+		tell It;
+			suppress;
+			setResourcesState false false 100;
+			setPopoutState 400;
+			setExplanationSize 0;
+			setAnnotationSize 0;
+			setFontIncAnnot 0;
+			setFontIncExp 0;
+			setSize 1920 930;
+			setLocation -9 -9;
+			setFont SanSerif;
+			setFontSize 10;
+			getToolPalette;
+			tell It;
+			endTell;
+			desuppress;
+		endTell;
+		getEmployee  #mesquite.charMatrices.BasicDataWindowCoord.BasicDataWindowCoord;
+		tell It;
+			showDataWindow #8793971034330585307 #mesquite.charMatrices.BasicDataWindowMaker.BasicDataWindowMaker;
+			tell It;
+				getWindow;
+				tell It;
+					setExplanationSize 30;
+					setAnnotationSize 20;
+					setFontIncAnnot 0;
+					setFontIncExp 0;
+					setSize 1820 863;
+					setLocation -9 -9;
+					setFont SanSerif;
+					setFontSize 10;
+					getToolPalette;
+					tell It;
+						setTool mesquite.charMatrices.BasicDataWindowMaker.BasicDataWindow.arrow;
+					endTell;
+					setActive;
+					setTool mesquite.charMatrices.BasicDataWindowMaker.BasicDataWindow.arrow;
+					colorCells  #mesquite.charMatrices.NoColor.NoColor;
+					colorRowNames  #mesquite.charMatrices.TaxonGroupColor.TaxonGroupColor;
+					colorColumnNames  #mesquite.charMatrices.CharGroupColor.CharGroupColor;
+					colorText  #mesquite.charMatrices.NoColor.NoColor;
+					setBackground White;
+					toggleShowNames on;
+					toggleShowTaxonNames on;
+					toggleTight off;
+					toggleThinRows off;
+					toggleShowChanges on;
+					toggleSeparateLines off;
+					toggleShowStates on;
+					toggleAutoWCharNames on;
+					toggleAutoTaxonNames off;
+					toggleShowDefaultCharNames off;
+					toggleConstrainCW on;
+					toggleBirdsEye off;
+					toggleShowPaleGrid off;
+					toggleShowPaleCellColors off;
+					togglePaleInapplicable on;
+					toggleShowBoldCellText off;
+					toggleAllowAutosize on;
+					toggleColorsPanel off;
+					toggleDiagonal on;
+					setDiagonalHeight 80;
+					toggleLinkedScrolling on;
+					toggleScrollLinkedTables off;
+				endTell;
+				showWindow;
+				getWindow;
+				tell It;
+					forceAutosize;
+				endTell;
+				getEmployee #mesquite.charMatrices.ColorByState.ColorByState;
+				tell It;
+					setStateLimit 9;
+					toggleUniformMaximum on;
+				endTell;
+				getEmployee #mesquite.charMatrices.ColorCells.ColorCells;
+				tell It;
+					setColor Red;
+					removeColor off;
+				endTell;
+				getEmployee #mesquite.categ.StateNamesStrip.StateNamesStrip;
+				tell It;
+					showStrip off;
+				endTell;
+				getEmployee #mesquite.charMatrices.AnnotPanel.AnnotPanel;
+				tell It;
+					togglePanel off;
+				endTell;
+				getEmployee #mesquite.charMatrices.CharReferenceStrip.CharReferenceStrip;
+				tell It;
+					showStrip off;
+				endTell;
+				getEmployee #mesquite.charMatrices.QuickKeySelector.QuickKeySelector;
+				tell It;
+					autotabOff;
+				endTell;
+				getEmployee #mesquite.charMatrices.SelSummaryStrip.SelSummaryStrip;
+				tell It;
+					showStrip off;
+				endTell;
+				getEmployee #mesquite.categ.SmallStateNamesEditor.SmallStateNamesEditor;
+				tell It;
+					panelOpen true;
+				endTell;
+			endTell;
+		endTell;
+		endTell;
+end;
+
+
