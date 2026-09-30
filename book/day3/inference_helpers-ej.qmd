@@ -3,7 +3,7 @@ title: "Inference"
 format: html
 ---
 
-Group: Lena Cole, Mark Patzkowsky, Joel Koelewijn, Stephan Spiekman, Charlotte Summers, Emilia Jarochowska
+Group: Lena Cole, Mark Patzkowsky, Joël Koelewijn, Stephan Spiekman, Charlotte Summers, Emilia Jarochowska
 
 Goal:
 
