@@ -568,7 +568,14 @@ Fossil record not simulated using taxonomy: all speciation events are assumed to
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">file =</span> <span class="st">"ages_temp.tsv"</span>,</span>
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">type =</span> <span class="st">"ages"</span>,</span>
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>                       <span class="at">all =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>                       <span class="at">reconstructed =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>                       <span class="at">reconstructed =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co"># export the true tree </span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>MorphSim<span class="sc">::</span><span class="fu">write.morpho</span>(<span class="at">data =</span> morpho_mk,</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>                       <span class="at">file =</span> <span class="st">"true_tree.tre"</span>,</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>                       <span class="at">type =</span> <span class="st">"tree"</span>,</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>                       <span class="at">all =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>                       <span class="at">reconstructed =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>With this data at hand, you can now try to recover your simulation setup parameters using the Bayesian tree inference tool of your choice. Example scripts for this are available under “Inference helpers” (chapter 13).</p>
 
