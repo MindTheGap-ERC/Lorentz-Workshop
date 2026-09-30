@@ -1,0 +1,86 @@
+#NEXUS
+[Data written by write.nexus.data.R, Wed Apr 30 14:49:11 2025]
+BEGIN DATA;
+  DIMENSIONS NTAX=77 NCHAR=1;
+  FORMAT DATATYPE=STANDARD MISSING=? GAP=- INTERLEAVE=NO symbols="01";
+  MATRIX
+	Abathocrinus		0
+	Abludoglyptocrinus	0
+	Acacocrinus		0
+	Aclistocrinus		0
+	Alisocrinus		0
+	Allocrinus		1
+	Alopocrinus		1
+	Archaeocalyptocrinus	0
+	Astakocrinus		0
+	Atalocrinus		0
+	Bikocrinus		0
+	Bohemicocrinus		0
+	Bolicrinus		0
+	Brahmacrinus		1
+	Briarocrinus		1
+	Calliocrinus		0
+	Camarocrinus		0
+	Canistrocrinus		0
+	Carpocrinus		0
+	Celtocrinus		1
+	Chenocrinus		1
+	Chicagocrinus		0
+	Clematocrinus		1
+	Clonocrinus		0
+	Compsocrinus		1
+	Cordylocrinus		0
+	Culicocrinus		0
+	Cylicocrinus		0
+	Cytocrinus		0
+	Delgadocrinus		0
+	Desmidocrinus		1
+	Dynamocrinus		1
+	Eknomocrinus		0
+	Eopatelliocrinus	1	
+	Eucalyptocrinites	0	
+	Fibrocrinus		0
+	Glyptocrinus		0
+	Hagnocrinus		1
+	Hapalocrinus		1
+	Hirneacrinus		0
+	Ibanocrinus		0
+	Jovacrinus		0
+	Krinocrinus		0
+	Kylixocrinus		0
+	Laurelocrinus		1
+	Lobomelocrinus		1
+	Lyonicrinus		0
+	Macrostylocrinus	0
+	Manticrinus		0
+	Marhoumacrinus		0
+	Marsupiocrinus		0
+	Melocrinites		0
+	Methabocrinus		0
+	Nanicrinus		0
+	Pachycephalocrinus	1
+	Paiderocrinus		1
+	Paramelocrinus		0
+	Patelliocrinus		1
+	Periechocrinus		1
+	Periglyptocrinus	0
+	Phrygilocrinus		1
+	Polypeltes		0
+	Praedicticrinus		0
+	Prokopicrinus		1
+	Promelocrinus		0
+	Pycnocrinus		1
+	Saaremaacrinus		0
+	Schizocrinus		0
+	Scyphocrinites		0
+	Stelidiocrinus		0
+	Stiptocrinus		1
+	Theleproktocrinus	0
+	Thomasocrinus		0
+	Tirocrinus		1
+	Typanocrinus		1
+	Xenocrinus		0
+	Zirocrinus		0
+  ;
+END;
+
