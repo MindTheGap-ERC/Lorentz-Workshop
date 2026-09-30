@@ -3,7 +3,7 @@ title: "Inference"
 format: html
 ---
 
-Group: Lena Cole, Mark Patzkowsky, Joël Koelewijn, Stephan Spiekman, Charlotte Summers, Emilia Jarochowska
+Group: Lena Cole, Mark Patzkowsky, Joël Koelewijn, Stephan Spiekman, Charlotte Summers, Emilia Jarochowska, Davey Wright
 
 Goal:
 
@@ -16,3 +16,22 @@ Specific case studies:
 
 Tools: https://revbayes.github.io/tutorials/sse/fossils
 
+# Lizard tree
+
+Has extant tips 38/1036 and polytomies. We need to collapse the polytomies.
+
+```{r}
+lizards_tree <- read.tree(file = "../Group_Niche_SSE/LizardTree.nex", 
+                          text = NULL, 
+                          tree.names = NULL, 
+                          skip = 0,
+                          comment.char = "", 
+                          keep.multi = FALSE)
+
+lizards_tree <- ape::multi2di(lizards_tree[[2]])
+write.tree(lizards_tree, file="../Group_Niche_SSE/lizards_without_polytomies.nex")
+```
+
+Secondly, in the tutorial, there is no option to set time-variable sampling rate, but the function `dnCDBDP` has a `nTimeSlices` parameter which we could try. We don't know anything about it though, but we expect it to work similarly to the skyline psi parameter setup.
+
+Rachel indicated that the setup we are interested in is possible in BEAST2 and she has a tutorial, but we stick with RevBayes for now. She also suggested fixing the tree first. Possibly the best approach would be to take the validation script using by Bruno and simulate a setup similar to ours first.

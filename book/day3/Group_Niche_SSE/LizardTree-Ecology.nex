@@ -14,7 +14,7 @@ END;
 BEGIN CHARACTERS;
 	TITLE  Character_Matrix;
 	DIMENSIONS  NCHAR=1;
-	FORMAT DATATYPE = STANDARD GAP = - MISSING = ? SYMBOLS = "  0 1 2 3 4 5 6";
+	FORMAT DATATYPE = STANDARD GAP = - MISSING = ? SYMBOLS = "  0 1";
 	MATRIX
 	Petrolacosaurus_kansensis             0
 	Eunotosaurus_africanus                0

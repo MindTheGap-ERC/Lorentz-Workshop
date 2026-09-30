@@ -1,4 +1,4 @@
-observed_phylogeny <- readTrees("LizardTree.nex")[1]
+observed_phylogeny <- readTrees("lizards_without_polytomies.nex")[1]
 data <- readCharacterData("LizardTree-Ecology.nex")
 num_states <- 2
 root <- observed_phylogeny.rootAge()
