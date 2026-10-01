@@ -71,7 +71,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../references.html" rel="next">
+<link href="../day4/overview.html" rel="next">
 <link href="../day3/FBD_strat_inference.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -277,8 +277,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Day 4: Analysis and software</span></span>
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Day 4: Analysis and software</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../day4/overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Overview</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../day4/reproducibility.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Reproducibility</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../day4/bug_reports.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Bug reports</span></span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">
@@ -287,7 +312,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
     </ul>
@@ -306,6 +331,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#standard-fbd-inference" id="toc-standard-fbd-inference" class="nav-link" data-scroll-target="#standard-fbd-inference"><span class="header-section-number">14.2.1</span> Standard FBD inference</a></li>
   <li><a href="#skyline-fbd-analysis" id="toc-skyline-fbd-analysis" class="nav-link" data-scroll-target="#skyline-fbd-analysis"><span class="header-section-number">14.2.2</span> Skyline FBD analysis</a></li>
   </ul></li>
+  <li><a href="#beast2" id="toc-beast2" class="nav-link" data-scroll-target="#beast2"><span class="header-section-number">14.3</span> BEAST2</a></li>
   </ul>
 </nav>
     </div>
@@ -337,7 +363,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="revbayes" class="level2" data-number="14.2">
 <h2 data-number="14.2" class="anchored" data-anchor-id="revbayes"><span class="header-section-number">14.2</span> RevBayes</h2>
-<p>All RevBayes scripts can also be downloaded: <a href="fbd_inference_base.rev" download="bd_inference_base.rev">fbd_inference_base.rev</a> <a href="model_clock.rev" download="model_clock.rev">model_clock.rev</a> <a href="model_morpho.rev" download="model_morpho.rev">model_morpho.rev</a> <a href="model_fbd_base.rev" download="model_fbd_base.rev">model_fbd_base.rev</a> <a href="model_fbd_skyline_sampling.rev" download="model_fbd_skyline_sampling.rev">model_fbd_skyline_sampling.rev</a> <a href="fbd_inference_skyline.rev" download="fbd_inference_skyline.rev">fbd_inference_skyline.rev</a></p>
+<p>All RevBayes scripts can also be downloaded: <a href="fbd_inference_base.rev" download="fbd_inference_base.rev">fbd_inference_base.rev</a> <a href="model_clock.rev" download="model_clock.rev">model_clock.rev</a> <a href="model_morpho.rev" download="model_morpho.rev">model_morpho.rev</a> <a href="model_fbd_const.rev" download="model_fbd_const.rev">model_fbd_const.rev</a> <a href="model_fbd_skyline_sampling.rev" download="model_fbd_skyline_sampling.rev">model_fbd_skyline_sampling.rev</a> <a href="fbd_inference_skyline.rev" download="fbd_inference_skyline.rev">fbd_inference_skyline.rev</a></p>
 <section id="standard-fbd-inference" class="level3" data-number="14.2.1">
 <h3 data-number="14.2.1" class="anchored" data-anchor-id="standard-fbd-inference"><span class="header-section-number">14.2.1</span> Standard FBD inference</h3>
 <p>This is a simple setup for a constant rate FBD inference. For more complex cases (e.g., age uncertainty, total evidence etc.) see <a href="https://revbayes.github.io/tutorials/fbd/fbd_specimen.html">this tutorial</a>.</p>
@@ -418,21 +444,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>And last, the tree model is specified in <code>model_fbd_tree.rev</code>:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>speciation_rate <span class="sc">~</span> <span class="fu">dnExponential</span>(<span class="at">lambda =</span> <span class="dv">1</span><span class="sc">/</span>true_origination_rate) <span class="co"># set to true mean</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(speciation_rate, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">0.1</span>) )</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(speciation_rate, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">1.0</span>) )</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(speciation_rate, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">5.0</span>) )</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(speciation_rate, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">0.1</span>) )</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(speciation_rate, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">1.0</span>) )</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(speciation_rate, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">5.0</span>) )</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">speciation_rate.setValue</span>(true_origination_rate)</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>extinction_rate <span class="sc">~</span> <span class="fu">dnExponential</span>(<span class="at">lambda =</span> <span class="dv">1</span><span class="sc">/</span>true_extinction_rate) <span class="co"># set to true mean</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(extinction_rate, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">0.1</span>) )</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(extinction_rate, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">1.0</span>) )</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(extinction_rate, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">5.0</span>) )</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(extinction_rate, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">0.1</span>) )</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(extinction_rate, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">1.0</span>) )</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(extinction_rate, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">5.0</span>) )</span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fu">extinction_rate.setValue</span>(true_extinction_rate)</span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>origin_time <span class="sc">~</span> <span class="fu">dnExponential</span>(<span class="at">lambda =</span> <span class="fl">1.0</span>)</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(origin_time, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">0.1</span>) )</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(origin_time, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">1.0</span>) )</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(origin_time, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">5.0</span>) )</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(origin_time, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">0.1</span>) )</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(origin_time, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">1.0</span>) )</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(origin_time, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">5.0</span>) )</span>
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="fu">origin_time.setValue</span>(true_origin_time)</span>
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>psi <span class="sc">~</span> <span class="fu">dnExponential</span>(<span class="at">lambda =</span> <span class="dv">1</span><span class="sc">/</span>true_sampling_rate)</span>
@@ -577,9 +603,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvSubtreeScale</span>(fbd_tree, <span class="at">weight =</span> <span class="fl">100.0</span>))</span>
 <span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvTreeScale</span>(fbd_tree, origin_time, <span class="at">weight =</span> <span class="fl">100.0</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-
-
 </section>
+</section>
+<section id="beast2" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="beast2"><span class="header-section-number">14.3</span> BEAST2</h2>
+<p>To run the analysis on your device using BEAST2, you will need to have the packages MM, SA and BDSKY installed. These can be installed via the <a href="https://www.beast2.org/managing-packages/">Package Manager</a> in BEAUti. The input for any analysis in BEAST is an xml file, which can be generated using BEAUti. Some of the options specified above in the RevBayes analysis can not be configured via BEAUti and require editing the xml (this includes the birth, death, sampling parameterisation, and the FBD skyline analysis).</p>
+<p>The same analysis can be run in BEAST2 using the available templates: <a href="FBD_const_template.xml">FBD_const.xml</a> and <a href="FBD_skyline_template.xml">FBD_skyline.xml</a>. You can create the xml input file based on your simulated data using this <a href="beast_parser.R">parser function</a> and the code below.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in the data output by MorphSim </span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>char <span class="ot">&lt;-</span> ape<span class="sc">::</span><span class="fu">read.nexus.data</span>(<span class="st">"char_mat_temp.nex"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>ages <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"ages_temp.tsv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the parser function</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"/Users/iq75aqot/Desktop/rb_test/beast_templates/beast_parser.R"</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"FILEPATH/ON/YOUR/COMPUTER/beast_parser.R"</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># FBD constant rates </span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>template.file <span class="ot">=</span> <span class="st">"FILEPATH/ON/YOUR/COMPUTER/FBD_const_template.xml"</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>output.file <span class="ot">=</span> <span class="st">"FBD_const_sim_01.xml"</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="fu">beast.parser</span>(template.file, char, ages, output.file)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co"># FBD skyline</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>template.file <span class="ot">=</span> <span class="st">"FILEPATH/ON/YOUR/COMPUTER/FBD_skyline_template.xml"</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>output.file <span class="ot">=</span> <span class="st">"FBD_skyline_sim_01.xml"</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>breakpoints <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>) <span class="co"># alternatively you can generate these using get_skyline_breakpoints(adm, 0.1)</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="fu">beast.parser</span>(template.file, char, ages, output.file, <span class="at">rate_times =</span> breakpoints)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Once you have created the files you can simply run them using BEAST2 as normal.</p>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -990,8 +1044,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../references.html" class="pagination-link" aria-label="References">
-        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">References</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../day4/overview.html" class="pagination-link" aria-label="Overview">
+        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Overview</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

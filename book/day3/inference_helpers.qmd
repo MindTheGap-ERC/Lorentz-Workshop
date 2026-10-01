@@ -10,7 +10,7 @@ This chapter contains code to help set up phylogenetic inference pipelines.
 
 ## RevBayes
 
-All RevBayes scripts can also be downloaded: [fbd_inference_base.rev](fbd_inference_base.rev){download="bd_inference_base.rev"} [model_clock.rev](model_clock.rev){download="model_clock.rev"} [model_morpho.rev](model_morpho.rev){download="model_morpho.rev"} [model_fbd_const.rev](model_fbd_const.rev){download="model_fbd_base.rev"} [model_fbd_skyline_sampling.rev](model_fbd_skyline_sampling.rev){download="model_fbd_skyline_sampling.rev"} [fbd_inference_skyline.rev](fbd_inference_skyline.rev){download="fbd_inference_skyline.rev"}
+All RevBayes scripts can also be downloaded: [fbd_inference_base.rev](fbd_inference_base.rev){download="fbd_inference_base.rev"} [model_clock.rev](model_clock.rev){download="model_clock.rev"} [model_morpho.rev](model_morpho.rev){download="model_morpho.rev"} [model_fbd_const.rev](model_fbd_const.rev){download="model_fbd_const.rev"} [model_fbd_skyline_sampling.rev](model_fbd_skyline_sampling.rev){download="model_fbd_skyline_sampling.rev"} [fbd_inference_skyline.rev](fbd_inference_skyline.rev){download="fbd_inference_skyline.rev"}
 
 ### Standard FBD inference
 
@@ -106,21 +106,21 @@ And last, the tree model is specified in `model_fbd_tree.rev`:
 ```{r}
 #| eval: false
 speciation_rate ~ dnExponential(lambda = 1/true_origination_rate) # set to true mean
-moves.append( mvScale(speciation_rate, weight=5.0, lambda = 0.1) )
-moves.append( mvScale(speciation_rate, weight=5.0, lambda = 1.0) )
-moves.append( mvScale(speciation_rate, weight=5.0, lambda = 5.0) )
+moves.append( mvScale(speciation_rate, weight = 5.0, lambda = 0.1) )
+moves.append( mvScale(speciation_rate, weight = 5.0, lambda = 1.0) )
+moves.append( mvScale(speciation_rate, weight = 5.0, lambda = 5.0) )
 speciation_rate.setValue(true_origination_rate)
 
 extinction_rate ~ dnExponential(lambda = 1/true_extinction_rate) # set to true mean
-moves.append( mvScale(extinction_rate, weight=5.0, lambda = 0.1) )
-moves.append( mvScale(extinction_rate, weight=5.0, lambda = 1.0) )
-moves.append( mvScale(extinction_rate, weight=5.0, lambda = 5.0) )
+moves.append( mvScale(extinction_rate, weight = 5.0, lambda = 0.1) )
+moves.append( mvScale(extinction_rate, weight = 5.0, lambda = 1.0) )
+moves.append( mvScale(extinction_rate, weight = 5.0, lambda = 5.0) )
 extinction_rate.setValue(true_extinction_rate)
 
 origin_time ~ dnExponential(lambda = 1.0)
-moves.append( mvScale(origin_time, weight=5.0, lambda = 0.1) )
-moves.append( mvScale(origin_time, weight=5.0, lambda = 1.0) )
-moves.append( mvScale(origin_time, weight=5.0, lambda = 5.0) )
+moves.append( mvScale(origin_time, weight = 5.0, lambda = 0.1) )
+moves.append( mvScale(origin_time, weight = 5.0, lambda = 1.0) )
+moves.append( mvScale(origin_time, weight = 5.0, lambda = 5.0) )
 origin_time.setValue(true_origin_time)
 
 psi ~ dnExponential(lambda = 1/true_sampling_rate)
@@ -276,3 +276,37 @@ moves.append( mvRootTimeSlideUniform(fbd_tree, origin_time, weight = 0.0) )
 moves.append( mvSubtreeScale(fbd_tree, weight = 100.0))
 moves.append( mvTreeScale(fbd_tree, origin_time, weight = 100.0))
 ```
+
+## BEAST2
+
+To run the analysis on your device using BEAST2, you will need to have the packages MM, SA and BDSKY installed. These can be installed via the [Package Manager](https://www.beast2.org/managing-packages/) in BEAUti. The input for any analysis in BEAST is an xml file, which can be generated using BEAUti. Some of the options specified above in the RevBayes analysis can not be configured via BEAUti and require editing the xml (this includes the birth, death, sampling parameterisation, and the FBD skyline analysis).
+
+The same analysis can be run in BEAST2 using the available templates: [FBD_const.xml](FBD_const_template.xml) and [FBD_skyline.xml](FBD_skyline_template.xml). You can create the xml input file based on your simulated data using this [parser function](beast_parser.R) and the code below.
+
+```{r}
+#| eval: false
+
+# Read in the data output by MorphSim 
+char <- ape::read.nexus.data("char_mat_temp.nex")
+ages <- read.table("ages_temp.tsv", header = TRUE)
+
+# Load the parser function
+source("/Users/iq75aqot/Desktop/rb_test/beast_templates/beast_parser.R")
+source("FILEPATH/ON/YOUR/COMPUTER/beast_parser.R")
+
+# FBD constant rates 
+template.file = "FILEPATH/ON/YOUR/COMPUTER/FBD_const_template.xml"
+output.file = "FBD_const_sim_01.xml"
+
+beast.parser(template.file, char, ages, output.file)
+
+# FBD skyline
+template.file = "FILEPATH/ON/YOUR/COMPUTER/FBD_skyline_template.xml"
+output.file = "FBD_skyline_sim_01.xml"
+breakpoints <- c(0, 1, 2, 3) # alternatively you can generate these using get_skyline_breakpoints(adm, 0.1)
+
+beast.parser(template.file, char, ages, output.file, rate_times = breakpoints)
+
+```
+
+Once you have created the files you can simply run them using BEAST2 as normal.

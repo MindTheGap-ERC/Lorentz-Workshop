@@ -15,7 +15,7 @@ rho <- 1.0
 true_origination_rate <- 2
 true_extinction_rate <- 0.3
 true_origin_time <- 2
-true_clock_rate = 0.5
+true_clock_rate <- 0.5
 
 # initialize moves
 moves = VectorMoves()
@@ -37,15 +37,15 @@ my_model = model(phy_morpho)
 # initialize monitors
 monitors = VectorMonitors()
 # write state to tracefile
-monitors.append( mnModel(filename=outfile_name, printgen=10) )
+monitors.append( mnModel(filename = outfile_name, printgen=10) )
 # write tree to tree file
 monitors.append(mnFile(filename = treefile_name, printgen = 10, fbd_tree))
 # output to the screen
-monitors.append(mnScreen(printgen=100, origin_time, speciation_rate, extinction_rate, psi) )
+monitors.append(mnScreen(printgen = 100, origin_time, speciation_rate, extinction_rate, psi) )
 
 # initialize mcmc
 mymcmc = mcmc(my_model, monitors, moves, nruns = 2, ntries = 10000)
-mymcmc.burnin(generations=2000,tuningInterval=1500, verbose = TRUE)
+mymcmc.burnin(generations = 2000,tuningInterval=1500, verbose = TRUE)
 mymcmc.operatorSummary()
 mymcmc.run(generations = 10000)
 mymcmc.operatorSummary()

@@ -40,17 +40,7 @@ axis(1)
 mtext("Time since origin [Myr]", side = 1, line = 2)
 ```
 
-Note that this is a complete tree, meaning it contains extinct lineages. For comparison, let's plot the reconstructed tree, after pruning all non-sampled extinct lineages, assuming we sample all extant tips:
-
-```{r plot_reconstructed-tree}
-reconstructed_tree = tree |>
-  geiger::drop.extinct(tol = 10^-8)
-plot(reconstructed_tree,
-     root.edge = TRUE,
-     main = "Reconstructed tree")
-axis(1)
-mtext("Time since origin [Myr]", side = 1, line = 2)
-```
+Note that this is a complete tree, meaning it contains extinct lineages.
 
 ## Simulating fossils along the tree
 
@@ -59,7 +49,8 @@ Now, let's sample some fossil occurrences along the tree according to a specifie
 ```{r simulate-fossil-object}
 psi = 5 # fossil sampling rate
 fossils = FossilSim::sim.fossils.poisson(rate = psi,
-                                         tree = tree)
+                                         tree = tree,
+                                         root.edge = FALSE)
 # inspect the fossils
 fossils
 ```
@@ -120,7 +111,7 @@ The sampled tree is the tree with all unsampled lineages (extant and extinct) re
 
 ## Tasks and discussion points
 
-1.  Explore the simulation pipeline by modifying the parameters and the random seed. How large is the intrinsic variation in the trees when parameters are fixed? Are there parameters where the true tree, reconstructed/sampled tree differ most/least?
+1.  Explore the simulation pipeline by modifying the parameters and the random seed. How large is the intrinsic variation in the trees when parameters are fixed? Are there parameters where the true tree and reconstructed/sampled tree differ most/least?
 
 2.  Think of the timescale you are usually on. What parameters work well on this scale?
 
@@ -194,6 +185,13 @@ MorphSim::write.morpho(data = morpho_mk,
 MorphSim::write.morpho(data = morpho_mk,
                        file = "ages_temp.tsv",
                        type = "ages",
+                       all = TRUE,
+                       reconstructed = TRUE)
+
+# export the true tree 
+MorphSim::write.morpho(data = morpho_mk,
+                       file = "true_tree.tre",
+                       type = "tree",
                        all = TRUE,
                        reconstructed = TRUE)
 ```
