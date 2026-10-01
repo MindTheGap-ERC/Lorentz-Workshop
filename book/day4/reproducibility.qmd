@@ -19,17 +19,15 @@ Each group will be assigned a random number and each random number is associated
 
 We are interested in extracting information from published articles that relate to reproducibility and overall comprehension of a given analysis. This includes information about the data (phylogenetic characters and age information), model and prior parameter choices, as well as data and code accessibility.
 
-Use the following template to record your results: [Reproducibility_task](Reproducibility_task.docx)
+Use the following template to record your results: [Reproducibility_task.docx](Reproducibility_task.docx)
+
+Data collection protocol (adapted from Mulvey et al. 2025).
 
 Details of each variable are described below.
 
 Keep track of the following: How long does it take to extract information from each publication? From your perspective, are we collecting all relevant information? Did you encounter any specific challenges? Any suggestions for streamlining this process?
 
 **At the end of the activity please leave 5-10 minutes to write down your thoughts.**
-
-Data collection protocol (adapted from Mulvey et al. 2025)
-
-From Mulvey et al. [FBD survey criteria](https://docs.google.com/document/d/1nHFa01aLEOO7vjFuOUjHN0Ge4XVbadBH_-YD1JvdEi8/edit?tab=t.0)
 
 Notes before you get started
 
