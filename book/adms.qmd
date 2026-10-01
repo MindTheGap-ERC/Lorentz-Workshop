@@ -4,6 +4,14 @@ title: "Time in rocks"
 
 ## Introduction
 
+In order to run this code, you will need the `admtools` R Package.
+
+```{r, echo=false, include=true}
+install.packages("admtools")
+library(admtools)
+
+```
+
 This chapter introduces the concept of **age-depth models**, which formalize geochronological knowledge and contain a lot of stratigraphic information, e.g., on sediment accumulation rates and hiatus location and duration.
 
 At the end of the chapter you will
@@ -34,7 +42,7 @@ Broadly, everything that translates data between the *time domain* (time dimensi
 First let's load the data from your stratigraphic forward model:
 
 ```{r import-ck-data}
-adm_name = "data/output/columns_adm.csv" # adjust if you have a different output location
+adm_name = "data/output/carbo-platform.h5" # adjust if you have a different output location
 data_adm = read.csv(adm_name) # read age-depth model data
 ```
 
