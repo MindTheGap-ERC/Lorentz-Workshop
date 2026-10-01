@@ -15,11 +15,14 @@ Your next task is to form small groups and to extract key details from published
 
 Each group will be assigned a random number and each random number is associated with three papers that you can access here: \<insert link\>.
 
+
 ### Quantifying the reproducibility of studies that use the FBD model
 
 We are interested in extracting information from published articles that relate to reproducibility and overall comprehension of a given analysis. This includes information about the data (phylogenetic characters and age information), model and prior parameter choices, as well as data and code accessibility.
 
-Use the following template to record your results: [Reproducibility_task](Reproducibility_task.docx)
+Use the following template to record your results: [Reproducibility_task.docx](Reproducibility_task.docx){download="Reproducibility_task.docx"}
+
+Data collection protocol (adapted from Mulvey et al. 2025).
 
 Details of each variable are described below.
 
@@ -27,46 +30,42 @@ Keep track of the following: How long does it take to extract information from e
 
 **At the end of the activity please leave 5-10 minutes to write down your thoughts.**
 
-Data collection protocol (adapted from Mulvey et al. 2025)
-
-From Mulvey et al. [FBD survey criteria](https://docs.google.com/document/d/1nHFa01aLEOO7vjFuOUjHN0Ge4XVbadBH_-YD1JvdEi8/edit?tab=t.0)
-
 Notes before you get started
 
-- The spreadsheet is divided into 3 parts: “From the publication”, “Data and code accessibility”, and “From the code”. It is often easier to extract information about the analytical setup from supplementary code than the written text, but since we’re trying to quantify reproducibility we’d like you to answer the questions for each section separately.\
-- If you can not obtain any information from the written parts of the paper, you can write ***not found*** in the spreadsheet (do not try to guess).\
-- If a particular question is taking an especially long time to answer, just move onto the next one.\
-- If a study runs more than one analysis just add it as a new line in the spreadsheet. Most columns will likely be the same but some number might be different, e.g., taxa or characters.\
-- Note the survey is not about criticising specific individuals authors or papers, the focus is on collecting information about community wide practices.
+-   The spreadsheet is divided into 3 parts: “From the publication”, “Data and code accessibility”, and “From the code”. It is often easier to extract information about the analytical setup from supplementary code than the written text, but since we’re trying to quantify reproducibility we’d like you to answer the questions for each section separately.\
+-   If you can not obtain any information from the written parts of the paper, you can write ***not found*** in the spreadsheet (do not try to guess).\
+-   If a particular question is taking an especially long time to answer, just move onto the next one.\
+-   If a study runs more than one analysis just add it as a new line in the spreadsheet. Most columns will likely be the same but some number might be different, e.g., taxa or characters.\
+-   Note the survey is not about criticising specific individuals authors or papers, the focus is on collecting information about community wide practices.
 
 ### 
 
 **Group 1**
 
-- [Paper 1](https://nph.onlinelibrary.wiley.com/doi/full/10.1111/nph.19010)
-- [Paper 2](https://academic.oup.com/sysbio/article/70/6/1232/6184877)
+-   [Paper 1](https://nph.onlinelibrary.wiley.com/doi/full/10.1111/nph.19010)
+-   [Paper 2](https://academic.oup.com/sysbio/article/70/6/1232/6184877)
 
 **Group 2**
 
-- [Paper 1](https://www.nature.com/articles/s41559-019-1047-3) 
-- [Paper 2](https://academic.oup.com/sysbio/article-abstract/70/1/86/5854876)
+-   [Paper 1](https://www.nature.com/articles/s41559-019-1047-3)
+-   [Paper 2](https://academic.oup.com/sysbio/article-abstract/70/1/86/5854876)
 
-**Group 3** 
+**Group 3**
 
-- [Paper 1](https://www.cambridge.org/core/journals/journal-of-paleontology/article/largestknown-fossil-penguin-provides-insight-into-the-early-evolution-of-sphenisciform-body-size-and-flipper-anatomy/8D4A78B2CA0A716134F8E60169A633FD) 
-- [Paper 2](https://academic.oup.com/sysbio/article/70/5/922/6122448)
+-   [Paper 1](https://www.cambridge.org/core/journals/journal-of-paleontology/article/largestknown-fossil-penguin-provides-insight-into-the-early-evolution-of-sphenisciform-body-size-and-flipper-anatomy/8D4A78B2CA0A716134F8E60169A633FD)
+-   [Paper 2](https://academic.oup.com/sysbio/article/70/5/922/6122448)
 
-**Group 4** 
+**Group 4**
 
-- [Paper 1](https://nph.onlinelibrary.wiley.com/doi/full/10.1111/nph.19010) 
-- [Paper 2](https://link.springer.com/article/10.1186/s13358-023-00266-6)
+-   [Paper 1](https://nph.onlinelibrary.wiley.com/doi/full/10.1111/nph.19010)
+-   [Paper 2](https://link.springer.com/article/10.1186/s13358-023-00266-6)
 
-**Group 5** 
+**Group 5**
 
-- [Paper 1](https://www.nature.com/articles/s41559-019-1047-3) 
-- [Paper 2](https://www.sciencedirect.com/science/article/abs/pii/S161650471830020X)
+-   [Paper 1](https://www.nature.com/articles/s41559-019-1047-3)
+-   [Paper 2](https://www.sciencedirect.com/science/article/abs/pii/S161650471830020X)
 
-**Group 6** 
+**Group 6**
 
-- [Paper 1](https://www.cambridge.org/core/journals/journal-of-paleontology/article/largestknown-fossil-penguin-provides-insight-into-the-early-evolution-of-sphenisciform-body-size-and-flipper-anatomy/8D4A78B2CA0A716134F8E60169A633FD) 
-- [Paper 2](https://bioone.org/journals/american-museum-novitates/volume-2021/issue-3970/3970.1/Total-Evidence-Phylogenetic-Analysis-Supports-New-Morphological-Synapomorphies-for-Bovidae/10.1206/3970.1.full)
+-   [Paper 1](https://www.cambridge.org/core/journals/journal-of-paleontology/article/largestknown-fossil-penguin-provides-insight-into-the-early-evolution-of-sphenisciform-body-size-and-flipper-anatomy/8D4A78B2CA0A716134F8E60169A633FD)
+-   [Paper 2](https://bioone.org/journals/american-museum-novitates/volume-2021/issue-3970/3970.1/Total-Evidence-Phylogenetic-Analysis-Supports-New-Morphological-Synapomorphies-for-Bovidae/10.1206/3970.1.full)
