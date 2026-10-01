@@ -1,0 +1,62 @@
+---
+title: "Bug reports"
+format: html
+editor: visual
+---
+
+### Task 2 - Bug reporting
+
+*Breakout group activity*\
+*Rachel Warnock, Niklas Hohmann, Emilia Jarochowska*
+
+A bug is an error in computer code - it could result in a failure of the software to run, or it could be a mismatch between what the software is intended to do and what it actually does. A **bug report** is a description of the issue such that it can be reproduced and fixed by someone who maintains the software. One way anyone can contribute to software development is to submit a well-documented bug report. Lack of experience in writing a perfect bug report should not stop anyone from writing one - if you are a beginner, you can just describe what you think goes wrong, developers can then ask follow-up questions.
+
+Bug reports might not result in an immediate fix (many scientific software developers are juggling multiple roles), but it helps keep track of issues, alerts others users to the problem, and increases the chances that the problem will eventually be fixed – a bug definitely won’t be fixed if no one else knows about it!
+
+Your next task is to form small groups of 2-3 individuals and work together to submit a bug report to one of the programs you’ve used over the past few days (CarboKitten, one of the R packages, BEAST2, RevBayes). The objective of this activity is to promote positive practices around bug reporting within our community, with a view to providing online guidelines that other researchers can use beyond this workshop. Have a look at the issue tracker of one of the repositories (including closed issues) to get an impression of what bug reports look like (examples linked below). You can spot if the report required the developers to ask a lot of follow-up questions to understand the problem or whether they could address it immediately.
+
+#### What you need
+
+Before reporting an issue you will want to ensure the following: (1) make sure you can reproduce the bug on your device, and (2) try to make sure you’re dealing with a bug and not a problem with your setup (see below).
+
+To report a bug you will need to prepare the following:
+
+1.  A concise written explanation of the bug.\
+2.  The code that reproduces the bug (i.e., the Rev scripts or xml files). Ideally this would be the simplest possible version of the code that reproduces the issue.\
+3.  Any associated datafiles that are needed to reproduce the error.\
+4.  The version of the software you’re using.\
+5.  Details of your operating system.
+
+#### How do I know it's a bug and not a problem with my analysis?
+
+It is common that users report bugs that some developers might argue are not bugs - e.g., if it's an issue with your data, like some sort of incompatibility with the model assumptions. Your report is still extremely useful - first, you will learn how to fix the issue (or why your set up might be wrong); second, the developers can improve the documentation, error messaging, or user experience (which is not always prioritised) so other people don’t bump into the same problem.
+
+#### General tips
+
+- Before reporting a bug, carefully review your setup - go through all model and parameter choices and reflect on whether they make sense for your data.\
+- If your setup is complicated or you’re working with a large dataset, try reducing the complexity of the analysis. Can you reproduce the error with a simpler model or a smaller number of datapoints?\
+- If possible, simplify the scripts for your bug report. A simpler setup can sometimes help the developer track down the issue more efficiently. Here, using version control can be life-saving - if you try many multiple variants of the analysis, you can use individual commit IDs to ensure each variant is reproducible to yourself and others.\
+- Due to the stochastic nature of many of the simulation and inference tools that we use, bugs can appear random. Familiarise yourself with setting seeds for the random number generator to narrow down when the code breaks and to make your reports more reproducible.
+
+#### Example: RevBayes
+
+- [Example 1](https://github.com/revbayes/revbayes/issues/820)\
+- [Example 2](https://github.com/revbayes/revbayes/issues/811)
+
+#### Example: R packages
+
+- Lots of good examples [via Paleoverse](https://github.com/palaeoverse/palaeoverse/issues)
+
+#### Example: CarbonKitten
+
+- [Example 1](https://github.com/MindTheGap-ERC/CarboKitten.jl/issues/227)\
+- [Example 2](https://github.com/MindTheGap-ERC/CarboKitten.jl/issues/133)
+
+#### Feature requests
+
+Although the focus here is on bug reporting, sometimes bug reports can evolve into feature requests, so the boundary between the two is not always clear-cut. For example:
+
+- function `foo()` throws an error when I apply it to `shmoo`, but I am confident that this operation should be possible for `shmoo` and my setup is correct.\
+- That is because we haven’t implemented `foo()` for `shmoo` yet. It only works on `foo-foo-the-snoo` so far. We were considering extending the implementation to `shmoo`, but haven’t had any use case so far. If you have a use case, we can think of extending it.
+
+A dialogue might follow where you get the chance to specify details of this feature that would be useful for your use case. If it’s specific, you may want to consider how to credit the developers for a contribution that made your specific study possible - we encourage you to regard this as a scientific contribution and it may help sustain the work of the developers.
