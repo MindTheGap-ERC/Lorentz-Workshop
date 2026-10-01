@@ -309,5 +309,4 @@ beast.parser(template.file, char, ages, output.file, rate_times = breakpoints)
 
 ```
 
-Once you have created the files you can simply run them using BEAST2 as normal. 
-
+Once you have created the files you can simply run them using BEAST2 as normal.
