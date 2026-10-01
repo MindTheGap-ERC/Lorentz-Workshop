@@ -1,6 +1,10 @@
 project:
   type: book
   output-dir: ../docs
+  # Rename Quarto's version-hashed theme bundles to fixed filenames, so that
+  # rendering with a different Quarto version does not leave pages pointing at a
+  # stylesheet that was never committed. See book/stabilize-assets.sh.
+  post-render: bash stabilize-assets.sh
 
 book:
   title: "Bridging Stratigraphic Palaeobiology and Phylogenetics"
