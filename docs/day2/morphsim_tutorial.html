@@ -786,46 +786,47 @@ Note
 <li><p>Arms = ecological traits expected to undergo more rapid evolution more character states, faster rates of state transition, and taphonomically more likely to have missing data.</p></li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>tree_list <span class="ot">&lt;-</span> TreeSim<span class="sc">::</span><span class="fu">sim.bd.taxa</span>(</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">n        =</span> <span class="dv">10</span>,   <span class="co"># number of extant tips</span></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">numbsim  =</span> <span class="dv">1</span>,    <span class="co"># number of trees to simulate</span></span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">lambda   =</span> <span class="dv">1</span>,    <span class="co"># speciation rate</span></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mu       =</span> <span class="fl">0.5</span>,  <span class="co"># extinction rate</span></span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">complete =</span> <span class="cn">TRUE</span> <span class="co"># if set to false drop all extinct lineages and keep only extant tips</span></span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>tree <span class="ot">&lt;-</span> tree_list[[<span class="dv">1</span>]]</span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># switched off by Emilia because this chunked errored on render</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>tree_list <span class="ot">&lt;-</span> TreeSim<span class="sc">::</span><span class="fu">sim.bd.taxa</span>(</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">n        =</span> <span class="dv">10</span>,   <span class="co"># number of extant tips</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">numbsim  =</span> <span class="dv">1</span>,    <span class="co"># number of trees to simulate</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">lambda   =</span> <span class="dv">1</span>,    <span class="co"># speciation rate</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mu       =</span> <span class="fl">0.5</span>,  <span class="co"># extinction rate</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">complete =</span> <span class="cn">TRUE</span> <span class="co"># if set to false drop all extinct lineages and keep only extant tips</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>tree <span class="ot">&lt;-</span> tree_list[[<span class="dv">1</span>]]</span>
 <span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a><span class="co">#partition 1  = calyx</span></span>
-<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>calyx_partition <span class="ot">&lt;-</span> <span class="fu">sim.morpho</span>(<span class="at">k =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>), <span class="at">time.tree =</span> tree, <span class="at">br.rates =</span> <span class="fl">0.1</span>, <span class="at">trait.num =</span> <span class="dv">16</span>, <span class="at">partition =</span> <span class="fu">c</span>(<span class="dv">8</span>,<span class="dv">8</span>), <span class="at">full.states=</span><span class="cn">TRUE</span>)</span>
-<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a><span class="co">#k=c(2,3) is 2 sets of chars, one with 2 states and one with 3 char states</span></span>
-<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a><span class="co">#trait.num=c(8,8) is two sets of 8 chars each</span></span>
-<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a><span class="co">#br.rates = pretty slow</span></span>
-<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a><span class="co">#define.Q = ord_Q is an ordered modeled of character change</span></span>
-<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a><span class="co">#full.states=TRUE means all char. states will be included in the simulated trait data</span></span>
-<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a><span class="co">#partition 1  = calyx</span></span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>calyx_partition <span class="ot">&lt;-</span> <span class="fu">sim.morpho</span>(<span class="at">k =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>), <span class="at">time.tree =</span> tree, <span class="at">br.rates =</span> <span class="fl">0.1</span>, <span class="at">trait.num =</span> <span class="dv">16</span>, <span class="at">partition =</span> <span class="fu">c</span>(<span class="dv">8</span>,<span class="dv">8</span>), <span class="at">full.states=</span><span class="cn">TRUE</span>)</span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a><span class="co">#k=c(2,3) is 2 sets of chars, one with 2 states and one with 3 char states</span></span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a><span class="co">#trait.num=c(8,8) is two sets of 8 chars each</span></span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a><span class="co">#br.rates = pretty slow</span></span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a><span class="co">#define.Q = ord_Q is an ordered modeled of character change</span></span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a><span class="co">#full.states=TRUE means all char. states will be included in the simulated trait data</span></span>
 <span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a><span class="co">#Partition 2 = arms</span></span>
-<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a>arms_partition <span class="ot">&lt;-</span> <span class="fu">sim.morpho</span>(<span class="at">k=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>), <span class="at">time.tree=</span>tree, <span class="at">br.rates=</span><span class="fl">0.3</span>, <span class="at">trait.num=</span><span class="dv">16</span>, <span class="at">partition =</span> <span class="fu">c</span>(<span class="dv">8</span>,<span class="dv">8</span>), <span class="at">full.states=</span><span class="cn">TRUE</span>)</span>
-<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-26"><a href="#cb35-26" aria-hidden="true" tabindex="-1"></a><span class="co">#k=c(4,5) is 2 sets of chars, one with 4 states and one with 5 char states</span></span>
-<span id="cb35-27"><a href="#cb35-27" aria-hidden="true" tabindex="-1"></a><span class="co">#trait.num=c(8,8) is two sets of 8 chars each</span></span>
-<span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a><span class="co">#br.rates = faster than calyx</span></span>
-<span id="cb35-29"><a href="#cb35-29" aria-hidden="true" tabindex="-1"></a><span class="co">#full.states=TRUE means all char. states will be included in the simulated trait data</span></span>
-<span id="cb35-30"><a href="#cb35-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-31"><a href="#cb35-31" aria-hidden="true" tabindex="-1"></a><span class="co">#combine  partitions</span></span>
-<span id="cb35-32"><a href="#cb35-32" aria-hidden="true" tabindex="-1"></a>combined_crinoid <span class="ot">&lt;-</span> <span class="fu">combine.morpho</span>(calyx_partition, arms_partition)</span>
-<span id="cb35-33"><a href="#cb35-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a><span class="co">#Partition 2 = arms</span></span>
+<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a>arms_partition <span class="ot">&lt;-</span> <span class="fu">sim.morpho</span>(<span class="at">k=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>), <span class="at">time.tree=</span>tree, <span class="at">br.rates=</span><span class="fl">0.3</span>, <span class="at">trait.num=</span><span class="dv">16</span>, <span class="at">partition =</span> <span class="fu">c</span>(<span class="dv">8</span>,<span class="dv">8</span>), <span class="at">full.states=</span><span class="cn">TRUE</span>)</span>
+<span id="cb35-26"><a href="#cb35-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-27"><a href="#cb35-27" aria-hidden="true" tabindex="-1"></a><span class="co">#k=c(4,5) is 2 sets of chars, one with 4 states and one with 5 char states</span></span>
+<span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a><span class="co">#trait.num=c(8,8) is two sets of 8 chars each</span></span>
+<span id="cb35-29"><a href="#cb35-29" aria-hidden="true" tabindex="-1"></a><span class="co">#br.rates = faster than calyx</span></span>
+<span id="cb35-30"><a href="#cb35-30" aria-hidden="true" tabindex="-1"></a><span class="co">#full.states=TRUE means all char. states will be included in the simulated trait data</span></span>
+<span id="cb35-31"><a href="#cb35-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-32"><a href="#cb35-32" aria-hidden="true" tabindex="-1"></a><span class="co">#combine  partitions</span></span>
+<span id="cb35-33"><a href="#cb35-33" aria-hidden="true" tabindex="-1"></a>combined_crinoid <span class="ot">&lt;-</span> <span class="fu">combine.morpho</span>(calyx_partition, arms_partition)</span>
 <span id="cb35-34"><a href="#cb35-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-35"><a href="#cb35-35" aria-hidden="true" tabindex="-1"></a><span class="co">#Simulate missing data for each partition; less missing data in calyx partition,</span></span>
-<span id="cb35-36"><a href="#cb35-36" aria-hidden="true" tabindex="-1"></a>    <span class="co">#more missing data in arms partition</span></span>
-<span id="cb35-37"><a href="#cb35-37" aria-hidden="true" tabindex="-1"></a>final_crinoid_part <span class="ot">&lt;-</span> <span class="fu">sim.missing.data</span>(</span>
-<span id="cb35-38"><a href="#cb35-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> combined_crinoid, <span class="at">method =</span> <span class="st">"partition"</span>,</span>
-<span id="cb35-39"><a href="#cb35-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">seq =</span> <span class="st">"tips"</span>, <span class="at">probability =</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
-<span id="cb35-40"><a href="#cb35-40" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb35-35"><a href="#cb35-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-36"><a href="#cb35-36" aria-hidden="true" tabindex="-1"></a><span class="co">#Simulate missing data for each partition; less missing data in calyx partition,</span></span>
+<span id="cb35-37"><a href="#cb35-37" aria-hidden="true" tabindex="-1"></a>    <span class="co">#more missing data in arms partition</span></span>
+<span id="cb35-38"><a href="#cb35-38" aria-hidden="true" tabindex="-1"></a>final_crinoid_part <span class="ot">&lt;-</span> <span class="fu">sim.missing.data</span>(</span>
+<span id="cb35-39"><a href="#cb35-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> combined_crinoid, <span class="at">method =</span> <span class="st">"partition"</span>,</span>
+<span id="cb35-40"><a href="#cb35-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">seq =</span> <span class="st">"tips"</span>, <span class="at">probability =</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb35-41"><a href="#cb35-41" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="group-2-future-model-development" class="level3" data-number="7.3.2">
@@ -916,7 +917,8 @@ P_{i,i} = \frac{1}{k} \left(1 - e^{-k \delta (1 + \lambda t)} \right) + e^{-k \d
 </div>
 <p>Combining partitions</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>combined <span class="ot">&lt;-</span> <span class="fu">combine.morpho</span>(morpho_mkv_brain, morpho_mkv_teeth)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># switched off by Emilia because this chunked errored on render</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>combined <span class="ot">&lt;-</span> <span class="fu">combine.morpho</span>(morpho_mkv_brain, morpho_mkv_teeth)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Introduce missing data We have made our neurocranial parittion have loads more missing data than the teeth. We would ideally like to be able to do this only introducing missing data for extant tips and don’t know how to combine that with doing it by partition. Maybe if partition was a different argument to method then you could combine them.</p>
 <div class="cell">
@@ -949,83 +951,109 @@ P_{i,i} = \frac{1}{k} \left(1 - e^{-k \delta (1 + \lambda t)} \right) + e^{-k \d
 <p>Authors: Stephen, Myrthe, Kenneth, Anthony</p>
 <p>Adjusted R script of Morphsim to represent a conceptual archosaur phylogeny. An attempt was made to create several partitions with multiple character states and with differences in missing characters (e.g.&nbsp;more in multistate characters).</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12</span>)</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>tree_list <span class="ot">&lt;-</span> <span class="fu">sim.bd.taxa</span>(</span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">n        =</span> <span class="dv">10</span>,   <span class="co"># number of extant tips</span></span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">numbsim  =</span> <span class="dv">1</span>,    <span class="co"># number of trees to simulate</span></span>
-<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">lambda   =</span> <span class="dv">1</span>,    <span class="co"># speciation rate</span></span>
-<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">mu       =</span> <span class="fl">0.5</span>,  <span class="co"># extinction rate</span></span>
-<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">complete =</span> <span class="cn">TRUE</span> <span class="co"># if set to false drop all extinct lineages and keep only extant tips</span></span>
-<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>tree <span class="ot">&lt;-</span> tree_list[[<span class="dv">1</span>]]</span>
-<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a><span class="co"># total tip count, including BOTH extant and extinct lineages</span></span>
-<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a><span class="co"># (this will be &gt; 10, since n only controls extant tips)morpho_mk &lt;- sim.morpho(k = 3, time.tree = tree, br.rates = 0.1, trait.num = 15)</span></span>
-<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># switched off by Emilia because this chunked errored on render</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12</span>)</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>tree_list <span class="ot">&lt;-</span> <span class="fu">sim.bd.taxa</span>(</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">n        =</span> <span class="dv">10</span>,   <span class="co"># number of extant tips</span></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">numbsim  =</span> <span class="dv">1</span>,    <span class="co"># number of trees to simulate</span></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">lambda   =</span> <span class="dv">1</span>,    <span class="co"># speciation rate</span></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">mu       =</span> <span class="fl">0.5</span>,  <span class="co"># extinction rate</span></span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">complete =</span> <span class="cn">TRUE</span> <span class="co"># if set to false drop all extinct lineages and keep only extant tips</span></span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>tree <span class="ot">&lt;-</span> tree_list[[<span class="dv">1</span>]]</span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a><span class="co"># total tip count, including BOTH extant and extinct lineages</span></span>
+<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a><span class="co"># (this will be &gt; 10, since n only controls extant tips)morpho_mk &lt;- sim.morpho(k = 3, time.tree = tree, br.rates = 0.1, trait.num = 15)</span></span>
 <span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-16"><a href="#cb45-16" aria-hidden="true" tabindex="-1"></a>morpho_mk <span class="ot">&lt;-</span> <span class="fu">sim.morpho</span>(<span class="at">k =</span> <span class="dv">3</span>, <span class="at">time.tree =</span> tree, <span class="at">br.rates =</span> <span class="fl">0.1</span>, <span class="at">trait.num =</span> <span class="dv">15</span>)</span>
-<span id="cb45-17"><a href="#cb45-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-18"><a href="#cb45-18" aria-hidden="true" tabindex="-1"></a>morpho_mkv <span class="ot">&lt;-</span> <span class="fu">sim.morpho</span>(<span class="at">k =</span> <span class="dv">3</span>, <span class="at">time.tree =</span> tree, <span class="at">br.rates =</span> <span class="fl">0.1</span>,</span>
-<span id="cb45-19"><a href="#cb45-19" aria-hidden="true" tabindex="-1"></a>                         <span class="at">trait.num =</span> <span class="dv">15</span>, <span class="at">variable =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb45-20"><a href="#cb45-20" aria-hidden="true" tabindex="-1"></a><span class="co"># tolerate autapomorphies</span></span>
-<span id="cb45-21"><a href="#cb45-21" aria-hidden="true" tabindex="-1"></a>morpho_pars_standard <span class="ot">&lt;-</span> <span class="fu">sim.morpho</span>(<span class="at">k =</span> <span class="dv">3</span>, <span class="at">time.tree =</span> tree, <span class="at">br.rates =</span> <span class="fl">0.1</span>, <span class="at">trait.num =</span> <span class="dv">15</span>, <span class="at">variable =</span> <span class="cn">TRUE</span>, <span class="at">parsimony =</span> <span class="st">"standard"</span>)</span>
-<span id="cb45-22"><a href="#cb45-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-23"><a href="#cb45-23" aria-hidden="true" tabindex="-1"></a><span class="co"># every state must occur in 2+ taxa = stricter</span></span>
-<span id="cb45-24"><a href="#cb45-24" aria-hidden="true" tabindex="-1"></a>morpho_pars_strict <span class="ot">&lt;-</span> <span class="fu">sim.morpho</span>(<span class="at">k =</span> <span class="dv">3</span>, <span class="at">time.tree =</span> tree, <span class="at">br.rates =</span> <span class="fl">0.1</span>,</span>
-<span id="cb45-25"><a href="#cb45-25" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">trait.num =</span> <span class="dv">15</span>, <span class="at">variable =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb45-26"><a href="#cb45-26" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">parsimony =</span> <span class="st">"strict"</span>)</span>
-<span id="cb45-27"><a href="#cb45-27" aria-hidden="true" tabindex="-1"></a>morpho_acrv <span class="ot">&lt;-</span> <span class="fu">sim.morpho</span>(<span class="at">k =</span> <span class="dv">3</span>, <span class="at">time.tree =</span> tree, <span class="at">br.rates =</span> <span class="fl">0.1</span>, <span class="at">trait.num =</span> <span class="dv">15</span>, <span class="at">ACRV.ncats =</span> <span class="dv">4</span>)</span>
-<span id="cb45-28"><a href="#cb45-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-16"><a href="#cb45-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-17"><a href="#cb45-17" aria-hidden="true" tabindex="-1"></a>morpho_mk <span class="ot">&lt;-</span> <span class="fu">sim.morpho</span>(<span class="at">k =</span> <span class="dv">3</span>, <span class="at">time.tree =</span> tree, <span class="at">br.rates =</span> <span class="fl">0.1</span>, <span class="at">trait.num =</span> <span class="dv">15</span>)</span>
+<span id="cb45-18"><a href="#cb45-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-19"><a href="#cb45-19" aria-hidden="true" tabindex="-1"></a>morpho_mkv <span class="ot">&lt;-</span> <span class="fu">sim.morpho</span>(<span class="at">k =</span> <span class="dv">3</span>, <span class="at">time.tree =</span> tree, <span class="at">br.rates =</span> <span class="fl">0.1</span>,</span>
+<span id="cb45-20"><a href="#cb45-20" aria-hidden="true" tabindex="-1"></a>                         <span class="at">trait.num =</span> <span class="dv">15</span>, <span class="at">variable =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb45-21"><a href="#cb45-21" aria-hidden="true" tabindex="-1"></a><span class="co"># tolerate autapomorphies</span></span>
+<span id="cb45-22"><a href="#cb45-22" aria-hidden="true" tabindex="-1"></a>morpho_pars_standard <span class="ot">&lt;-</span> <span class="fu">sim.morpho</span>(<span class="at">k =</span> <span class="dv">3</span>, <span class="at">time.tree =</span> tree, <span class="at">br.rates =</span> <span class="fl">0.1</span>, <span class="at">trait.num =</span> <span class="dv">15</span>, <span class="at">variable =</span> <span class="cn">TRUE</span>, <span class="at">parsimony =</span> <span class="st">"standard"</span>)</span>
+<span id="cb45-23"><a href="#cb45-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-24"><a href="#cb45-24" aria-hidden="true" tabindex="-1"></a><span class="co"># every state must occur in 2+ taxa = stricter</span></span>
+<span id="cb45-25"><a href="#cb45-25" aria-hidden="true" tabindex="-1"></a>morpho_pars_strict <span class="ot">&lt;-</span> <span class="fu">sim.morpho</span>(<span class="at">k =</span> <span class="dv">3</span>, <span class="at">time.tree =</span> tree, <span class="at">br.rates =</span> <span class="fl">0.1</span>,</span>
+<span id="cb45-26"><a href="#cb45-26" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">trait.num =</span> <span class="dv">15</span>, <span class="at">variable =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb45-27"><a href="#cb45-27" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">parsimony =</span> <span class="st">"strict"</span>)</span>
+<span id="cb45-28"><a href="#cb45-28" aria-hidden="true" tabindex="-1"></a>morpho_acrv <span class="ot">&lt;-</span> <span class="fu">sim.morpho</span>(<span class="at">k =</span> <span class="dv">3</span>, <span class="at">time.tree =</span> tree, <span class="at">br.rates =</span> <span class="fl">0.1</span>, <span class="at">trait.num =</span> <span class="dv">15</span>, <span class="at">ACRV.ncats =</span> <span class="dv">4</span>)</span>
 <span id="cb45-29"><a href="#cb45-29" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb45-30"><a href="#cb45-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-31"><a href="#cb45-31" aria-hidden="true" tabindex="-1"></a>ord_Q <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.0</span>,</span>
-<span id="cb45-32"><a href="#cb45-32" aria-hidden="true" tabindex="-1"></a>                  <span class="fl">0.3333333</span>, <span class="sc">-</span><span class="fl">0.6666667</span>, <span class="fl">0.3333333</span>,</span>
-<span id="cb45-33"><a href="#cb45-33" aria-hidden="true" tabindex="-1"></a>                  <span class="fl">0.0</span>, <span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.5</span>),</span>
-<span id="cb45-34"><a href="#cb45-34" aria-hidden="true" tabindex="-1"></a>                <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb45-35"><a href="#cb45-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-36"><a href="#cb45-36" aria-hidden="true" tabindex="-1"></a>morpho_ordered <span class="ot">&lt;-</span> <span class="fu">sim.morpho</span>(<span class="at">k =</span> <span class="dv">3</span>, <span class="at">time.tree =</span> tree, <span class="at">br.rates =</span> <span class="fl">0.1</span>, <span class="at">trait.num =</span> <span class="dv">15</span>, <span class="at">variable =</span> <span class="cn">TRUE</span>, <span class="at">ACRV =</span> <span class="st">"gamma"</span>, <span class="at">alpha.gamma =</span> <span class="dv">1</span>,</span>
-<span id="cb45-37"><a href="#cb45-37" aria-hidden="true" tabindex="-1"></a>                             <span class="at">ACRV.ncats =</span> <span class="dv">4</span>, <span class="at">define.Q =</span> ord_Q)</span>
-<span id="cb45-38"><a href="#cb45-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-31"><a href="#cb45-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-32"><a href="#cb45-32" aria-hidden="true" tabindex="-1"></a>ord_Q <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.0</span>,</span>
+<span id="cb45-33"><a href="#cb45-33" aria-hidden="true" tabindex="-1"></a>                  <span class="fl">0.3333333</span>, <span class="sc">-</span><span class="fl">0.6666667</span>, <span class="fl">0.3333333</span>,</span>
+<span id="cb45-34"><a href="#cb45-34" aria-hidden="true" tabindex="-1"></a>                  <span class="fl">0.0</span>, <span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.5</span>),</span>
+<span id="cb45-35"><a href="#cb45-35" aria-hidden="true" tabindex="-1"></a>                <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb45-36"><a href="#cb45-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-37"><a href="#cb45-37" aria-hidden="true" tabindex="-1"></a>morpho_ordered <span class="ot">&lt;-</span> <span class="fu">sim.morpho</span>(<span class="at">k =</span> <span class="dv">3</span>, <span class="at">time.tree =</span> tree, <span class="at">br.rates =</span> <span class="fl">0.1</span>, <span class="at">trait.num =</span> <span class="dv">15</span>, <span class="at">variable =</span> <span class="cn">TRUE</span>, <span class="at">ACRV =</span> <span class="st">"gamma"</span>, <span class="at">alpha.gamma =</span> <span class="dv">1</span>,</span>
+<span id="cb45-38"><a href="#cb45-38" aria-hidden="true" tabindex="-1"></a>                             <span class="at">ACRV.ncats =</span> <span class="dv">4</span>, <span class="at">define.Q =</span> ord_Q)</span>
 <span id="cb45-39"><a href="#cb45-39" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb45-40"><a href="#cb45-40" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb45-41"><a href="#cb45-41" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb45-42"><a href="#cb45-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-43"><a href="#cb45-43" aria-hidden="true" tabindex="-1"></a><span class="co"># partition 1: unordered binary characters with MkV + gamma ACRV, present/absent, assumed to change less frequently</span></span>
-<span id="cb45-44"><a href="#cb45-44" aria-hidden="true" tabindex="-1"></a>partition_1 <span class="ot">&lt;-</span> <span class="fu">sim.morpho</span>(<span class="at">time.tree =</span> tree, <span class="at">k =</span> <span class="dv">2</span>, <span class="at">trait.num =</span> <span class="dv">72</span>,</span>
-<span id="cb45-45"><a href="#cb45-45" aria-hidden="true" tabindex="-1"></a>                          <span class="at">br.rates =</span> <span class="fl">0.1</span>, <span class="at">variable =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb45-46"><a href="#cb45-46" aria-hidden="true" tabindex="-1"></a>                          <span class="at">ACRV =</span> <span class="st">"gamma"</span>, <span class="at">alpha.gamma =</span> <span class="dv">1</span>, <span class="at">ACRV.ncats =</span><span class="dv">4</span>)</span>
-<span id="cb45-47"><a href="#cb45-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-48"><a href="#cb45-48" aria-hidden="true" tabindex="-1"></a><span class="co"># partition 2: ordered three-state characters with a custom Q matrix</span></span>
-<span id="cb45-49"><a href="#cb45-49" aria-hidden="true" tabindex="-1"></a>partition_2 <span class="ot">&lt;-</span> <span class="fu">sim.morpho</span>(<span class="at">time.tree =</span> tree, <span class="at">k =</span> <span class="dv">3</span>, <span class="at">trait.num =</span> <span class="dv">8</span>, <span class="at">variable =</span> <span class="cn">TRUE</span>, <span class="at">br.rates =</span> <span class="fl">0.3</span>, <span class="at">define.Q =</span> ord_Q)</span>
-<span id="cb45-50"><a href="#cb45-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-51"><a href="#cb45-51" aria-hidden="true" tabindex="-1"></a><span class="co"># partition 3: unordered three-state characters with MkV + gamma ACRV</span></span>
-<span id="cb45-52"><a href="#cb45-52" aria-hidden="true" tabindex="-1"></a>partition_3 <span class="ot">&lt;-</span> <span class="fu">sim.morpho</span>(<span class="at">time.tree =</span> tree, <span class="at">k =</span> <span class="dv">3</span>, <span class="at">trait.num =</span> <span class="dv">13</span>,</span>
-<span id="cb45-53"><a href="#cb45-53" aria-hidden="true" tabindex="-1"></a>                          <span class="at">br.rates =</span> <span class="fl">0.3</span>, <span class="at">variable =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb45-54"><a href="#cb45-54" aria-hidden="true" tabindex="-1"></a>                          <span class="at">ACRV =</span> <span class="st">"gamma"</span>, <span class="at">alpha.gamma =</span> <span class="dv">1</span>, <span class="at">ACRV.ncats =</span><span class="dv">4</span>)</span>
-<span id="cb45-55"><a href="#cb45-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-56"><a href="#cb45-56" aria-hidden="true" tabindex="-1"></a>c1 <span class="ot">&lt;-</span> <span class="fu">combine.morpho</span>(partition_1, partition_2)</span>
-<span id="cb45-57"><a href="#cb45-57" aria-hidden="true" tabindex="-1"></a><span class="co">#combined &lt;- combine.morpho(c1, partition_3)</span></span>
-<span id="cb45-58"><a href="#cb45-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-43"><a href="#cb45-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-44"><a href="#cb45-44" aria-hidden="true" tabindex="-1"></a><span class="co"># partition 1: unordered binary characters with MkV + gamma ACRV, present/absent, assumed to change less frequently</span></span>
+<span id="cb45-45"><a href="#cb45-45" aria-hidden="true" tabindex="-1"></a>partition_1 <span class="ot">&lt;-</span> <span class="fu">sim.morpho</span>(<span class="at">time.tree =</span> tree, <span class="at">k =</span> <span class="dv">2</span>, <span class="at">trait.num =</span> <span class="dv">72</span>,</span>
+<span id="cb45-46"><a href="#cb45-46" aria-hidden="true" tabindex="-1"></a>                          <span class="at">br.rates =</span> <span class="fl">0.1</span>, <span class="at">variable =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb45-47"><a href="#cb45-47" aria-hidden="true" tabindex="-1"></a>                          <span class="at">ACRV =</span> <span class="st">"gamma"</span>, <span class="at">alpha.gamma =</span> <span class="dv">1</span>, <span class="at">ACRV.ncats =</span><span class="dv">4</span>)</span>
+<span id="cb45-48"><a href="#cb45-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-49"><a href="#cb45-49" aria-hidden="true" tabindex="-1"></a><span class="co"># partition 2: ordered three-state characters with a custom Q matrix</span></span>
+<span id="cb45-50"><a href="#cb45-50" aria-hidden="true" tabindex="-1"></a>partition_2 <span class="ot">&lt;-</span> <span class="fu">sim.morpho</span>(<span class="at">time.tree =</span> tree, <span class="at">k =</span> <span class="dv">3</span>, <span class="at">trait.num =</span> <span class="dv">8</span>, <span class="at">variable =</span> <span class="cn">TRUE</span>, <span class="at">br.rates =</span> <span class="fl">0.3</span>, <span class="at">define.Q =</span> ord_Q)</span>
+<span id="cb45-51"><a href="#cb45-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-52"><a href="#cb45-52" aria-hidden="true" tabindex="-1"></a><span class="co"># partition 3: unordered three-state characters with MkV + gamma ACRV</span></span>
+<span id="cb45-53"><a href="#cb45-53" aria-hidden="true" tabindex="-1"></a>partition_3 <span class="ot">&lt;-</span> <span class="fu">sim.morpho</span>(<span class="at">time.tree =</span> tree, <span class="at">k =</span> <span class="dv">3</span>, <span class="at">trait.num =</span> <span class="dv">13</span>,</span>
+<span id="cb45-54"><a href="#cb45-54" aria-hidden="true" tabindex="-1"></a>                          <span class="at">br.rates =</span> <span class="fl">0.3</span>, <span class="at">variable =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb45-55"><a href="#cb45-55" aria-hidden="true" tabindex="-1"></a>                          <span class="at">ACRV =</span> <span class="st">"gamma"</span>, <span class="at">alpha.gamma =</span> <span class="dv">1</span>, <span class="at">ACRV.ncats =</span><span class="dv">4</span>)</span>
+<span id="cb45-56"><a href="#cb45-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-57"><a href="#cb45-57" aria-hidden="true" tabindex="-1"></a>c1 <span class="ot">&lt;-</span> <span class="fu">combine.morpho</span>(partition_1, partition_2)</span>
+<span id="cb45-58"><a href="#cb45-58" aria-hidden="true" tabindex="-1"></a><span class="co">#combined &lt;- combine.morpho(c1, partition_3)</span></span>
 <span id="cb45-59"><a href="#cb45-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-60"><a href="#cb45-60" aria-hidden="true" tabindex="-1"></a><span class="do">## COMMENTED OUT UNTIL LAURA FIXES </span><span class="al">BUG</span><span class="do"> ######</span></span>
-<span id="cb45-61"><a href="#cb45-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-62"><a href="#cb45-62" aria-hidden="true" tabindex="-1"></a><span class="co"># 100 traits total, model info from both partitions preserved</span></span>
-<span id="cb45-63"><a href="#cb45-63" aria-hidden="true" tabindex="-1"></a><span class="co">#length(combined$sequences$tips[[1]])</span></span>
-<span id="cb45-64"><a href="#cb45-64" aria-hidden="true" tabindex="-1"></a><span class="co">#combined$model$Specified</span></span>
-<span id="cb45-65"><a href="#cb45-65" aria-hidden="true" tabindex="-1"></a><span class="co"># partition 1: 30% missing</span></span>
-<span id="cb45-66"><a href="#cb45-66" aria-hidden="true" tabindex="-1"></a><span class="co"># partition 2: 70% missing</span></span>
-<span id="cb45-67"><a href="#cb45-67" aria-hidden="true" tabindex="-1"></a><span class="co"># partition 3: 70% missing</span></span>
-<span id="cb45-68"><a href="#cb45-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-69"><a href="#cb45-69" aria-hidden="true" tabindex="-1"></a><span class="co">#missing_part &lt;- sim.missing.data(</span></span>
-<span id="cb45-70"><a href="#cb45-70" aria-hidden="true" tabindex="-1"></a><span class="co">#  data = combined, method = "partition",</span></span>
-<span id="cb45-71"><a href="#cb45-71" aria-hidden="true" tabindex="-1"></a><span class="co">#  seq = "tips", probability = c(0.3, 0.7, 0.7)</span></span>
-<span id="cb45-72"><a href="#cb45-72" aria-hidden="true" tabindex="-1"></a><span class="co">#)</span></span>
-<span id="cb45-73"><a href="#cb45-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-74"><a href="#cb45-74" aria-hidden="true" tabindex="-1"></a><span class="co">#missing_extinct &lt;- sim.missing.data(</span></span>
-<span id="cb45-75"><a href="#cb45-75" aria-hidden="true" tabindex="-1"></a><span class="co">#  data = combined , method = "extinct",</span></span>
-<span id="cb45-76"><a href="#cb45-76" aria-hidden="true" tabindex="-1"></a><span class="co">#  seq = "tips", probability = 0.5</span></span>
-<span id="cb45-77"><a href="#cb45-77" aria-hidden="true" tabindex="-1"></a><span class="co">#)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb45-60"><a href="#cb45-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-61"><a href="#cb45-61" aria-hidden="true" tabindex="-1"></a><span class="do">## COMMENTED OUT UNTIL LAURA FIXES </span><span class="al">BUG</span><span class="do"> ######</span></span>
+<span id="cb45-62"><a href="#cb45-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-63"><a href="#cb45-63" aria-hidden="true" tabindex="-1"></a><span class="co"># 100 traits total, model info from both partitions preserved</span></span>
+<span id="cb45-64"><a href="#cb45-64" aria-hidden="true" tabindex="-1"></a><span class="co">#length(combined$sequences$tips[[1]])</span></span>
+<span id="cb45-65"><a href="#cb45-65" aria-hidden="true" tabindex="-1"></a><span class="co">#combined$model$Specified</span></span>
+<span id="cb45-66"><a href="#cb45-66" aria-hidden="true" tabindex="-1"></a><span class="co"># partition 1: 30% missing</span></span>
+<span id="cb45-67"><a href="#cb45-67" aria-hidden="true" tabindex="-1"></a><span class="co"># partition 2: 70% missing</span></span>
+<span id="cb45-68"><a href="#cb45-68" aria-hidden="true" tabindex="-1"></a><span class="co"># partition 3: 70% missing</span></span>
+<span id="cb45-69"><a href="#cb45-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-70"><a href="#cb45-70" aria-hidden="true" tabindex="-1"></a><span class="co">#missing_part &lt;- sim.missing.data(</span></span>
+<span id="cb45-71"><a href="#cb45-71" aria-hidden="true" tabindex="-1"></a><span class="co">#  data = combined, method = "partition",</span></span>
+<span id="cb45-72"><a href="#cb45-72" aria-hidden="true" tabindex="-1"></a><span class="co">#  seq = "tips", probability = c(0.3, 0.7, 0.7)</span></span>
+<span id="cb45-73"><a href="#cb45-73" aria-hidden="true" tabindex="-1"></a><span class="co">#)</span></span>
+<span id="cb45-74"><a href="#cb45-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-75"><a href="#cb45-75" aria-hidden="true" tabindex="-1"></a><span class="co">#missing_extinct &lt;- sim.missing.data(</span></span>
+<span id="cb45-76"><a href="#cb45-76" aria-hidden="true" tabindex="-1"></a><span class="co">#  data = combined , method = "extinct",</span></span>
+<span id="cb45-77"><a href="#cb45-77" aria-hidden="true" tabindex="-1"></a><span class="co">#  seq = "tips", probability = 0.5</span></span>
+<span id="cb45-78"><a href="#cb45-78" aria-hidden="true" tabindex="-1"></a><span class="co">#)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>ord_Q <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="fl">0.5</span>, <span class="fl">0.0</span>,</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>                   <span class="fl">0.3333333</span>, <span class="sc">-</span><span class="fl">0.6666667</span>, <span class="fl">0.3333333</span>,</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>                   <span class="fl">0.0</span>, <span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.5</span>),</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>morpho_ordered <span class="ot">&lt;-</span> <span class="fu">sim.morpho</span>(<span class="at">k =</span> <span class="dv">3</span>, <span class="at">time.tree =</span> tree, <span class="at">br.rates =</span> <span class="fl">0.1</span>, <span class="at">trait.num =</span> <span class="dv">15</span>,</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>                              <span class="at">variable =</span> <span class="cn">TRUE</span>, <span class="at">ACRV =</span> <span class="st">"gamma"</span>, <span class="at">alpha.gamma =</span> <span class="dv">1</span>,</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>                              <span class="at">ACRV.ncats =</span> <span class="dv">4</span>, <span class="at">define.Q =</span> ord_Q)</span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(morpho_ordered, <span class="at">trait =</span> <span class="dv">1</span>, <span class="at">box.cex =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Note: no fossil data available, fossils will not be shown</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Note: no fossil data available, reconstructed tree will not be shown</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="morphsim_tutorial_files/figure-html/sim-ordered-second-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 </div>
 
 

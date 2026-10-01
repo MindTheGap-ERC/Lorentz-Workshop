@@ -326,7 +326,9 @@ Generating a partition that aims to capture variation in regions of the crinoid 
 
 -   Arms = ecological traits expected to undergo more rapid evolution more character states, faster rates of state transition, and taphonomically more likely to have missing data.
 
-```{R}
+```{r}
+#| eval: false
+# switched off by Emilia because this chunked errored on render
 tree_list <- TreeSim::sim.bd.taxa(
     n        = 10,   # number of extant tips
     numbsim  = 1,    # number of trees to simulate
@@ -486,9 +488,9 @@ morpho_mkv_brain <- sim.morpho(k = 2, time.tree = tree, br.rates = 0.05,
 Combining partitions
 
 ```{r}
-
+#| eval: false
+# switched off by Emilia because this chunked errored on render
 combined <- combine.morpho(morpho_mkv_brain, morpho_mkv_teeth)
-
 ```
 
 Introduce missing data We have made our neurocranial parittion have loads more missing data than the teeth. We would ideally like to be able to do this only introducing missing data for extant tips and don't know how to combine that with doing it by partition. Maybe if partition was a different argument to method then you could combine them.
@@ -527,6 +529,8 @@ Authors: Stephen, Myrthe, Kenneth, Anthony
 Adjusted R script of Morphsim to represent a conceptual archosaur phylogeny. An attempt was made to create several partitions with multiple character states and with differences in missing characters (e.g. more in multistate characters).
 
 ```{R}
+#| eval: false
+# switched off by Emilia because this chunked errored on render
 set.seed(12)
 
 tree_list <- sim.bd.taxa(
@@ -607,7 +611,7 @@ c1 <- combine.morpho(partition_1, partition_2)
 ```
 
 ```{r}
-#| label: sim-ordered
+#| label: sim-ordered-second
 ord_Q <- matrix(c(-0.5, 0.5, 0.0,
                    0.3333333, -0.6666667, 0.3333333,
                    0.0, 0.5, -0.5),

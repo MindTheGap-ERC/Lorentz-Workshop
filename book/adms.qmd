@@ -6,7 +6,8 @@ title: "Time in rocks"
 
 In order to run this code, you will need the `admtools` R Package.
 
-```{r, echo=false, include=true}
+```{r}
+#| eval: false
 install.packages("admtools")
 library(admtools)
 

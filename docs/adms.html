@@ -371,6 +371,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">5.1</span> Introduction</h2>
+<p>In order to run this code, you will need the <code>admtools</code> R Package.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"admtools"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(admtools)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <p>This chapter introduces the concept of <strong>age-depth models</strong>, which formalize geochronological knowledge and contain a lot of stratigraphic information, e.g., on sediment accumulation rates and hiatus location and duration.</p>
 <p>At the end of the chapter you will</p>
 <ul>
@@ -397,22 +402,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="5.4" class="anchored" data-anchor-id="loading-data-and-constructing-age-depth-models"><span class="header-section-number">5.4</span> Loading data and constructing age-depth models</h2>
 <p>First let’s load the data from your stratigraphic forward model:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>adm_name <span class="ot">=</span> <span class="st">"data/output/columns_adm.csv"</span> <span class="co"># adjust if you have a different output location</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>data_adm <span class="ot">=</span> <span class="fu">read.csv</span>(adm_name) <span class="co"># read age-depth model data</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>adm_name <span class="ot">=</span> <span class="st">"data/output/columns_adm.csv"</span> <span class="co"># adjust if you have a different output location</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data_adm <span class="ot">=</span> <span class="fu">read.csv</span>(adm_name) <span class="co"># read age-depth model data</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>For the time being, we focus on one specific location in the simulated platform, namely the proximal section. We start by extracting the time steps and the height data at the examined location. Here we use the section that we named the “proximal” in the CarboKitten example. Of course you can always change which section you examine by changing the key or by importing a specific column from the data frame.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>key <span class="ot">=</span> <span class="st">"proximal"</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">=</span>  data_adm[,<span class="fu">which</span>(<span class="fu">grepl</span>(<span class="st">"Myr"</span>,<span class="fu">names</span>(data_adm)))] <span class="co"># time step</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>h <span class="ot">=</span> data_adm[,<span class="fu">which</span>(<span class="fu">grepl</span>(key,<span class="fu">names</span>(data_adm)))] <span class="co"># heights at the location with key in the name</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>key <span class="ot">=</span> <span class="st">"proximal"</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">=</span>  data_adm[,<span class="fu">which</span>(<span class="fu">grepl</span>(<span class="st">"Myr"</span>,<span class="fu">names</span>(data_adm)))] <span class="co"># time step</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>h <span class="ot">=</span> data_adm[,<span class="fu">which</span>(<span class="fu">grepl</span>(key,<span class="fu">names</span>(data_adm)))] <span class="co"># heights at the location with key in the name</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>With this, we can define the age-depth model object:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>adm <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">tp_to_adm</span>(<span class="at">t =</span> t,</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">h =</span> h,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">T_unit =</span> <span class="st">"Myr"</span>,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">L_unit =</span> <span class="st">"m"</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>adm</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>adm <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">tp_to_adm</span>(<span class="at">t =</span> t,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">h =</span> h,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">T_unit =</span> <span class="st">"Myr"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">L_unit =</span> <span class="st">"m"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>adm</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>age-depth model</code></pre>
 </div>
@@ -420,7 +425,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Here <code>tp_to_adm</code> stands for “tie points to age-depth model”.</p>
 <p>You can get a quick overview of the properties of the age-depth model using <code>summary</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(adm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(adm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>age-depth model 
 Total duration: 1 Myr
@@ -431,14 +436,14 @@ Stratigraphic completeness: 35.34 %
 </div>
 <p>Plotting age-depth models works out of the box using the default <code>plot</code> function. You can plot the accumulative and destructive intervals separately.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(adm,</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">lwd_destr =</span> <span class="dv">1</span>, <span class="co"># line width destructive interval (hiatus)</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">lwd_acc =</span> <span class="dv">2</span>, <span class="co"># line width accumulative interval</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">col_destr =</span> <span class="st">"blue"</span>,</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">col_acc =</span> <span class="st">"black"</span>)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>admtools<span class="sc">::</span><span class="fu">T_axis_lab</span>() <span class="co"># add time axis label</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>admtools<span class="sc">::</span><span class="fu">L_axis_lab</span>() <span class="co"># add length axis label (stratigraphic domain)</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="at">main =</span> <span class="fu">paste</span>(<span class="st">"Age-depth model at "</span>, key, <span class="st">"location"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(adm,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">lwd_destr =</span> <span class="dv">1</span>, <span class="co"># line width destructive interval (hiatus)</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">lwd_acc =</span> <span class="dv">2</span>, <span class="co"># line width accumulative interval</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">col_destr =</span> <span class="st">"blue"</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">col_acc =</span> <span class="st">"black"</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>admtools<span class="sc">::</span><span class="fu">T_axis_lab</span>() <span class="co"># add time axis label</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>admtools<span class="sc">::</span><span class="fu">L_axis_lab</span>() <span class="co"># add length axis label (stratigraphic domain)</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="at">main =</span> <span class="fu">paste</span>(<span class="st">"Age-depth model at "</span>, key, <span class="st">"location"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -454,59 +459,59 @@ Stratigraphic completeness: 35.34 %
 <p>Internally, age-depth model objects are just a list of times and associated heights plus information about which intervals are erosive (meaning, they remove data). However, they are incredibly convenient to quickly extract basic stratigraphic information from.</p>
 <p>For example, you can easily determine the number of hiatuses, time span covered, sediment accumulated, and stratigraphic (in)completeness:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># no of hiatuses</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>admtools<span class="sc">::</span><span class="fu">get_hiat_no</span>(adm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># no of hiatuses</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>admtools<span class="sc">::</span><span class="fu">get_hiat_no</span>(adm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 39</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># total duration</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>admtools<span class="sc">::</span><span class="fu">get_total_duration</span>(adm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># total duration</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>admtools<span class="sc">::</span><span class="fu">get_total_duration</span>(adm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># total thickness of sediment accumulated</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>admtools<span class="sc">::</span><span class="fu">get_total_thickness</span>(adm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># total thickness of sediment accumulated</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>admtools<span class="sc">::</span><span class="fu">get_total_thickness</span>(adm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 46.0238</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># stratigraphic (in)completeness</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># note this is incompleteness on the timescale of the time steps of your forward simulation</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># here on the scale of your forward simulation</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>admtools<span class="sc">::</span><span class="fu">get_incompleteness</span>(adm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># stratigraphic (in)completeness</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># note this is incompleteness on the timescale of the time steps of your forward simulation</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># here on the scale of your forward simulation</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>admtools<span class="sc">::</span><span class="fu">get_incompleteness</span>(adm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.6466</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>admtools<span class="sc">::</span><span class="fu">get_completeness</span>(adm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>admtools<span class="sc">::</span><span class="fu">get_completeness</span>(adm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.3534</code></pre>
 </div>
 </div>
 <p>You can extract more information, e.g., exact gap timing and positions, using <code>get_hiat_list</code>.</p>
 <p>In addition, you can extract information on sediment accumulation rates, both in the temporal and stratigraphic domain:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># constants for convenience</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>t_min <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">min_time</span>(adm)</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>t_max <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">max_time</span>(adm)</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>h_min <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">min_height</span>(adm)</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>h_max <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">max_height</span>(adm)</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>t_step <span class="ot">=</span> <span class="fl">0.01</span> <span class="co"># 10 kyr resolution</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>h_step <span class="ot">=</span> <span class="dv">1</span> <span class="co"># meter resolution</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co"># plotting values</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>t_vals <span class="ot">=</span> <span class="fu">seq</span>(t_min, t_max, <span class="at">by =</span> t_step)</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>h_vals <span class="ot">=</span> <span class="fu">seq</span>(h_min, h_max, <span class="at">by =</span> h_step)</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Time domain plot</span></span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> t_vals,</span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">y =</span> admtools<span class="sc">::</span><span class="fu">sed_rate_t</span>(adm, t_vals),</span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"l"</span>,</span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Time [Myr]"</span>,</span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Sediment accumulation rate [m/Myr]"</span>,</span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Sediment accumulation (Time domain)"</span>)</span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Stratigraphic domain plot</span></span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> admtools<span class="sc">::</span><span class="fu">sed_rate_l</span>(adm, h_vals),</span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>     <span class="at">y =</span> h_vals,</span>
-<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"l"</span>,</span>
-<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Sediment accumulation [m/Myr]"</span>,</span>
-<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Stratigraphic position [m]"</span>,</span>
-<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Sediment accumulation (Stratigraphic domain)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># constants for convenience</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>t_min <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">min_time</span>(adm)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>t_max <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">max_time</span>(adm)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>h_min <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">min_height</span>(adm)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>h_max <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">max_height</span>(adm)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>t_step <span class="ot">=</span> <span class="fl">0.01</span> <span class="co"># 10 kyr resolution</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>h_step <span class="ot">=</span> <span class="dv">1</span> <span class="co"># meter resolution</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co"># plotting values</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>t_vals <span class="ot">=</span> <span class="fu">seq</span>(t_min, t_max, <span class="at">by =</span> t_step)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>h_vals <span class="ot">=</span> <span class="fu">seq</span>(h_min, h_max, <span class="at">by =</span> h_step)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Time domain plot</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> t_vals,</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">y =</span> admtools<span class="sc">::</span><span class="fu">sed_rate_t</span>(adm, t_vals),</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Time [Myr]"</span>,</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Sediment accumulation rate [m/Myr]"</span>,</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Sediment accumulation (Time domain)"</span>)</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Stratigraphic domain plot</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> admtools<span class="sc">::</span><span class="fu">sed_rate_l</span>(adm, h_vals),</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>     <span class="at">y =</span> h_vals,</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Sediment accumulation [m/Myr]"</span>,</span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Stratigraphic position [m]"</span>,</span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Sediment accumulation (Stratigraphic domain)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
@@ -520,12 +525,12 @@ Stratigraphic completeness: 35.34 %
 <p>This nicely displays a major difference between the temporal and stratigraphic domain: In the time domain, sediment accumulation can be 0 (or even negative) during times of sedimentary stasis, stagnation, or erosion. However, in the stratigraphic domain, sediment accumulation must always be positive as only intervals with positive sediment accumulation can be preserved and make it into the sedimentary record.</p>
 <p>For this reason, it can be more intuitive to plot <em>sediment condensation</em> instead, which is the amout of time preserved per stratigraphic increment:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> admtools<span class="sc">::</span><span class="fu">condensation</span>(adm, h_vals),</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">y =</span> h_vals,</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"l"</span>,</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Condensation [Myr/m]"</span>,</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Stratigraphic position [m]"</span>,</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Sediment condensation (Stratigraphic domain)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> admtools<span class="sc">::</span><span class="fu">condensation</span>(adm, h_vals),</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">y =</span> h_vals,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Condensation [Myr/m]"</span>,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Stratigraphic position [m]"</span>,</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Sediment condensation (Stratigraphic domain)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -548,24 +553,24 @@ Stratigraphic completeness: 35.34 %
 <h3 data-number="5.6.1" class="anchored" data-anchor-id="base-case"><span class="header-section-number">5.6.1</span> Base case</h3>
 <p>Let’s look at a simple example:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># times</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>t_example <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.5</span>)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># transform into stratigraphic positions</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>h_example <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">time_to_strat</span>(t_example,</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>                                    adm)</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># display</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>h_example</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># times</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>t_example <span class="ot">=</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.5</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># transform into stratigraphic positions</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>h_example <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">time_to_strat</span>(t_example,</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>                                    adm)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co"># display</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>h_example</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 12.94445       NA</code></pre>
 </div>
 </div>
 <p>Here you can see that the time of 0.2 is placed at 13 m stratigraphic height, but the time at 0.5 Myr is associated with a hiatus and is “destroyed” (the argument <code>destructive</code> defaults to <code>TRUE</code>). For comparison:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>h_example <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">time_to_strat</span>(t_example,</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>                                    adm,</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">destructive =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># display</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>h_example</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>h_example <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">time_to_strat</span>(t_example,</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                                    adm,</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">destructive =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># display</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>h_example</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 12.94445 25.49968</code></pre>
 </div>
@@ -573,11 +578,11 @@ Stratigraphic completeness: 35.34 %
 <p>returns two numeric values, where 25.5 m is the stratigraphic position of the hiatal surface associated with the gap.</p>
 <p>The transformation of data from the stratigraphic domain to the time domain works identically:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># example stratigraphic positions</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>h_example <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">30</span>)</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>t_example <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">strat_to_time</span>(<span class="at">obj =</span> h_example,</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">x =</span> adm)</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>t_example</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># example stratigraphic positions</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>h_example <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">30</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>t_example <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">strat_to_time</span>(<span class="at">obj =</span> h_example,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">x =</span> adm)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>t_example</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.04825809 0.57217924</code></pre>
 </div>
@@ -588,31 +593,31 @@ Stratigraphic completeness: 35.34 %
 <h3 data-number="5.6.2" class="anchored" data-anchor-id="application-to-fossil-abundance-and-last-occurrences"><span class="header-section-number">5.6.2</span> Application to fossil abundance and last occurrences</h3>
 <p>The power of this conceptual approach is that it immediately generalizes to any type of temporal and stratigraphic data.</p>
 <p>As a first example, let’s first simulate fossil occurrences of a single taxon in the time domain.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set seed for reproducibility</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>seed <span class="ot">=</span> <span class="dv">42</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(seed)</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># small constant</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>eps <span class="ot">=</span> <span class="fl">0.01</span></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>max_rate <span class="ot">=</span> <span class="dv">1000</span></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co"># fossil occurrences peak 10-fold beteen 0.5 and 0.55 Myr </span></span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>rate <span class="ot">=</span> <span class="fu">approxfun</span>(<span class="at">x =</span> <span class="fu">c</span>(t_min, <span class="fl">0.45</span>, <span class="fl">0.45</span> <span class="sc">+</span> eps, <span class="fl">0.53</span>, <span class="fl">0.53</span> <span class="sc">+</span> eps, t_max),</span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">y =</span> <span class="dv">100</span> <span class="sc">*</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">1</span>, <span class="dv">1</span>),</span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">rule =</span> <span class="dv">2</span>)</span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> t,</span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">y =</span> <span class="fu">rate</span>(t),</span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"l"</span>,</span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Time [Myr]"</span>,</span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Abundance [Fossils/Myr]"</span>,</span>
-<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Fossil abundance"</span>,</span>
-<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, max_rate))</span>
-<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>sim_fossils <span class="ot">=</span> StratPal<span class="sc">::</span><span class="fu">p3_var_rate</span>(<span class="at">x =</span> rate,</span>
-<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">from =</span> t_min,</span>
-<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">to =</span> t_max,</span>
-<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">f_max =</span> max_rate)</span>
-<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(sim_fossils,</span>
-<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>     <span class="at">breaks =</span> <span class="fu">seq</span>(t_min, t_max, <span class="at">length.out =</span> <span class="dv">30</span>),</span>
-<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlab =</span> <span class="st">"Time [Myr]"</span>,</span>
-<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">" Simulated fossil abundance in the time domain"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set seed for reproducibility</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>seed <span class="ot">=</span> <span class="dv">42</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(seed)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># small constant</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>eps <span class="ot">=</span> <span class="fl">0.01</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>max_rate <span class="ot">=</span> <span class="dv">1000</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co"># fossil occurrences peak 10-fold beteen 0.5 and 0.55 Myr </span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>rate <span class="ot">=</span> <span class="fu">approxfun</span>(<span class="at">x =</span> <span class="fu">c</span>(t_min, <span class="fl">0.45</span>, <span class="fl">0.45</span> <span class="sc">+</span> eps, <span class="fl">0.53</span>, <span class="fl">0.53</span> <span class="sc">+</span> eps, t_max),</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">y =</span> <span class="dv">100</span> <span class="sc">*</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">rule =</span> <span class="dv">2</span>)</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> t,</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">y =</span> <span class="fu">rate</span>(t),</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Time [Myr]"</span>,</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Abundance [Fossils/Myr]"</span>,</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Fossil abundance"</span>,</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, max_rate))</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>sim_fossils <span class="ot">=</span> StratPal<span class="sc">::</span><span class="fu">p3_var_rate</span>(<span class="at">x =</span> rate,</span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">from =</span> t_min,</span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">to =</span> t_max,</span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">f_max =</span> max_rate)</span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(sim_fossils,</span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>     <span class="at">breaks =</span> <span class="fu">seq</span>(t_min, t_max, <span class="at">length.out =</span> <span class="dv">30</span>),</span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlab =</span> <span class="st">"Time [Myr]"</span>,</span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">" Simulated fossil abundance in the time domain"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
@@ -625,12 +630,12 @@ Stratigraphic completeness: 35.34 %
 </div>
 <p>Now we can transform the these fossils into the stratigraphic domain:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>sim_fossils_strat <span class="ot">=</span> sim_fossils <span class="sc">|&gt;</span> </span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  admtools<span class="sc">::</span><span class="fu">time_to_strat</span>(adm)</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(sim_fossils_strat,</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">breaks =</span> <span class="fu">seq</span>(h_min, h_max, <span class="at">length.out =</span> <span class="dv">30</span>),</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Stratigraphic position [m]"</span>,</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Fossil abundance in the stratigraphic domain"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>sim_fossils_strat <span class="ot">=</span> sim_fossils <span class="sc">|&gt;</span> </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  admtools<span class="sc">::</span><span class="fu">time_to_strat</span>(adm)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(sim_fossils_strat,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">breaks =</span> <span class="fu">seq</span>(h_min, h_max, <span class="at">length.out =</span> <span class="dv">30</span>),</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Stratigraphic position [m]"</span>,</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Fossil abundance in the stratigraphic domain"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -642,14 +647,14 @@ Stratigraphic completeness: 35.34 %
 <p>Two things are notable here: First, there are very few fossils preserved in the stratigraphic domain (45 vs.&nbsp;189 in the time domain) due to the destructive effect of the gaps. Second, the peak in fossil abundance is almost completely missing, as it largely coincides with a gap.</p>
 <p>Of course the same works in the other direction: Assuming we observe a uniform fossil abundance in the stratigraphic domain, the reconstructed fossil abundance in the time domain is:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>StratPal<span class="sc">::</span><span class="fu">p3</span>(<span class="at">rate =</span> <span class="dv">10</span>,</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">from =</span> h_min,</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">to =</span> h_max) <span class="sc">|&gt;</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  admtools<span class="sc">::</span><span class="fu">strat_to_time</span>(<span class="at">x =</span> adm) <span class="sc">|&gt;</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hist</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(t_min, t_max, <span class="at">length.out =</span> <span class="dv">30</span>),</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">"Time [Myr]"</span>,</span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">ylab =</span> <span class="st">"Fossil abundance"</span>,</span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">main =</span> <span class="st">"Reconstructed fossil abundance in time domain"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>StratPal<span class="sc">::</span><span class="fu">p3</span>(<span class="at">rate =</span> <span class="dv">10</span>,</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">from =</span> h_min,</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">to =</span> h_max) <span class="sc">|&gt;</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  admtools<span class="sc">::</span><span class="fu">strat_to_time</span>(<span class="at">x =</span> adm) <span class="sc">|&gt;</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hist</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(t_min, t_max, <span class="at">length.out =</span> <span class="dv">30</span>),</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">"Time [Myr]"</span>,</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">ylab =</span> <span class="st">"Fossil abundance"</span>,</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">main =</span> <span class="st">"Reconstructed fossil abundance in time domain"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -661,28 +666,28 @@ Stratigraphic completeness: 35.34 %
 <p>Note here the gaps in fossil abundance are due to the gaps in the fossil record - no fossil ages will be reconstructed during the gap. If you want to explore the interaction between sediment accumulation, age-depth models, and fossil abundance more interactively, check out the <a href="https://utrecht-university.shinyapps.io/ShellbedCondensator/">Shellbed condensator</a>, a shiny app that runs in your browser.</p>
 <p>Last, we show off a classic example of stratigraphic paleobiology: The generation of artifactual clusters of last occurrences at hiatal surfaces from fossil taxa simulated under a scenario where extinction rate increases gradually through time. This example quietly assumes that for each taxon, the fossil abundance is high enough for the Signor-Lipps effect to be negligible (Why is this assumption needed, and where is it expressed in the code?)</p>
 <p>For the extinction rate, we assume it doubles over the timescale of observation. To reduce the effects of noise, we simulate a (unrealistically) large number of last occurrences:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>n_lfo <span class="ot">=</span> <span class="dv">1000</span> <span class="co"># no of last occurrences</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>f_lo <span class="ot">=</span> <span class="fu">approxfun</span>(<span class="at">x =</span> <span class="fu">c</span>(t_min, t_max),</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">y =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="co"># double over timescale of observation</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">rule =</span> <span class="dv">2</span>)</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> t,</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">y =</span> <span class="fu">f_lo</span>(t),</span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"l"</span>,</span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Time [Myr]"</span>,</span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Extinction rate [-]"</span>,</span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Extinction rate"</span>,</span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">yaxt =</span> <span class="st">"n"</span>,</span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">max</span>(<span class="fu">f_lo</span>(t))))</span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>last_occ <span class="ot">=</span> StratPal<span class="sc">::</span><span class="fu">p3_var_rate</span>(<span class="at">x =</span> f_lo,</span>
-<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">from =</span> t_min,</span>
-<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">to =</span> t_max,</span>
-<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">n =</span> n_lfo, <span class="co"># condition on the required number of last occurrences</span></span>
-<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">f_max =</span> <span class="dv">2</span>)</span>
-<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(last_occ,</span>
-<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>     <span class="at">breaks =</span> <span class="fu">seq</span>(t_min, t_max, <span class="at">length.out =</span> <span class="dv">30</span>),</span>
-<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Time [Myr]"</span>,</span>
-<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Last occurrences [#/Myr]"</span>,</span>
-<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Last occurrences in the time domain"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>n_lfo <span class="ot">=</span> <span class="dv">1000</span> <span class="co"># no of last occurrences</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>f_lo <span class="ot">=</span> <span class="fu">approxfun</span>(<span class="at">x =</span> <span class="fu">c</span>(t_min, t_max),</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">y =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="co"># double over timescale of observation</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">rule =</span> <span class="dv">2</span>)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> t,</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">y =</span> <span class="fu">f_lo</span>(t),</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Time [Myr]"</span>,</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Extinction rate [-]"</span>,</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Extinction rate"</span>,</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">yaxt =</span> <span class="st">"n"</span>,</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">max</span>(<span class="fu">f_lo</span>(t))))</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>last_occ <span class="ot">=</span> StratPal<span class="sc">::</span><span class="fu">p3_var_rate</span>(<span class="at">x =</span> f_lo,</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">from =</span> t_min,</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">to =</span> t_max,</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">n =</span> n_lfo, <span class="co"># condition on the required number of last occurrences</span></span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">f_max =</span> <span class="dv">2</span>)</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(last_occ,</span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>     <span class="at">breaks =</span> <span class="fu">seq</span>(t_min, t_max, <span class="at">length.out =</span> <span class="dv">30</span>),</span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Time [Myr]"</span>,</span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Last occurrences [#/Myr]"</span>,</span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Last occurrences in the time domain"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
@@ -695,12 +700,12 @@ Stratigraphic completeness: 35.34 %
 </div>
 <p>Now let’s transfor this into the stratigraphic domain to see where the last occurrences cluster. We use the option <code>destructive = FALSE</code> to make sure the last occurrences during a gap appear directly at the stratigraphic position of the associated hiatus surface.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>last_occ <span class="sc">|&gt;</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  admtools<span class="sc">::</span><span class="fu">time_to_strat</span>(<span class="at">x =</span> adm,</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">destructiv =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hist</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(h_min, h_max, <span class="at">length.out =</span> <span class="dv">30</span>),</span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">"Stratigraphic position [m]"</span>,</span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">main =</span> <span class="st">"Last occurrences in the stratigraphic domain"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>last_occ <span class="sc">|&gt;</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  admtools<span class="sc">::</span><span class="fu">time_to_strat</span>(<span class="at">x =</span> adm,</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">destructiv =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hist</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(h_min, h_max, <span class="at">length.out =</span> <span class="dv">30</span>),</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">"Stratigraphic position [m]"</span>,</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">main =</span> <span class="st">"Last occurrences in the stratigraphic domain"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -716,21 +721,21 @@ Stratigraphic completeness: 35.34 %
 <p>As a last example, we show how age-depth models can modify our understanding of trait evolution along lineages.</p>
 <p>As a baseline, let’s simulate a trait evolving according to a random walk along a lineage:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>t_res <span class="ot">=</span> <span class="fl">0.01</span> <span class="co"># temporal resolution</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>t_sampled <span class="ot">=</span> <span class="fu">seq</span>(<span class="at">from =</span> t_min, <span class="co"># times where the lineage is sampled</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">to =</span> t_max,</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">by =</span> t_res)</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co"># model parameters</span></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">=</span> <span class="dv">1</span> <span class="co"># variance</span></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">=</span> <span class="dv">3</span> <span class="co"># directionality</span></span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>lineage_t <span class="ot">=</span> StratPal<span class="sc">::</span><span class="fu">random_walk</span>(<span class="at">t =</span> t_sampled,</span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">sigma =</span> sigma,</span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">mu =</span> mu)</span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lineage_t,</span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Time [Myr]"</span>,</span>
-<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Trait value"</span>,</span>
-<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"l"</span>,</span>
-<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Trait evolution in the time domain"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>t_res <span class="ot">=</span> <span class="fl">0.01</span> <span class="co"># temporal resolution</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>t_sampled <span class="ot">=</span> <span class="fu">seq</span>(<span class="at">from =</span> t_min, <span class="co"># times where the lineage is sampled</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">to =</span> t_max,</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">by =</span> t_res)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co"># model parameters</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">=</span> <span class="dv">1</span> <span class="co"># variance</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">=</span> <span class="dv">3</span> <span class="co"># directionality</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>lineage_t <span class="ot">=</span> StratPal<span class="sc">::</span><span class="fu">random_walk</span>(<span class="at">t =</span> t_sampled,</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">sigma =</span> sigma,</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">mu =</span> mu)</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lineage_t,</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Time [Myr]"</span>,</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Trait value"</span>,</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Trait evolution in the time domain"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -741,12 +746,12 @@ Stratigraphic completeness: 35.34 %
 </div>
 <p>Now let’s see how this evolutionary process is expressed in the stratigraphic domain:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>lineage_t <span class="sc">|&gt;</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  admtools<span class="sc">::</span><span class="fu">time_to_strat</span>(<span class="at">x =</span> adm) <span class="sc">|&gt;</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">type =</span> <span class="st">"l"</span>,</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">"Trait value"</span>,</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">ylab =</span> <span class="st">"Stratigraphic position [m]"</span>,</span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">main =</span> <span class="st">"Trait evolution in the stratigraphic domain"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>lineage_t <span class="sc">|&gt;</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  admtools<span class="sc">::</span><span class="fu">time_to_strat</span>(<span class="at">x =</span> adm) <span class="sc">|&gt;</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">"Trait value"</span>,</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">ylab =</span> <span class="st">"Stratigraphic position [m]"</span>,</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">main =</span> <span class="st">"Trait evolution in the stratigraphic domain"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -765,38 +770,38 @@ Stratigraphic completeness: 35.34 %
 <p>Let’s quickly dive into correlation using depth-depth curves. Depth-depth curves are very similar to age-depth model in the sense that they act as coordinate transformations. However, they translate data within the stratigraphic domain by associating coeval stratigraphic positions with each other.</p>
 <p>We start by constructing a few more age-depth models:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>key1 <span class="ot">=</span> <span class="st">"proximal"</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>key2 <span class="ot">=</span> <span class="st">"midplatform"</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>key3 <span class="ot">=</span> <span class="st">"slope"</span></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>h1 <span class="ot">=</span> data_adm[,<span class="fu">which</span>(<span class="fu">grepl</span>(key1,<span class="fu">names</span>(data_adm)))] </span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>h2 <span class="ot">=</span> data_adm[,<span class="fu">which</span>(<span class="fu">grepl</span>(key2,<span class="fu">names</span>(data_adm)))] </span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>h3 <span class="ot">=</span> data_adm[,<span class="fu">which</span>(<span class="fu">grepl</span>(key3,<span class="fu">names</span>(data_adm)))] </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>key1 <span class="ot">=</span> <span class="st">"proximal"</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>key2 <span class="ot">=</span> <span class="st">"midplatform"</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>key3 <span class="ot">=</span> <span class="st">"slope"</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>h1 <span class="ot">=</span> data_adm[,<span class="fu">which</span>(<span class="fu">grepl</span>(key1,<span class="fu">names</span>(data_adm)))] </span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>h2 <span class="ot">=</span> data_adm[,<span class="fu">which</span>(<span class="fu">grepl</span>(key2,<span class="fu">names</span>(data_adm)))] </span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>h3 <span class="ot">=</span> data_adm[,<span class="fu">which</span>(<span class="fu">grepl</span>(key3,<span class="fu">names</span>(data_adm)))] </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>With this, we can define the age-depth model object:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>adm_proximal <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">tp_to_adm</span>(<span class="at">t =</span> t,</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">h =</span> h1,</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">T_unit =</span> <span class="st">"Myr"</span>,</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">L_unit =</span> <span class="st">"m"</span>)</span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>adm_mid <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">tp_to_adm</span>(<span class="at">t =</span> t,</span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">h =</span> h2,</span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>                          <span class="at">T_unit =</span> <span class="st">"Myr"</span>,</span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">L_unit =</span> <span class="st">"m"</span>)</span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>adm_slope <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">tp_to_adm</span>(<span class="at">t =</span> t,</span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>                          <span class="at">h =</span> h3,</span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>                          <span class="at">T_unit =</span> <span class="st">"Myr"</span>,</span>
-<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>                          <span class="at">L_unit =</span> <span class="st">"m"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>adm_proximal <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">tp_to_adm</span>(<span class="at">t =</span> t,</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">h =</span> h1,</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">T_unit =</span> <span class="st">"Myr"</span>,</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">L_unit =</span> <span class="st">"m"</span>)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>adm_mid <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">tp_to_adm</span>(<span class="at">t =</span> t,</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">h =</span> h2,</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>                          <span class="at">T_unit =</span> <span class="st">"Myr"</span>,</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">L_unit =</span> <span class="st">"m"</span>)</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>adm_slope <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">tp_to_adm</span>(<span class="at">t =</span> t,</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>                          <span class="at">h =</span> h3,</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>                          <span class="at">T_unit =</span> <span class="st">"Myr"</span>,</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>                          <span class="at">L_unit =</span> <span class="st">"m"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell quarto-layout-panel" data-layout-ncol="2">
 
 </div>
 <p>Now we can construct a depth-depth curve from two age-depth models using <code>adm_to_ddc</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>ddc <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">adm_to_ddc</span>(<span class="at">adm1 =</span> adm_proximal,</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">adm2 =</span> adm_slope)</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ddc,</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"l"</span>,</span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Stratigraphic position proximal [m]"</span>,</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Stratigraphic postion on slope [m]"</span>,</span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Depth-depth curve for correlation"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>ddc <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">adm_to_ddc</span>(<span class="at">adm1 =</span> adm_proximal,</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">adm2 =</span> adm_slope)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ddc,</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Stratigraphic position proximal [m]"</span>,</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Stratigraphic postion on slope [m]"</span>,</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Depth-depth curve for correlation"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -824,107 +829,107 @@ Stratigraphic completeness: 35.34 %
 <p><em>(<code>adms_pmm_mv-a.qmd</code>)</em></p>
 <p>Replaced the gradually doubling extinction rate in the last-occurrence example with a short, intense <strong>extinction pulse</strong>, and extended the figure to show the time and stratigraphic domains side by side.</p>
 <p>Instead of an extinction rate that doubles linearly over the interval of observation, the rate is held at background level and multiplied 50-fold for 20 kyr starting at 0.5 Myr:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>n_lfo <span class="ot">=</span> <span class="dv">1000</span>      <span class="co"># no of last occurrences</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>t_ext   <span class="ot">=</span> <span class="fl">0.50</span>    <span class="co"># onset of the extinction pulse [Myr]</span></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>dur_ext <span class="ot">=</span> <span class="fl">0.02</span>    <span class="co"># duration of the pulse [Myr]</span></span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>bg_rate <span class="ot">=</span> <span class="dv">1</span>       <span class="co"># background extinction rate (relative units)</span></span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>mag_ext <span class="ot">=</span> <span class="dv">50</span>      <span class="co"># pulse intensity as a multiple of background</span></span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>d       <span class="ot">=</span> <span class="fl">1e-4</span>    <span class="co"># tiny offset to make the step sharp</span></span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>f_lo <span class="ot">=</span> <span class="fu">approxfun</span>(<span class="at">x =</span> <span class="fu">c</span>(t_min, t_ext, t_ext <span class="sc">+</span> d,</span>
-<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>                       t_ext <span class="sc">+</span> dur_ext, t_ext <span class="sc">+</span> dur_ext <span class="sc">+</span> d, t_max),</span>
-<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">y =</span> bg_rate <span class="sc">*</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, mag_ext, mag_ext, <span class="dv">1</span>, <span class="dv">1</span>),</span>
-<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>                 <span class="at">rule =</span> <span class="dv">2</span>)</span>
-<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>last_occ <span class="ot">=</span> StratPal<span class="sc">::</span><span class="fu">p3_var_rate</span>(<span class="at">x =</span> f_lo,</span>
-<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">from =</span> t_min,</span>
-<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">to =</span> t_max,</span>
-<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">n =</span> n_lfo,</span>
-<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">f_max =</span> bg_rate <span class="sc">*</span> mag_ext)  <span class="co"># must be &gt;= max(f_lo)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The rate curve is then evaluated on a fine grid (5000 points) rather than on the model time steps <code>t</code>, so that the sharp pulse is not missed, and the three panels (rate, last occurrences in the time domain, last occurrences in the stratigraphic domain) are plotted together with the pulse interval marked in red. The histograms use 60 instead of 30 breaks:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>t_fine <span class="ot">=</span> <span class="fu">seq</span>(t_min, t_max, <span class="at">length.out =</span> <span class="dv">5000</span>)</span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> t_fine,</span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">y =</span> <span class="fu">f_lo</span>(t_fine),</span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"l"</span>,</span>
-<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Time [Myr]"</span>,</span>
-<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Extinction rate [relative]"</span>,</span>
-<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Extinction rate"</span>,</span>
-<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, bg_rate <span class="sc">*</span> mag_ext))</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>n_lfo <span class="ot">=</span> <span class="dv">1000</span>      <span class="co"># no of last occurrences</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>t_ext   <span class="ot">=</span> <span class="fl">0.50</span>    <span class="co"># onset of the extinction pulse [Myr]</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>dur_ext <span class="ot">=</span> <span class="fl">0.02</span>    <span class="co"># duration of the pulse [Myr]</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>bg_rate <span class="ot">=</span> <span class="dv">1</span>       <span class="co"># background extinction rate (relative units)</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>mag_ext <span class="ot">=</span> <span class="dv">50</span>      <span class="co"># pulse intensity as a multiple of background</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>d       <span class="ot">=</span> <span class="fl">1e-4</span>    <span class="co"># tiny offset to make the step sharp</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>f_lo <span class="ot">=</span> <span class="fu">approxfun</span>(<span class="at">x =</span> <span class="fu">c</span>(t_min, t_ext, t_ext <span class="sc">+</span> d,</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>                       t_ext <span class="sc">+</span> dur_ext, t_ext <span class="sc">+</span> dur_ext <span class="sc">+</span> d, t_max),</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">y =</span> bg_rate <span class="sc">*</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, mag_ext, mag_ext, <span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>                 <span class="at">rule =</span> <span class="dv">2</span>)</span>
 <span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(last_occ,</span>
-<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">breaks =</span> <span class="fu">seq</span>(t_min, t_max, <span class="at">length.out =</span> <span class="dv">60</span>),</span>
-<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Time [Myr]"</span>,</span>
-<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Last occurrences"</span>,</span>
-<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Last occurrences (time domain)"</span>)</span>
-<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">c</span>(t_ext, t_ext <span class="sc">+</span> dur_ext), <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lty =</span> <span class="dv">2</span>)  <span class="co"># mark the pulse</span></span>
-<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>last_occ_strat <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">time_to_strat</span>(last_occ, <span class="at">x =</span> adm, <span class="at">destructive =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(last_occ_strat,</span>
-<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">breaks =</span> <span class="fu">seq</span>(h_min, h_max, <span class="at">length.out =</span> <span class="dv">60</span>),</span>
-<span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Stratigraphic position [m]"</span>,</span>
-<span id="cb37-24"><a href="#cb37-24" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Last occurrences"</span>,</span>
-<span id="cb37-25"><a href="#cb37-25" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Last occurrences (strat. domain)"</span>)</span>
-<span id="cb37-26"><a href="#cb37-26" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> admtools<span class="sc">::</span><span class="fu">time_to_strat</span>(<span class="fu">c</span>(t_ext, t_ext <span class="sc">+</span> dur_ext), adm, <span class="at">destructive =</span> <span class="cn">FALSE</span>),</span>
-<span id="cb37-27"><a href="#cb37-27" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb37-28"><a href="#cb37-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-29"><a href="#cb37-29" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>last_occ <span class="ot">=</span> StratPal<span class="sc">::</span><span class="fu">p3_var_rate</span>(<span class="at">x =</span> f_lo,</span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">from =</span> t_min,</span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">to =</span> t_max,</span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">n =</span> n_lfo,</span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">f_max =</span> bg_rate <span class="sc">*</span> mag_ext)  <span class="co"># must be &gt;= max(f_lo)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The rate curve is then evaluated on a fine grid (5000 points) rather than on the model time steps <code>t</code>, so that the sharp pulse is not missed, and the three panels (rate, last occurrences in the time domain, last occurrences in the stratigraphic domain) are plotted together with the pulse interval marked in red. The histograms use 60 instead of 30 breaks:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>t_fine <span class="ot">=</span> <span class="fu">seq</span>(t_min, t_max, <span class="at">length.out =</span> <span class="dv">5000</span>)</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> t_fine,</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">y =</span> <span class="fu">f_lo</span>(t_fine),</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Time [Myr]"</span>,</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Extinction rate [relative]"</span>,</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Extinction rate"</span>,</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, bg_rate <span class="sc">*</span> mag_ext))</span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(last_occ,</span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">breaks =</span> <span class="fu">seq</span>(t_min, t_max, <span class="at">length.out =</span> <span class="dv">60</span>),</span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Time [Myr]"</span>,</span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Last occurrences"</span>,</span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Last occurrences (time domain)"</span>)</span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">c</span>(t_ext, t_ext <span class="sc">+</span> dur_ext), <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lty =</span> <span class="dv">2</span>)  <span class="co"># mark the pulse</span></span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>last_occ_strat <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">time_to_strat</span>(last_occ, <span class="at">x =</span> adm, <span class="at">destructive =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(last_occ_strat,</span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">breaks =</span> <span class="fu">seq</span>(h_min, h_max, <span class="at">length.out =</span> <span class="dv">60</span>),</span>
+<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Stratigraphic position [m]"</span>,</span>
+<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Last occurrences"</span>,</span>
+<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Last occurrences (strat. domain)"</span>)</span>
+<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> admtools<span class="sc">::</span><span class="fu">time_to_strat</span>(<span class="fu">c</span>(t_ext, t_ext <span class="sc">+</span> dur_ext), adm, <span class="at">destructive =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-29"><a href="#cb38-29" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This moves the transformation of last occurrences into the stratigraphic domain into the baseline chunk, so it happens in the same figure as the time-domain histogram.</p>
 </section>
 <section id="sergei-tarasov" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="sergei-tarasov"><span class="header-section-number">6.3</span> Sergei Tarasov</h2>
 <p><em>(<code>adms_st.qmd</code>)</em></p>
 <p>No changes to the text or code, apart from the path to the CarboKitten output, which was adjusted to be relative to the repository root instead of the <code>book/</code> directory:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>adm_name <span class="ot">=</span> <span class="st">"book/data/output/columns_adm.csv"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>adm_name <span class="ot">=</span> <span class="st">"book/data/output/columns_adm.csv"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="april-joël-william-johannes-tim" class="level2" data-number="6.4">
 <h2 data-number="6.4" class="anchored" data-anchor-id="april-joël-william-johannes-tim"><span class="header-section-number">6.4</span> April, Joël, William, Johannes, Tim</h2>
 <p><em>(<code>adms_tb.qmd</code>)</em></p>
 <p>Explored how the <strong>temporal resolution of the tie points</strong> affects the age-depth model, by keeping the full-resolution model alongside a coarsened one and comparing the two.</p>
 <p>The full-resolution model is stored as <code>adm_init</code>, and <code>t</code> and <code>h</code> are then thinned to every 50th time step before <code>adm</code> is built from them:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>key <span class="ot">=</span> <span class="st">"proximal"</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>adm_init <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">tp_to_adm</span>(<span class="at">t =</span> data_adm[,<span class="fu">which</span>(<span class="fu">grepl</span>(<span class="st">"Myr"</span>,<span class="fu">names</span>(data_adm)))],</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">h =</span> data_adm[,<span class="fu">which</span>(<span class="fu">grepl</span>(key,<span class="fu">names</span>(data_adm)))],</span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">T_unit =</span> <span class="st">"Myr"</span>,</span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">L_unit =</span> <span class="st">"m"</span>)</span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>steps <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="fu">length</span>(data_adm[,<span class="fu">which</span>(<span class="fu">grepl</span>(<span class="st">"Myr"</span>,<span class="fu">names</span>(data_adm)))]), <span class="dv">50</span>)</span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>t <span class="ot">=</span>  data_adm[,<span class="fu">which</span>(<span class="fu">grepl</span>(<span class="st">"Myr"</span>,<span class="fu">names</span>(data_adm)))][steps] <span class="co"># time step</span></span>
-<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>h <span class="ot">=</span> data_adm[,<span class="fu">which</span>(<span class="fu">grepl</span>(key,<span class="fu">names</span>(data_adm)))][steps] <span class="co"># heights at the location with key in the name</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>key <span class="ot">=</span> <span class="st">"proximal"</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>adm_init <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">tp_to_adm</span>(<span class="at">t =</span> data_adm[,<span class="fu">which</span>(<span class="fu">grepl</span>(<span class="st">"Myr"</span>,<span class="fu">names</span>(data_adm)))],</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">h =</span> data_adm[,<span class="fu">which</span>(<span class="fu">grepl</span>(key,<span class="fu">names</span>(data_adm)))],</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">T_unit =</span> <span class="st">"Myr"</span>,</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">L_unit =</span> <span class="st">"m"</span>)</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>steps <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="fu">length</span>(data_adm[,<span class="fu">which</span>(<span class="fu">grepl</span>(<span class="st">"Myr"</span>,<span class="fu">names</span>(data_adm)))]), <span class="dv">50</span>)</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>t <span class="ot">=</span>  data_adm[,<span class="fu">which</span>(<span class="fu">grepl</span>(<span class="st">"Myr"</span>,<span class="fu">names</span>(data_adm)))][steps] <span class="co"># time step</span></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>h <span class="ot">=</span> data_adm[,<span class="fu">which</span>(<span class="fu">grepl</span>(key,<span class="fu">names</span>(data_adm)))][steps] <span class="co"># heights at the location with key in the name</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The plotting ranges are taken from the full-resolution model <code>adm_init</code>, and both sediment accumulation plots show the full-resolution curve in black with the coarsened curve overplotted in dark red:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># constants for convenience</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>t_min <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">min_time</span>(adm_init)</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>t_max <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">max_time</span>(adm_init)</span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>h_min <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">min_height</span>(adm_init)</span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>h_max <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">max_height</span>(adm_init)</span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>t_step <span class="ot">=</span> <span class="fl">0.01</span> <span class="co"># 10 kyr resolution</span></span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>h_step <span class="ot">=</span> <span class="dv">1</span> <span class="co"># meter resolution</span></span>
-<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="co"># plotting values</span></span>
-<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>t_vals <span class="ot">=</span> <span class="fu">seq</span>(t_min, t_max, <span class="at">by =</span> t_step)</span>
-<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>h_vals <span class="ot">=</span> <span class="fu">seq</span>(h_min, h_max, <span class="at">by =</span> h_step)</span>
-<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Time domain plot</span></span>
-<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> t_vals,</span>
-<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">y =</span> admtools<span class="sc">::</span><span class="fu">sed_rate_t</span>(adm_init, t_vals),</span>
-<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"l"</span>,</span>
-<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Time [Myr]"</span>,</span>
-<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Sediment accumulation rate [m/Myr]"</span>,</span>
-<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Sediment accumulation (Time domain)"</span>)</span>
-<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="at">x =</span> t_vals,</span>
-<span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a>     <span class="at">y =</span> admtools<span class="sc">::</span><span class="fu">sed_rate_t</span>(adm, t_vals),</span>
-<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">col =</span> <span class="st">"#800020"</span>)</span>
-<span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Stratigraphic domain plot</span></span>
-<span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> admtools<span class="sc">::</span><span class="fu">sed_rate_l</span>(adm_init, h_vals),</span>
-<span id="cb40-23"><a href="#cb40-23" aria-hidden="true" tabindex="-1"></a>     <span class="at">y =</span> h_vals,</span>
-<span id="cb40-24"><a href="#cb40-24" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"l"</span>,</span>
-<span id="cb40-25"><a href="#cb40-25" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Sediment accumulation [m/Myr]"</span>,</span>
-<span id="cb40-26"><a href="#cb40-26" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Stratigraphic position [m]"</span>,</span>
-<span id="cb40-27"><a href="#cb40-27" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Sediment accumulation (Stratigraphic domain)"</span>)</span>
-<span id="cb40-28"><a href="#cb40-28" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="at">x =</span> admtools<span class="sc">::</span><span class="fu">sed_rate_l</span>(adm, h_vals),</span>
-<span id="cb40-29"><a href="#cb40-29" aria-hidden="true" tabindex="-1"></a>     <span class="at">y =</span> h_vals,</span>
-<span id="cb40-30"><a href="#cb40-30" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">col =</span> <span class="st">"#800020"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># constants for convenience</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>t_min <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">min_time</span>(adm_init)</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>t_max <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">max_time</span>(adm_init)</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>h_min <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">min_height</span>(adm_init)</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>h_max <span class="ot">=</span> admtools<span class="sc">::</span><span class="fu">max_height</span>(adm_init)</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>t_step <span class="ot">=</span> <span class="fl">0.01</span> <span class="co"># 10 kyr resolution</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>h_step <span class="ot">=</span> <span class="dv">1</span> <span class="co"># meter resolution</span></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="co"># plotting values</span></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>t_vals <span class="ot">=</span> <span class="fu">seq</span>(t_min, t_max, <span class="at">by =</span> t_step)</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>h_vals <span class="ot">=</span> <span class="fu">seq</span>(h_min, h_max, <span class="at">by =</span> h_step)</span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Time domain plot</span></span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> t_vals,</span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">y =</span> admtools<span class="sc">::</span><span class="fu">sed_rate_t</span>(adm_init, t_vals),</span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Time [Myr]"</span>,</span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Sediment accumulation rate [m/Myr]"</span>,</span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Sediment accumulation (Time domain)"</span>)</span>
+<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="at">x =</span> t_vals,</span>
+<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a>     <span class="at">y =</span> admtools<span class="sc">::</span><span class="fu">sed_rate_t</span>(adm, t_vals),</span>
+<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">col =</span> <span class="st">"#800020"</span>)</span>
+<span id="cb41-21"><a href="#cb41-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Stratigraphic domain plot</span></span>
+<span id="cb41-22"><a href="#cb41-22" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> admtools<span class="sc">::</span><span class="fu">sed_rate_l</span>(adm_init, h_vals),</span>
+<span id="cb41-23"><a href="#cb41-23" aria-hidden="true" tabindex="-1"></a>     <span class="at">y =</span> h_vals,</span>
+<span id="cb41-24"><a href="#cb41-24" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb41-25"><a href="#cb41-25" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Sediment accumulation [m/Myr]"</span>,</span>
+<span id="cb41-26"><a href="#cb41-26" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Stratigraphic position [m]"</span>,</span>
+<span id="cb41-27"><a href="#cb41-27" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Sediment accumulation (Stratigraphic domain)"</span>)</span>
+<span id="cb41-28"><a href="#cb41-28" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="at">x =</span> admtools<span class="sc">::</span><span class="fu">sed_rate_l</span>(adm, h_vals),</span>
+<span id="cb41-29"><a href="#cb41-29" aria-hidden="true" tabindex="-1"></a>     <span class="at">y =</span> h_vals,</span>
+<span id="cb41-30"><a href="#cb41-30" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">col =</span> <span class="st">"#800020"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The group also recorded their names in the YAML header, as <code>group: "April, Joël, William, Johannes, Tim"</code>.</p>
 
 
