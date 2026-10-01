@@ -38,3 +38,35 @@ Notes before you get started
 - If a particular question is taking an especially long time to answer, just move onto the next one.\
 - If a study runs more than one analysis just add it as a new line in the spreadsheet. Most columns will likely be the same but some number might be different, e.g., taxa or characters.\
 - Note the survey is not about criticising specific individuals authors or papers, the focus is on collecting information about community wide practices.
+
+### 
+
+**Group 1**
+
+- [Paper 1](https://nph.onlinelibrary.wiley.com/doi/full/10.1111/nph.19010)
+- [Paper 2](https://academic.oup.com/sysbio/article/70/6/1232/6184877)
+
+**Group 2**
+
+- [Paper 1](https://www.nature.com/articles/s41559-019-1047-3) 
+- [Paper 2](https://academic.oup.com/sysbio/article-abstract/70/1/86/5854876)
+
+**Group 3** 
+
+- [Paper 1](https://www.cambridge.org/core/journals/journal-of-paleontology/article/largestknown-fossil-penguin-provides-insight-into-the-early-evolution-of-sphenisciform-body-size-and-flipper-anatomy/8D4A78B2CA0A716134F8E60169A633FD) 
+- [Paper 2](https://academic.oup.com/sysbio/article/70/5/922/6122448)
+
+**Group 4** 
+
+- [Paper 1](https://nph.onlinelibrary.wiley.com/doi/full/10.1111/nph.19010) 
+- [Paper 2](https://link.springer.com/article/10.1186/s13358-023-00266-6)
+
+**Group 5** 
+
+- [Paper 1](https://www.nature.com/articles/s41559-019-1047-3) 
+- [Paper 2](https://www.sciencedirect.com/science/article/abs/pii/S161650471830020X)
+
+**Group 6** 
+
+- [Paper 1](https://www.cambridge.org/core/journals/journal-of-paleontology/article/largestknown-fossil-penguin-provides-insight-into-the-early-evolution-of-sphenisciform-body-size-and-flipper-anatomy/8D4A78B2CA0A716134F8E60169A633FD) 
+- [Paper 2](https://bioone.org/journals/american-museum-novitates/volume-2021/issue-3970/3970.1/Total-Evidence-Phylogenetic-Analysis-Supports-New-Morphological-Synapomorphies-for-Bovidae/10.1206/3970.1.full)
