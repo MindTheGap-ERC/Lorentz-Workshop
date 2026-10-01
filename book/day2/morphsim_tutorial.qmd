@@ -313,4 +313,296 @@ Build this with `sim.morpho()`, using `partition` and `k` (or `combine.morpho()`
 
 **Step 3: Are there some limitations to what we can simulate?** Think about all the models you have seen so far, are there any processes you think we are not capturing that would be important for modeling morphological data from fossils? What assumptions could we include to improve our modeling of morphological data?
 
+## Breakout group discussions 
+
+
+### Group 1 : Variation in rates of evolution in crinoid body plan evolution
+
+Authors: Lena, Mark, Joel, Charlotte, Xianyi
+
+Generating a partition that aims to capture variation in regions of the crinoid body:
+
+-   Calyx = More likely to be under major body plan constraints fewer character states, slower rates of state transition, & taphonomically less missing data.
+
+-   Arms = ecological traits expected to undergo more rapid evolution more character states, faster rates of state transition, and taphonomically more likely to have missing data.
+
+```{R}
+tree_list <- TreeSim::sim.bd.taxa(
+    n        = 10,   # number of extant tips
+    numbsim  = 1,    # number of trees to simulate
+    lambda   = 1,    # speciation rate
+    mu       = 0.5,  # extinction rate
+    complete = TRUE # if set to false drop all extinct lineages and keep only extant tips
+)
+
+tree <- tree_list[[1]]
+
+
+#partition 1  = calyx
+calyx_partition <- sim.morpho(k = c(2, 3), time.tree = tree, br.rates = 0.1, trait.num = 16, partition = c(8,8), full.states=TRUE)
+
+#k=c(2,3) is 2 sets of chars, one with 2 states and one with 3 char states
+#trait.num=c(8,8) is two sets of 8 chars each
+#br.rates = pretty slow
+#define.Q = ord_Q is an ordered modeled of character change
+#full.states=TRUE means all char. states will be included in the simulated trait data
+
+
+
+#Partition 2 = arms
+arms_partition <- sim.morpho(k=c(4,5), time.tree=tree, br.rates=0.3, trait.num=16, partition = c(8,8), full.states=TRUE)
+
+#k=c(4,5) is 2 sets of chars, one with 4 states and one with 5 char states
+#trait.num=c(8,8) is two sets of 8 chars each
+#br.rates = faster than calyx
+#full.states=TRUE means all char. states will be included in the simulated trait data
+
+#combine  partitions
+combined_crinoid <- combine.morpho(calyx_partition, arms_partition)
+
+
+#Simulate missing data for each partition; less missing data in calyx partition,
+    #more missing data in arms partition
+final_crinoid_part <- sim.missing.data(
+    data = combined_crinoid, method = "partition",
+    seq = "tips", probability = c(0.2, 0.2, 0.5, 0.5)
+)
+```
+
+### Group 2 : Future model development
+
+Authors: David, April, Mark, Ugne, Davy
+
+-   The tripartite structure of Bayesian time-tree inference could potentially be broken down. Spike clock models introduce a connection between the tree model and the clock model. We could introduce a connection between the tree model and the substitution model as well, e.g. by assuming that the $Q$-matrix changes at speciation events.
+
+-   Discussion of the work April did with Pete Wagner, where the $Q$-matrix itself is time-dependent. The transition probabilities are:
+
+    $$
+    P_{i,j} = \frac{1}{k} \left(1 - e^{-k \delta (1 + \lambda t)} \right)
+    $$
+
+    $$
+    P_{i,i} = \frac{1}{k} \left(1 - e^{-k \delta (1 + \lambda t)} \right) + e^{-k \delta (1 + \lambda t)}
+    $$
+
+-   This increases the number of dependencies, but not the number of free parameters! You are already estimating $\lambda$ (speciation rate) as part of the tree model, and $\delta$ (branch rate) as part of the clock model.
+
+-   When this model was first described, it wasn't possible to let the speciation rate vary continuously through time, so the tree was cut up into narrow time slices.
+
+-   Can we pinpoint properties in which character matrices generated under this model differ from those generated under the standard M$k$ model? Maybe use the test statistics from Mulvey et al. (2025)?
+
+-   Can we fit punctuated evolution models to distributions of trees that were inferred under models without punctuation?
+
+-   Discussion of biogeographic dating (FBD + DEC)
+
+-   Discussion of stepping-stone sampling
+
+### Group 3: Impacts of ambiguous characters
+
+Authors: Bethany, Pedro, Melanie, Mariana, Tim, Filippo
+
+Step 1: Biology
+
+We created a simple simulation considering the effect of silicification on brachiopods, where silicification randomly preserves the internal structure of shells. The first partition creates external shell characters, notably whether a taxon has few, moderate, or many costae (ribs). The second partition assigns random internal characters present to reflect whether or not these taxa were silicified.
+
+```{R}
+library(TreeSim)
+library(MorphSim)
+set.seed(12)
+
+tree <- sim.bd.taxa(n = 10, numbsim = 1, lambda = 1, mu = 0.5, complete = TRUE)[[1]]
+
+# Partition 1: external shell, ordered meristic characters (e.g. few / moderate / many ribs)
+ord_Q <- matrix(c(-0.5, 0.5, 0,
+                  1/3, -2/3, 1/3,
+                  0, 0.5, -0.5), nrow = 3, byrow = TRUE)
+
+shell_ext <- sim.morpho(time.tree = tree, k = 3, trait.num = 10, br.rates = 0.1,
+                        variable = TRUE, define.Q = ord_Q)
+
+# Partition 2: internal characters, unordered, strongly heterogeneous rates
+# (alpha < 1 = some characters nearly frozen, a few fast)
+shell_int <- sim.morpho(time.tree = tree, k = 3, trait.num = 10, br.rates = 0.1,
+                        variable = TRUE, ACRV = "gamma", alpha.gamma = 0.5, ACRV.ncats = 4)
+
+brach <- combine.morpho(shell_ext, shell_int)
+brach$model$Specified
+
+
+brach_missing <- sim.missing.data(data = brach, method = "partition",
+                                  seq = "tips", probability = c(0.1, 0.7))
+
+
+```
+
+Step 2: Stratigraphy
+
+Silicification is currently thought to be controlled by lithology, such that silicification is more likely to occurr in carbonate rocks with minimal fine-grained siliciclastic content. The amount of terrigenous fine-grained siliciclastic in a carbonate system is controlled by accomodation, whereby any major decrease in accomodation subaerially exposes the platform, decreasing river baselines, and introducing siliciclastic sediment into the basin.
+
+Step 3: Limitations
+
+Many limitations were preliminarily considered. Notably the role of water depth, the intersection of various taphonomic factors, which characters to simulate as potentially losing, and how to include ambigious traits?
+
+### Group 4: Biases in missing data
+
+Authors: Richard, Walker, Madleen, Martin, Will
+
+We are looking at the effect of having biased missing data where you have one set of data that is often found but not phylogenetically uninformative (e.g. teeth) and a second set that has loads of missing data but which is phylogenetically character-rich (e.g. body fossils).
+
+Building the tree
+
+```{r}
+set.seed(5)
+
+tree_list <- sim.bd.taxa(
+  n        = 30,   # number of extant tips
+  numbsim  = 1,    # number of trees to simulate
+  lambda   = 1,    # speciation rate
+  mu       = 0.8,  # extinction rate
+  complete = TRUE # drop extinct/non-sampled lineages; keep only extant tips
+)
+
+tree <- tree_list[[1]]
+
+```
+
+Partition 1: Teeth Setting up a tooth partition, fast evolving, few characters
+
+```{r}
+
+morpho_mkv_teeth <- sim.morpho(k = 2, time.tree = tree, br.rates = 0.2,
+                          trait.num = 15, variable = TRUE)
+
+```
+
+Partition 2: Braincase Setting up a braincase partition, slow evolving, lots of characters
+
+```{r}
+
+morpho_mkv_brain <- sim.morpho(k = 2, time.tree = tree, br.rates = 0.05,
+                          trait.num = 85, variable = TRUE)
+```
+
+Combining partitions
+
+```{r}
+
+combined <- combine.morpho(morpho_mkv_brain, morpho_mkv_teeth)
+
+```
+
+Introduce missing data We have made our neurocranial parittion have loads more missing data than the teeth. We would ideally like to be able to do this only introducing missing data for extant tips and don't know how to combine that with doing it by partition. Maybe if partition was a different argument to method then you could combine them.
+
+```{r}
+# hard tissue characters (partition 1): 10% missing
+# soft tissue characters (partition 2): 70% missing
+missing_part <- sim.missing.data(
+  data = combined, method = "partition",
+  seq = "tips", probability = c(0.95, 0.05)
+)
+```
+
+Writing files
+
+```{r}
+# full tree
+#write.morpho(missing_part, file = "Fishtree.tre", type = "tree",
+#             reconstructed = FALSE)
+
+# character matrix
+#write.morpho(missing_part, file = "Fishmatrix.nex", type = "matrix", reconstructed = FALSE)
+
+# fossil occurrence ages (compatible with RevBayes)
+#write.morpho(missing_part, file = "Fishages_rb.tsv", type = "ages")
+
+# ages with associated uncertainty
+#write.morpho(missing_part, file = "Fishages.tsv", type = "ages",
+#             uncertainty = 2)
+```
+
+### Group 5: Testing the Realism of Simulated Morphological Data
+
+Authors: Stephen, Myrthe, Kenneth, Anthony
+
+Adjusted R script of Morphsim to represent a conceptual archosaur phylogeny. An attempt was made to create several partitions with multiple character states and with differences in missing characters (e.g. more in multistate characters).
+
+```{R}
+set.seed(12)
+
+tree_list <- sim.bd.taxa(
+  n        = 10,   # number of extant tips
+  numbsim  = 1,    # number of trees to simulate
+  lambda   = 1,    # speciation rate
+  mu       = 0.5,  # extinction rate
+  complete = TRUE # if set to false drop all extinct lineages and keep only extant tips
+)
+
+tree <- tree_list[[1]]
+# total tip count, including BOTH extant and extinct lineages
+# (this will be > 10, since n only controls extant tips)morpho_mk <- sim.morpho(k = 3, time.tree = tree, br.rates = 0.1, trait.num = 15)
+
+
+morpho_mk <- sim.morpho(k = 3, time.tree = tree, br.rates = 0.1, trait.num = 15)
+
+morpho_mkv <- sim.morpho(k = 3, time.tree = tree, br.rates = 0.1,
+                         trait.num = 15, variable = TRUE)
+# tolerate autapomorphies
+morpho_pars_standard <- sim.morpho(k = 3, time.tree = tree, br.rates = 0.1, trait.num = 15, variable = TRUE, parsimony = "standard")
+
+# every state must occur in 2+ taxa = stricter
+morpho_pars_strict <- sim.morpho(k = 3, time.tree = tree, br.rates = 0.1,
+                                 trait.num = 15, variable = TRUE,
+                                 parsimony = "strict")
+morpho_acrv <- sim.morpho(k = 3, time.tree = tree, br.rates = 0.1, trait.num = 15, ACRV.ncats = 4)
+
+
+
+ord_Q <- matrix(c(-0.5, 0.5, 0.0,
+                  0.3333333, -0.6666667, 0.3333333,
+                  0.0, 0.5, -0.5),
+                nrow = 3, byrow = TRUE)
+
+morpho_ordered <- sim.morpho(k = 3, time.tree = tree, br.rates = 0.1, trait.num = 15, variable = TRUE, ACRV = "gamma", alpha.gamma = 1,
+                             ACRV.ncats = 4, define.Q = ord_Q)
+
+
+
+
+
+# partition 1: unordered binary characters with MkV + gamma ACRV, present/absent, assumed to change less frequently
+partition_1 <- sim.morpho(time.tree = tree, k = 2, trait.num = 72,
+                          br.rates = 0.1, variable = TRUE,
+                          ACRV = "gamma", alpha.gamma = 1, ACRV.ncats =4)
+
+# partition 2: ordered three-state characters with a custom Q matrix
+partition_2 <- sim.morpho(time.tree = tree, k = 3, trait.num = 8, variable = TRUE, br.rates = 0.3, define.Q = ord_Q)
+
+# partition 3: unordered three-state characters with MkV + gamma ACRV
+partition_3 <- sim.morpho(time.tree = tree, k = 3, trait.num = 13,
+                          br.rates = 0.3, variable = TRUE,
+                          ACRV = "gamma", alpha.gamma = 1, ACRV.ncats =4)
+
+c1 <- combine.morpho(partition_1, partition_2)
+#combined <- combine.morpho(c1, partition_3)
+
+
+## COMMENTED OUT UNTIL LAURA FIXES BUG ######
+
+# 100 traits total, model info from both partitions preserved
+#length(combined$sequences$tips[[1]])
+#combined$model$Specified
+# partition 1: 30% missing
+# partition 2: 70% missing
+# partition 3: 70% missing
+
+#missing_part <- sim.missing.data(
+#  data = combined, method = "partition",
+#  seq = "tips", probability = c(0.3, 0.7, 0.7)
+#)
+
+#missing_extinct <- sim.missing.data(
+#  data = combined , method = "extinct",
+#  seq = "tips", probability = 0.5
+#)
+```
 
