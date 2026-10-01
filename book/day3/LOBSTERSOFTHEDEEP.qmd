@@ -44,13 +44,14 @@ title(main = "Age-depth model")
 **Tree** We are using Myrthe's Polychelid consensus tree and treating this as the "true" tree.
 
 ```{r}
-tree <- read.nexus("TheTrueTree.tree")
+ tree <- read.nexus("Lobsters_of_the_deep/TheTrueTree.tree")
 tree$edge.length<-
    tree$edge.length/max(nodeHeights(tree)[,2])*1
 plot(tree)
 ```
 
 **Sampling fossils on the tree**
+
 ```{r}
 seed = 42
 lambda = 3 # origination rate [Myr^-1]
@@ -70,7 +71,9 @@ plot(fossils,
      show.ranges=TRUE,
      main = "FBD tree")
 ```
+
 **Ecological and taphonomic effects**
+
 ```{r}
 wd_location = "C:/Users/deardenr/stratworkshop/Lorentz-Workshop/book/data/output/columns_wd.csv" # adjust if you have a different output location
 data_wd = read.csv(wd_location) # read age-depth model data
@@ -84,8 +87,8 @@ plot(x = t,
      main = "Water depth")
 ```
 
-LOBSTERS OF THE SHALLOWS
-These lobsters like living in shallow water
+LOBSTERS OF THE SHALLOWS These lobsters like living in shallow water
+
 ```{r}
 wd_opt = 5 # pref. water depth 5 m
 wd_tolerance = 5 # water depth tolerance 10 m (sd)
@@ -105,6 +108,7 @@ plot(x = wd_vals_s,
 ```
 
 LOBSTERS OF THE DEEP
+
 ```{r}
 wd_opt = 17 # pref. water depth 5 m
 wd_tolerance = 3 # water depth tolerance 10 m (sd)
@@ -124,6 +128,7 @@ plot(x = wd_vals_d,
 ```
 
 Define the gradient function
+
 ```{r}
 # define function that specifies water depth as a function of time
 gradient = approxfun(x = t,
@@ -135,8 +140,9 @@ plot(x = t,
      ylab = "Water depth [m]",
      main = "Water depth as gradient")
 ```
-**Sampling compared**
-Shallow lobs
+
+**Sampling compared** Shallow lobs
+
 ```{r}
 plot(x = t,
      y = t |> gradient() |> niche_def_s(),
@@ -145,7 +151,9 @@ plot(x = t,
      ylab = "Sampling probability",
      main = "Sampling probability of shallow lobs, time domain")
 ```
+
 Deep lobs
+
 ```{r}
 plot(x = t,
      y = t |> gradient() |> niche_def_d(),
@@ -154,7 +162,9 @@ plot(x = t,
      ylab = "Sampling probability",
      main = "Sampling probability of deep lobs, time domain")
 ```
+
 **plotting tree baseline**
+
 ```{r}
 # Baseline plot
 plot(fossils, 
@@ -162,7 +172,9 @@ plot(fossils,
      main = "Full fossil record without ecological effects",
      rho = 0)
 ```
+
 **plotting tree shallow**
+
 ```{r}
 fossils_after_ecol_s = fossils |>
   admtools::rev_dir(ref = t_max) |>
@@ -181,6 +193,7 @@ plot(fossils_after_ecol_s_ext,
      show.tip.label = TRUE,
      cex=0.5)
 ```
+
 ```{r}
 fossils_after_ecol_d = fossils |>
   admtools::rev_dir(ref = t_max) |>
@@ -201,8 +214,9 @@ plot(fossils_after_ecol_d_ext,
      show.tip.label = TRUE,
      cex=0.5)
 ```
-**BUG**
-**Sampled trees**
+
+**BUG** **Sampled trees**
+
 ```{r}
 plot(fossils_after_ecol_s_ext,
      tree = tree,
@@ -219,7 +233,9 @@ plot(fossils_after_ecol_d_ext,
 library(MorphSim)
 plot(data = fossils_after_ecol_s_ext, trait = 1, timetree = T)
 ```
+
 **Shallow lob matrix**
+
 ```{r}
 # simple Mk2 model
 n_states = 2
@@ -240,6 +256,7 @@ title(main = paste0("Trait no. ", trait_to_display))
 ```
 
 **Deep lob matrix**
+
 ```{r}
 # simple Mk2 model
 n_states = 2
@@ -258,6 +275,7 @@ plot(morpho_mk_d,
      trait = trait_to_display)
 title(main = paste0("Trait no. ", trait_to_display))
 ```
+
 ```{r}
 # export character matrix
 MorphSim::write.morpho(data = morpho_mk_d,
@@ -283,6 +301,7 @@ MorphSim::write.morpho(data = morpho_mk,
 Nothign is working and we can't wxport the matrix so we're going to make some specialised deep sea lobster datasets
 
 **Deep sea lobster**
+
 ```{r}
 # simple Mk2 model
 n_states = 2
