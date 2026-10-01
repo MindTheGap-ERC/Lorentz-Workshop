@@ -724,6 +724,61 @@
     ]
   },
   {
+    "objectID": "day4/overview.html",
+    "href": "day4/overview.html",
+    "title": "15  Overview",
+    "section": "",
+    "text": "16 Day 4\nToday we will switch to thinking about aspects of software development and maintenance, and scientific reproducibility in phylogenetics.\nBased on your past experience, or experience gained over the past few days, you are probably aware that setting up a phylogenetic inference is not always straightforward and, in particular, the use of fossil (or other time series) data introduces additional complexity. As we’ll see later, it can also be difficult to extract information about completed analyses from the published literature, especially with regards to model and prior assumptions.\nThere are many things that contribute to these challenges, including but not limited to:\nThe main aim of today is to initiate conversations around the future of software development and reproducibility in phylogenetics, using models that integrate information from the fossil record as a basis for discussion. Although the focus is on applications in paleobiology, the above challenges are not unique to applications in paleobiology, or even phylogenetics. Everyone’s perspective is welcome throughout the day.",
+    "crumbs": [
+      "Day 4: Analysis and software",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Overview</span>"
+    ]
+  },
+  {
+    "objectID": "day4/overview.html#morning",
+    "href": "day4/overview.html#morning",
+    "title": "15  Overview",
+    "section": "16.1 Morning",
+    "text": "16.1 Morning\n\n16.1.1 Task 1 - Reproducibility\nBreakout group activity\nDay 4 - task 1\n\n\n16.1.2 Task 2 - Bug reporting\nBreakout group activity\nDay 4 - task 2",
+    "crumbs": [
+      "Day 4: Analysis and software",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Overview</span>"
+    ]
+  },
+  {
+    "objectID": "day4/overview.html#section",
+    "href": "day4/overview.html#section",
+    "title": "15  Overview",
+    "section": "16.2 ",
+    "text": "16.2",
+    "crumbs": [
+      "Day 4: Analysis and software",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Overview</span>"
+    ]
+  },
+  {
+    "objectID": "day4/overview.html#section-1",
+    "href": "day4/overview.html#section-1",
+    "title": "15  Overview",
+    "section": "16.3 ",
+    "text": "16.3",
+    "crumbs": [
+      "Day 4: Analysis and software",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Overview</span>"
+    ]
+  },
+  {
+    "objectID": "day4/overview.html#afternoon",
+    "href": "day4/overview.html#afternoon",
+    "title": "15  Overview",
+    "section": "16.4 Afternoon",
+    "text": "16.4 Afternoon\nChair: Rachel, Online chair: Niklas, Note-taker: Emilia\nAll participants can participate via Zoom.\n\n16.4.1 Talk 1 followed by roundtable discussion\nArchitecture and limitations of common frameworks used in phylogenetic software development - Joëlle Barido-Sottani\nSee discussion points below.\n\n\n16.4.2 Talk 2 followed by roundtable discussion\nCommunity led phylogenetic software development - Ugnė Stolz\nDiscussing points:\n\nHow to properly reward contributions to software especially stuff like maintenance which is hard to publish\n\nOrganizing turnover - what to do when people leave or features/models are abandoned\nShould we establish a long-term working group?\nModel extensions: new packages vs. one big package?\n\nHow to encourage (adequate) documentation?\n\nHow to encourage, verify and document compatibility between modules?\nHow essential is harmonizing perceptions of who the software’s user base is and could be?\nOther questions welcome",
+    "crumbs": [
+      "Day 4: Analysis and software",
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Overview</span>"
+    ]
+  },
+  {
     "objectID": "day4/reproducibility.html",
     "href": "day4/reproducibility.html",
     "title": "16  Reproducibility",
@@ -732,6 +787,17 @@
     "crumbs": [
       "Day 4: Analysis and software",
       "<span class='chapter-number'>16</span>  <span class='chapter-title'>Reproducibility</span>"
+    ]
+  },
+  {
+    "objectID": "day4/bug_reports.html",
+    "href": "day4/bug_reports.html",
+    "title": "17  Bug reports",
+    "section": "",
+    "text": "17.0.1 Task 2 - Bug reporting\nBreakout group activity\nRachel Warnock, Niklas Hohmann, Emilia Jarochowska\nA bug is an error in computer code - it could result in a failure of the software to run, or it could be a mismatch between what the software is intended to do and what it actually does. A bug report is a description of the issue such that it can be reproduced and fixed by someone who maintains the software. One way anyone can contribute to software development is to submit a well-documented bug report. Lack of experience in writing a perfect bug report should not stop anyone from writing one - if you are a beginner, you can just describe what you think goes wrong, developers can then ask follow-up questions.\nBug reports might not result in an immediate fix (many scientific software developers are juggling multiple roles), but it helps keep track of issues, alerts others users to the problem, and increases the chances that the problem will eventually be fixed – a bug definitely won’t be fixed if no one else knows about it!\nYour next task is to form small groups of 2-3 individuals and work together to submit a bug report to one of the programs you’ve used over the past few days (CarboKitten, one of the R packages, BEAST2, RevBayes). The objective of this activity is to promote positive practices around bug reporting within our community, with a view to providing online guidelines that other researchers can use beyond this workshop. Have a look at the issue tracker of one of the repositories (including closed issues) to get an impression of what bug reports look like (examples linked below). You can spot if the report required the developers to ask a lot of follow-up questions to understand the problem or whether they could address it immediately.\n\n17.0.1.1 What you need\nBefore reporting an issue you will want to ensure the following: (1) make sure you can reproduce the bug on your device, and (2) try to make sure you’re dealing with a bug and not a problem with your setup (see below).\nTo report a bug you will need to prepare the following:\n\nA concise written explanation of the bug.\n\nThe code that reproduces the bug (i.e., the Rev scripts or xml files). Ideally this would be the simplest possible version of the code that reproduces the issue.\n\nAny associated datafiles that are needed to reproduce the error.\n\nThe version of the software you’re using.\n\nDetails of your operating system.\n\n\n\n17.0.1.2 How do I know it’s a bug and not a problem with my analysis?\nIt is common that users report bugs that some developers might argue are not bugs - e.g., if it’s an issue with your data, like some sort of incompatibility with the model assumptions. Your report is still extremely useful - first, you will learn how to fix the issue (or why your set up might be wrong); second, the developers can improve the documentation, error messaging, or user experience (which is not always prioritised) so other people don’t bump into the same problem.\n\n\n17.0.1.3 General tips\n\nBefore reporting a bug, carefully review your setup - go through all model and parameter choices and reflect on whether they make sense for your data.\n\nIf your setup is complicated or you’re working with a large dataset, try reducing the complexity of the analysis. Can you reproduce the error with a simpler model or a smaller number of datapoints?\n\nIf possible, simplify the scripts for your bug report. A simpler setup can sometimes help the developer track down the issue more efficiently. Here, using version control can be life-saving - if you try many multiple variants of the analysis, you can use individual commit IDs to ensure each variant is reproducible to yourself and others.\n\nDue to the stochastic nature of many of the simulation and inference tools that we use, bugs can appear random. Familiarise yourself with setting seeds for the random number generator to narrow down when the code breaks and to make your reports more reproducible.\n\n\n\n17.0.1.4 Example: RevBayes\n\nExample 1\n\nExample 2\n\n\n\n17.0.1.5 Example: R packages\n\nLots of good examples via Paleoverse\n\n\n\n17.0.1.6 Example: CarbonKitten\n\nExample 1\n\nExample 2\n\n\n\n17.0.1.7 Feature requests\nAlthough the focus here is on bug reporting, sometimes bug reports can evolve into feature requests, so the boundary between the two is not always clear-cut. For example:\n\nfunction foo() throws an error when I apply it to shmoo, but I am confident that this operation should be possible for shmoo and my setup is correct.\n\nThat is because we haven’t implemented foo() for shmoo yet. It only works on foo-foo-the-snoo so far. We were considering extending the implementation to shmoo, but haven’t had any use case so far. If you have a use case, we can think of extending it.\n\nA dialogue might follow where you get the chance to specify details of this feature that would be useful for your use case. If it’s specific, you may want to consider how to credit the developers for a contribution that made your specific study possible - we encourage you to regard this as a scientific contribution and it may help sustain the work of the developers.",
+    "crumbs": [
+      "Day 4: Analysis and software",
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Bug reports</span>"
     ]
   }
 ]
