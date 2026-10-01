@@ -42,7 +42,7 @@ Broadly, everything that translates data between the *time domain* (time dimensi
 First let's load the data from your stratigraphic forward model:
 
 ```{r import-ck-data}
-adm_name = "data/output/carbo-platform.h5" # adjust if you have a different output location
+adm_name = "data/output/columns_adm.csv" # adjust if you have a different output location
 data_adm = read.csv(adm_name) # read age-depth model data
 ```
 
