@@ -608,9 +608,9 @@ c1 <- combine.morpho(partition_1, partition_2)
 
 ```{r}
 #| label: sim-ordered
-ord_Q <- matrix(c(-0.5*lambda, 0.5*lambda, 0.0,
-                   0.3333333*lambda, -0.6666667*lambda, 0.3333333*lambda,
-                   0.0, 0.5*lambda, -0.5*lambda),
+ord_Q <- matrix(c(-0.5, 0.5, 0.0,
+                   0.3333333, -0.6666667, 0.3333333,
+                   0.0, 0.5, -0.5),
                 nrow = 3, byrow = TRUE)
 
 morpho_ordered <- sim.morpho(k = 3, time.tree = tree, br.rates = 0.1, trait.num = 15,
