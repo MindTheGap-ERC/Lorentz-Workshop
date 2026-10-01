@@ -25,11 +25,12 @@ julia
 
 Create a project and add the packages we need: `CarboKitten` itself, `Unitful` for physical units, and `CairoMakie` for plotting (CarboKitten's visualisation functions are a package extension that only activates once a Makie backend is loaded). If you have cloned this repository (i.e. [MindTheGap-ERC/Lorentz-Workshop](https://github.com/MindTheGap-ERC/Lorentz-Workshop/)) onto your computer, you have the `Manifest.toml` file, which contains information on Julia packages that are needed to run the code below. In order to install packages listed in there, run the commands below in your Julia interpreter.
 
-```{r echo=false, include=true}
-
-install.packages("JuliaCall")
-library(JuliaCall)
+```{julia}
+using Pkg
+Pkg.activate(".")
+Pkg.instantiate
 ```
+
 Either within this notebook, or within a terminal, load the needed packages. 
 
 ```{julia}
@@ -41,7 +42,11 @@ using CairoMakie
 
 Note that you may execute the code in this lesson with the package `JuliaCall`:
 
+```{r echo=false, include=true}
 
+install.packages("JuliaCall")
+library(JuliaCall)
+```
 
 ## Building a platform with a gappy stratigraphic record
 
