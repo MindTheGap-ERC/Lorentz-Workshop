@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>5&nbsp; Introduction to morphological data – Bridging Stratigraphic Palaeobiology and Phylogenetics</title>
+<title>6&nbsp; Introduction to morphological data – Bridging Stratigraphic Palaeobiology and Phylogenetics</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,7 +26,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -88,7 +107,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../day2/Intro_morpho.html">Day 2: Fossils</a></li><li class="breadcrumb-item"><a href="../day2/Intro_morpho.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction to morphological data</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../day2/Intro_morpho.html">Day 2: Fossils</a></li><li class="breadcrumb-item"><a href="../day2/Intro_morpho.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to morphological data</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -116,13 +135,13 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Index</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Day 1: Stratigraphy</span></a>
+ <span class="menu-text">How to use this book</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -130,20 +149,8 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../stratigraphic_paleobiology.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Stratigraphic paleobiology</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../CarboKitten_tutorial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Simulating the stratigraphic record</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../adms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Time in rocks</span></span></a>
+  <a href="../instructions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How to use this book?</span></span></a>
   </div>
 </li>
       </ul>
@@ -151,7 +158,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Day 2: Fossils</span></a>
+ <span class="menu-text">Day 1: Stratigraphy</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -159,26 +166,20 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../day2/Intro_morpho.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction to morphological data</span></span></a>
+  <a href="../stratigraphic_paleobiology.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Stratigraphic paleobiology</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../day2/morphsim_tutorial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">MorphSim Tutorial</span></span></a>
+  <a href="../CarboKitten_tutorial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Simulating the stratigraphic record</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../day2/complex_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Morphological model extensions</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../day2/Model-RevBayes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Setting up morphological models in RevBayes, MrBayes, and BEAST2</span></span></a>
+  <a href="../adms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Time in rocks</span></span></a>
   </div>
 </li>
       </ul>
@@ -186,7 +187,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Day 3: Tree inference</span></a>
+ <span class="menu-text">Day 2: Fossils</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -194,39 +195,99 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../day3/FBD_sim.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Simulating trees under the FBD model</span></span></a>
+  <a href="../day2/Intro_morpho.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to morphological data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../day3/StratPal_fossils.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Stratigraphic paleobiology and fossil occurrences</span></span></a>
+  <a href="../day2/morphsim_tutorial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">MorphSim Tutorial</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../day3/StratPal_phylo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Phylogeny and stratigraphy</span></span></a>
+  <a href="../day2/complex_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Morphological model extensions ED model: tail armor</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../day3/FBD_strat_inference.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Stratigraphic information in phylogenetic inference</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../day3/inference_helpers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Inference</span></span></a>
+  <a href="../day2/Model-RevBayes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Setting up morphological models in RevBayes, MrBayes, and BEAST2</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Day 4: Analysis and software</span></span>
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Day 3: Tree inference</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../day3/FBD_sim.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Simulating trees under the FBD model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../day3/StratPal_fossils.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Stratigraphic paleobiology and fossil occurrences</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../day3/StratPal_phylo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Phylogeny and stratigraphy</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../day3/FBD_strat_inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Stratigraphic information in phylogenetic inference</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../day3/inference_helpers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Inference</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Day 4: Analysis and software</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../day4/overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Overview</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../day4/reproducibility.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Reproducibility</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../day4/bug_reports.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Bug reports</span></span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">
@@ -235,7 +296,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
     </ul>
@@ -243,15 +304,29 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#what-are-phylogenetic-data" id="toc-what-are-phylogenetic-data" class="nav-link active" data-scroll-target="#what-are-phylogenetic-data"><span class="header-section-number">7</span> What Are Phylogenetic Data</a>
+  <ul class="collapse">
+  <li><a href="#data-morphology-and-data-models" id="toc-data-morphology-and-data-models" class="nav-link" data-scroll-target="#data-morphology-and-data-models"><span class="header-section-number">7.1</span> Data, Morphology, and Data Models</a></li>
+  </ul></li>
+  <li><a href="#a-brief-history-of-the-use-of-morphology-in-phylogenetics" id="toc-a-brief-history-of-the-use-of-morphology-in-phylogenetics" class="nav-link" data-scroll-target="#a-brief-history-of-the-use-of-morphology-in-phylogenetics"><span class="header-section-number">8</span> A Brief History of the Use of Morphology in Phylogenetics</a></li>
+  <li><a href="#how-can-we-model-discrete-morphology" id="toc-how-can-we-model-discrete-morphology" class="nav-link" data-scroll-target="#how-can-we-model-discrete-morphology"><span class="header-section-number">9</span> How Can We Model Discrete Morphology</a></li>
+  <li><a href="#how-can-we-model-continuous-traits" id="toc-how-can-we-model-continuous-traits" class="nav-link" data-scroll-target="#how-can-we-model-continuous-traits"><span class="header-section-number">10</span> How Can We model Continuous Traits</a></li>
+  <li><a href="#a-reintegrated-vision-of-morphology-in-the-21st-century" id="toc-a-reintegrated-vision-of-morphology-in-the-21st-century" class="nav-link" data-scroll-target="#a-reintegrated-vision-of-morphology-in-the-21st-century"><span class="header-section-number">11</span> A Reintegrated Vision of Morphology in the 21st Century</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">12</span> References</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../day2/Intro_morpho.html">Day 2: Fossils</a></li><li class="breadcrumb-item"><a href="../day2/Intro_morpho.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction to morphological data</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../day2/Intro_morpho.html">Day 2: Fossils</a></li><li class="breadcrumb-item"><a href="../day2/Intro_morpho.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to morphological data</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction to morphological data</span></h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to morphological data</span></h1>
 </div>
 
 
@@ -268,8 +343,76 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="what-are-phylogenetic-data" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> What Are Phylogenetic Data</h1>
+<section id="data-morphology-and-data-models" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="data-morphology-and-data-models"><span class="header-section-number">7.1</span> Data, Morphology, and Data Models</h2>
+<p>THe idea of what data are has been refined over the history of philosophy. Data are typically accepted to be <em>representational</em>, that is, to be written down in some way so as to be shareable. Generally, we do not expect to be able to put a whole fossil into our disk drive or to have CarboKitten read our sedimentary cores and simulate histories based upon it. Data are also typically considered to be evidence of one or more phenomenon <span class="citation" data-cites="Leonelli2019">(<a href="#ref-Leonelli2019" role="doc-biblioref">Leonelli 2019</a>)</span>. That an object has epistemic value for a particular purpose implies that it has been processed for that purpose. This has lead philosophers <span class="citation" data-cites="suppes1966models">(<a href="#ref-suppes1966models" role="doc-biblioref">Suppes 1966</a>)</span> to conclude that researchers are often not interested in <em>data</em>, but in <em>data models</em>, or data that have been processed in some way and can be evaluated for their fit to that particular purpose <span class="citation" data-cites="Bokulich2021">(<a href="#ref-Bokulich2021" role="doc-biblioref">Bokulich and Parker 2021</a>)</span>. Today, we will examine the idea of how phylogenetic data fit into this picture, and what the process of writing down phylogenetic data means for our models of evolution.</p>
+<p>When we discuss phylogenetic data, we may be talking about morphological characters or we may be discussing molecular ones. For now, we will focus on morphological ones. In this case, the phylogenetic character data will be coded from a specimen, or several. <em>A priori,</em> we already have a bias. Generally we are collecting characters from these specimens because we think something is interesting in this group - perhaps the evolution, a novel morphology, something else. Researchers examine a sample of taxa. In cases with rich sampling, a researcher may be able to look across multiple specimens of the same operational taxonomic unit (OTU) and confirm their character, whether it has polymorphism in the sample, or whether it is constant. In the case of a poorly-sampled clade, it may be that the researcher is able to look at one sample per OTU, and may not know if a trait is plastic in any way. In very poorly-sampled clades, which many vertebrates are, you may lose resolution on things like morphological modularity. Traits may be collected for a variety of reasons. These can include having observed trait function in the case of extant organisms, or close relatives, or analogizing from more distantly-related relatives <span class="citation" data-cites="hesse1965models">(<a href="#ref-hesse1965models" role="doc-biblioref">Hesse 1965, bokulich2025models</a>)</span>. I will not be giving an exhaustive look at character coding schemes. If you’d like more to read on character theory, please see <span class="citation" data-cites="stevens1984homology budd2006origin wagner2000character">(<a href="#ref-stevens1984homology" role="doc-biblioref">Stevens 1984</a>; <a href="#ref-budd2006origin" role="doc-biblioref">Budd 2006</a>; <a href="#ref-wagner2000character" role="doc-biblioref">Wagner 2000</a>)</span>.</p>
+<p>What distinguishes phylogenetic character data from mere data? Homology. A phylogenetic character must be homologous. It must, in all its observations (i.e., across OTUs), it must reflect common ancestry. This is because a phylogenetic character is considered to be the end point of a history of life that generated it - i.e., a process of evolution that proceeded through a process of diversification through time. If the trait is not the end point of this process, then you cannot model a phylogeny from it. If the trait does not reflect a shared evolutionary history, it cannot be evidence for that shared history. Thus, no matter what other evidence is used, a human must assess homology for these traits. A trait that is not homologous may be data for some other purpose - presence/absence modeling, phenetic clustering - but it is not phylogenetic data.</p>
+<p>I’d like to make an argument that the process of collecting morphological data is imprinted by theory. As we’ve highlighted before, we choose clades based on something we think is happening in them. Interesting organisms or traits, perhaps we have data sucggesting a rock outcrop may be fruitful. From the word go, we are imprinting theory. As we learned from Mark yesterday, not all areas of the Earth are equally good for sampling - we are likely learning something about the median fossil and not peripheral ones. When we code characters, we are choosing ones we think matter. The homology statement that we use to then write down that character constrains the downstream models that we can use. If we write down a trait as ordered, we are saying something about how that trait evolved: that we believe you must go through an intermediate in order to transit from one state to another. If we write a character down as binary or multistate, this can have downstream implications for trees explored and tree lengths [<span class="citation" data-cites="khakurel2024fundamental">Khakurel et al. (<a href="#ref-khakurel2024fundamental" role="doc-biblioref">2024</a>)</span>; mulvey2025assessing]. We won’t deal much with continuous traits in this workshop, but many traits that are collected as continuous traits are then discretized for phylogenetic analysis. We don’t discretize traits because discrettraits are “better” in any real way. But we have developed methods and significantly matured them for use with DNA, which are discrete. Thus, even the way we use the vocabulary of traits is imprinted by theory, including theory from other fields (molecular biology). This relationship between theory and data collection has been termed ``model-data synthesis” .</p>
+<p>Bokulich and Parker (2021) make the argument that data must be evalutate for <em>fidelity for purpose.</em> That is, how well can the data be used for the science we’d like to conduct. For example, autapomorphies. Historically, these have not been collected at all. This is because, under parsimony, they cannot be used to distinguish between two trees. An autapomorphy has a length of one no matter what the tree for a given set of taxa. Thus, it was not data for a parsimony analysis - it cannot generate evidence for one tree over another. An autapomorphy has poor fit to the purpose of parsimony. It may be data for some question but in the parsimony worldview, it was not phylogenetic data. However, under a Bayesian modeling framework, an autapomorphy is phylogenetic data. Because we co-estimate a tree and branch lengths in the world of Bayesian phylogenetics, an autapomrophy can inform branch rates. Thus, it is phylogenetic data. It doesn’t contain direct tree-building information, and might be considered lower <em>fidelity of purpose</em> than a character that has tree-building information. But it’s nonetheless data. And accordingly, as Bayesian phylogenetics has become more common, we see more workers collecting these characters <span class="citation" data-cites="Hopkins2026">(<a href="#ref-Hopkins2026" role="doc-biblioref">Hopkins et al. 2026</a>)</span>.</p>
+<p>I’d like to highlight that this is not an issue of discrete morphology, despite us focusing on this. When we assess morphology for discrete molecular traits, we do this using software. But the software implments models for how likely different molecular changes are. A multiple sequence alignment is just as imprinted by throey as a morphological character matrix. And many people never even think of it - they click buttons in an interface and raw reads become phylogenetic data. Likewise, if you use continuous traits inferentially, you are doing so assuming some model of evolution that describes an evolutionary history. The trait must be homologous to describe this history, and that homology is typically assessed by a human.</p>
+<p>Now that we know a little about the loading of theory and expectation onto morphological traits, let’s talk about how they’ve been used historically and how they are modeled.</p>
+</section>
+</section>
+<section id="a-brief-history-of-the-use-of-morphology-in-phylogenetics" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> A Brief History of the Use of Morphology in Phylogenetics</h1>
+</section>
+<section id="how-can-we-model-discrete-morphology" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> How Can We Model Discrete Morphology</h1>
+<p>As we covered in the prior section, the original way of inferring phylogenetic trees was by hand. The first reproducible and shareable ways of doing this were via parsimony. Parsimony is a generalization of Occam’s Razor. Under parsimony, a character is only collected if it may inform the tree - a property known as parsimony informativity. Under the maximum parsimony information criterion, each character is scored along a proposed tree to see how many changes are implied by that tree and character. A character that does not change has a score of zero, no matter the tree proposed. A character that is unique to one OTU has a length of one no matter the tree proposed. Thus, they are not collected. Characters that can favor one topology over another will be scored. The default assumptions of parsimony is that all characters contribute equally to the parsimony score, and evolve in an unordered fashion. Each character may have its own number of changes on the tree. Other parameterizations may alter these assumptions.</p>
+<p>Model-based models for use with likelihood and Bayesian methods became available in 2001 (Lewis2001?). On it’s face, the Mk model makes similar assumptions to parsimony - all characters contribute to the score, character change is unordered - but the model does not assume that the smallest number of changes is automatically the best. The Mk model also makes some likelihood-specific assumptions: the equilibrium state frequencies (the state frequencies you would see if you ran the evolutionary process out to equilibrium) are equal and that rates of change are equal. The former means no specific change is more likely than the other. Under a likelihood-based phylogenetic model, the probability of observing a change is a product of the exchangeability, or the raw rate of change between two character states, and the probability of the starting state. Both of these quantities are assumed to be equal in the Mk model. We could make a different set of assumptions (Nylander et al.&nbsp;2004, Klopfstein and Ronquist 2015, Wright et al 2016) that allows state frequencies to vary. Altering either the exchangeability or the state frequency will allow different sets of characters in a character matrix to have different rates at which character states evolve into one another. Likewise, we may assume Gamma-distributed rate heterogeneity (Yang 1994)to allow characters to evolve faster or slower, relative to some norm.</p>
+<p>While it is possible to estimate a Mk model tree in RAxML and other maximum likelihood platforms, most estimation has been in the Bayesian realm. This is for a few reasons. The first is that Bayesian methods log solutions sampled during the estimation, leaving the researcher with samples of possible trees and parameters. This allows for a visualization of uncertainty. Thus, it is common in Bayesian analyses to incorporate multiple trees, cloudograms, and posterior probabilities with visualized phylogenetic trees. Uncertainty visualization is also possible in parsimony, though less common. Because datasets are quite small, representation of uncertainty is common in morphological phylogenetics. The second reason is that people who were interested in morphology tended to be Bayesians.</p>
+<p>So what is a Bayesian method? This is not an exhaustive course; I will simply provide you a very brief background.</p>
+<p>The above is the equation for Bayes’ Theorem. The pipe character is read as “given”. What this means is that we are computing the probability of the model given the data. We calculate this probability by computing the phylogenetic character likelihood (the probability of the data given a model), the prior (the probability of the model before you see any data), divided by the marginal probability of the data (the probability of the data without considering any model parameters).</p>
+</section>
+<section id="how-can-we-model-continuous-traits" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> How Can We model Continuous Traits</h1>
+</section>
+<section id="a-reintegrated-vision-of-morphology-in-the-21st-century" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> A Reintegrated Vision of Morphology in the 21st Century</h1>
+<p>While morphological characters were the initial source of phylogenetic data, much of the prior 50 years has been characterized by an atomization of phylogenetic workers. Particularly in the 1980s through the 2000s, morphological phylogenetics has taken a backseat to work on molecular phylogenetics. Because of the volume of data, and the shared properties of nucleotides, model development in particular proliferated for likelihood and Bayesian methods that were able to make use of molecular datasets.</p>
+<p>Paleobiology is not the only area of science in which this was observed. In fact, in the late 2010s, the US National Science Foundation launched an initiative called Reintegrating Biology to imagine what a national, interdisciplinary biological science research program might look like. Special issues of journals were spawned. Workshops were held. Even independent of any top-down efforts, the 2010s can be characterized as investing in a massive re-integration of the biological sciences and the geological sciences.</p>
+<p>A number of factors converged in the early half of the 2010s. Tanja Stadler published a paper describing a model of diversification and sampling through time that would be adapted in 2014 to accommodate fossil sampling (samples not in the present). Graham Slater published a manuscript detailing how comparative methods can be mislead without accounting for paleobiological data. Shortly thereafter, a number of papers demonstrated that the Mk model worked pretty well for morphological data. All the pieces were in place to make truly integrative stratigraphic trees with morphological data.</p>
+<p>The final thing that was missing in the ecosystem was democratized software platforms to do this work. Over the prior 30 years, most phylogenetic software has relied upon a preset slate of options, decided upon by the developer, in advance of software publication. RevBayes and BEAST2 have changed the model, in favor of offering a sandbox of endlessly combinable model options. In RevBayes and BEAST2, the model is simply a graph of interlocking pieces to which new nodes can be added as your data types and model complexity change. As discussed in the section “How Can We model Continuous Traits”, a user who wants to work with continuous data simply specifies a model that works with continuous traits (in theory, any way).</p>
+<p>The latter half of the 2010s was spent asking a wider range of questions than anyone thought possible using these models. How much morphological data can swamp the signal in a molecular dataset? Can we model known differential diversification processes over time, or across branches? How do we integrate continuous traits in Bayesian analyses? What confident can we be in our model-based assumptions? Even cultural and linguistic artifact data can be played with in the same complexity as biological data.</p>
+<p>For someone who started a PhD in 2009, the past two decades have been an incredibly wild ride. While the siloes still exist, I’ve been privileged to publish with mathematicians, computer scientists, biologists and geologists. So far, we’ve achieved an incredible synthesis of theory from across the sciences. Here’s to the next twenty.</p>
+</section>
+<section id="references" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> References</h1>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Bokulich2021" class="csl-entry" role="listitem">
+Bokulich, Alisa, and Wendy Parker. 2021. <span>“Data Models, Representation and Adequacy-for-Purpose.”</span> <em>European Journal for Philosophy of Science</em> 11 (1). <a href="https://doi.org/10.1007/s13194-020-00345-2">https://doi.org/10.1007/s13194-020-00345-2</a>.
+</div>
+<div id="ref-budd2006origin" class="csl-entry" role="listitem">
+Budd, Graham E. 2006. <span>“On the Origin and Evolution of Major Morphological Characters.”</span> <em>Biological Reviews</em> 81 (4): 609–28.
+</div>
+<div id="ref-hesse1965models" class="csl-entry" role="listitem">
+Hesse, Mary. 1965. <em>Models and Analogies in Science</em>.
+</div>
+<div id="ref-Hopkins2026" class="csl-entry" role="listitem">
+Hopkins, Melanie J., Mark C. Nikolic, James D. Holmes, et al. 2026. <span>“Building Phenotypic Character Matrices for Phylogenetic Inference: Exploration of 35 Years of Practice.”</span> <em>Biological Reviews</em>, ahead of print, May. <a href="https://doi.org/10.1002/brv.70183">https://doi.org/10.1002/brv.70183</a>.
+</div>
+<div id="ref-khakurel2024fundamental" class="csl-entry" role="listitem">
+Khakurel, Basanta, Courtney Grigsby, Tyler D Tran, Juned Zariwala, Sebastian Höhna, and April M Wright. 2024. <span>“The Fundamental Role of Character Coding in Bayesian Morphological Phylogenetics.”</span> <em>Systematic Biology</em> 73 (5): 861–71.
+</div>
+<div id="ref-Leonelli2019" class="csl-entry" role="listitem">
+Leonelli, Sabina. 2019. <span>“What Distinguishes Data from Models?”</span> <em>European Journal for Philosophy of Science</em> 9 (2). <a href="https://doi.org/10.1007/s13194-018-0246-0">https://doi.org/10.1007/s13194-018-0246-0</a>.
+</div>
+<div id="ref-stevens1984homology" class="csl-entry" role="listitem">
+Stevens, Peter F. 1984. <span>“Homology and Phylogeny: Morphology and Systematics.”</span> <em>Systematic Botany</em>, 395–409.
+</div>
+<div id="ref-suppes1966models" class="csl-entry" role="listitem">
+Suppes, Patrick. 1966. <span>“Models of Data.”</span> In <em>Studies in Logic and the Foundations of Mathematics</em>, vol. 44. Elsevier.
+</div>
+<div id="ref-wagner2000character" class="csl-entry" role="listitem">
+Wagner, Günter P. 2000. <em>The Character Concept in Evolutionary Biology</em>. Elsevier.
+</div>
+</div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -675,12 +818,12 @@ ul.task-list li input[type="checkbox"] {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../adms.html" class="pagination-link" aria-label="Time in rocks">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Time in rocks</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Time in rocks</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../day2/morphsim_tutorial.html" class="pagination-link" aria-label="MorphSim Tutorial">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">MorphSim Tutorial</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">MorphSim Tutorial</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

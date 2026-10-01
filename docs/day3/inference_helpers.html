@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>13&nbsp; Inference – Bridging Stratigraphic Palaeobiology and Phylogenetics</title>
+<title>14&nbsp; Inference – Bridging Stratigraphic Palaeobiology and Phylogenetics</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -71,7 +71,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../references.html" rel="next">
+<link href="../day4/overview.html" rel="next">
 <link href="../day3/FBD_strat_inference.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -123,7 +123,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../day3/FBD_sim.html">Day 3: Tree inference</a></li><li class="breadcrumb-item"><a href="../day3/inference_helpers.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Inference</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../day3/FBD_sim.html">Day 3: Tree inference</a></li><li class="breadcrumb-item"><a href="../day3/inference_helpers.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Inference</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -151,13 +151,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Index</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Day 1: Stratigraphy</span></a>
+ <span class="menu-text">How to use this book</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -165,20 +165,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../stratigraphic_paleobiology.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Stratigraphic paleobiology</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../CarboKitten_tutorial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Simulating the stratigraphic record</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../adms.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Time in rocks</span></span></a>
+  <a href="../instructions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">How to use this book?</span></span></a>
   </div>
 </li>
       </ul>
@@ -186,7 +174,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Day 2: Fossils</span></a>
+ <span class="menu-text">Day 1: Stratigraphy</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -194,26 +182,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../day2/Intro_morpho.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction to morphological data</span></span></a>
+  <a href="../stratigraphic_paleobiology.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Stratigraphic paleobiology</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../day2/morphsim_tutorial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">MorphSim Tutorial</span></span></a>
+  <a href="../CarboKitten_tutorial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Simulating the stratigraphic record</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../day2/complex_models.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Morphological model extensions</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../day2/Model-RevBayes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Setting up morphological models in RevBayes, MrBayes, and BEAST2</span></span></a>
+  <a href="../adms.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Time in rocks</span></span></a>
   </div>
 </li>
       </ul>
@@ -221,7 +203,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Day 3: Tree inference</span></a>
+ <span class="menu-text">Day 2: Fossils</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -229,39 +211,99 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../day3/FBD_sim.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Simulating trees under the FBD model</span></span></a>
+  <a href="../day2/Intro_morpho.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to morphological data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../day3/StratPal_fossils.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Stratigraphic paleobiology and fossil occurrences</span></span></a>
+  <a href="../day2/morphsim_tutorial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">MorphSim Tutorial</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../day3/StratPal_phylo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Phylogeny and stratigraphy</span></span></a>
+  <a href="../day2/complex_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Morphological model extensions ED model: tail armor</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../day3/FBD_strat_inference.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Stratigraphic information in phylogenetic inference</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../day3/inference_helpers.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Inference</span></span></a>
+  <a href="../day2/Model-RevBayes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Setting up morphological models in RevBayes, MrBayes, and BEAST2</span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Day 4: Analysis and software</span></span>
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Day 3: Tree inference</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../day3/FBD_sim.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Simulating trees under the FBD model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../day3/StratPal_fossils.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Stratigraphic paleobiology and fossil occurrences</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../day3/StratPal_phylo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Phylogeny and stratigraphy</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../day3/FBD_strat_inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Stratigraphic information in phylogenetic inference</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../day3/inference_helpers.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Inference</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Day 4: Analysis and software</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../day4/overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Overview</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../day4/reproducibility.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Reproducibility</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../day4/bug_reports.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Bug reports</span></span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">
@@ -270,7 +312,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../references.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">References</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">References</span></span></a>
   </div>
 </li>
     </ul>
@@ -283,21 +325,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#bayesian-inference" id="toc-bayesian-inference" class="nav-link active" data-scroll-target="#bayesian-inference"><span class="header-section-number">13.1</span> Bayesian inference</a></li>
-  <li><a href="#revbayes" id="toc-revbayes" class="nav-link" data-scroll-target="#revbayes"><span class="header-section-number">13.2</span> Revbayes</a>
+  <li><a href="#bayesian-inference" id="toc-bayesian-inference" class="nav-link active" data-scroll-target="#bayesian-inference"><span class="header-section-number">14.1</span> Bayesian inference</a></li>
+  <li><a href="#revbayes" id="toc-revbayes" class="nav-link" data-scroll-target="#revbayes"><span class="header-section-number">14.2</span> RevBayes</a>
   <ul class="collapse">
-  <li><a href="#standard-fbd-inference" id="toc-standard-fbd-inference" class="nav-link" data-scroll-target="#standard-fbd-inference"><span class="header-section-number">13.2.1</span> Standard FBD inference</a></li>
-  <li><a href="#skyline-fbd-analysis" id="toc-skyline-fbd-analysis" class="nav-link" data-scroll-target="#skyline-fbd-analysis"><span class="header-section-number">13.2.2</span> Skyline FBD analysis</a></li>
+  <li><a href="#standard-fbd-inference" id="toc-standard-fbd-inference" class="nav-link" data-scroll-target="#standard-fbd-inference"><span class="header-section-number">14.2.1</span> Standard FBD inference</a></li>
+  <li><a href="#skyline-fbd-analysis" id="toc-skyline-fbd-analysis" class="nav-link" data-scroll-target="#skyline-fbd-analysis"><span class="header-section-number">14.2.2</span> Skyline FBD analysis</a></li>
   </ul></li>
+  <li><a href="#beast2" id="toc-beast2" class="nav-link" data-scroll-target="#beast2"><span class="header-section-number">14.3</span> BEAST2</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../day3/FBD_sim.html">Day 3: Tree inference</a></li><li class="breadcrumb-item"><a href="../day3/inference_helpers.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Inference</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../day3/FBD_sim.html">Day 3: Tree inference</a></li><li class="breadcrumb-item"><a href="../day3/inference_helpers.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Inference</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Inference</span></h1>
+<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Inference</span></h1>
 </div>
 
 
@@ -314,16 +357,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="bayesian-inference" class="level2" data-number="13.1">
-<h2 data-number="13.1" class="anchored" data-anchor-id="bayesian-inference"><span class="header-section-number">13.1</span> Bayesian inference</h2>
+<section id="bayesian-inference" class="level2" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="bayesian-inference"><span class="header-section-number">14.1</span> Bayesian inference</h2>
 <p>This chapter contains code to help set up phylogenetic inference pipelines.</p>
 </section>
-<section id="revbayes" class="level2" data-number="13.2">
-<h2 data-number="13.2" class="anchored" data-anchor-id="revbayes"><span class="header-section-number">13.2</span> Revbayes</h2>
-<p>All revbayes scripts can also be downloaded: <a href="fbd_inference_base.rev" download="bd_inference_base.rev">fbd_inference_base.rev</a> <a href="model_clock.rev" download="model_clock.rev">model_clock.rev</a> <a href="model_morpho.rev" download="model_morpho.rev">model_morpho.rev</a> <a href="model_fbd_base.rev" download="model_fbd_base.rev">model_fbd_base.rev</a> <a href="model_fbd_skyline_sampling.rev" download="model_fbd_skyline_sampling.rev">model_fbd_skyline_sampling.rev</a> <a href="fbd_inference_skyline.rev" download="fbd_inference_skyline.rev">fbd_inference_skyline.rev</a></p>
-<section id="standard-fbd-inference" class="level3" data-number="13.2.1">
-<h3 data-number="13.2.1" class="anchored" data-anchor-id="standard-fbd-inference"><span class="header-section-number">13.2.1</span> Standard FBD inference</h3>
-<p>This as a simple setup for a constant rate FBD inference. For more complex cases (e.g., age uncertainty, total evidence etc.) see <a href="https://revbayes.github.io/tutorials/fbd/fbd_specimen.html">this tutorial</a>.</p>
+<section id="revbayes" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="revbayes"><span class="header-section-number">14.2</span> RevBayes</h2>
+<p>All RevBayes scripts can also be downloaded: <a href="fbd_inference_base.rev" download="fbd_inference_base.rev">fbd_inference_base.rev</a> <a href="model_clock.rev" download="model_clock.rev">model_clock.rev</a> <a href="model_morpho.rev" download="model_morpho.rev">model_morpho.rev</a> <a href="model_fbd_const.rev" download="model_fbd_const.rev">model_fbd_const.rev</a> <a href="model_fbd_skyline_sampling.rev" download="model_fbd_skyline_sampling.rev">model_fbd_skyline_sampling.rev</a> <a href="fbd_inference_skyline.rev" download="fbd_inference_skyline.rev">fbd_inference_skyline.rev</a></p>
+<section id="standard-fbd-inference" class="level3" data-number="14.2.1">
+<h3 data-number="14.2.1" class="anchored" data-anchor-id="standard-fbd-inference"><span class="header-section-number">14.2.1</span> Standard FBD inference</h3>
+<p>This is a simple setup for a constant rate FBD inference. For more complex cases (e.g., age uncertainty, total evidence etc.) see <a href="https://revbayes.github.io/tutorials/fbd/fbd_specimen.html">this tutorial</a>.</p>
 <p>We use this basic setup, available in the file <code>fbd_inference_base.rev</code>:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>char_mat <span class="ot">&lt;-</span> <span class="st">"char_mat.nex"</span></span>
@@ -344,7 +387,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>true_extinction_rate <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>true_sampling_rate <span class="ot">&lt;-</span> <span class="dv">10</span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>true_origin_time <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>true_clock_rate <span class="ot">=</span> <span class="fl">0.5</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>true_clock_rate <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># initialize moves</span></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>moves <span class="ot">=</span> <span class="fu">VectorMoves</span>()</span>
@@ -366,11 +409,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="co"># initialize monitors</span></span>
 <span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>monitors <span class="ot">=</span> <span class="fu">VectorMonitors</span>()</span>
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="co"># write state to tracefile</span></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="fu">monitors.append</span>( <span class="fu">mnModel</span>(<span class="at">filename=</span>outfile_name, <span class="at">printgen=</span><span class="dv">10</span>) )</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="fu">monitors.append</span>( <span class="fu">mnModel</span>(<span class="at">filename =</span> outfile_name, <span class="at">printgen =</span> <span class="dv">10</span>) )</span>
 <span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="co"># write tree to tree file</span></span>
 <span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="fu">monitors.append</span>(<span class="fu">mnFile</span>(<span class="at">filename =</span> treefile_name, <span class="at">printgen =</span> <span class="dv">10</span>, fbd_tree))</span>
 <span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="co"># output to the screen</span></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="fu">monitors.append</span>(<span class="fu">mnScreen</span>(<span class="at">printgen=</span><span class="dv">100</span>, origin_time, speciation_rate, extinction_rate) )</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="fu">monitors.append</span>(<span class="fu">mnScreen</span>(<span class="at">printgen =</span> <span class="dv">100</span>, origin_time, speciation_rate, extinction_rate) )</span>
 <span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="co"># initialize mcmc</span></span>
 <span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>mymcmc <span class="ot">=</span> <span class="fu">mcmc</span>(my_model, monitors, moves, <span class="at">nruns =</span> <span class="dv">2</span>, <span class="at">ntries =</span> <span class="dv">10000</span>)</span>
@@ -381,7 +424,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="fu">q</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Note that the “true” model parameters are provided. This is to accelerate convergence by defining appropriate priors and set the initial state of the analysis. Empirically, this is would never be the case.</p>
+<p>Note that the “true” model parameters are provided. This is to accelerate convergence by defining reasonable starting values. Empirically, you would never know the true values but you could still use estimates from previous studies.</p>
 <p>The base analysis calls the three key model components: clock, morphological model, and tree model.</p>
 <p>The clock model is specified in <code>model_clock.rev</code>:</p>
 <div class="cell">
@@ -401,21 +444,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>And last, the tree model is specified in <code>model_fbd_tree.rev</code>:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>speciation_rate <span class="sc">~</span> <span class="fu">dnExponential</span>(<span class="at">lambda =</span> <span class="dv">1</span><span class="sc">/</span>true_origination_rate) <span class="co"># set to true mean</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(speciation_rate, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">0.1</span>) )</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(speciation_rate, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">1.0</span>) )</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(speciation_rate, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">5.0</span>) )</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(speciation_rate, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">0.1</span>) )</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(speciation_rate, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">1.0</span>) )</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(speciation_rate, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">5.0</span>) )</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">speciation_rate.setValue</span>(true_origination_rate)</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>extinction_rate <span class="sc">~</span> <span class="fu">dnExponential</span>(<span class="at">lambda =</span> <span class="dv">1</span><span class="sc">/</span>true_extinction_rate) <span class="co"># set to true mean</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(extinction_rate, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">0.1</span>) )</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(extinction_rate, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">1.0</span>) )</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(extinction_rate, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">5.0</span>) )</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(extinction_rate, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">0.1</span>) )</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(extinction_rate, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">1.0</span>) )</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(extinction_rate, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">5.0</span>) )</span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fu">extinction_rate.setValue</span>(true_extinction_rate)</span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>origin_time <span class="sc">~</span> <span class="fu">dnExponential</span>(<span class="at">lambda =</span> <span class="fl">1.0</span>)</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(origin_time, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">0.1</span>) )</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(origin_time, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">1.0</span>) )</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(origin_time, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">5.0</span>) )</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(origin_time, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">0.1</span>) )</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(origin_time, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">1.0</span>) )</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(origin_time, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">5.0</span>) )</span>
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="fu">origin_time.setValue</span>(true_origin_time)</span>
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>psi <span class="sc">~</span> <span class="fu">dnExponential</span>(<span class="at">lambda =</span> <span class="dv">1</span><span class="sc">/</span>true_sampling_rate)</span>
@@ -436,17 +479,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvSubtreeScale</span>(fbd_tree, <span class="at">weight =</span> <span class="fl">10.0</span>))</span>
 <span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvTreeScale</span>(fbd_tree, origin_time, <span class="at">weight =</span> <span class="fl">10.0</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>With all these parts in place, you can run the analysis</p>
+<p>With all these parts in place, you can run the analysis in your terminal:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>rb fbd_inference.rev</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">rb</span> fbd_inference.rev</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>in your terminal. This might take a while, and there are useful tools such as <code>nohup</code> (for Linux) that allow you to run these analyses in the background:</p>
+<p>This might take a while, and there are useful tools such as <code>nohup</code> (for Linux) that allow you to run these analyses in the background:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>nohup rb fbd_inference.rev <span class="sc">&gt;</span> out.log <span class="dv">2</span><span class="sc">&gt;</span><span class="er">&amp;</span><span class="dv">1</span> <span class="sc">&amp;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nohup</span> rb fbd_inference.rev <span class="op">&gt;</span> out.log <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">&amp;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="skyline-fbd-analysis" class="level3" data-number="13.2.2">
-<h3 data-number="13.2.2" class="anchored" data-anchor-id="skyline-fbd-analysis"><span class="header-section-number">13.2.2</span> Skyline FBD analysis</h3>
+<section id="skyline-fbd-analysis" class="level3" data-number="14.2.2">
+<h3 data-number="14.2.2" class="anchored" data-anchor-id="skyline-fbd-analysis"><span class="header-section-number">14.2.2</span> Skyline FBD analysis</h3>
 <p>For the FBD skyline sampling analysis that formalizes stratigraphic knowledge as priors we use a very similar base setup, available in <code>fbd_inference_skyline.rev</code>:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>char_mat <span class="ot">&lt;-</span> <span class="st">"char_mat.nex"</span></span>
@@ -466,7 +509,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>true_origination_rate <span class="ot">&lt;-</span> <span class="dv">2</span></span>
 <span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>true_extinction_rate <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
 <span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>true_origin_time <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>true_clock_rate <span class="ot">=</span> <span class="fl">0.5</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>true_clock_rate <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
 <span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="co"># initialize moves</span></span>
 <span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>moves <span class="ot">=</span> <span class="fu">VectorMoves</span>()</span>
@@ -496,7 +539,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a><span class="co"># initialize mcmc</span></span>
 <span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>mymcmc <span class="ot">=</span> <span class="fu">mcmc</span>(my_model, monitors, moves, <span class="at">nruns =</span> <span class="dv">2</span>, <span class="at">ntries =</span> <span class="dv">10000</span>)</span>
-<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a><span class="fu">mymcmc.burnin</span>(<span class="at">generations=</span><span class="dv">2000</span>,<span class="at">tuningInterval=</span><span class="dv">1500</span>, <span class="at">verbose =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a><span class="fu">mymcmc.burnin</span>(<span class="at">generations =</span> <span class="dv">2000</span>,<span class="at">tuningInterval =</span> <span class="dv">1500</span>, <span class="at">verbose =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a><span class="fu">mymcmc.operatorSummary</span>()</span>
 <span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a><span class="fu">mymcmc.run</span>(<span class="at">generations =</span> <span class="dv">10000</span>)</span>
 <span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a><span class="fu">mymcmc.operatorSummary</span>()</span>
@@ -506,21 +549,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The tree model is slightly different because of the skyline analysis. The contents of <code>model_fbd_skyline_sampling.rev</code> are</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>speciation_rate <span class="sc">~</span> <span class="fu">dnExponential</span>(<span class="at">lambda =</span> <span class="dv">1</span><span class="sc">/</span>true_origination_rate) <span class="co"># set to true mean</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(speciation_rate, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">0.1</span>) )</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(speciation_rate, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">1.0</span>) )</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(speciation_rate, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">5.0</span>) )</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(speciation_rate, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">0.1</span>) )</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(speciation_rate, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">1.0</span>) )</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(speciation_rate, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">5.0</span>) )</span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">speciation_rate.setValue</span>(true_origination_rate)</span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>extinction_rate <span class="sc">~</span> <span class="fu">dnExponential</span>(<span class="at">lambda =</span> <span class="dv">1</span><span class="sc">/</span>true_extinction_rate) <span class="co"># set to true mean</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(extinction_rate, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">0.1</span>) )</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(extinction_rate, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">1.0</span>) )</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(extinction_rate, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">5.0</span>) )</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(extinction_rate, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">0.1</span>) )</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(extinction_rate, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">1.0</span>) )</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(extinction_rate, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">5.0</span>) )</span>
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">extinction_rate.setValue</span>(true_extinction_rate)</span>
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>origin_time <span class="sc">~</span> <span class="fu">dnExponential</span>(<span class="at">lambda =</span> <span class="fl">1.0</span>)</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(origin_time, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">0.1</span>) )</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(origin_time, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">1.0</span>) )</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(origin_time, <span class="at">weight=</span><span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">5.0</span>) )</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(origin_time, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">0.1</span>) )</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(origin_time, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">1.0</span>) )</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>(origin_time, <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">5.0</span>) )</span>
 <span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="fu">origin_time.setValue</span>(true_origin_time)</span>
 <span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co"># skyline breakpoints from the example age-depth model</span></span>
@@ -548,21 +591,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>( psi[<span class="dv">7</span>], <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">1.0</span>) )</span>
 <span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvScale</span>( psi[<span class="dv">7</span>], <span class="at">weight =</span> <span class="fl">5.0</span>, <span class="at">lambda =</span> <span class="fl">10.0</span>) )</span>
 <span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>fbd_tree <span class="sc">~</span> <span class="fu">dnFBDP</span>(<span class="at">origin=</span>origin_time, <span class="at">lambda=</span>speciation_rate, <span class="at">mu=</span>extinction_rate, <span class="at">psi=</span>psi, <span class="at">rho=</span>rho, <span class="at">taxa=</span>taxa, <span class="at">timeline =</span> timeline)</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>fbd_tree <span class="sc">~</span> <span class="fu">dnFBDP</span>(<span class="at">origin =</span> origin_time, <span class="at">lambda =</span> speciation_rate, <span class="at">mu =</span> extinction_rate, <span class="at">psi =</span> psi, <span class="at">rho =</span> rho, <span class="at">taxa =</span> taxa, <span class="at">timeline =</span> timeline)</span>
 <span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a><span class="co">#fbd_tree.setValue(init_tree)</span></span>
-<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvFNPR</span>(fbd_tree, <span class="at">weight=</span><span class="fl">20.0</span>) )</span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvFNPR</span>(fbd_tree, <span class="at">weight =</span> <span class="fl">20.0</span>) )</span>
 <span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvGPR</span>(fbd_tree, <span class="at">weight =</span> <span class="fl">10.0</span>))</span>
-<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvCollapseExpandFossilBranch</span>(fbd_tree, origin_time, <span class="at">weight=</span><span class="fl">500.0</span>) )</span>
-<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvNodeTimeSlideUniform</span>(fbd_tree, <span class="at">weight=</span><span class="fl">10.0</span>) )</span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvCollapseExpandFossilBranch</span>(fbd_tree, origin_time, <span class="at">weight =</span> <span class="fl">500.0</span>) )</span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvNodeTimeSlideUniform</span>(fbd_tree, <span class="at">weight =</span> <span class="fl">10.0</span>) )</span>
 <span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvNodeTimeScale</span>(fbd_tree, <span class="at">weight =</span> <span class="fl">20.0</span>))</span>
-<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvRootTimeSlideUniform</span>(fbd_tree, origin_time, <span class="at">weight=</span><span class="fl">0.0</span>) )</span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvRootTimeSlideUniform</span>(fbd_tree, origin_time, <span class="at">weight =</span> <span class="fl">0.0</span>) )</span>
 <span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvSubtreeScale</span>(fbd_tree, <span class="at">weight =</span> <span class="fl">100.0</span>))</span>
 <span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a><span class="fu">moves.append</span>( <span class="fu">mvTreeScale</span>(fbd_tree, origin_time, <span class="at">weight =</span> <span class="fl">100.0</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-
-
 </section>
+</section>
+<section id="beast2" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="beast2"><span class="header-section-number">14.3</span> BEAST2</h2>
+<p>To run the analysis on your device using BEAST2, you will need to have the packages MM, SA and BDSKY installed. These can be installed via the <a href="https://www.beast2.org/managing-packages/">Package Manager</a> in BEAUti. The input for any analysis in BEAST is an xml file, which can be generated using BEAUti. Some of the options specified above in the RevBayes analysis can not be configured via BEAUti and require editing the xml (this includes the birth, death, sampling parameterisation, and the FBD skyline analysis).</p>
+<p>The same analysis can be run in BEAST2 using the available templates: <a href="FBD_const_template.xml">FBD_const.xml</a> and <a href="FBD_skyline_template.xml">FBD_skyline.xml</a>. You can create the xml input file based on your simulated data using this <a href="beast_parser.R">parser function</a> and the code below.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in the data output by MorphSim </span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>char <span class="ot">&lt;-</span> ape<span class="sc">::</span><span class="fu">read.nexus.data</span>(<span class="st">"char_mat_temp.nex"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>ages <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"ages_temp.tsv"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the parser function</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"/Users/iq75aqot/Desktop/rb_test/beast_templates/beast_parser.R"</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"FILEPATH/ON/YOUR/COMPUTER/beast_parser.R"</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># FBD constant rates </span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>template.file <span class="ot">=</span> <span class="st">"FILEPATH/ON/YOUR/COMPUTER/FBD_const_template.xml"</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>output.file <span class="ot">=</span> <span class="st">"FBD_const_sim_01.xml"</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="fu">beast.parser</span>(template.file, char, ages, output.file)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co"># FBD skyline</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>template.file <span class="ot">=</span> <span class="st">"FILEPATH/ON/YOUR/COMPUTER/FBD_skyline_template.xml"</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>output.file <span class="ot">=</span> <span class="st">"FBD_skyline_sim_01.xml"</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>breakpoints <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>) <span class="co"># alternatively you can generate these using get_skyline_breakpoints(adm, 0.1)</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="fu">beast.parser</span>(template.file, char, ages, output.file, <span class="at">rate_times =</span> breakpoints)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Once you have created the files you can simply run them using BEAST2 as normal.</p>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -969,12 +1040,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../day3/FBD_strat_inference.html" class="pagination-link" aria-label="Stratigraphic information in phylogenetic inference">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Stratigraphic information in phylogenetic inference</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Stratigraphic information in phylogenetic inference</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../references.html" class="pagination-link" aria-label="References">
-        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">References</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../day4/overview.html" class="pagination-link" aria-label="Overview">
+        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Overview</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -1,0 +1,70 @@
+---
+title: "Overview"
+format: html
+editor: visual
+---
+
+# Day 4
+
+Today we will switch to thinking about aspects of **software development and maintenance**, and **scientific reproducibility** in phylogenetics.
+
+Based on your past experience, or experience gained over the past few days, you are probably aware that setting up a phylogenetic inference is not always straightforward and, in particular, the use of fossil (or other time series) data introduces additional complexity. As we’ll see later, it can also be difficult to extract information about completed analyses from the published literature, especially with regards to model and prior assumptions. 
+
+There are many things that contribute to these challenges, including but not limited to:
+
+* The underlying theory, models, and data are complex  
+* The collection and curation of empirical data (phylogenetic characters or temporal information) is labour intensive and inconsistent  
+* The nature of available data might be incompatible with available models  
+* There are a huge range of options that can be challenging for new users to navigate  
+* Designing and developing (or reviewing) user-friendly software is labour intensive and not always incentivised  
+* Computing environments vary across users and are constantly evolving  
+* Software is also constantly evolving (versioning), with (breaking) changes not always clearly documented and the versions used for analyses not always known   
+* It is generally challenging to secure funding for software maintenance  
+* Establishing and maintaining communication across experts requires a lot of effort  
+* Journals have inconsistent expectations about how much of this data/information has to be provided to readers
+
+The main aim of today is to initiate conversations around the future of software development and reproducibility in phylogenetics, using models that integrate information from the fossil record as a basis for discussion. Although the focus is on applications in paleobiology, the above challenges are not unique to applications in paleobiology, or even phylogenetics. Everyone’s perspective is welcome throughout the day.
+
+## Morning
+
+### Task 1 \- Reproducibility
+
+*Breakout group activity*  
+[Day 4 - task 1]()
+
+### Task 2 \- Bug reporting
+
+*Breakout group activity*  
+[Day 4 - task 2](https://docs.google.com/document/d/1VKgmguFfCTs6kpWXZ8IOaiIDpApAS2MXaNy9heSOBqk/edit?tab=t.0)
+
+## 
+
+## 
+
+## Afternoon
+
+*Chair: Rachel, Online chair: Niklas, Note-taker: Emilia*  
+*All participants can participate via Zoom.*
+
+### Talk 1 followed by roundtable discussion
+
+*Architecture and limitations of common frameworks used in phylogenetic software development* \- Joëlle Barido-Sottani
+
+See discussion points below.
+
+### Talk 2 followed by roundtable discussion
+
+*Community led phylogenetic software development* \- Ugnė Stolz
+
+**Discussing points:**
+
+1. How to properly reward contributions to software especially stuff like maintenance which is hard to publish  
+2. Organizing turnover \- what to do when people leave or features/models are abandoned
+3. Should we establish a long-term working group?
+4. Model extensions: new packages vs. one big package?  
+5. How to encourage (adequate) documentation?  
+6. How to encourage, verify and document compatibility between modules?
+7. How essential is harmonizing perceptions of who the software’s user base is and could be?
+8. Other questions welcome
+
+

@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beast beautitemplate="Standard" beautistatus="" namespace="beast.core:beast.evolution.alignment:beast.evolution.tree.coalescent:beast.core.util:beast.evolution.nuc:beast.evolution.operators:beast.evolution.sitemodel:beast.evolution.substitutionmodel:beast.base.evolution.alignment:beast.pkgmgmt:beast.base.core:beast.base.inference:beast.base.evolution.tree.coalescent:beast.base.inference.util:beast.base.evolution.operator:beast.base.inference.operator:beast.base.evolution.sitemodel:beast.base.evolution.substitutionmodel:beast.base.evolution.likelihood" required="BEAST.base v2.7.7:SA v2.1.1:MM v1.2.1" version="2.7">
+
+<!--
+    BEAST2: tip-dated morphological analysis of fossil and living bears
+
+    Data:    bears_morphology.nex - 18 taxa, 62 binary characters (Abella et al. 2012)
+    Ages:    bears_taxa.tsv - fossil ages sampled uniformly within their ranges;
+             living bears fixed at the present
+    Model:   Mk + v (Lewis 2001) + Gamma(4); strict clock;
+             fossilized birth-death tree prior with sampled ancestors
+    Needs:   BEAST 2.7 with the SA (sampled ancestors) and MM (morph-models) packages
+
+    Run:     beast bears_FBD_strict.xml
+-->
+
+    <!-- ================================================================
+         Morphological matrix. The last two columns of every sequence
+         (one all-0, one all-1) are dummy constant characters: morph-models
+         uses them to apply the Mkv ascertainment-bias correction and
+         excludes them from the likelihood itself (see excludefrom/excludeto
+         below). They are not real data.
+         ================================================================ -->
+    <data id="bears_morph" spec="Alignment" dataType="standard">
+        <sequence id="seq_Agriarctos_spp" spec="Sequence" taxon="Agriarctos_spp" totalcount="2" value="?0??????????????0001111001?11?011110110??01110????????????????01"/>
+        <sequence id="seq_Ailurarctos_lufengensis" spec="Sequence" taxon="Ailurarctos_lufengensis" totalcount="2" value="?0???????????????001111011?11?0????0111?0011101011011?????????01"/>
+        <sequence id="seq_Ailuropoda_melanoleuca" spec="Sequence" taxon="Ailuropoda_melanoleuca" totalcount="2" value="1011110110100100000111101011100101001100001110100101100010001001"/>
+        <sequence id="seq_Ballusia_elmensis" spec="Sequence" taxon="Ballusia_elmensis" totalcount="2" value="?0????01?000000000?0100000?10000100??0???000001011110?????????01"/>
+        <sequence id="seq_Helarctos_malayanus" spec="Sequence" taxon="Helarctos_malayanus" totalcount="2" value="0100001001100101010101100001101001101001110000001101100100110101"/>
+        <sequence id="seq_Indarctos_arctoides" spec="Sequence" taxon="Indarctos_arctoides" totalcount="2" value="1111110110100100010111101011110111101100001111101101101011001001"/>
+        <sequence id="seq_Indarctos_punjabiensis" spec="Sequence" taxon="Indarctos_punjabiensis" totalcount="2" value="11111101101001000101111010111101111011000011101011011010?0001001"/>
+        <sequence id="seq_Indarctos_vireti" spec="Sequence" taxon="Indarctos_vireti" totalcount="2" value="11?11101101001000101111000111101111011000001001011011010?1001?01"/>
+        <sequence id="seq_Kretzoiarctos_beatrix" spec="Sequence" taxon="Kretzoiarctos_beatrix" totalcount="2" value="11????01?01001000001111001?11?011110110000111010111???????????01"/>
+        <sequence id="seq_Melursus_ursinus" spec="Sequence" taxon="Melursus_ursinus" totalcount="2" value="0100101001010000010101111001100111010000010100011111111111110101"/>
+        <sequence id="seq_Tremarctos_ornatus" spec="Sequence" taxon="Tremarctos_ornatus" totalcount="2" value="1100001011001100010111101001110101111010110100111111100110111001"/>
+        <sequence id="seq_Ursavus_brevirhinus" spec="Sequence" taxon="Ursavus_brevirhinus" totalcount="2" value="10????????????0001?010101011100110101?0??000001011111?????????01"/>
+        <sequence id="seq_Ursavus_primaevus" spec="Sequence" taxon="Ursavus_primaevus" totalcount="2" value="???????????????????0101000111001101???0??000001011111?????????01"/>
+        <sequence id="seq_Ursus_americanus" spec="Sequence" taxon="Ursus_americanus" totalcount="2" value="0100001001000011010101110000101000001001110000011011101100110101"/>
+        <sequence id="seq_Ursus_arctos" spec="Sequence" taxon="Ursus_arctos" totalcount="2" value="0100001001010011110101110000111000001011110101011011101100110101"/>
+        <sequence id="seq_Ursus_maritimus" spec="Sequence" taxon="Ursus_maritimus" totalcount="2" value="0100001001010011100101100001101001101011100001011011101100110101"/>
+        <sequence id="seq_Ursus_thibetanus" spec="Sequence" taxon="Ursus_thibetanus" totalcount="2" value="0100101101000101010101110000101011101011110000011011100101111001"/>
+        <sequence id="seq_Zaragocyon_daamsi" spec="Sequence" taxon="Zaragocyon_daamsi" totalcount="2" value="01???????0????000010100001010001111000???0010000000000????????01"/>
+        <userDataType id="StandardData.bears" spec="beast.base.evolution.datatype.StandardData" ambiguities="01" nrOfStates="2"/>
+    </data>
+
+    <map name="Uniform">beast.base.inference.distribution.Uniform</map>
+    <map name="Exponential">beast.base.inference.distribution.Exponential</map>
+    <map name="LogNormal">beast.base.inference.distribution.LogNormalDistributionModel</map>
+    <map name="Normal">beast.base.inference.distribution.Normal</map>
+    <map name="Beta">beast.base.inference.distribution.Beta</map>
+    <map name="Gamma">beast.base.inference.distribution.Gamma</map>
+    <map name="prior">beast.base.inference.distribution.Prior</map>
+
+    <run id="mcmc" spec="MCMC" chainLength="10000000">
+        <state id="state" spec="State" storeEvery="5000">
+
+            <!-- Tree, with tip ages in millions of years before present.
+                 Fossils start at the midpoint of their age range. -->
+            <tree id="Tree.t:bears" spec="beast.base.evolution.tree.Tree" name="stateNode">
+                <trait id="dateTrait.t:bears" spec="beast.base.evolution.tree.TraitSet" traitname="date-backward" value="Agriarctos_spp=6.325,Ailurarctos_lufengensis=7,Ailuropoda_melanoleuca=0,Ballusia_elmensis=18.25,Helarctos_malayanus=0,Indarctos_arctoides=7.3,Indarctos_punjabiensis=7.3,Indarctos_vireti=8.225,Kretzoiarctos_beatrix=11.5,Melursus_ursinus=0,Tremarctos_ornatus=0,Ursavus_brevirhinus=16.435,Ursavus_primaevus=14.81,Ursus_americanus=0,Ursus_arctos=0,Ursus_maritimus=0,Ursus_thibetanus=0,Zaragocyon_daamsi=21.4">
+                    <taxa id="TaxonSet.bears" spec="TaxonSet">
+                        <alignment idref="bears_morph"/>
+                    </taxa>
+                </trait>
+                <taxonset idref="TaxonSet.bears"/>
+            </tree>
+
+            <parameter id="clockRate.c:bears" spec="parameter.RealParameter" lower="0.0" name="stateNode">0.05</parameter>
+            <parameter id="gammaShape.s:bears" spec="parameter.RealParameter" lower="0.1" name="stateNode">1.0</parameter>
+
+            <parameter id="diversificationRateFBD.t:bears" spec="parameter.RealParameter" lower="0.0" name="stateNode">0.1</parameter>
+            <parameter id="turnoverFBD.t:bears" spec="parameter.RealParameter" lower="0.0" upper="1.0" name="stateNode">0.5</parameter>
+            <parameter id="samplingProportionFBD.t:bears" spec="parameter.RealParameter" lower="0.0" upper="1.0" name="stateNode">0.5</parameter>
+            <parameter id="originFBD.t:bears" spec="parameter.RealParameter" lower="0.0" name="stateNode">35.0</parameter>
+        </state>
+
+        <init id="RandomTree.t:bears" spec="RandomTree" estimate="false" initial="@Tree.t:bears" taxa="@bears_morph">
+            <populationModel id="ConstantPopulation0.t:bears" spec="ConstantPopulation">
+                <parameter id="randomPopSize.t:bears" spec="parameter.RealParameter" name="popSize">5.0</parameter>
+            </populationModel>
+        </init>
+
+        <distribution id="posterior" spec="CompoundDistribution">
+            <distribution id="prior" spec="CompoundDistribution">
+
+                <!-- Fossilized birth-death tree prior (SA package).
+                     rho = 1: all 8 living bear species are sampled. -->
+                <distribution id="FBD.t:bears" spec="sa.evolution.speciation.SABirthDeathModel" conditionOnRhoSampling="true" diversificationRate="@diversificationRateFBD.t:bears" origin="@originFBD.t:bears" samplingProportion="@samplingProportionFBD.t:bears" tree="@Tree.t:bears" turnover="@turnoverFBD.t:bears">
+                    <parameter id="rFBD.t:bears" spec="parameter.RealParameter" estimate="false" lower="0.0" upper="1.0" name="removalProbability">0.0</parameter>
+                    <parameter id="rhoFBD.t:bears" spec="parameter.RealParameter" estimate="false" lower="0.0" upper="1.0" name="rho">1.0</parameter>
+                </distribution>
+
+                <prior id="diversificationRatePriorFBD.t:bears" name="distribution" x="@diversificationRateFBD.t:bears">
+                    <Exponential id="Exponential.divRate" name="distr">
+                        <parameter id="RealParameter.divRateMean" spec="parameter.RealParameter" estimate="false" name="mean">1.0</parameter>
+                    </Exponential>
+                </prior>
+                <prior id="turnoverPriorFBD.t:bears" name="distribution" x="@turnoverFBD.t:bears">
+                    <Uniform id="Uniform.turnover" name="distr" lower="0.0" upper="1.0"/>
+                </prior>
+                <prior id="samplingProportionPriorFBD.t:bears" name="distribution" x="@samplingProportionFBD.t:bears">
+                    <Beta id="Beta.samplingProportion" name="distr">
+                        <parameter id="RealParameter.betaAlpha" spec="parameter.RealParameter" estimate="false" name="alpha">2.0</parameter>
+                        <parameter id="RealParameter.betaBeta" spec="parameter.RealParameter" estimate="false" name="beta">2.0</parameter>
+                    </Beta>
+                </prior>
+
+                <!-- Origin must be older than the oldest fossil (22.8 Ma, Zaragocyon),
+                     so the prior is offset by that age (mean ~31.3 Ma). -->
+                <prior id="originPriorFBD.t:bears" name="distribution" x="@originFBD.t:bears">
+                    <LogNormal id="LogNormal.origin" meanInRealSpace="true" name="distr" offset="22.8">
+                        <parameter id="RealParameter.originM" spec="parameter.RealParameter" estimate="false" name="M">8.5</parameter>
+                        <parameter id="RealParameter.originS" spec="parameter.RealParameter" estimate="false" name="S">1.0</parameter>
+                    </LogNormal>
+                </prior>
+
+                <!-- Strict clock: rate of character change per character per Myr -->
+                <prior id="ClockPrior.c:bears" name="distribution" x="@clockRate.c:bears">
+                    <Exponential id="Exponential.clock" name="distr">
+                        <parameter id="RealParameter.clockMean" spec="parameter.RealParameter" estimate="false" name="mean">1.0</parameter>
+                    </Exponential>
+                </prior>
+
+                <prior id="GammaShapePrior.s:bears" name="distribution" x="@gammaShape.s:bears">
+                    <Exponential id="Exponential.gammaShape" name="distr">
+                        <parameter id="RealParameter.gammaShapeMean" spec="parameter.RealParameter" estimate="false" name="mean">1.0</parameter>
+                    </Exponential>
+                </prior>
+
+                <!-- Fossil age uncertainty: each fossil's age is sampled
+                     uniformly within its stratigraphic range -->
+                <distribution id="Agriarctos_spp.prior" spec="sa.math.distributions.SAMRCAPrior" tipsonly="true" tree="@Tree.t:bears">
+                    <taxonset id="Agriarctos_spp.taxonset" spec="TaxonSet">
+                        <taxon id="Agriarctos_spp" spec="Taxon"/>
+                    </taxonset>
+                    <Uniform id="Uniform.Agriarctos_spp" name="distr" lower="4.9" upper="7.75"/>
+                </distribution>
+                <distribution id="Ailurarctos_lufengensis.prior" spec="sa.math.distributions.SAMRCAPrior" tipsonly="true" tree="@Tree.t:bears">
+                    <taxonset id="Ailurarctos_lufengensis.taxonset" spec="TaxonSet">
+                        <taxon id="Ailurarctos_lufengensis" spec="Taxon"/>
+                    </taxonset>
+                    <Uniform id="Uniform.Ailurarctos_lufengensis" name="distr" lower="5.8" upper="8.2"/>
+                </distribution>
+                <distribution id="Ballusia_elmensis.prior" spec="sa.math.distributions.SAMRCAPrior" tipsonly="true" tree="@Tree.t:bears">
+                    <taxonset id="Ballusia_elmensis.taxonset" spec="TaxonSet">
+                        <taxon id="Ballusia_elmensis" spec="Taxon"/>
+                    </taxonset>
+                    <Uniform id="Uniform.Ballusia_elmensis" name="distr" lower="13.7" upper="22.8"/>
+                </distribution>
+                <distribution id="Indarctos_arctoides.prior" spec="sa.math.distributions.SAMRCAPrior" tipsonly="true" tree="@Tree.t:bears">
+                    <taxonset id="Indarctos_arctoides.taxonset" spec="TaxonSet">
+                        <taxon id="Indarctos_arctoides" spec="Taxon"/>
+                    </taxonset>
+                    <Uniform id="Uniform.Indarctos_arctoides" name="distr" lower="4.9" upper="9.7"/>
+                </distribution>
+                <distribution id="Indarctos_punjabiensis.prior" spec="sa.math.distributions.SAMRCAPrior" tipsonly="true" tree="@Tree.t:bears">
+                    <taxonset id="Indarctos_punjabiensis.taxonset" spec="TaxonSet">
+                        <taxon id="Indarctos_punjabiensis" spec="Taxon"/>
+                    </taxonset>
+                    <Uniform id="Uniform.Indarctos_punjabiensis" name="distr" lower="4.9" upper="9.7"/>
+                </distribution>
+                <distribution id="Indarctos_vireti.prior" spec="sa.math.distributions.SAMRCAPrior" tipsonly="true" tree="@Tree.t:bears">
+                    <taxonset id="Indarctos_vireti.taxonset" spec="TaxonSet">
+                        <taxon id="Indarctos_vireti" spec="Taxon"/>
+                    </taxonset>
+                    <Uniform id="Uniform.Indarctos_vireti" name="distr" lower="7.75" upper="8.7"/>
+                </distribution>
+                <distribution id="Kretzoiarctos_beatrix.prior" spec="sa.math.distributions.SAMRCAPrior" tipsonly="true" tree="@Tree.t:bears">
+                    <taxonset id="Kretzoiarctos_beatrix.taxonset" spec="TaxonSet">
+                        <taxon id="Kretzoiarctos_beatrix" spec="Taxon"/>
+                    </taxonset>
+                    <Uniform id="Uniform.Kretzoiarctos_beatrix" name="distr" lower="11.2" upper="11.8"/>
+                </distribution>
+                <distribution id="Ursavus_brevirhinus.prior" spec="sa.math.distributions.SAMRCAPrior" tipsonly="true" tree="@Tree.t:bears">
+                    <taxonset id="Ursavus_brevirhinus.taxonset" spec="TaxonSet">
+                        <taxon id="Ursavus_brevirhinus" spec="Taxon"/>
+                    </taxonset>
+                    <Uniform id="Uniform.Ursavus_brevirhinus" name="distr" lower="15.97" upper="16.9"/>
+                </distribution>
+                <distribution id="Ursavus_primaevus.prior" spec="sa.math.distributions.SAMRCAPrior" tipsonly="true" tree="@Tree.t:bears">
+                    <taxonset id="Ursavus_primaevus.taxonset" spec="TaxonSet">
+                        <taxon id="Ursavus_primaevus" spec="Taxon"/>
+                    </taxonset>
+                    <Uniform id="Uniform.Ursavus_primaevus" name="distr" lower="13.65" upper="15.97"/>
+                </distribution>
+                <distribution id="Zaragocyon_daamsi.prior" spec="sa.math.distributions.SAMRCAPrior" tipsonly="true" tree="@Tree.t:bears">
+                    <taxonset id="Zaragocyon_daamsi.taxonset" spec="TaxonSet">
+                        <taxon id="Zaragocyon_daamsi" spec="Taxon"/>
+                    </taxonset>
+                    <Uniform id="Uniform.Zaragocyon_daamsi" name="distr" lower="20" upper="22.8"/>
+                </distribution>
+            </distribution>
+
+            <distribution id="likelihood" spec="CompoundDistribution" useThreads="true">
+                <!-- Mk + v + Gamma: all 62 characters are binary, so a single
+                     2-state partition. ascertained="true" with the two dummy columns
+                     (63-64) gives the Lewis variable-characters correction. -->
+                <distribution id="morphTreeLikelihood.bears" spec="TreeLikelihood" tree="@Tree.t:bears">
+                    <data id="bears_morph2" spec="FilteredAlignment" data="@bears_morph" filter="1-64" ascertained="true" excludefrom="62" excludeto="64">
+                        <userDataType id="morphDataType.bears2" spec="beast.base.evolution.datatype.StandardData" ambiguities="01" nrOfStates="2"/>
+                    </data>
+                    <siteModel id="SiteModel.s:bears" spec="SiteModel" gammaCategoryCount="4" shape="@gammaShape.s:bears">
+                        <parameter id="mutationRate.s:bears" spec="parameter.RealParameter" estimate="false" name="mutationRate">1.0</parameter>
+                        <parameter id="proportionInvariant.s:bears" spec="parameter.RealParameter" estimate="false" lower="0.0" upper="1.0" name="proportionInvariant">0.0</parameter>
+                        <substModel id="LewisMK.s:bears" spec="morphmodels.evolution.substitutionmodel.LewisMK" datatype="@morphDataType.bears2"/>
+                    </siteModel>
+                    <branchRateModel id="StrictClock.c:bears" spec="beast.base.evolution.branchratemodel.StrictClockModel" clock.rate="@clockRate.c:bears"/>
+                </distribution>
+            </distribution>
+        </distribution>
+
+        <!-- ===================== Operators ===================== -->
+        <operator id="StrictClockRateScaler.c:bears" spec="ScaleOperator" parameter="@clockRate.c:bears" scaleFactor="0.75" weight="3.0"/>
+        <operator id="strictClockUpDownOperator.c:bears" spec="operator.UpDownOperator" scaleFactor="0.75" weight="3.0">
+            <up idref="clockRate.c:bears"/>
+            <down idref="Tree.t:bears"/>
+        </operator>
+        <operator id="gammaShapeScaler.s:bears" spec="ScaleOperator" parameter="@gammaShape.s:bears" scaleFactor="0.5" weight="1.0"/>
+
+        <operator id="originScalerFBD.t:bears" spec="ScaleOperator" parameter="@originFBD.t:bears" scaleFactor="0.75" weight="3.0"/>
+        <operator id="divRateScalerFBD.t:bears" spec="ScaleOperator" parameter="@diversificationRateFBD.t:bears" scaleFactor="0.75" weight="10.0"/>
+        <operator id="turnoverScalerFBD.t:bears" spec="ScaleOperator" parameter="@turnoverFBD.t:bears" scaleFactor="0.75" weight="10.0"/>
+        <operator id="samplingPScalerFBD.t:bears" spec="ScaleOperator" parameter="@samplingProportionFBD.t:bears" scaleFactor="0.75" weight="10.0"/>
+
+        <operator id="LeafToSAFBD.t:bears" spec="sa.evolution.operators.LeafToSampledAncestorJump" tree="@Tree.t:bears" weight="10.0"/>
+        <operator id="SAWilsonBaldingFBD.t:bears" spec="sa.evolution.operators.SAWilsonBalding" tree="@Tree.t:bears" weight="10.0"/>
+        <operator id="SAWideFBD.t:bears" spec="sa.evolution.operators.SAExchange" isNarrow="false" tree="@Tree.t:bears" weight="10.0"/>
+        <operator id="SANarrowFBD.t:bears" spec="sa.evolution.operators.SAExchange" tree="@Tree.t:bears" weight="10.0"/>
+        <operator id="SAUniformOperatorFBD.t:bears" spec="sa.evolution.operators.SAUniform" tree="@Tree.t:bears" weight="20.0"/>
+        <operator id="SATreeRootScalerFBD.t:bears" spec="sa.evolution.operators.SAScaleOperator" rootOnly="true" scaleFactor="0.95" tree="@Tree.t:bears" weight="1.0"/>
+        <operator id="SATreeScalerFBD.t:bears" spec="sa.evolution.operators.SAScaleOperator" scaleFactor="0.95" tree="@Tree.t:bears" weight="3.0"/>
+
+        <operator id="tipDatesSampler.Agriarctos_spp" spec="sa.evolution.operators.SampledNodeDateRandomWalker" taxonset="@Agriarctos_spp.taxonset" tree="@Tree.t:bears" weight="1.0" windowSize="1.0"/>
+        <operator id="tipDatesSampler.Ailurarctos_lufengensis" spec="sa.evolution.operators.SampledNodeDateRandomWalker" taxonset="@Ailurarctos_lufengensis.taxonset" tree="@Tree.t:bears" weight="1.0" windowSize="1.0"/>
+        <operator id="tipDatesSampler.Ballusia_elmensis" spec="sa.evolution.operators.SampledNodeDateRandomWalker" taxonset="@Ballusia_elmensis.taxonset" tree="@Tree.t:bears" weight="1.0" windowSize="1.0"/>
+        <operator id="tipDatesSampler.Indarctos_arctoides" spec="sa.evolution.operators.SampledNodeDateRandomWalker" taxonset="@Indarctos_arctoides.taxonset" tree="@Tree.t:bears" weight="1.0" windowSize="1.0"/>
+        <operator id="tipDatesSampler.Indarctos_punjabiensis" spec="sa.evolution.operators.SampledNodeDateRandomWalker" taxonset="@Indarctos_punjabiensis.taxonset" tree="@Tree.t:bears" weight="1.0" windowSize="1.0"/>
+        <operator id="tipDatesSampler.Indarctos_vireti" spec="sa.evolution.operators.SampledNodeDateRandomWalker" taxonset="@Indarctos_vireti.taxonset" tree="@Tree.t:bears" weight="1.0" windowSize="1.0"/>
+        <operator id="tipDatesSampler.Kretzoiarctos_beatrix" spec="sa.evolution.operators.SampledNodeDateRandomWalker" taxonset="@Kretzoiarctos_beatrix.taxonset" tree="@Tree.t:bears" weight="1.0" windowSize="1.0"/>
+        <operator id="tipDatesSampler.Ursavus_brevirhinus" spec="sa.evolution.operators.SampledNodeDateRandomWalker" taxonset="@Ursavus_brevirhinus.taxonset" tree="@Tree.t:bears" weight="1.0" windowSize="1.0"/>
+        <operator id="tipDatesSampler.Ursavus_primaevus" spec="sa.evolution.operators.SampledNodeDateRandomWalker" taxonset="@Ursavus_primaevus.taxonset" tree="@Tree.t:bears" weight="1.0" windowSize="1.0"/>
+        <operator id="tipDatesSampler.Zaragocyon_daamsi" spec="sa.evolution.operators.SampledNodeDateRandomWalker" taxonset="@Zaragocyon_daamsi.taxonset" tree="@Tree.t:bears" weight="1.0" windowSize="1.0"/>
+
+        <!-- ===================== Output ===================== -->
+        <logger id="tracelog" spec="Logger" fileName="$(filebase).log" logEvery="1000" model="@posterior" sanitiseHeaders="true" sort="smart">
+            <log idref="posterior"/>
+            <log idref="likelihood"/>
+            <log idref="prior"/>
+            <log id="TreeHeight.t:bears" spec="beast.base.evolution.tree.TreeStatLogger" tree="@Tree.t:bears"/>
+            <log idref="clockRate.c:bears"/>
+            <log idref="gammaShape.s:bears"/>
+            <log idref="morphTreeLikelihood.bears"/>
+            <log idref="FBD.t:bears"/>
+            <log idref="diversificationRateFBD.t:bears"/>
+            <log idref="turnoverFBD.t:bears"/>
+            <log idref="samplingProportionFBD.t:bears"/>
+            <log idref="originFBD.t:bears"/>
+            <log id="SACountFBD.t:bears" spec="sa.evolution.tree.SampledAncestorLogger" tree="@Tree.t:bears"/>
+            <log idref="Agriarctos_spp.prior"/>
+            <log idref="Ailurarctos_lufengensis.prior"/>
+            <log idref="Ballusia_elmensis.prior"/>
+            <log idref="Indarctos_arctoides.prior"/>
+            <log idref="Indarctos_punjabiensis.prior"/>
+            <log idref="Indarctos_vireti.prior"/>
+            <log idref="Kretzoiarctos_beatrix.prior"/>
+            <log idref="Ursavus_brevirhinus.prior"/>
+            <log idref="Ursavus_primaevus.prior"/>
+            <log idref="Zaragocyon_daamsi.prior"/>
+        </logger>
+
+        <logger id="screenlog" spec="Logger" logEvery="10000">
+            <log idref="posterior"/>
+            <log idref="likelihood"/>
+            <log idref="prior"/>
+        </logger>
+
+        <logger id="treelog.t:bears" spec="Logger" fileName="$(filebase).trees" logEvery="1000" mode="tree">
+            <log id="TreeWithMetaDataLogger.t:bears" spec="beast.base.evolution.TreeWithMetaDataLogger" tree="@Tree.t:bears"/>
+        </logger>
+
+        <operatorschedule id="OperatorSchedule" spec="OperatorSchedule"/>
+    </run>
+</beast>
