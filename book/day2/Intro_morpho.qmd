@@ -1,5 +1,6 @@
 ---
 title: "Introduction to morphological data"
+references: references.bib
 ---
 
 ```{r}
@@ -32,7 +33,7 @@ In cases with rich sampling, a researcher may be able to look across multiple sp
 In the case of a poorly-sampled clade, it may be that the researcher is able to look at one sample per OTU, and may not know if a trait is plastic in any way.
 In very poorly-sampled clades, which many vertebrates are, you may lose resolution on things like morphological modularity. 
 Traits may be collected for a variety of reasons. 
-These can include having observed trait function in the case of extant organisms, or close relatives, or analogizing from more distantly-related relatives [@hesse1965models, bokulich2025models]. 
+These can include having observed trait function in the case of extant organisms, or close relatives, or analogizing from more distantly-related relatives [@hesse1965models; @bokulich2025models]. 
 I will not be giving an exhaustive look at character coding schemes. If you'd like more to read on character theory, please see [@stevens1984homology; @budd2006origin; @wagner2000character].
 
 What distinguishes phylogenetic character data from mere data? 
@@ -57,7 +58,7 @@ We won't deal much with continuous traits in this workshop, but many traits that
 We don't discretize traits because discrettraits are "better" in any real way. 
 But we have developed methods and significantly matured them for use with DNA, which are discrete.
 Thus, even the way we use the vocabulary of traits is imprinted by theory, including theory from other fields (molecular biology).
-This relationship between theory and data collection has been termed ``model-data synthesis" \citep{Parker2020}.
+This relationship between theory and data collection has been termed *model-data synthesis* [@Parker2020].
 
 Bokulich and Parker (2021) make the argument that data must be evalutate for *fidelity for purpose.* 
 That is, how well can the data be used for the science we'd like to conduct.
@@ -86,23 +87,68 @@ The trait must be homologous to describe this history, and that homology is typi
 Now that we know a little about the loading of theory and expectation onto morphological traits, let's talk about how they've been used historically and how they are modeled. 
 
 
-# A Brief History of the Use of Morphology in Phylogenetics
+# A Brief History of Phylogenetics
 
+This is not an exhaustive history of phylogenetics; I'm simply presenting a few perspectives that might interest folks in this crowd. 
+Trees as metaphors for the history of life were commonplace in the 1800s. Everyone is familiar with the 'I think' topology represented in Darwin [@Darwin1837], but other authors were using this metaphor as well [@haeckel1879].
+During the latter quarter of the 1800s through the mid-1900s, different researchers took different ways to actually uncover the evolutionary relationships between taxa. 
+
+In the 1960s, a number of new methods for repeatably estimating phylogenetic trees all hit the market in a fairly short period of time. 
+In 1963, Sokal and Sneath proposed numerical taxonomy [@sokal1963principles], which attempts to cluster and create phylogenetic trees based on their characteristics.
+These tools cluster taxa based on numerical assessment of their trait data.
+Notably, there is not an evolutionary model to this approach.
+Shortly thereafter, Hennig proposed the maximum parsimony criterion, in which the tree that implies the fewest number of changes is to be preferred.
+Three years thereafter, Jukes and Cantor proposed the first very simple [@Jukes1969] sequence model to probabilistically describe evolution in a molecular sequence.
+All of these describe ways to assess phylogeny that, given a common dataset, two workers could arrive at the same analytical answer. 
+Across this whole time, Margaret Dayhoff was pioneering molecular data sharing technologies.
+The stage was set for modern phylogenetics [@ayhoff1980nucleic]. 
+
+In the 1970s and 1980s, a number of things happened: Joseph Felsenstein described situations under which parsimony will be unreliable for tree inference [@Felsenstein1983], published a tree-pruning algorithm to allow efficient computation of model probabilities on a tree [@felsenstein1981evolutionary], and he (and others) published models of sequence evolution that are sensitive to known molecular evolutionary parameters [@Felsenstein1981]. 
+At the same time, GenBank came online, bringing a wealth of molecular information to researchers. 
+As a result, a wealth of models that take advantage of known patterns and processes of molecular evolution were made available to the phylogenetics community.
+Now we had models and data, the last piece of the puzzle was software; the manner in which models are made available to the people. 
+Throughout the '80s and '90s, a variety of software tools became available to use parsimony, numerical taxonomy (clustering), and modeling tools. 
+
+In 2001, the first model for explicitly modeling morphological phylogenetic characters was made available by Paul Lewis. 
+This model was made available in a variety of places - PAUP, RAxML, MrBayes. 
+But it was really MrBayes where the idea of modeling morphological models took off.
+In the coming years, researchers explored new phylogenetic models, estimating trees from joint molecular-morphological datasets, and partitioning among characters that may evolve differently. 
+While morphological data are used in maximum likelihood, in a model-based framework, you are more likely to see them in Bayesian estimations. 
+
+At the same time, there was a somewhat of a sidelining of morphological data.
+Due to the ease of availability of DNA character acquisition either de novo or from GenBank, molecular data became the norm. 
+Because the sequence models available for estimation of molecular phylogenetic trees, and the availability of automated homology assignment, there was a widespread perception that molecular data were more useful or objective than morphological data.
+The 2010s, in many ways, can be defined the reintegration of morphology into phylogenetic analysis. 
+See section `A Reintegrated Vision of Morphology in the 21st Century` for more.
 
 # How Can We Model Discrete Morphology
 
 As we covered in the prior section, the original way of inferring phylogenetic trees was by hand. The first reproducible and shareable ways of doing this were via parsimony. Parsimony is a generalization of Occam’s Razor. Under parsimony, a character is only collected if it may inform the tree - a property known as parsimony informativity. Under the maximum parsimony information criterion, each character is scored along a proposed tree to see how many changes are implied by that tree and character. A character that does not change has a score of zero, no matter the tree proposed. A character that is unique to one OTU has a length of one no matter the tree proposed. Thus, they are not collected. Characters that can favor one topology over another will be scored. The default assumptions of parsimony is that all characters contribute equally to the parsimony score, and evolve in an unordered fashion. Each character may have its own number of changes on the tree. Other parameterizations may alter these assumptions.
 
-Model-based models for use with likelihood and Bayesian methods became available in 2001 (Lewis2001?). On it’s face, the Mk model makes similar assumptions to parsimony - all characters contribute to the score, character change is unordered - but the model does not assume that the smallest number of changes is automatically the best. The Mk model also makes some likelihood-specific assumptions: the equilibrium state frequencies (the state frequencies you would see if you ran the evolutionary process out to equilibrium) are equal and that rates of change are equal. The former means no specific change is more likely than the other. Under a likelihood-based phylogenetic model, the probability of observing a change is a product of the exchangeability, or the raw rate of change between two character states, and the probability of the starting state. Both of these quantities are assumed to be equal in the Mk model. We could make a different set of assumptions (Nylander et al. 2004, Klopfstein and Ronquist 2015, Wright et al 2016) that allows state frequencies to vary. Altering either the exchangeability or the state frequency will allow different sets of characters in a character matrix to have different rates at which character states evolve into one another. Likewise, we may assume Gamma-distributed rate heterogeneity (Yang 1994)to allow characters to evolve faster or slower, relative to some norm.
+Model-based models for use with likelihood and Bayesian methods became available in 2001 (Lewis 2001 ). On it’s face, the Mk model makes similar assumptions to parsimony - all characters contribute to the score, character change is unordered - but the model does not assume that the smallest number of changes is automatically the best. The Mk model also makes some likelihood-specific assumptions: the equilibrium state frequencies (the state frequencies you would see if you ran the evolutionary process out to equilibrium) are equal and that rates of change are equal. The former means no specific change is more likely than the other. Under a likelihood-based phylogenetic model, the probability of observing a change is a product of the exchangeability, or the raw rate of change between two character states, and the probability of the starting state. Both of these quantities are assumed to be equal in the Mk model. We could make a different set of assumptions [@Nylander2004; @klopfstein2015nonstationary; @Wright2016]that allows state frequencies to vary. Altering either the exchangeability or the state frequency will allow different sets of characters in a character matrix to have different rates at which character states evolve into one another. Likewise, we may assume Gamma-distributed rate heterogeneity [@Yang1994a] to allow characters to evolve faster or slower, relative to some norm.
 
 While it is possible to estimate a Mk model tree in RAxML and other maximum likelihood platforms, most estimation has been in the Bayesian realm. This is for a few reasons. The first is that Bayesian methods log solutions sampled during the estimation, leaving the researcher with samples of possible trees and parameters. This allows for a visualization of uncertainty. Thus, it is common in Bayesian analyses to incorporate multiple trees, cloudograms, and posterior probabilities with visualized phylogenetic trees. Uncertainty visualization is also possible in parsimony, though less common. Because datasets are quite small, representation of uncertainty is common in morphological phylogenetics. The second reason is that people who were interested in morphology tended to be Bayesians.
 
 So what is a Bayesian method? This is not an exhaustive course; I will simply provide you a very brief background.
 
+$$ Pr(Model\ |\ Data) = \frac{Pr(Data\ |\ Model)Pr(Model)}{Pr(Data)} $$
+
 The above is the equation for Bayes’ Theorem. The pipe character is read as “given”. What this means is that we are computing the probability of the model given the data. We calculate this probability by computing the phylogenetic character likelihood (the probability of the data given a model), the prior (the probability of the model before you see any data), divided by the marginal probability of the data (the probability of the data without considering any model parameters).
 
 
-# How Can We model Continuous Traits
+# How Can We model Continuous Traits for Phylogenetic Inference
+
+One thing I'd like to emphasize is that a continuous trait still must be homologous. 
+We can't use the Q-matrix approach with continuous traits because, being continuously-valued, this would drive the size of the Q-matrix to infinite size. 
+Thus, we commonly use methods develiped for use with continuous traits themselves.
+The only one used inferentially [@Parins-Fukuchi2017; @wang2026implementation; @wynd2026incorporating] is Brownian Motion, which is a random walk model described by a single variance parameter, sigma. 
+The sigma parameter determines how large the move away from the starting state is at each step. 
+On average, we expect a larger step to produce a larger difference from the starting trait value than a small step.
+
+Something that is excellent about a Bayesian model is that additional nodes can be added to the model graph, meaning that one can easily expand the model to accommodate multiple data types and different models, meaning it is easy to implement and add a continuous trait model to your phylogenetic analysis.
+On the other hand, phylogenetic analyses with continuous trait data still behave in somewhat mysterious ways that can be hard to understand from a theoretical point of view. 
+This may reflect the nascent stages of development for these methods.
+Incorporating other known information into phylogenetic analyses from continuous traits, such as trait optimum models or correlations, may improve inference. 
 
 
 # A Reintegrated Vision of Morphology in the 21st Century
@@ -111,7 +157,7 @@ While morphological characters were the initial source of phylogenetic data, muc
 
 Paleobiology is not the only area of science in which this was observed. In fact, in the late 2010s, the US National Science Foundation launched an initiative called Reintegrating Biology to imagine what a national, interdisciplinary biological science research program might look like. Special issues of journals were spawned. Workshops were held. Even independent of any top-down efforts, the 2010s can be characterized as investing in a massive re-integration of the biological sciences and the geological sciences. 
 
-A number of factors converged in the early half of the 2010s. Tanja Stadler published a paper describing a  model of diversification and sampling through time that would be adapted in 2014 to accommodate fossil sampling (samples not in the present). Graham Slater published a manuscript detailing how comparative methods can be mislead without accounting for paleobiological data. Shortly thereafter, a number of papers demonstrated that the Mk model worked pretty well for morphological data. All the pieces were in place to make truly integrative stratigraphic trees with morphological data.
+A number of factors converged in the early half of the 2010s. Tanja Stadler published a paper describing a  model of diversification and sampling through time [@stadler2010sampling] that would be adapted in 2014 [@Heath2014] to accommodate fossil sampling (samples not in the present). Graham Slater published a manuscript detailing how comparative methods can be mislead without accounting for paleobiological data [@slater2012integrating]. Shortly thereafter, a number of papers demonstrated that the Mk model worked pretty well for morphological data. All the pieces were in place to make truly integrative stratigraphic trees with morphological data [@Wright2014].
 
 The final thing that was missing in the ecosystem was democratized software platforms to do this work. Over the prior 30 years, most phylogenetic software has relied upon a preset slate of options, decided upon by the developer, in advance of software publication. RevBayes and BEAST2 have changed the model, in favor of offering a sandbox of endlessly combinable model options. In RevBayes and BEAST2, the model is simply a graph of interlocking pieces to which new nodes can be added as your data types and model complexity change. As discussed in the section "How Can We model Continuous Traits", a user who wants to work with continuous data simply specifies a model that works with continuous traits (in theory, any way). 
 

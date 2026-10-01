@@ -4,6 +4,14 @@ title: "Time in rocks"
 
 ## Introduction
 
+In order to run this code, you will need the `admtools` R Package.
+
+```{r, echo=false, include=true}
+install.packages("admtools")
+library(admtools)
+
+```
+
 This chapter introduces the concept of **age-depth models**, which formalize geochronological knowledge and contain a lot of stratigraphic information, e.g., on sediment accumulation rates and hiatus location and duration.
 
 At the end of the chapter you will
