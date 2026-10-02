@@ -1,0 +1,67 @@
+---
+title: "Book discussion"
+format: html
+editor: visual
+---
+
+## Discussion
+
+* Who is the target audience?
+* Conceptual vs. computational vs. empirical explanation?
+* How do we maximize impact?
+* Terminology/Glossary? If we provide a low entry point, parts will be generic
+* VERY broad readership. How do we pick them all up at the right point?
+* Level of readership vs breadth
+* Proofread chapters by other discipline specialist!
+* Three parts: strat, phylo, integration
+* Future facing work: What is conceptually interesting, what is available vs. what needs to be done?
+* How do we update as the field moves along? Which parts are more prone to this?
+* How much signposting vs. writing in place?
+* Highlight points of integration early!
+* Case studies? Range! Provide your favorite!
+* Accessible explanation about the models for domain specialists. What goes in, what comes out?
+* Structure model outputs as graphic models!
+* Add future challenges in those graphical models
+* Compartmentalize according to software in graphical models
+* Benchmark: everyone should be able to run all code with explanations in place
+
+Target audience:
+* 2nd year PhD
+* Breadth: Clear directions to external resources or glossary, make mental shortcuts and conventions explicit! Provide entry points for biologists, geologists, CS/math - have each chapter reviewed by other disciplines, reference math background (Yuki).
+* Software wise: self-contained
+
+Structure:
+Introduction: Motivation & goals Emilia, Rachel, Laura, Johan, Niklas
+Underlying motivation for Bayesian!
+Be specific about learning objectives
+
+Part 1: Stratigraphic paleobiology and paleoecology
+* Principles of Stratigraphy: Mark
+* Structure of the stratigraphic record: Emilia, Johan (day 1, first part)
+* Paleobiology, paleoecology and biostratigraphy: Mark, Lina, (day 3, first part), Martin
+* Age-depth models and sedimentation: Niklas (day 1, second part) add more formalism
+
+Part 2: Phylogeny and trait evolution
+Motivation & structure
+* Sasha: FBD model and its extensions (day 3) (identifiability) Bethany
+* April: Morphology as data, Stephan, Filippo
+* Sergei: Trait evolution
+* Laura: Modelling trait evolution (day 2 tutorial)
+* Phylogenetic inference: Bethany (currently day 3 end), Joel and Joelle
+
+Part 3: Integration
+Lead-in: Model to simulation to inference pipeline!
+
+* Spatial and temporal scales (theory) Niklas, Mark
+* Stratigraphic information in phylogenetic inference (usage of database) (day 3 middle) (this is where the big diagram appears), data assumption violations: Niklas, Rachel, David
+* Determining and propagating uncertainty: Bethany, Rachel
+* Open challenges and future work - Orga team
+* Joelle & Ugne: Software development (move to digital infra?)
+
+Summary
+
+TIMELINE?
+
+
+
+
