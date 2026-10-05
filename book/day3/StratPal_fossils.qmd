@@ -269,7 +269,8 @@ As a simple example, we define a taphonomic gradient that filters all occurrence
 f = StratPal::strat_filter(adm)
 fossils_filtered = fossils |>
   admtools::rev_dir(ref = t_max) |>
-  StratPal::apply_taphonomy(identity, f) |>
+  StratPal::apply_taphonomy(pres_potential =  f,
+                            ctc = identity) |>
   admtools::rev_dir(ref = t_max)
 plot(fossils_filtered,
      tree = tree,

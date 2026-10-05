@@ -42,8 +42,8 @@ using CairoMakie
 
 Note that you may execute the code in this lesson with the package `JuliaCall`:
 
-```{r echo=false, include=true}
-
+```{r}
+#| eval: false
 install.packages("JuliaCall")
 library(JuliaCall)
 ```
