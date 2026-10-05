@@ -2,17 +2,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>13&nbsp; Stratigraphic information in phylogenetic inference – Bridging Stratigraphic Palaeobiology and Phylogenetics</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -69,7 +75,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../day3/StratPal_phylo.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
@@ -131,9 +136,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="../index.html" class="sidebar-logo-link">
-      </a>
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Bridging Stratigraphic Palaeobiology and Phylogenetics</a> 
     </div>
@@ -366,7 +369,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="providing-stratigraphic-data-to-phylogenetic-inference" class="level2" data-number="13.3">
 <h2 data-number="13.3" class="anchored" data-anchor-id="providing-stratigraphic-data-to-phylogenetic-inference"><span class="header-section-number">13.3</span> Providing stratigraphic data to phylogenetic inference</h2>
 <p>Add stratigraphic information to the inference by using the FBD skyline model. Use the skyline to model variation in the sampling rate by distinguishing between intervals where (1) you know nothing can be sampled due to gaps in the fossil record, (2) intervals where fossils are sampled and you have an estimate of the sampling rate available (or alternatively strong prior information), and (3) intervals where fossils are sampled but you have no estimate of the sampling rate.</p>
-<!--- [Download the dataset](ages.tsv){download="ages.tsv"} --->
 <p>You can use the following code to determine the breakpoints of your skyline model more easily:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>get_skyline_breakpoints <span class="ot">=</span> <span class="cf">function</span>(adm,</span>
