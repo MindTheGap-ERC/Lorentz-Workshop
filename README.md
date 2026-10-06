@@ -14,11 +14,11 @@
 
 The workshop was possible thanks to the financial support of following bodies:
 
-![The Paleontological Society](img/PalSoc.png){width=180px}
+![The Paleontological Society](img/PalSoc.png)
 
-![The Palaeontological Association](img/PalAss.jpg){width=180px}
+![The Palaeontological Association](img/PalAss_small.jpg)
 
-![The Society for the Study of Evolution](img/SSE.png){width=180px}
+![The Society for the Study of Evolution](img/SSE.png)
 
 Funded by the European Union (ERC, MindTheGap, StG project no 101041077). Views and opinions expressed are however those of the author(s) only and do not necessarily reflect those of the European Union or the European Research Council. Neither the European Union nor the granting authority can be held responsible for them. 
 
