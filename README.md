@@ -10,6 +10,20 @@
 4.  Rachel Warnock, Friedrich-Alexander-Universität Erlangen-Nürnberg
 5.  Niklas Hohmann, Utrecht University
 
+### Sponsors
+
+The workshop was possible thanks to the financial support of following bodies:
+
+![The Paleontological Society](img/PalSoc.png){width=180px}
+
+![The Palaeontological Association](img/PalAss.jpg){width=180px}
+
+![The Society for the Study of Evolution](img/SSE.png){width=180px}
+
+Funded by the European Union (ERC, MindTheGap, StG project no 101041077). Views and opinions expressed are however those of the author(s) only and do not necessarily reflect those of the European Union or the European Research Council. Neither the European Union nor the granting authority can be held responsible for them. 
+
+![European Union and European Research Council logos](https://erc.europa.eu/sites/default/files/2023-06/LOGO_ERC-FLAG_FP.png)
+
 ### The workshop book
 
 Our [joint open book](https://mindthegap-erc.github.io/Lorentz-Workshop/) is where you can find the detailed instructions, tutorials and (in the course of the workshop) everyone's contributions. Please refer to the book for [installation instructions](https://mindthegap-erc.github.io/Lorentz-Workshop/#installation-instructions).
