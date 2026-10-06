@@ -1,0 +1,138 @@
+---
+title: "Workshop Day 3: summary of group work"
+format: html
+editor: visual
+---
+
+This page summarises the Markdown (`.md`) and Quarto (`.qmd`) files added or changed during day 3. Most group files started as copies of a Day 3 tutorial chapter, so changes are described **relative to the chapter each file was based on**.
+
+Authorship is taken from the git history. Group composition is listed as recorded in the files or commit messages. Where a group did not write down its members, this is noted.
+
+## Overview
+
+| File | Based on | Group / members | Committed by | Date(s) |
+|---------------|---------------|---------------|---------------|---------------|
+| `day3/FBD_sim_RPD.qmd` | `day3/FBD_sim.qmd` | Forams: Richard, Will, Martin | Richard Dearden | 30 Sep |
+| `day3/StratPal_fossils_RPD.qmd` | `day3/StratPal_fossils.qmd` | Forams: Richard, Will, Martin | Richard Dearden | 30 Sep |
+| `day3/LOBSTERSOFTHEDEEP.qmd` | `day3/StratPal_fossils.qmd`, `day3/FBD_sim.qmd` (new file) | Lobsters: not recorded (uses Myrthe's tree) | Richard Dearden | 30 Sep, 1 Oct |
+| `day3/FBD_sim_KDB.qmd` | `day3/FBD_sim.qmd` | Not recorded (file suffix "KDB") | djbirddanerd | 30 Sep |
+| `day3/inference_helpers-ej.qmd` | none (new notes) | Niche/SSE: Lena Cole, Mark Patzkowsky, Joël Koelewijn, Stephan Spiekman, Charlotte Summers, Emilia Jarochowska, Davey Wright | Emilia Jarochowska, TheRapto | 30 Sep |
+| `day3/data_limitations.md` | none (new notes) | Data limitations breakout: not recorded | Basanta Khakurel | 30 Sep |
+| `book discussion.qmd` | none (new notes) | Book discussion (plenary) | Niklas Hohmann | 2 Oct |
+
+## Forams group: Richard, Will, Martin
+
+*Group members from the commit messages "Adding Richard/Will/Martin file" and "Richard/Martin/Will doing science". All commits by Richard Dearden.*
+
+### `FBD_sim_RPD.qmd` (vs. `FBD_sim.qmd`, +153/−7 lines)
+
+-   The original tutorial is unchanged up to the end, except that the **export of the true tree** (`write.morpho(..., type = "tree")`) was removed.
+-   Added a section marked *"Below I am doing my own thing"*:
+    -   Re-ran the birth-death simulation with a **higher extinction rate** (`mu = 0.4` instead of `0.3`).
+    -   Raised the **fossil sampling rate** to `psi = 10` and set `rho = 0.45`.
+    -   Saved every plot to PNG (`*_RPD.png`) instead of plotting inline.
+    -   Added a **foram-specific scenario**: *"high speciation and low extinction with a high fossil sampling rate. We are foraminiferanologists."* It uses `seed = 8`, `lambda = 5`, `mu = 0.1`, `psi = 20` and `rho = 0.5`.
+
+### `StratPal_fossils_RPD.qmd` (vs. `StratPal_fossils.qmd`, +293/−6 lines)
+
+-   Bullet-point indentation was reformatted (`-` → `-`). The text is otherwise unchanged.
+-   Appended a self-contained re-run of the chapter, headed **"Richard/Martin/Will doing science"**:
+    -   It uses the participants' own CarboKitten output (`columns_adm.csv`, `columns_wd.csv`, location `"mid"`).
+    -   Tree and fossils are simulated with `lambda = 4`, `mu = 0.1`, `psi = 10` and `seed = 8`.
+    -   The niche was moved to **deeper water** (`wd_opt = 10`, `wd_tolerance = 5`).
+    -   It goes through the ecology, taphonomy and age-misassignment steps, saving each figure as `*_RPD.png`.
+-   Open questions the group raised:
+    -   *Can you combine taphonomic and ecological effects?*
+    -   *Is it possible to set different niches for different tips in the tree?*
+
+## Lobsters group
+
+*Committed by Richard Dearden. The full group membership is not recorded in the file. The phylogeny is "Myrthe's Polychelid consensus tree".*
+
+### `LOBSTERSOFTHEDEEP.qmd` (new file, 303 lines; edited 1 Oct)
+
+-   **Question:** Polychelidan lobsters lived in shallow water in the Mesozoic and live in the deep sea today. If you simulate a shallow-to-deep niche shift, can you recover the original tree?
+-   **Relative to the tutorials:** the workflow is adapted from `StratPal_fossils.qmd` and `FBD_sim.qmd`. The main change is that the "true" tree is an **empirical tree** (`TheTrueTree.tree`, branch lengths rescaled to 1), not a `TreeSim` simulation.
+-   It defines **two niche models** on the CarboKitten water-depth gradient:
+    -   Shallow: `wd_opt = 5`, `tol = 5`.
+    -   Deep: `wd_opt = 17`, `tol = 3`.
+-   Fossils are filtered under each model, then Mk2 character matrices are simulated with `MorphSim` for each scenario.
+-   **Bugs recorded by the group:**
+    -   Problems reading in a real tree with tip labels and branch lengths.
+    -   Plotting the sampled trees and the `MorphSim` output.
+    -   Exporting the character matrix (*"Nothing is working and we can't export the matrix"*).
+-   **1 Oct edit:** the tree path changed to `Lobsters_of_the_deep/TheTrueTree.tree`, and blank lines were added around chunks and headings (formatting only).
+
+## FBD simulation variant (KDB)
+
+*Committed by `djbirddanerd`. Group membership is not recorded.*
+
+### `FBD_sim_KDB.qmd` (vs. `FBD_sim.qmd`, +3/−3 lines)
+
+Only the parameters were changed:
+
+| Parameter                     | Original | KDB |
+|-------------------------------|----------|-----|
+| `seed`                        | 42       | 41  |
+| `t_max` (simulation duration) | 1        | 2   |
+| `rho` (extant sampling)       | 0.5      | 0.1 |
+
+That is a longer simulated time span and much sparser sampling of extant tips.
+
+## Niche / SSE group: lizards vs. crinoids
+
+*Members as listed in the file: Lena Cole, Mark Patzkowsky, Joël Koelewijn, Stephan Spiekman, Charlotte Summers, Emilia Jarochowska, Davey Wright (added in the second revision).*
+
+*Commits by Emilia Jarochowska (notes, tidying, RevBayes script), TheRapto (fixed the spelling "Joel" → "Joël"), and csummers25 (tree and ecology data files).*
+
+### `inference_helpers-ej.qmd` (new notes, 3 revisions)
+
+-   **Goal:** infer trees and evolutionary rates across mass extinctions associated with niche shifts, while accounting for niche-space availability changing through time.
+-   **Case studies:**
+    1.  Reptiles across the P/T boundary: did the marine-to-terrestrial shift happen once or twice (Sauropterygians and Ichthyosaurs, or their common ancestor), and when?
+    2.  Crinoids across the end-Ordovician extinction: is the post-extinction radiation real, or an artefact of rock-record bias?
+-   **Progress:**
+    -   The lizard tree (38/1036 extant tips) has polytomies. These are resolved with `ape::multi2di` and written to `lizards_without_polytomies.nex`.
+    -   The RevBayes SSE-with-fossils tutorial has no time-variable sampling rate. `dnCDBDP`'s `nTimeSlices` is a candidate.
+    -   Rachel noted that this setup is possible in BEAST2. The group is sticking with RevBayes for now: fix the tree first, then simulate a matching setup with Bruno's validation script.
+-   **Supporting files** (not Markdown) are collected in `book/day3/Group_Niche_SSE/`:
+    -   Trees and ecology data: `LizardTree.nex`, `LizardTree-Ecology.nex`, `crinoid_MCC.nex`, `crinoid_depth.nex`, `lizards_without_polytomies.nex`.
+    -   `SEE_lizards.rev`, adapted from Bruno's tutorial.
+
+## Data limitations breakout
+
+*Written by Basanta Khakurel. Group membership is not recorded.*
+
+### `data_limitations.md` (new, 21 lines)
+
+The group collected problems; no solutions are proposed:
+
+-   Missing character data: when it is a problem, and how taphonomy drives missingness (log taphonomic information alongside characters and test for correlation).
+-   How important different morphological characters are, and how to weight them (priors, inferring weights, how characters are spread across body regions).
+-   Whether speciation modes can be inferred, and how much data that needs.
+-   How much age uncertainty still allows accurate inference, including non-uniform uncertainty and sensible prior shapes.
+-   Modelling lithology in terrestrial environments.
+
+## Book discussion
+
+*Written by Niklas Hohmann. Records a plenary discussion.*
+
+### `book discussion.qmd` (new, 67 lines, in `book/`)
+
+-   **Audience:** second-year PhD students from biology, geology and CS/math. Provide glossaries and entry points, have each chapter reviewed by someone from another discipline, and keep the software self-contained.
+-   **Proposed structure, with tentative authors:**
+    -   **Introduction:** Emilia, Rachel, Laura, Johan, Niklas.
+    -   **Part 1, Stratigraphic paleobiology:** Mark, Emilia, Johan, Lina, Martin, Niklas.
+    -   **Part 2, Phylogeny and trait evolution:** Sasha, Bethany, April, Stephan, Filippo, Sergei, Laura, Joel, Joelle.
+    -   **Part 3, Integration:** Niklas, Mark, Rachel, David, Bethany, Joelle, Ugne, and the organising team.
+-   **Open item:** the timeline.
+
+## Recurring themes and open issues
+
+-   **Different niches on different parts of the tree** came up in both the forams and lobsters groups. `StratPal::apply_niche` currently applies a single niche to the whole fossil record.
+-   **Combining ecological and taphonomic filters** was raised by the forams group.
+-   **Time-variable sampling** came up in RevBayes (Niche/SSE group) and in the age uncertainty discussion (data limitations).
+-   **Reproducibility:** `FBD_sim_RPD.qmd`, `StratPal_fossils_RPD.qmd` and `LOBSTERSOFTHEDEEP.qmd` contain hard-coded `setwd()` or absolute Windows paths, so they will not render on other machines.
+-   **Known issue in `LOBSTERSOFTHEDEEP.qmd`:**
+    -   The export chunk refers to `morpho_mk`, which is not defined in that file (only `morpho_mk_s` and `morpho_mk_d` are).
+    -   `nodeHeights()` comes from `phytools`, which is not loaded.
